@@ -1,0 +1,85 @@
+@startuml domain
+
+skinparam linetype ortho
+
+'========================================================
+rectangle #877666{
+class User << Entity >>
+}
+'========================================================
+rectangle #F4EDED{
+class Task << Root >> << Entity >>
+class TaskType << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #F9DB6D{
+class Route << Root >> << Entity >>
+class Path << Entity >>
+class Point << (v,#A4C2E5) ValueObject >>
+
+}
+'========================================================
+rectangle #464D77{
+class Robot << Root >> << Entity >>
+
+class Drone  << Entity >>
+
+class MobileRobot  << Entity >>
+
+class Designation  << (v,orange) ValueObject >> << unique >>
+
+class AvailableTask  << (v,#A4C2E5) ValueObject >>
+
+class OperationStatus  << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #36827F{
+class Building  << Root >> << Entity >>
+class BuildingName  << (v,orange) ValueObject >> << unique >>
+
+class Floor  << Entity >>
+class FloorNumber  << (v,#A4C2E5) ValueObject >>
+
+class BuildingMap  << Entity >>
+
+class FloorMap  << Entity >>
+
+class Passageway  << Entity >>
+
+class Elevator  << Entity >>
+
+class Room << Entity >>
+}
+'========================================================
+
+
+Robot <|-u- MobileRobot
+Robot <|-u- Drone
+Robot "1"-l->"1" Designation
+Robot "*"-d->"*" AvailableTask
+Robot "*"-d->"1" OperationStatus
+
+Task "*"-l>"1" Route
+Task "*"-->"1" TaskType
+Task -> Building
+
+Route "*"-->"1..*" Path
+Path "*"-r-->"1..*" Robot : "Made by"
+Path "*"->"1" Point
+Path "*"->"1" Point
+
+User ---> Task: "Asks"
+
+Building "1"-->"1" BuildingMap
+Building "1"-u->"*" Floor
+Building "1"-->"0..1" Elevator
+Building "2"-u->"*" Passageway
+Building "1"-->"1" BuildingName
+
+Passageway "1"-r->"1" Floor
+Passageway "1"-r->"1" Floor
+
+Floor "1"-r->"1" FloorMap
+Floor "1"-u->"*" Room
+Floor "*"-u->"1" FloorNumber
+@enduml
