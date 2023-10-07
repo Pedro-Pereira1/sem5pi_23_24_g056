@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Campus Manager" as CM
+actor "UI Fleet Manager" as FM
+actor "UI System Manager" as SM
+actor "UI User" as U
+
+package  RobDroneGo  {
+  usecase "Create Building" as UC1
+  usecase "Edit Building" as UC2
+  usecase "List All Buildings" as UC3
+  usecase "Create Floor of Building" as UC4
+  usecase "Edit Floor of Building" as UC5
+  usecase "List Floors of Building" as UC6
+  usecase "Create Passage Between Buildings" as UC7
+  usecase "Edit Passage Between Buildings" as UC8
+  usecase "List Passages Between Buildings" as UC9
+  usecase "Create Elevator in Building" as UC10
+  usecase "Edit Elevator in Building" as UC11
+  usecase "List Elevators in Building" as UC12
+  usecase "Create Rooms of Floor" as UC13
+  usecase "List Room of Floor" as UC14
+
+  usecase "Add New Robot Type" as UC15
+  usecase "Add New Robot to Fleet" as UC16
+  usecase "Inhibit Robot" as UC17
+  usecase "Consult All Robots" as UC18
+  usecase "Search Robots by Designation or Task" as UC19
+}
+CM --> UC1
+CM --> UC2
+CM --> UC3
+CM --> UC4
+CM --> UC5
+CM --> UC6
+CM --> UC7
+CM --> UC8
+CM --> UC9
+CM --> UC10
+CM --> UC11
+CM --> UC12
+CM --> UC13
+CM --> UC14
+
+FM --> UC15
+FM --> UC16
+FM --> UC17
+FM --> UC18
+FM --> UC19
+@enduml
