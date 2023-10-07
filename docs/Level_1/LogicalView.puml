@@ -1,0 +1,17 @@
+@startuml
+
+interface "UI Campus Manager" as CM
+interface "UI Fleet Manager" as FM
+interface "UI System Manager" as SM
+interface "UI User" as U
+
+component <<component>> {
+
+}
+
+CM -d- [<<component>>]
+FM -d- [<<component>>]
+SM -d- [<<component>>]
+U  -d- [<<component>>]
+
+@enduml
