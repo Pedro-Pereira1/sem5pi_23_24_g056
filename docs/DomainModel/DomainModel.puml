@@ -2,10 +2,7 @@
 
 skinparam linetype ortho
 
-'========================================================
-rectangle #877666{
-class User << Entity >>
-}
+
 '========================================================
 rectangle #F4EDED{
 class Task << Root >> << Entity >>
@@ -40,8 +37,6 @@ class BuildingName  << (v,orange) ValueObject >> << unique >>
 class Floor  << Entity >>
 class FloorNumber  << (v,#A4C2E5) ValueObject >>
 
-class BuildingMap  << Entity >>
-
 class FloorMap  << Entity >>
 
 class Passageway  << Entity >>
@@ -49,6 +44,8 @@ class Passageway  << Entity >>
 class Elevator  << Entity >>
 
 class Room << Entity >>
+class RoomId << (v,orange) ValueObject >> << unique >>
+
 }
 '========================================================
 
@@ -68,16 +65,16 @@ Path "*"-r-->"1..*" Robot : "Made by"
 Path "*"->"1" Point
 Path "*"->"1" Point
 
-User ---> Task: "Asks"
 
-Building "1"-->"1" BuildingMap
+
 Building "1"-u->"*" Floor
-Building "1"-->"0..1" Elevator
-Building "2"-u->"*" Passageway
+Building "1"-r->"0..1" Elevator
 Building "1"-->"1" BuildingName
 
-Passageway "1"-r->"1" Floor
-Passageway "1"-r->"1" Floor
+Room "1"-u->"1" RoomId
+
+
+Floor "2"-l->"0..*" Passageway
 
 Floor "1"-r->"1" FloorMap
 Floor "1"-u->"*" Room
