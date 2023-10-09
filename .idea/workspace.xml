@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="08b8ca9f-cf9b-44bc-b3a7-f24ed0cf76cf" name="Changes" comment="Update documentation, updated Domain Model" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="UML Sequence" />
+        <option value="UML Use Case" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2WRM2g0aT3exMN7bPClKz24Io64" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Use Case&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/0941p/OneDrive/Ambiente de Trabalho/ISEP/ISEP_3ºano/1ºSemestre/LAPR5/sem5pi_23_24_g056/docs/Level_3/Diagrams&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\Level_3\Diagrams" />
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\Level_2\Diagrams" />
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\US_380" />
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\US_270" />
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\US_200" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\0941p\OneDrive\Ambiente de Trabalho\ISEP\ISEP_3ºano\1ºSemestre\LAPR5\sem5pi_23_24_g056\docs\Level_1\Diagrams" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08b8ca9f-cf9b-44bc-b3a7-f24ed0cf76cf" name="Changes" comment="" />
+      <created>1696690734060</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696690734060</updated>
+      <workItem from="1696690735397" duration="6413000" />
+      <workItem from="1696766465010" duration="665000" />
+      <workItem from="1696837523147" duration="4735000" />
+      <workItem from="1696850636274" duration="1078000" />
+      <workItem from="1696857363704" duration="3746000" />
+    </task>
+    <task id="LOCAL-00001" summary="Update on project documentation added Glossary Template">
+      <created>1696690818781</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696690818781</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update on project documentation added team members folders Template">
+      <created>1696690847012</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696690847012</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Update on project documentation added Logical Levels readme Templates">
+      <created>1696690877140</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1696690877140</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update on project documentation added documentation readme">
+      <created>1696690901644</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1696690901644</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update member 1211131 folder with task assigned for Sprint A">
+      <created>1696691838636</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696691838636</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Update documentation readme with member 1211131 tasks assigned for Sprint A">
+      <created>1696691869469</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696691869469</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update documentation added folders with basics Template for user 1211131 assigned User Stories">
+      <created>1696691930290</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1696691930290</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update documentation, updated Glossary with basic terms of Request for Proposals">
+      <created>1696701011396</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1696701011396</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Update documentation, updated path for US folders">
+      <created>1696701025398</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1696701025398</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update documentation, added Use Case Diagram readme">
+      <created>1696701055095</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1696701055095</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update documentation, added Use Case Diagram svg and puml files">
+      <created>1696701070314</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1696701070314</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Update documentation, added 1st version of Logical View - level 1">
+      <created>1696701098165</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1696701098166</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update documentation, added 1st version of Use Case Diagram readme">
+      <created>1696702383018</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1696702383018</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Update documentation, changed name of Glossary to a readme">
+      <created>1696702437596</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1696702437596</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Update documentation, added new term &quot;Fleet&quot; to Glossary">
+      <created>1696851271021</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851271021</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Update documentation, updated location of Logical view puml file">
+      <created>1696851377005</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851377005</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Update documentation, updated Level1 readme added basic template with all us">
+      <created>1696851446133</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851446133</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Update documentation, updated Level2 readme added basic template with all us">
+      <created>1696851454306</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851454306</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update documentation, updated Level3 readme added basic template with all us">
+      <created>1696851462077</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851462077</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update documentation, updated US150 documentation added points 1 Context,2 Requirements and 3 Analysis">
+      <created>1696851529808</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851529808</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update documentation, updated US180 documentation added points 1 Context,2 Requirements and 3 Analysis">
+      <created>1696851539790</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851539790</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Update documentation, updated US200 documentation added points 1 Context,2 Requirements and 3 Analysis">
+      <created>1696851549529</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851549529</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Update documentation, updated US270 documentation added points 1 Context,2 Requirements and 3 Analysis">
+      <created>1696851557959</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851557959</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update documentation, updated US380 documentation added points 1 Context,2 Requirements and 3 Analysis">
+      <created>1696851566337</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851566337</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Update documentation, updated US150 documentation added diagrams template">
+      <created>1696851600054</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851600054</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update documentation, updated US180 documentation added diagrams template">
+      <created>1696851617620</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851617620</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update documentation, updated US200 documentation added diagrams template">
+      <created>1696851634743</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851634743</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update documentation, updated US270 documentation added diagrams template">
+      <created>1696851649835</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851649835</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Update documentation, updated US380 documentation added diagrams template">
+      <created>1696851663475</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851663475</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Update documentation, updated Level 2 documentation added template diagram">
+      <created>1696851686480</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851686480</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Update documentation, updated Level 3 documentation added template diagram">
+      <created>1696851695481</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1696851695481</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Update documentation, updated Domain Model">
+      <created>1696858916847</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1696858916847</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update documentation, updated Glossary with basic terms of Request for Proposals" />
+    <MESSAGE value="Update documentation, updated path for US folders" />
+    <MESSAGE value="Update documentation, added Use Case Diagram readme" />
+    <MESSAGE value="Update documentation, added Use Case Diagram svg and puml files" />
+    <MESSAGE value="Update documentation, added 1st version of Logical View - level 1" />
+    <MESSAGE value="Update documentation, added 1st version of Use Case Diagram readme" />
+    <MESSAGE value="Update documentation, changed name of Glossary to a readme" />
+    <MESSAGE value="Update documentation, added new term &quot;Fleet&quot; to Glossary" />
+    <MESSAGE value="Update documentation, updated location of Logical view puml file" />
+    <MESSAGE value="Update documentation, updated Level1 readme added basic template with all us" />
+    <MESSAGE value="Update documentation, updated Level2 readme added basic template with all us" />
+    <MESSAGE value="Update documentation, updated Level3 readme added basic template with all us" />
+    <MESSAGE value="Update documentation, updated US150 documentation added points 1 Context,2 Requirements and 3 Analysis" />
+    <MESSAGE value="Update documentation, updated US180 documentation added points 1 Context,2 Requirements and 3 Analysis" />
+    <MESSAGE value="Update documentation, updated US200 documentation added points 1 Context,2 Requirements and 3 Analysis" />
+    <MESSAGE value="Update documentation, updated US270 documentation added points 1 Context,2 Requirements and 3 Analysis" />
+    <MESSAGE value="Update documentation, updated US380 documentation added points 1 Context,2 Requirements and 3 Analysis" />
+    <MESSAGE value="Update documentation, updated US150 documentation added diagrams template" />
+    <MESSAGE value="Update documentation, updated US180 documentation added diagrams template" />
+    <MESSAGE value="Update documentation, updated US200 documentation added diagrams template" />
+    <MESSAGE value="Update documentation, updated US270 documentation added diagrams template" />
+    <MESSAGE value="Update documentation, updated US380 documentation added diagrams template" />
+    <MESSAGE value="Update documentation, updated Level 2 documentation added template diagram" />
+    <MESSAGE value="Update documentation, updated Level 3 documentation added template diagram" />
+    <MESSAGE value="Update documentation, updated Domain Model" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update documentation, updated Domain Model" />
+  </component>
+</project>
