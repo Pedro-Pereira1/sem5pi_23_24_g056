@@ -1,0 +1,42 @@
+@startuml
+
+autonumber
+
+participant ":Floor" as Floor
+participant ":ListBuildingController" as Controller
+participant ":BuildingService" as Service
+participant ":BuildingRepo" as Repo
+participant ":BuildingMap" as Map
+participant ":BuildingDTO" as DTO
+
+?o->Floor: GET
+activate Floor
+
+Floor -> Controller: getBuildingsByMaxAndMinFloors(min,max)
+activate Controller
+
+Controller -> Service: getBuildingsByMaxAndMinFloors(min,max)
+activate Service
+
+Service -> Repo: getBuildingsByMaxAndMinFloors(min,max)
+activate Repo
+
+
+Repo --> Service: buildingList
+deactivate Repo
+Service -> Map: toDTO(buildingList)
+activate Map
+Map -> DTO:create()
+deactivate Map
+
+Service --> Controller: buildingListDTO
+deactivate Service
+
+Controller --> Floor: buildingListDTO
+deactivate Controller
+
+<--Floor: buildingListDTO
+deactivate Floor
+
+
+@enduml

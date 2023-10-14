@@ -9,8 +9,6 @@
 
 **US 180 -** As a Campus Manager, I want to list buildings with min and max floors.
 
-- **FRE0X - XXX XXX:** yyyyyyyyy.
-
 **Dependencies:**
 - **US150 -** As a Campus Manager, I want to create a building.
 
@@ -34,7 +32,11 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.1. Realization
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+#### Level2
+![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
+
+#### Level3
+![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
 
 ### 4.2. Class Diagram
 
