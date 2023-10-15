@@ -2,12 +2,12 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-actor "Campus Manager" as CM
+actor "Fleet Manager" as CM
 
-CM -> System: Starts the process to  creat a building
-System --> CM:
-CM -> System:
-CM <-- System:
+CM -> System: Starts the process to add a new robot to the fleet
+System --> CM: Request data (type, name)
+CM -> System: Types the data
+CM <-- System: Informs operation success
 
 
 @enduml
