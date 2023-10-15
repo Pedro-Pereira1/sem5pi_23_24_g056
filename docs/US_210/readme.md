@@ -22,7 +22,19 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * Campus Manager is a user role that manages the data of the routes and maps.
 * Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
-* The floor information is based on:
+* The floor information is based on: Floor Number, Floor Description and each floor coordinate info(wall,door,elevator,etc)
+* Floor example:
+
+|  O,N   |  N  |  N  |  N  |  N  | O,N |  N  |  N  |  O  |
+|:------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|   O    |     |     |     |     |  O  |     |     |  O  |
+|  N,PA  |  N  |  N  | N,P |  N  |  N  | N,P |  N  |  E  |
+|   PA   |     |     |     |     |     |     |     |  E  |
+|  O,N   |  N  |  N  |  N  |  N  |  N  | O,P |     |  O  |
+|   O    |     |     |     |     |     |  O  |     | PA  |
+|   O    |     |     |     |     |     |  O  |     | PA  |
+|   N    |  N  |  N  |  N  |  N  |  N  |  N  |  N  |     |
+* "O" means west wall, "N" means north wall, "P" means door, "PA" means passageway and "E" means elevator.
 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
