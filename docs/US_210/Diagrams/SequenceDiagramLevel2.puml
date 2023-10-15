@@ -1,22 +1,25 @@
 @startuml
-'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+autonumber
+actor "Campus Manager" as CM
+participant Visualização
+participant "Gestão de Informação" as GI
 
-User -> (Start)
-User --> (Use)
+CM -> Visualização: Starts the process to list all floors of a building
+activate Visualização
+Visualização --> CM:  Request intended building
+deactivate Visualização
 
-Admin ---> (Use)
+CM -> Visualização: Types the data
+activate Visualização
 
-note right of Admin : This is an example.
+Visualização -> GI: GET floorsByBuilding
+activate GI
+GI --> Visualização: floors(JSON)
+deactivate GI
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+CM <-- Visualização: Shows all floors of intended building
+deactivate Visualização
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+
 @enduml
