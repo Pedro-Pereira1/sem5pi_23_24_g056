@@ -9,6 +9,8 @@
 
 **US 210 -** As a Campus Manager, I want to list all floors of a building.
 
+- **FRE0X - XXX XXX:** yyyyyyyyy.
+
 **Dependencies:**
 - **US150 -** As a Campus Manager, I want to create a building.
 - **US190 -** As a Campus Manager, I want to create building floor.
@@ -46,11 +48,7 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.1. Realization
 
-#### Level2
-![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
-
-#### Level3
-![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
+![SequenceDiagram](Diagrams/SequenceDiagram.svg)
 
 ### 4.2. Class Diagram
 

@@ -1,42 +1,22 @@
 @startuml
+'https://plantuml.com/use-case-diagram
 
-autonumber
+:Main Admin: as Admin
+(Use the application) as (Use)
 
-participant ":Floor" as Floor
-participant ":ListFloorController" as Controller
-participant ":FloorService" as Service
-participant ":BuildingRepo" as Repo
-participant ":BuildingMap" as Map
-participant ":FloorDTO" as DTO
+User -> (Start)
+User --> (Use)
 
-?o->Floor: GET
-activate Floor
+Admin ---> (Use)
 
-Floor -> Controller: getFloorsByBuilding(building)
-activate Controller
+note right of Admin : This is an example.
 
-Controller -> Service: getFloorsByBuilding(building)
-activate Service
+note right of (Use)
+A note can also
+be on several lines
+end note
 
-Service -> Repo: getFloorsByBuilding(building)
-activate Repo
-
-
-Repo --> Service: floorList
-deactivate Repo
-Service -> Map: toDTO(floorList)
-activate Map
-Map -> DTO:create()
-deactivate Map
-
-Service --> Controller: floorListDTO
-deactivate Service
-
-Controller --> Floor: floorListDTO
-deactivate Controller
-
-<--Floor: floorListDTO
-deactivate Floor
-
-
+note "This note is connected\nto several objects." as N2
+(Start) .. N2
+N2 .. (Use)
 @enduml

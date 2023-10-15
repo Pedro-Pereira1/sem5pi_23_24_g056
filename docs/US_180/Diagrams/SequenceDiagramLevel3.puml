@@ -2,17 +2,17 @@
 
 autonumber
 
-participant ":Building" as Building
+participant ":Floor" as Floor
 participant ":ListBuildingController" as Controller
 participant ":BuildingService" as Service
 participant ":BuildingRepo" as Repo
 participant ":BuildingMap" as Map
 participant ":BuildingDTO" as DTO
 
-?o->Building: GET
-activate Building
+?o->Floor: GET
+activate Floor
 
-Building -> Controller: getBuildingsByMaxAndMinFloors(min,max)
+Floor -> Controller: getBuildingsByMaxAndMinFloors(min,max)
 activate Controller
 
 Controller -> Service: getBuildingsByMaxAndMinFloors(min,max)
@@ -32,11 +32,11 @@ deactivate Map
 Service --> Controller: buildingListDTO
 deactivate Service
 
-Controller --> Building: buildingListDTO
+Controller --> Floor: buildingListDTO
 deactivate Controller
 
-<--Building: buildingListDTO
-deactivate Building
+<--Floor: buildingListDTO
+deactivate Floor
 
 
 @enduml
