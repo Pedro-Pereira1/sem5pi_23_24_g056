@@ -9,14 +9,12 @@
 
 **US 200 -** As a Campus Manager, I want to edit building floor information.
 
-- **FRE0X - XXX XXX:** yyyyyyyyy.
-
 **Dependencies:**
 - **US150 -** As a Campus Manager, I want to create a building.
 - **US190 -** As a Campus Manager, I want to create building floor.
 
 **Regarding this requirement we understand that:** <br>
-As a Campus Manager, an actor of the system, I will be able to access the system and edit building floor information().
+As a Campus Manager, an actor of the system, I will be able to access the system and edit building floor information(floor number, floor description).
 
 ## 3. Analysis
 
@@ -24,7 +22,18 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * Campus Manager is a user role that manages the data of the routes and maps.
 * Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
-* The floor information is based on: 
+* Floor example:
+
+|  O,N   |  N  |  N  |  N  |  N  | O,N |  N  |  N  |  O  |
+|:------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|   O    |     |     |     |     |  O  |     |     |  O  |
+|  N,PA  |  N  |  N  | N,P |  N  |  N  | N,P |  N  |  E  |
+|   PA   |     |     |     |     |     |     |     |  E  |
+|  O,N   |  N  |  N  |  N  |  N  |  N  | O,P |     |  O  |
+|   O    |     |     |     |     |     |  O  |     | PA  |
+|   O    |     |     |     |     |     |  O  |     | PA  |
+|   N    |  N  |  N  |  N  |  N  |  N  |  N  |  N  |     |
+* "O" means west wall, "N" means north wall, "P" means door, "PA" means passageway and "E" means elevator.
 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
@@ -36,7 +45,11 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.1. Realization
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+#### Level2
+![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
+
+#### Level3
+![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
 
 ### 4.2. Class Diagram
 
