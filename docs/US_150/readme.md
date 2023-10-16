@@ -1,32 +1,29 @@
-# US 150 - As a Campus Manager, I want to create a building.
+# US 150 - As a Campus Manager, I want to create a building
 
 ## 1. Context
 
 * First time that this task is developed.
-* This task is relative to system user Campus Manager .
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-**US 150 -** As a Campus Manager, I want to create a building
+**US 150 -** As a Campus Manager, I want to:
 
-- **FRE0X - XXX XXX:** yyyyyyyyy.
+* Create a building
 
 **Dependencies:**
 There are no Dependencies associated with this US.
 
-**Regarding this requirement we understand that:** <br>
-As a Campus Manager, an actor of the system, I will be able to access the system and create a building in the Campus area.
-
 ## 3. Analysis
 
-**Analyzing this User Story we understand that:**
-* Campus Manager is a user role that manages the data of the routes and maps.
-* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+Regarding this requirement we understand that as a Campus Manager, an actor of the system, I will be able to access the system and create a building in the Campus area. A building is a structure within the campus that houses various rooms, floors, elevators and may have passageways to other buildings, it can be navigated by the robisep robots using corridors and elevators.
 
 ### 3.1. Domain Model Excerpt
+
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
 ### 3.2. System Sequence Diagram
+
 ![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
 
 ## 4. Design
@@ -43,14 +40,21 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.4. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Verifies that is possible to create a building with the correct paramethers*
 
+```javascript
+test("Valid building", () => {
+
+})
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+
+**Test 2:** *Verifies that is not possible to create a building with the wrong paramethers*
+
+```javascript
+test("Invalid building", () => {
+
+})
+```
 
 ## 5. Implementation
 
