@@ -1,17 +1,18 @@
 @startuml
 
-interface "UI Campus Manager" as CM
-interface "UI Fleet Manager" as FM
-interface "UI System Manager" as SM
-interface "UI User" as U
+() "UI Campus Manager" as CM
+() "UI Fleet Manager" as FM
+() "UI System Manager" as SM
+() "UI User" as U
 
-component <<component>> {
+component RDG [
+  <<component>>
+  **RobDroneGo**
+]
 
-}
-
-CM -d- [<<component>>]
-FM -d- [<<component>>]
-SM -d- [<<component>>]
-U  -d- [<<component>>]
+CM -d- RDG
+FM -d- RDG
+SM -d- RDG
+U  -d- RDG
 
 @enduml
