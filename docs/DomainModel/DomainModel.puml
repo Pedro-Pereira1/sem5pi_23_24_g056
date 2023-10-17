@@ -8,13 +8,13 @@ rectangle #F4EDED{
 class Task << Root >> << Entity >>
 class TaskType << (v,#A4C2E5) ValueObject >>
 class TaskDescription << (v,#A4C2E5) ValueObject >>
+class TaskId << (v,orange) ValueObject >> << unique >>
+
 }
 '========================================================
 rectangle #F9DB6D{
 class Route << Root >> << Entity >>
 class Path << Entity >>
-class Point << (v,#A4C2E5) ValueObject >>
-
 }
 '========================================================
 rectangle #464D77{
@@ -40,22 +40,35 @@ rectangle #36827F{
 class Building  << Root >> << Entity >>
 class BuildingDescription  << (v,#A4C2E5) ValueObject >>
 class BuildingName  << (v,orange) ValueObject >> << unique >>
+}
+'========================================================
+rectangle #FF3B1B{
+class Room << Root >> << Entity >>
+class RoomId << (v,orange) ValueObject >> << unique >>
+class RoomCoordinates << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #EDB182{
+class Passageway  << Root >> << Entity >>
+class PassagewayId  << (v,orange) ValueObject >> << unique >>
+class PassagewayCoordinates << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #9055A2{
+class Elevator  << Root >> << Entity >>
+class ElevatorId  << (v,orange) ValueObject >> << unique >>
+class ElevatorCoordinates << (v,#A4C2E5) ValueObject >>
+}
 
-
-class Floor  << Entity >>
-class FloorNumber  << (v,#A4C2E5) ValueObject >>
+'========================================================
+rectangle #D499B9{
+class Floor  << Root >> << Entity >>
+class FloorNumber  << (v,orange) ValueObject >> << unique >>
 class FloorDescription  << (v,#A4C2E5) ValueObject >>
-
 class FloorMap  << Entity >>
 
-class Passageway  << Entity >>
-
-class Elevator  << Entity >>
-
-class Room << Entity >>
-class RoomId << (v,orange) ValueObject >> << unique >>
-
 }
+
 '========================================================
 
 
@@ -71,26 +84,33 @@ Task "*"-l>"1" Route
 Task "*"-->"1" TaskType
 Task "*"-->"1" TaskDescription
 Task -> Building
+Task "1"-->"1" TaskId
 
 Route "*"-->"1..*" Path
 Path "*"-r-->"1..*" Robot : "Made by"
-Path "*"->"1" Point
-Path "*"->"1" Point
 
 
 
-Building "1"-u->"*" Floor
-Building "1"-r->"0..1" Elevator
+Elevator "1"-d->"1" ElevatorId
+Elevator "1"->"1" ElevatorCoordinates
+
+Building "1"->"*" Floor
 Building "*"-->"0..1" BuildingDescription
-Building "1"-->"1" BuildingDescription
+Building "1"-->"1" BuildingName
 
-Room "1"-u->"1" RoomId
+Room "1"-d->"1" RoomId
+Room "1"->"1" RoomCoordinates
+
+Passageway "1"-d->"1" PassagewayId
+Passageway "1"->"1" PassagewayCoordinates
 
 
-Floor "2"-l->"0..*" Passageway
+Floor "1"-d->"1" FloorMap
+Floor "*"-u>"1" FloorNumber
+Floor "*"->"1" FloorDescription
 
-Floor "1"-r->"1" FloorMap
-Floor "1"-u->"*" Room
-Floor "*"-u->"1" FloorNumber
-Floor "*"-u->"1" FloorDescription
+FloorMap "2"--->"0..*" Passageway
+FloorMap "1"-d---->"0..1" Elevator
+FloorMap "1"->"*" Room
+
 @enduml
