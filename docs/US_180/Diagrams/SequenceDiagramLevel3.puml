@@ -2,7 +2,7 @@
 
 autonumber
 
-participant ":Floor" as Floor
+participant ":Building" as Floor
 participant ":ListBuildingController" as Controller
 participant ":BuildingService" as Service
 participant ":BuildingRepo" as Repo

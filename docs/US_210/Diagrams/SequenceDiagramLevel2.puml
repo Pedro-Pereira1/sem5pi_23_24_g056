@@ -3,7 +3,7 @@
 autonumber
 actor "Campus Manager" as CM
 participant Visualização
-participant "Gestão de Informação" as GI
+participant "MasterDataBuilding" as GI
 
 CM -> Visualização: Starts the process to list all floors of a building
 activate Visualização
