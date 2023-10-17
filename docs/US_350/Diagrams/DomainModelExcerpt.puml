@@ -1,22 +1,34 @@
 @startuml
-'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+skinparam linetype ortho
 
-User -> (Start)
-User --> (Use)
+rectangle #464D77{
+class Robot << Root >> << Entity >>
+class RobotType << Entity >>
+class Drone  << Entity >>
+class MobileRobot  << Entity >>
 
-Admin ---> (Use)
+class RobotModel  << (v,#A4C2E5) ValueObject >>
+class RobotBrand  << (v,#A4C2E5) ValueObject >>
 
-note right of Admin : This is an example.
+class Code  << (v,orange) ValueObject >> << unique >>
+class AvailableTask  << (v,#A4C2E5) ValueObject >>
+class Nickname  << (v,#A4C2E5) ValueObject >>
+class OperationStatus  << (v,#A4C2E5) ValueObject >>
+class SerialNumber  << (v,#A4C2E5) ValueObject >>
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+}
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+Robot <|-u- MobileRobot
+Robot <|-u- Drone
+Robot "1"-l->"1" Code
+Robot "*"-->"1" RobotType
+Robot "*"-d->"1" OperationStatus
+Robot "1"-->"1" Nickname
+Robot "1"-->"1" SerialNumber
+
+RobotType "*"-->"1" RobotModel
+RobotType "*"-->"1" RobotBrand
+RobotType "*"-->"*" AvailableTask
+
 @enduml
