@@ -5,7 +5,7 @@ autonumber
 actor "Fleet Manager" as CM
 
 CM -> System: Starts the process to add a new robot to the fleet
-System --> CM: Request data (type, name)
+System --> CM: Request data (type, serialNumber, Nickname, Code)
 CM -> System: Types the data
 CM <-- System: Informs operation success
 
