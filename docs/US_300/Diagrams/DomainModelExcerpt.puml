@@ -1,22 +1,40 @@
 @startuml
-'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+skinparam linetype ortho
 
-User -> (Start)
-User --> (Use)
 
-Admin ---> (Use)
+rectangle #36827F{
+class Building  << Root >> << Entity >>
+class BuildingDescription  << (v,#A4C2E5) ValueObject >>
+class BuildingName  << (v,orange) ValueObject >> << unique >>
+}
 
-note right of Admin : This is an example.
+rectangle #D499B9{
+class Floor  << Root >> << Entity >>
+class FloorNumber  << (v,orange) ValueObject >> << unique >>
+class FloorDescription  << (v,#A4C2E5) ValueObject >>
+class FloorMap  << Entity >>
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+}
+rectangle #9055A2{
+class Elevator  << Root >> << Entity >>
+class ElevatorId  << (v,orange) ValueObject >> << unique >>
+class ElevatorCoordinates << (v,#A4C2E5) ValueObject >>
+}
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+
+Building "1"->"*" Floor
+Building "*"-->"0..1" BuildingDescription
+Building "1"-->"1" BuildingName
+
+Floor "1"-d->"1" FloorMap
+Floor "*"-u>"1" FloorNumber
+Floor "*"->"1" FloorDescription
+FloorMap "1"-d---->"0..1" Elevator
+
+
+Elevator "1"-d->"1" ElevatorId
+Elevator "1"->"1" ElevatorCoordinates
+
+
 @enduml
