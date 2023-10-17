@@ -1,22 +1,18 @@
 @startuml
-'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+skinparam linetype ortho
 
-User -> (Start)
-User --> (Use)
+class ListBuildingUI
+class ListBuildingController
+class BuildingService
+class BuildingRepo
+class BuildingMap
+class BuildingDTO
 
-Admin ---> (Use)
+ ListBuildingUI .-d> ListBuildingController
+ListBuildingController -d->BuildingService
+BuildingService -r> BuildingRepo
+BuildingService -d-> BuildingMap
+BuildingMap -d-> BuildingDTO
 
-note right of Admin : This is an example.
-
-note right of (Use)
-A note can also
-be on several lines
-end note
-
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
 @enduml
