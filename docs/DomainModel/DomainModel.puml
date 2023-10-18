@@ -19,18 +19,21 @@ class Path << Entity >>
 '========================================================
 rectangle #464D77{
 class Robot << Root >> << Entity >>
-class RobotType << Entity >>
 class Drone  << Entity >>
 class MobileRobot  << Entity >>
 
-class RobotModel  << (v,#A4C2E5) ValueObject >>
-class RobotBrand  << (v,#A4C2E5) ValueObject >>
-
 class Code  << (v,orange) ValueObject >> << unique >>
-class AvailableTask  << (v,#A4C2E5) ValueObject >>
 class Nickname  << (v,#A4C2E5) ValueObject >>
 class OperationStatus  << (v,#A4C2E5) ValueObject >>
 class SerialNumber  << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #96A377{
+class RobotType << Root >> << Entity >>
+class AvailableTask  << (v,#A4C2E5) ValueObject >>
+class RobotModel  << (v,#A4C2E5) ValueObject >>
+class RobotBrand  << (v,#A4C2E5) ValueObject >>
+class RobotTypeId << (v,orange) ValueObject >> << unique >>
 
 }
 '========================================================
@@ -81,6 +84,8 @@ Robot "1"-->"1" SerialNumber
 RobotType "*"-->"1" RobotModel
 RobotType "*"-->"1" RobotBrand
 RobotType "*"-->"*" AvailableTask
+RobotType "1"-->"1" RobotTypeId
+
 
 Task "*"-l>"1" Route
 Task "*"-->"1" TaskType
