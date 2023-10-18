@@ -8,7 +8,7 @@ import { PassagewayID } from './PassagewayID';
     passagewayID: PassagewayID;
   }
 
-  export class Building extends AggregateRoot<PassagewayProps> {
+  export class Passageway extends AggregateRoot<PassagewayProps> {
 
     
     private constructor (props: PassagewayProps, id?: UniqueEntityID) {
