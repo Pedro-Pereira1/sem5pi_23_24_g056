@@ -8,7 +8,7 @@ import { ElevatorID } from './ElevatorID';
     elevatorID: ElevatorID;
   }
 
-  export class Building extends AggregateRoot<ElevatorProps> {
+  export class Elevator extends AggregateRoot<ElevatorProps> {
 
     
     private constructor (props: ElevatorProps, id?: UniqueEntityID) {
