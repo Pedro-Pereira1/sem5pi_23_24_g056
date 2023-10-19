@@ -1,13 +1,17 @@
-@startuml
+@startuml sequenceDiagram
 'https://plantuml.com/sequence-diagram
 
 autonumber
 actor "Campus Manager" as CM
 
-CM -> System: Starts the process to  creat a building
-System --> CM:
-CM -> System:
-CM <-- System:
+participant CreateBuildingRoute
+participant CreateBuildingController
+participant CreateBuildingService
+participant Building
+participant BuildingDto
+participant BuildingMapper
+database BuildingRepo
+
 
 
 @enduml

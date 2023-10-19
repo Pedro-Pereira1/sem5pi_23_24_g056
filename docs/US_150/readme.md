@@ -36,15 +36,11 @@ In order to resolve this US we will make use of the folliwing classes:
 6. BuildingDto
 7. Building
 
-### 4.2. Class Diagram
-
-![ClassDiagram](Diagrams/ClassDiagram.svg)
-
-### 4.3. Sequence Diagram
+### 4.2. Sequence Diagram
 
 ![SequenceDiagram](Diagrams/SequenceDiagram.svg)
 
-### 4.4. Applied Patterns
+### 4.3. Applied Patterns
 
 * Controller
 * Repository
@@ -52,7 +48,7 @@ In order to resolve this US we will make use of the folliwing classes:
 * Dto
 * Mapper
 
-### 4.5. Tests
+### 4.4. Tests
 
 **Test 1:** *Verifies that is possible to create a building with the correct paramethers*
 
