@@ -5,6 +5,7 @@ import { Code } from './Code';
 import { Nickname } from './Nickname';
 import { OperationStatus } from './OperationStatus';
 import { SerialNumber } from './SerialNumber';
+import { RobotType } from '../RobotType/RobotType';
 
 
 
@@ -13,6 +14,7 @@ import { SerialNumber } from './SerialNumber';
     nickname: Nickname;
     operationStatus: OperationStatus;
     serialNumber: SerialNumber;
+    type: RobotType;
   }
 
   export class Robot extends AggregateRoot<RobotProps> {
