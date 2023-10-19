@@ -3,13 +3,13 @@ import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { Path } from './Path';
 
 
-  interface RootProps {
+  interface RouteProps {
   }
 
-  export class Root extends AggregateRoot<RootProps> {
+  export class Route extends AggregateRoot<RouteProps> {
 
     
-    private constructor (props: RootProps, id?: UniqueEntityID) {
+    private constructor (props: RouteProps, id?: UniqueEntityID) {
       super(props, id);
     }
 
