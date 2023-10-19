@@ -12,7 +12,7 @@ import { AvailableTask } from './AvailableTask';
     availableTasks: AvailableTask[];
   }
 
-  export class Room extends AggregateRoot<robotTypeProps> {
+  export class RobotType extends AggregateRoot<robotTypeProps> {
 
     
     private constructor (props: robotTypeProps, id?: UniqueEntityID) {
