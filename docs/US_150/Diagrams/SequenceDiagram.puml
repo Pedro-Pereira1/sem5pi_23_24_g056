@@ -1,13 +1,74 @@
-@startuml
+@startuml sequenceDiagram
 'https://plantuml.com/sequence-diagram
 
 autonumber
 actor "Campus Manager" as CM
 
-CM -> System: Starts the process to  creat a building
-System --> CM:
-CM -> System:
-CM <-- System:
+participant RequestingApp
+participant CreateBuildingRoute
+participant CreateBuildingController
+participant CreateBuildingService
+participant Building
+participant BuildingMapper
+participant BuildingDto
+participant BuildingRepo
+database database
 
+
+CM -> RequestingApp : request building creation
+
+activate RequestingApp
+RequestingApp -> CreateBuildingRoute : /post buildingJSON
+
+activate CreateBuildingRoute
+CreateBuildingRoute -> CreateBuildingController : createBuilding(BuildingJSON)
+
+activate CreateBuildingController
+
+CreateBuildingController -> BuildingMapper : toDto(buildingJSON)
+activate BuildingMapper
+
+CreateBuildingController -> CreateBuildingService : createBuilding(BuildingDto) 
+
+activate CreateBuildingService
+activate BuildingRepo
+
+CreateBuildingService -> Building : create(BuildingDto)
+activate Building
+
+CreateBuildingService -> BuildingRepo : save(building)
+
+BuildingRepo -> BuildingMapper : toPersistence(building)
+
+BuildingRepo -> database : save(buildingRaw)
+
+BuildingRepo -> BuildingMapper : toDomain(buildingRaw)
+
+BuildingRepo --> CreateBuildingService
+deactivate BuildingRepo
+
+CreateBuildingService -> BuildingMapper : toDto(building)
+
+BuildingMapper -> BuildingDto : create
+activate BuildingDto
+
+deactivate Building
+
+deactivate BuildingMapper
+
+CreateBuildingService -> CreateBuildingController
+deactivate CreateBuildingService
+
+
+CreateBuildingController -> CreateBuildingRoute : code 201, buildingJSON
+deactivate CreateBuildingController
+
+deactivate BuildingDto
+
+CreateBuildingRoute -> RequestingApp : code 201, buildingJSON
+deactivate CreateBuildingRoute
+
+RequestingApp -> CM
+deactivate RequestingApp
 
 @enduml

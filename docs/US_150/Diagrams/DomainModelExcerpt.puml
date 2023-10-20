@@ -1,22 +1,13 @@
-@startuml
+@startuml domainModelExcerpt
 'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+rectangle #36827F{
+class Building  << Root >> << Entity >>
+class BuildingDescription  << (v,#A4C2E5) ValueObject >>
+class BuildingName  << (v,orange) ValueObject >> << unique >>
+}
 
-User -> (Start)
-User --> (Use)
+Building "*"-->"0..1" BuildingDescription
+Building "1"-->"1" BuildingName
 
-Admin ---> (Use)
-
-note right of Admin : This is an example.
-
-note right of (Use)
-A note can also
-be on several lines
-end note
-
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
 @enduml

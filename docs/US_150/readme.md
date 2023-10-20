@@ -20,23 +20,34 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 
 ### 3.1. Domain Model Excerpt
 
-![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
-
-### 3.2. System Sequence Diagram
-
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
+![DomainModelExcerpt](./Diagrams/domainModelExcerpt.svg)
 
 ## 4. Design
 
 ### 4.1. Realization
 
+In order to resolve this US we will make use of the folliwing classes:
+
+1. CreateBuildingController
+2. CreateBuildingService
+3. BuildingRepo
+4. BuildingMap
+5. BuildingDto
+6. Building
+
+We will make also use of CreateBuildingRoute file, inside this file we will put our route for any post request regarding the building creation
+
+### 4.2. Sequence Diagram
+
 ![SequenceDiagram](Diagrams/SequenceDiagram.svg)
 
-### 4.2. Class Diagram
-
-![ClassDiagram](Diagrams/ClassDiagram.svg)
-
 ### 4.3. Applied Patterns
+
+* Controller
+* Repository
+* Service
+* Dto
+* Mapper
 
 ### 4.4. Tests
 
