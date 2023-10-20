@@ -28,13 +28,14 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 
 In order to resolve this US we will make use of the folliwing classes:
 
-1. CreateBuildingRoute
-2. CreateBuildingController
-3. CreateBuildingService
-4. BuildingRepo
-5. BuildingMap
-6. BuildingDto
-7. Building
+1. CreateBuildingController
+2. CreateBuildingService
+3. BuildingRepo
+4. BuildingMap
+5. BuildingDto
+6. Building
+
+We will make also use of CreateBuildingRoute file, inside this file we will put our route for any post request regarding the building creation
 
 ### 4.2. Sequence Diagram
 
