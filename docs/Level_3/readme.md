@@ -9,14 +9,14 @@
 ## Logical and Implementation View - Logistics
 ![LogicalAndImplementationLogistics](Diagrams/LogicalAndImplementationLogistics.svg)
 
-## Logical View - Management
-![LogicalViewManagement](Diagrams/LogicalViewManagement.svg)
+## Logical View - MasterDataBuilding
+![LogicalViewManagement](Diagrams/LogicalViewMasterDataBuilding.svg)
 
-## Implementation View - Management
-![ImplementationViewManagement](Diagrams/ImplementationViewManagement.svg)
+## Implementation View - MasterDataBuilding
+![ImplementationViewManagement](Diagrams/ImplementationViewMasterDataBuilding.svg)
 
-## Logical and Implementation View - Management
-![LogicalAndImplementationManagement](Diagrams/LogicalAndImplementationManagement.svg)
+## Logical and Implementation View - MasterDataBuilding
+![LogicalAndImplementationManagement](Diagrams/LogicalAndImplementationMasterDataBuilding.svg)
 
 ### US150
 ![US150](../US_150/Diagrams/SequenceDiagramLevel3.svg)
