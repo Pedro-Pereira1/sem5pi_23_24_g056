@@ -1,0 +1,28 @@
+@startuml
+
+skinparam linetype ortho
+
+node Server1{
+  component "<<Browser>>" as BRW{
+   component "<<Visualização>>" as V {
+    }
+  }
+}
+
+node Server2{
+  component "<<Planeamento>>" as P {
+  }
+
+  component "<<MasterDataLogistic>>" as MDL{
+  }
+
+  component "<<MasterDataBuilding>>" as MDB{
+  }
+}
+
+
+
+Server1 -d- Server2: http/s
+
+
+@enduml
