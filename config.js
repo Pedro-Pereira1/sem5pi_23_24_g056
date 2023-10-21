@@ -44,6 +44,10 @@ export default {
     role: {
       name: "RoleController",
       path: "../controllers/users/roleController"
+    },
+    createbuilding: {
+      name: "CreateBuildingController",
+      path: "../controllers/building/create/createBuildingController"
     }
   },
 
@@ -55,6 +59,10 @@ export default {
     user: {
       name: "UserRepo",
       path: "../repos/userRepo"
+    },
+    building: {
+      name: "BuildingRepo",
+      path: "../repos/building/buildingRepo"
     }
   },
 
@@ -62,6 +70,10 @@ export default {
     role: {
       name: "RoleService",
       path: "../services/roleService"
+    },
+    createbuilding: {
+      name: "CreateBuilding",
+      path: "../services/building/create/createBuildingService"
     }
   },
 };
