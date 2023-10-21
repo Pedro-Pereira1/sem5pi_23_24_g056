@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Inject, Service } from 'typedi';
 import config from "../../config";
 
-import IRoleController from "./IControllers/IRoleController";
+import IRoleController from "./IControllers/role/IRoleController";
 import IRoleService from '../services/IServices/users/IRoleService';
 import IRoleDTO from '../dto/users/IRoleDTO';
 
