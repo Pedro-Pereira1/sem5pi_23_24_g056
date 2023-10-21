@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { Container } from 'typedi';
 
 import AuthService from '../../services/userService';
-import { IUserDTO } from '../../dto/IUserDTO';
+import { IUserDTO } from '../../dto/users/IUserDTO';
 
 import middlewares from '../middlewares';
 import { celebrate, Joi } from 'celebrate';

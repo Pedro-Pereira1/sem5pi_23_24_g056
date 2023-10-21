@@ -9,7 +9,7 @@ import { Result } from '../core/logic/Result';
 
 import IRoleService from "../services/IServices/users/IRoleService";
 import RoleController from "./roleController";
-import IRoleDTO from '../dto/IRoleDTO';
+import IRoleDTO from '../dto/users/IRoleDTO';
 
 describe('role controller', function () {
 	beforeEach(function() {

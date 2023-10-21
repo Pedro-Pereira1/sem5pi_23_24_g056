@@ -4,7 +4,7 @@ import { UniqueEntityID } from "../core/domain/UniqueEntityID";
 import { Result } from "../core/logic/Result";
 import { RoleId } from "./roleId";
 
-import IRoleDTO from "../dto/IRoleDTO";
+import IRoleDTO from "../dto/users/IRoleDTO";
 
 interface RoleProps {
   name: string;

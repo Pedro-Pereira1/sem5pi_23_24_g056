@@ -1,6 +1,6 @@
 import { Service, Inject } from 'typedi';
 import config from "../../config";
-import IRoleDTO from '../dto/IRoleDTO';
+import IRoleDTO from '../dto/users/IRoleDTO';
 import { Role } from "../domain/role";
 import IRoleRepo from './IRepos/users/IRoleRepo';
 import IRoleService from './IServices/users/IRoleService';

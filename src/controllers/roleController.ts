@@ -4,7 +4,7 @@ import config from "../../config";
 
 import IRoleController from "./IControllers/IRoleController";
 import IRoleService from '../services/IServices/users/IRoleService';
-import IRoleDTO from '../dto/IRoleDTO';
+import IRoleDTO from '../dto/users/IRoleDTO';
 
 import { Result } from "../core/logic/Result";
 

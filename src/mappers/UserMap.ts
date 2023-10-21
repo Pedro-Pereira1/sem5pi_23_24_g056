@@ -2,7 +2,7 @@ import { Container } from 'typedi';
 
 import { Mapper } from "../core/infra/Mapper";
 
-import {IUserDTO} from "../dto/IUserDTO";
+import {IUserDTO} from "../dto/users/IUserDTO";
 
 import { User } from "../domain/user";
 import { UniqueEntityID } from "../core/domain/UniqueEntityID";

@@ -9,7 +9,7 @@ import { randomBytes } from 'crypto';
 
 import IUserService from './IServices/users/IUserService';
 import { UserMap } from "../mappers/UserMap";
-import { IUserDTO } from '../dto/IUserDTO';
+import { IUserDTO } from '../dto/users/IUserDTO';
 
 import IUserRepo from './IRepos/users/IUserRepo';
 import IRoleRepo from './IRepos/users/IRoleRepo';

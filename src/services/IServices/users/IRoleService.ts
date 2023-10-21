@@ -1,5 +1,5 @@
 import { Result } from "../../../core/logic/Result";
-import IRoleDTO from "../../../dto/IRoleDTO";
+import IRoleDTO from "../../../dto/users/IRoleDTO";
 
 export default interface IRoleService  {
   createRole(roleDTO: IRoleDTO): Promise<Result<IRoleDTO>>;
