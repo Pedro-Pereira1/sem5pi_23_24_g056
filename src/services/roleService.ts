@@ -3,7 +3,7 @@ import config from "../../config";
 import IRoleDTO from '../dto/IRoleDTO';
 import { Role } from "../domain/role";
 import IRoleRepo from './IRepos/users/IRoleRepo';
-import IRoleService from './IServices/IRoleService';
+import IRoleService from './IServices/users/IRoleService';
 import { Result } from "../core/logic/Result";
 import { RoleMap } from "../mappers/RoleMap";
 

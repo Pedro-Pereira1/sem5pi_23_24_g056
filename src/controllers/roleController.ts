@@ -3,7 +3,7 @@ import { Inject, Service } from 'typedi';
 import config from "../../config";
 
 import IRoleController from "./IControllers/IRoleController";
-import IRoleService from '../services/IServices/IRoleService';
+import IRoleService from '../services/IServices/users/IRoleService';
 import IRoleDTO from '../dto/IRoleDTO';
 
 import { Result } from "../core/logic/Result";

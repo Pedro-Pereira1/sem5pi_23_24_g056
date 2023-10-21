@@ -7,7 +7,7 @@ import config from "../../config";
 
 import { Result } from '../core/logic/Result';
 
-import IRoleService from "../services/IServices/IRoleService";
+import IRoleService from "../services/IServices/users/IRoleService";
 import RoleController from "./roleController";
 import IRoleDTO from '../dto/IRoleDTO';
 
