@@ -1,16 +1,16 @@
 import { Container } from 'typedi';
 
-import { Mapper } from "../core/infra/Mapper";
+import { Mapper } from "../../core/infra/Mapper";
 
-import {IUserDTO} from "../dto/users/IUserDTO";
+import {IUserDTO} from "../../dto/users/IUserDTO";
 
-import { User } from "../domain/user";
-import { UniqueEntityID } from "../core/domain/UniqueEntityID";
+import { User } from "../../domain/user";
+import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 
-import { UserEmail } from "../domain/userEmail";
-import { UserPassword } from "../domain/userPassword";
+import { UserEmail } from "../../domain/userEmail";
+import { UserPassword } from "../../domain/userPassword";
 
-import RoleRepo from "../repos/roleRepo";
+import RoleRepo from "../../repos/roleRepo";
 
 export class UserMap extends Mapper<User> {
 

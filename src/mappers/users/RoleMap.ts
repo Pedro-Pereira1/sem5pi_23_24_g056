@@ -1,12 +1,12 @@
-import { Mapper } from "../core/infra/Mapper";
+import { Mapper } from "../../core/infra/Mapper";
 
 import { Document, Model } from 'mongoose';
-import { IRolePersistence } from '../dataschema/users/IRolePersistence';
+import { IRolePersistence } from '../../dataschema/users/IRolePersistence';
 
-import IRoleDTO from "../dto/users/IRoleDTO";
-import { Role } from "../domain/role";
+import IRoleDTO from "../../dto/users/IRoleDTO";
+import { Role } from "../../domain/role";
 
-import { UniqueEntityID } from "../core/domain/UniqueEntityID";
+import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 
 export class RoleMap extends Mapper<Role> {
   

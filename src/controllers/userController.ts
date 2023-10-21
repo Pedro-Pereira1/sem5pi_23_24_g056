@@ -6,7 +6,7 @@ import config from '../../config';
 
 import IUserRepo from '../services/IRepos/users/IUserRepo';
 
-import { UserMap } from "../mappers/UserMap";
+import { UserMap } from "../mappers/users/UserMap";
 import { IUserDTO } from '../dto/users/IUserDTO';
 
 
