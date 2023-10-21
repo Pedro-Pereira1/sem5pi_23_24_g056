@@ -1,4 +1,4 @@
 export interface IBuildingDTO {
-    buildingName: String
-    buildingDescription: String
+    buildingName: string
+    buildingDescription: string
 }
