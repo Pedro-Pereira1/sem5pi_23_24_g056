@@ -1,0 +1,22 @@
+@startuml SequenceDiagramLevel2
+
+
+actor "Campus Manager" as CM
+participant Visualizaçao
+participant MasterDataBuilding
+
+CM -> Visualizaçao : sends buinding information
+activate Visualizaçao
+
+Visualizaçao -> MasterDataBuilding : POST createBuildingRequest
+activate MasterDataBuilding
+
+MasterDataBuilding -> Visualizaçao : buildingJSON
+
+deactivate MasterDataBuilding
+
+Visualizaçao -> CM : Confirmation
+deactivate Visualizaçao
+
+
+@enduml

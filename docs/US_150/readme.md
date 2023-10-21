@@ -26,6 +26,12 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 
 ### 4.1. Realization
 
+Level 2:
+
+![SequenceDiagramLevel2](Diagrams/SequenceDiagramLevel2.svg)
+
+Level 3:
+
 In order to resolve this US we will make use of the folliwing classes:
 
 1. CreateBuildingController
@@ -39,7 +45,7 @@ We will make also use of CreateBuildingRoute file, inside this file we will put 
 
 ### 4.2. Sequence Diagram
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+![SequenceDiagramLevel3](Diagrams/SequenceDiagramLevel3.svg)
 
 ### 4.3. Applied Patterns
 
