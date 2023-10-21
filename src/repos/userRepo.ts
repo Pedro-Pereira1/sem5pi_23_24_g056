@@ -1,7 +1,7 @@
 import { Service, Inject } from 'typedi';
 
 import { Document, Model } from 'mongoose';
-import { IUserPersistence } from '../dataschema/IUserPersistence';
+import { IUserPersistence } from '../dataschema/users/IUserPersistence';
 
 import IUserRepo from "../services/IRepos/IUserRepo";
 import { User } from "../domain/user";

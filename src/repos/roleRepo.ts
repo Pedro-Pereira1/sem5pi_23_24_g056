@@ -6,7 +6,7 @@ import { RoleId } from "../domain/roleId";
 import { RoleMap } from "../mappers/RoleMap";
 
 import { Document, FilterQuery, Model } from 'mongoose';
-import { IRolePersistence } from '../dataschema/IRolePersistence';
+import { IRolePersistence } from '../dataschema/users/IRolePersistence';
 
 @Service()
 export default class RoleRepo implements IRoleRepo {
