@@ -43,7 +43,7 @@ export default {
   controllers: {
     role: {
       name: "RoleController",
-      path: "../controllers/users/roleController.ts"
+      path: "../controllers/users/roleController"
     }
   },
 
