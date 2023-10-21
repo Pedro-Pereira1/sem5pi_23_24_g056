@@ -11,8 +11,8 @@ import IUserService from '../services/IServices/IUserService';
 import { UserMap } from "../mappers/UserMap";
 import { IUserDTO } from '../dto/IUserDTO';
 
-import IUserRepo from './IRepos/IUserRepo';
-import IRoleRepo from './IRepos/IRoleRepo';
+import IUserRepo from './IRepos/users/IUserRepo';
+import IRoleRepo from './IRepos/users/IRoleRepo';
 
 import { User } from '../domain/user';
 import { UserPassword } from '../domain/userPassword';
