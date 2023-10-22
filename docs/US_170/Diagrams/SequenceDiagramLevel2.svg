@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="306px" preserveAspectRatio="none" style="width:475px;height:306px;background:#FFFFFF;" version="1.1" viewBox="0 0 475 306" width="475px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="230" y="114.9609"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="396" y="145.3125"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="64" x2="64" y1="82.6094" y2="224.0156"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="235" x2="235" y1="82.6094" y2="224.0156"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="400.5" x2="400.5" y1="82.6094" y2="224.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="5" y="79.5332">Campus Manager</text><ellipse cx="64" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M64,21.5 L64,48.5 M51,29.5 L77,29.5 M64,48.5 L51,63.5 M64,48.5 L77,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="5" y="237.5488">Campus Manager</text><ellipse cx="64" cy="249.125" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M64,257.125 L64,284.125 M51,265.125 L77,265.125 M64,284.125 L51,299.125 M64,284.125 L77,299.125 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="189" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="196" y="71.5332">Visualization</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="189" y="223.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="196" y="244.5488">Visualization</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="137" x="332.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="339.5" y="71.5332">MasterDataBuilding</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="137" x="332.5" y="223.0156"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="339.5" y="244.5488">MasterDataBuilding</text><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="230" y="114.9609"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="396" y="145.3125"/><polygon fill="#181818" points="218,110.9609,228,114.9609,218,118.9609,222,114.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="64" x2="224" y1="114.9609" y2="114.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="71" y="110.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="136" x="82" y="110.1045">request list all buildings</text><polygon fill="#181818" points="384,141.3125,394,145.3125,384,149.3125,388,145.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="240" x2="390" y1="145.3125" y2="145.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="247" y="140.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="100" x="258" y="140.4561">GET listBuildings</text><polygon fill="#181818" points="251,171.6641,241,175.6641,251,179.6641,247,175.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="245" x2="400" y1="175.6641" y2="175.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="257" y="170.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="121" x="268" y="170.8076">building list as JSON</text><polygon fill="#181818" points="75,202.0156,65,206.0156,75,210.0156,71,206.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="69" x2="234" y1="206.0156" y2="206.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="81" y="201.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="92" y="201.1592"> </text><!--MD5=[dad1e831b13f7c48b03c7e44739a8fc4]
+@startuml SequenceDiagramLevel2
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant MasterDataBuilding
+
+CM -> Visualization : request list all buildings
+activate Visualization
+
+Visualization -> MasterDataBuilding : GET listBuildings
+activate MasterDataBuilding
+
+MasterDataBuilding -> Visualization : building list as JSON
+deactivate MasterDataBuilding
+
+Visualization -> CM
+deactivate Visualization
+
+
+@enduml
+
+@startuml SequenceDiagramLevel2
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant MasterDataBuilding
+
+CM -> Visualization : request list all buildings
+activate Visualization
+
+Visualization -> MasterDataBuilding : GET listBuildings
+activate MasterDataBuilding
+
+MasterDataBuilding -> Visualization : building list as JSON
+deactivate MasterDataBuilding
+
+Visualization -> CM
+deactivate Visualization
+
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="579px" preserveAspectRatio="none" style="width:1162px;height:579px;background:#FFFFFF;" version="1.1" viewBox="0 0 1162 579" width="1162px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="364.2188" style="stroke:#181818;stroke-width:1.0;" width="10" x="192" y="114.9609"/><rect fill="#FFFFFF" height="303.5156" style="stroke:#181818;stroke-width:1.0;" width="10" x="325" y="145.3125"/><rect fill="#FFFFFF" height="242.8125" style="stroke:#181818;stroke-width:1.0;" width="10" x="471" y="175.6641"/><rect fill="#FFFFFF" height="182.1094" style="stroke:#181818;stroke-width:1.0;" width="10" x="621.5" y="206.0156"/><rect fill="#FFFFFF" height="121.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="747" y="236.3672"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="891" y="297.0703"/><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="989.5" y="327.4219"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="64" x2="64" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="197" x2="197" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="330" x2="330" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="476" x2="476" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="626" x2="626" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="752" x2="752" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="895.5" x2="895.5" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="994.5" x2="994.5" y1="82.6094" y2="497.1797"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1104.5" x2="1104.5" y1="82.6094" y2="497.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="5" y="79.5332">Campus Manager</text><ellipse cx="64" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M64,21.5 L64,48.5 M51,29.5 L77,29.5 M64,48.5 L51,63.5 M64,48.5 L77,63.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="5" y="510.7129">Campus Manager</text><ellipse cx="64" cy="522.2891" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M64,530.2891 L64,557.2891 M51,538.2891 L77,538.2891 M64,557.2891 L51,572.2891 M64,557.2891 L77,572.2891 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="151" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="158" y="71.5332">Visualization</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="151" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="158" y="517.7129">Visualization</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="124" x="268" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="275" y="71.5332">ListBuildingRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="124" x="268" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="275" y="517.7129">ListBuildingRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="402" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="409" y="71.5332">ListBuildingController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148" x="402" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="409" y="517.7129">ListBuildingController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="560" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="567" y="71.5332">ListBuildingService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133" x="560" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="567" y="517.7129">ListBuildingService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="98" x="703" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="710" y="71.5332">BuildingRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="98" x="703" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="710" y="517.7129">BuildingRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="850.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="857.5" y="71.5332">BuildingMap</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="850.5" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="857.5" y="517.7129">BuildingMap</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="951.5" y="50"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="958.5" y="71.5332">BuildingDto</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="951.5" y="496.1797"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="958.5" y="517.7129">BuildingDto</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="1047.5" y="79.5332">buildingdatabase</text><path d="M1086.5,29 C1086.5,19 1104.5,19 1104.5,19 C1104.5,19 1122.5,19 1122.5,29 L1122.5,55 C1122.5,65 1104.5,65 1104.5,65 C1104.5,65 1086.5,65 1086.5,55 L1086.5,29 " fill="#E2E2F0" style="stroke:#181818;stroke-width:1.5;"/><path d="M1086.5,29 C1086.5,39 1104.5,39 1104.5,39 C1104.5,39 1122.5,39 1122.5,29 " fill="none" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="1047.5" y="510.7129">buildingdatabase</text><path d="M1086.5,523.7891 C1086.5,513.7891 1104.5,513.7891 1104.5,513.7891 C1104.5,513.7891 1122.5,513.7891 1122.5,523.7891 L1122.5,549.7891 C1122.5,559.7891 1104.5,559.7891 1104.5,559.7891 C1104.5,559.7891 1086.5,559.7891 1086.5,549.7891 L1086.5,523.7891 " fill="#E2E2F0" style="stroke:#181818;stroke-width:1.5;"/><path d="M1086.5,523.7891 C1086.5,533.7891 1104.5,533.7891 1104.5,533.7891 C1104.5,533.7891 1122.5,533.7891 1122.5,523.7891 " fill="none" style="stroke:#181818;stroke-width:1.5;"/><rect fill="#FFFFFF" height="364.2188" style="stroke:#181818;stroke-width:1.0;" width="10" x="192" y="114.9609"/><rect fill="#FFFFFF" height="303.5156" style="stroke:#181818;stroke-width:1.0;" width="10" x="325" y="145.3125"/><rect fill="#FFFFFF" height="242.8125" style="stroke:#181818;stroke-width:1.0;" width="10" x="471" y="175.6641"/><rect fill="#FFFFFF" height="182.1094" style="stroke:#181818;stroke-width:1.0;" width="10" x="621.5" y="206.0156"/><rect fill="#FFFFFF" height="121.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="747" y="236.3672"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="891" y="297.0703"/><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="989.5" y="327.4219"/><polygon fill="#181818" points="180,110.9609,190,114.9609,180,118.9609,184,114.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="64" x2="186" y1="114.9609" y2="114.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="71" y="110.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="72" x="82" y="110.1045">list buildings</text><polygon fill="#181818" points="313,141.3125,323,145.3125,313,149.3125,317,145.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="202" x2="319" y1="145.3125" y2="145.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="209" y="140.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="220" y="140.4561">GET buildings</text><polygon fill="#181818" points="459,171.6641,469,175.6641,459,179.6641,463,175.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="335" x2="465" y1="175.6641" y2="175.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="342" y="170.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="353" y="170.8076">listBuildings()</text><polygon fill="#181818" points="609.5,202.0156,619.5,206.0156,609.5,210.0156,613.5,206.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="481" x2="615.5" y1="206.0156" y2="206.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="488" y="201.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="499" y="201.1592">listBuildings()</text><polygon fill="#181818" points="735,232.3672,745,236.3672,735,240.3672,739,236.3672" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="631.5" x2="741" y1="236.3672" y2="236.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="638.5" y="231.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="649.5" y="231.5107">findAll()</text><polygon fill="#181818" points="1092.5,262.7188,1102.5,266.7188,1092.5,270.7188,1096.5,266.7188" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="757" x2="1098.5" y1="266.7188" y2="266.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="764" y="261.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="775" y="261.8623">find()</text><polygon fill="#181818" points="879,293.0703,889,297.0703,879,301.0703,883,297.0703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="757" x2="885" y1="297.0703" y2="297.0703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="764" y="292.2139">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104" x="775" y="292.2139">toDto(buildingList)</text><polygon fill="#181818" points="977.5,323.4219,987.5,327.4219,977.5,331.4219,981.5,327.4219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="901" x2="983.5" y1="327.4219" y2="327.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="908" y="322.5654">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="919" y="322.5654">create</text><polygon fill="#181818" points="642.5,353.7734,632.5,357.7734,642.5,361.7734,638.5,357.7734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="636.5" x2="751" y1="357.7734" y2="357.7734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="648.5" y="352.917">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="659.5" y="352.917"> </text><polygon fill="#181818" points="492,384.125,482,388.125,492,392.125,488,388.125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="486" x2="625.5" y1="388.125" y2="388.125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="498" y="383.2686">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="516" y="383.2686"> </text><polygon fill="#181818" points="346,414.4766,336,418.4766,346,422.4766,342,418.4766" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="340" x2="475" y1="418.4766" y2="418.4766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="352" y="413.6201">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="370" y="413.6201">data as JSON</text><polygon fill="#181818" points="213,444.8281,203,448.8281,213,452.8281,209,448.8281" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="207" x2="329" y1="448.8281" y2="448.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="219" y="443.9717">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="237" y="443.9717">data as JSON</text><polygon fill="#181818" points="75,475.1797,65,479.1797,75,483.1797,71,479.1797" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="69" x2="196" y1="479.1797" y2="479.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="81" y="474.3232">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="86" x="99" y="474.3232">list of buildings</text><!--MD5=[2ec824c898158c3d312ac3dbeec5f38c]
+@startuml SequenceDiagramLevel3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant ListBuildingRoute
+participant ListBuildingController
+participant ListBuildingService
+participant BuildingRepo
+participant BuildingMap
+participant BuildingDto
+database buildingdatabase
+
+CM -> Visualization : list buildings
+activate Visualization
+
+Visualization -> ListBuildingRoute : GET buildings
+activate ListBuildingRoute
+
+ListBuildingRoute -> ListBuildingController : listBuildings()
+activate ListBuildingController
+
+ListBuildingController -> ListBuildingService : listBuildings()
+activate ListBuildingService
+
+ListBuildingService -> BuildingRepo : findAll()
+activate BuildingRepo
+
+BuildingRepo -> buildingdatabase : find()
+
+BuildingRepo -> BuildingMap : toDto(buildingList)
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+activate BuildingDto
+
+BuildingRepo -> ListBuildingService
+deactivate BuildingMap
+deactivate BuildingRepo
+
+ListBuildingService -> ListBuildingController
+deactivate ListBuildingService
+
+ListBuildingController -> ListBuildingRoute : data as JSON
+deactivate BuildingDto
+
+deactivate ListBuildingController
+
+ListBuildingRoute -> Visualization : data as JSON
+
+deactivate ListBuildingRoute
+
+Visualization -> CM : list of buildings
+deactivate Visualization
+
+@enduml
+
+@startuml SequenceDiagramLevel3
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant ListBuildingRoute
+participant ListBuildingController
+participant ListBuildingService
+participant BuildingRepo
+participant BuildingMap
+participant BuildingDto
+database buildingdatabase
+
+CM -> Visualization : list buildings
+activate Visualization
+
+Visualization -> ListBuildingRoute : GET buildings
+activate ListBuildingRoute
+
+ListBuildingRoute -> ListBuildingController : listBuildings()
+activate ListBuildingController
+
+ListBuildingController -> ListBuildingService : listBuildings()
+activate ListBuildingService
+
+ListBuildingService -> BuildingRepo : findAll()
+activate BuildingRepo
+
+BuildingRepo -> buildingdatabase : find()
+
+BuildingRepo -> BuildingMap : toDto(buildingList)
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+activate BuildingDto
+
+BuildingRepo -> ListBuildingService
+deactivate BuildingMap
+deactivate BuildingRepo
+
+ListBuildingService -> ListBuildingController
+deactivate ListBuildingService
+
+ListBuildingController -> ListBuildingRoute : data as JSON
+deactivate BuildingDto
+
+deactivate ListBuildingController
+
+ListBuildingRoute -> Visualization : data as JSON
+
+deactivate ListBuildingRoute
+
+Visualization -> CM : list of buildings
+deactivate Visualization
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

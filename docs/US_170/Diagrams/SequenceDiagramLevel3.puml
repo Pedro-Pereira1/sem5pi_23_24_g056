@@ -1,0 +1,57 @@
+@startuml SequenceDiagramLevel3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant ListBuildingRoute
+participant ListBuildingController
+participant ListBuildingService
+participant BuildingRepo
+participant BuildingMap
+participant BuildingDto
+database buildingdatabase
+
+CM -> Visualization : list buildings
+activate Visualization
+
+Visualization -> ListBuildingRoute : GET buildings
+activate ListBuildingRoute
+
+ListBuildingRoute -> ListBuildingController : listBuildings()
+activate ListBuildingController
+
+ListBuildingController -> ListBuildingService : listBuildings()
+activate ListBuildingService
+
+ListBuildingService -> BuildingRepo : findAll()
+activate BuildingRepo
+
+BuildingRepo -> buildingdatabase : find()
+
+BuildingRepo -> BuildingMap : toDto(buildingList)
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+activate BuildingDto
+
+BuildingRepo -> ListBuildingService
+deactivate BuildingMap
+deactivate BuildingRepo
+
+ListBuildingService -> ListBuildingController
+deactivate ListBuildingService
+
+ListBuildingController -> ListBuildingRoute : data as JSON
+deactivate BuildingDto
+
+deactivate ListBuildingController
+
+ListBuildingRoute -> Visualization : data as JSON
+
+deactivate ListBuildingRoute
+
+Visualization -> CM : list of buildings
+deactivate Visualization
+
+@enduml

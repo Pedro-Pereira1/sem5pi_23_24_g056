@@ -1,51 +1,68 @@
-# US 1001
-
-*This is an example template*
+# US 170 AS a campus manager, I want to list all buildings
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* First time that this task is developed.
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 170** As a campus manager i want to:
 
-*Example*
+* List all buildings
 
-**US G002** As {Ator} I Want...
-
-- G002.1. Blá Blá Blá ...
-
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+**Dependencies:** There are no Dependencies associated with this US.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+Regarding this requirement we understod that as a Campus manager an actor
+of the system, I want to have the posibility of list every building
+registered in the system regarless of number of floors, elevators, passageways, etc. And the information that I should be able to see is
+the building name, description and code.
+
+### 3.1 Domain model excerpt
+
+![Domain model excerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
 
-### 4.2. Class Diagram
+### Level 2
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![SequenceDiagramLevel2](Diagrams/SequenceDiagramLevel2.svg)
 
-### 4.3. Applied Patterns
+### Level 3
 
-### 4.4. Tests
+In order to resolve this US we will make use of the folliwing classes:
+
+1. ListBuildingController
+2. ListBuildingService
+3. BuildingRepo
+4. BuildingMap
+5. BuildingDto
+
+We will make also use of ListBuildingRoute file, inside this file we will put our route for any get request to list buildings
+
+![SequenceDiagramLevel3](Diagrams/SequenceDiagramLevel3.svg)
+
+### 4.2. Applied Patterns
+
+* Controller
+* Repository
+* Service
+* Dto
+* Mapper
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 
+```javaScript
+it('test something', () => {
+
+})
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
 
 ## 5. Implementation
 
@@ -56,7 +73,6 @@ public void ensureNullIsNotAllowed() {
 ## 6. Integration/Demonstration
 
 *In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
 *It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
 
 ## 7. Observations
@@ -64,5 +80,4 @@ public void ensureNullIsNotAllowed() {
 *This section should be used to include any content that does not fit any of the previous sections.*
 
 *The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+*The team should include in this section statements/references regarding third party works that were used in the development this work*
