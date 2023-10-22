@@ -1,22 +1,88 @@
-@startuml
+@startuml SequenceDiagramLevel3
 'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
 
-User -> (Start)
-User --> (Use)
+actor "Campus Manager" as CM
+participant CreateFloorRoute
+participant CreateFloorController
+participant CreateFloorService
+participant Floor
+participant Building
+participant BuildingMap
+participant FloorMap
+participant FloorDto
+participant FloorRepo
+participant BuildingRepo
+database buildingDatabase
+database floorDatabase
 
-Admin ---> (Use)
+CM -> CreateFloorRoute : data JSON
+activate CreateFloorRoute
 
-note right of Admin : This is an example.
+CreateFloorRoute -> CreateFloorController : createFloor(floorJSON, buildingCode)
+activate CreateFloorController
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+CreateFloorController -> CreateFloorService : createFloor(floorDto, buildingCode)
+activate CreateFloorService
+activate BuildingRepo
+activate FloorRepo
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+CreateFloorService -> BuildingRepo : findByCode(buildingCode)
+
+BuildingRepo -> buildingDatabase : findByCode(buildingCode)
+
+BuildingRepo -> BuildingMap : toDomain(building)
+activate BuildingMap
+
+BuildingMap -> Building : create(building)
+activate Building
+
+BuildingRepo --> CreateFloorService
+
+CreateFloorService -> Floor : create(floorDto)
+activate Floor
+
+CreateFloorService -> Building : addFloor(floor)
+
+CreateFloorService -> FloorRepo : save(floor)
+
+FloorRepo -> FloorMap : toPersistence(floor)
+activate FloorMap
+
+FloorRepo -> floorDatabase : save(floorPersistence)
+
+FloorRepo -> FloorMap : toDomain(floorPersistence)
+
+FloorRepo --> CreateFloorService
+
+CreateFloorService -> BuildingRepo : save(building)
+
+BuildingRepo -> BuildingMap : toPersistence(building)
+
+BuildingRepo -> buildingDatabase : save(building)
+
+BuildingRepo -> BuildingMap : toDomain(building)
+deactivate BuildingMap
+
+BuildingRepo --> CreateFloorService
+
+CreateFloorService -> FloorMap : toDto(floor)
+deactivate FloorMap
+
+deactivate Building
+deactivate Floor
+deactivate BuildingRepo
+deactivate FloorRepo
+
+CreateFloorService -> CreateFloorController 
+deactivate CreateFloorService
+
+CreateFloorController -> CreateFloorRoute
+
+deactivate CreateFloorController
+
+CreateFloorRoute -> CM
+
+deactivate CreateFloorRoute
+
 @enduml

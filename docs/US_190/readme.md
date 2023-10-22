@@ -37,25 +37,55 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 |   O    |     |     |     |     |     |  O  |     | PA  |
 |   O    |     |     |     |     |     |  O  |     | PA  |
 |   N    |  N  |  N  |  N  |  N  |  N  |  N  |  N  |     |
+
 * "O" means west wall, "N" means north wall, "P" means door, "PA" means passageway and "E" means elevator.
 
 ### 3.1. Domain Model Excerpt
+
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
 ### 3.2. System Sequence Diagram
+
 ![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
 
 ## 4. Design
 
 ### 4.1. Realization
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+Level 2:
+
+![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
+
+Level 3:
+
+
+In order to resolve this US we will make use of the folliwing classes:
+
+1. CreateFloorController
+2. CreateFloorService
+3. FloorRepo
+4. FloorMap
+5. FloorDto
+6. Floor
+7. Building
+8. BuildingMap
+9. BuildingRepo
+
+We will make also use of CreateFloorRoute file, inside this file we will put our route for any post request regarding the floor creation
+
+![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
 
 ### 4.2. Class Diagram
 
 ![ClassDiagram](Diagrams/ClassDiagram.svg)
 
 ### 4.3. Applied Patterns
+
+* Controller
+* Repository
+* Service
+* Dto
+* Mapper
 
 ### 4.4. Tests
 
