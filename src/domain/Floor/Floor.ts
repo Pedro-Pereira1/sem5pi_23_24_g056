@@ -20,4 +20,7 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.id
   }
 
+  get description(): FloorDescription {
+    return this.props.floorDescription
+  }
 }
