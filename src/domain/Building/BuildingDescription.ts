@@ -1,14 +1,16 @@
 import { ValueObject } from '../../core/domain/ValueObject';
 
-  
-  interface BuildingDescriptionProps {
-    value: string;
+interface BuildingDescriptionProps {
+  value: string;
+}
+
+export class BuildingDescription extends ValueObject<BuildingDescriptionProps> {
+
+  constructor(props: BuildingDescriptionProps) {
+    super(props);
   }
 
-  export class BuildingDescription extends ValueObject<BuildingDescriptionProps> {
-
-    private constructor (props : BuildingDescriptionProps){
-      super(props);
-    }
-    
+  get description(): string {
+    return this.props.value
   }
+}

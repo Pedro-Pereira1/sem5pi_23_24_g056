@@ -1,13 +1,13 @@
 import { Service, Inject } from 'typedi';
 
 import { Document, Model } from 'mongoose';
-import { IUserPersistence } from '../dataschema/IUserPersistence';
+import { IUserPersistence } from '../dataschema/users/IUserPersistence';
 
-import IUserRepo from "../services/IRepos/IUserRepo";
+import IUserRepo from "../services/IRepos/users/IUserRepo";
 import { User } from "../domain/user";
 import { UserId } from "../domain/userId";
 import { UserEmail } from "../domain/userEmail";
-import { UserMap } from "../mappers/UserMap";
+import { UserMap } from "../mappers/users/UserMap";
 
 @Service()
 export default class UserRepo implements IUserRepo {

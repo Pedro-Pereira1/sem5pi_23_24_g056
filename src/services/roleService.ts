@@ -1,11 +1,11 @@
 import { Service, Inject } from 'typedi';
 import config from "../../config";
-import IRoleDTO from '../dto/IRoleDTO';
+import IRoleDTO from '../dto/users/IRoleDTO';
 import { Role } from "../domain/role";
-import IRoleRepo from '../services/IRepos/IRoleRepo';
-import IRoleService from './IServices/IRoleService';
+import IRoleRepo from './IRepos/users/IRoleRepo';
+import IRoleService from './IServices/users/IRoleService';
 import { Result } from "../core/logic/Result";
-import { RoleMap } from "../mappers/RoleMap";
+import { RoleMap } from "../mappers/users/RoleMap";
 
 @Service()
 export default class RoleService implements IRoleService {

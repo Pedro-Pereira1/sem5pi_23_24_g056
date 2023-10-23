@@ -3,13 +3,13 @@ import * as sinon from 'sinon';
 import { Response, Request, NextFunction } from 'express';
 
 import { Container } from 'typedi';
-import config from "../../config";
+import config from "../../../config";
 
-import { Result } from '../core/logic/Result';
+import { Result } from '../../core/logic/Result';
 
-import IRoleService from "../services/IServices/IRoleService";
+import IRoleService from "../../services/IServices/users/IRoleService";
 import RoleController from "./roleController";
-import IRoleDTO from '../dto/IRoleDTO';
+import IRoleDTO from '../../dto/users/IRoleDTO';
 
 describe('role controller', function () {
 	beforeEach(function() {

@@ -4,9 +4,9 @@ import * as sinon from 'sinon';
 import { Response, Request, NextFunction } from 'express';
 import { Container } from 'typedi';
 import { Result } from '../src/core/logic/Result';
-import IRoleService from "../src/services/IServices/IRoleService";
-import RoleController from "../src/controllers/roleController";
-import IRoleDTO from '../src/dto/IRoleDTO';
+import IRoleService from "../src/services/IServices/users/IRoleService";
+import RoleController from "../src/controllers/users/roleController";
+import IRoleDTO from '../src/dto/users/IRoleDTO';
 import { Role } from '../src/domain/role';
 
 describe('role controller', function () {
