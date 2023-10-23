@@ -9,19 +9,22 @@
 
 **US 190 -** As a Campus Manager, I want to create building floor
 
-> **Q**: Será possível esclarecer como funcionarão estas user stories?? <br>
-> **A**: O requisito 190 Criar piso permite definir um piso para um dos edificios criados anteriormente, por exemplo, o piso 1 do edificio B com uma breve descrição (ex., "salas TP". <br>
-
+> **Q**: Será possível esclarecer como funcionarão estas user stories??
+>
+> **A**: O requisito 190 Criar piso permite definir um piso para um dos edificios criados anteriormente, por exemplo, o piso 1 do edificio B com uma breve descrição (ex., "salas TP".
 
 **Dependencies:**
-- **US150 -** As a Campus Manager, I want to create a building.
 
-**Regarding this requirement we understand that:** <br>
+* **US150 -** As a Campus Manager, I want to create a building.
+
+**Regarding this requirement we understand that:**
+
 As a Campus Manager, an actor of the system, I will be able to access the system and create building floor.
 
 ## 3. Analysis
 
 **Analyzing this User Story we understand that:**
+
 * Campus Manager is a user role that manages the data of the routes and maps.
 * Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
@@ -58,7 +61,6 @@ Level 2:
 
 Level 3:
 
-
 In order to resolve this US we will make use of the folliwing classes:
 
 1. CreateFloorController
@@ -89,31 +91,38 @@ We will make also use of CreateFloorRoute file, inside this file we will put our
 
 ### 4.4. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+```javascript
+it('floor create valid test', async function {
 
+})
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+
+```javascript
+it('floor create invalid test', async function {
+
+})
+```
+
+```javascript
+it('controller unit test with stud service', async function {
+
+})
+```
+
+```javascript
+it('service unit test with stud repo', async function {
+
+})
+```
+
+```javascript
+it('controller + service + repo test with stud database', async function {
+
+})
+```
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
-
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
-
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
-
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
