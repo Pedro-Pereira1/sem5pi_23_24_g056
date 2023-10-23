@@ -12,7 +12,7 @@ import { FloorMap } from './FloorMap';
 
   export class Floor extends AggregateRoot<FloorProps> {
 
-    private constructor (props: FloorProps, floorNumber: UniqueEntityID) {
+    private constructor (props: FloorProps, floorNumber: FloorNumber) {
       super(props, floorNumber);
     }
 
