@@ -7,7 +7,7 @@ interface FloorDescriptionProps {
 
 export class FloorDescription extends ValueObject<FloorDescriptionProps> {
 
-  private constructor(props: FloorDescriptionProps) {
+  constructor(props: FloorDescriptionProps) {
     super(props);
   }
 

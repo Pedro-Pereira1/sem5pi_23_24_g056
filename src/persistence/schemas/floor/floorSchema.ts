@@ -3,11 +3,20 @@ import IFloorPersistence from "../../../dataschema/floor/IFloorPersistence";
 
 const FloorSchema = new mongoose.Schema(
     {
-        floorNumber: {type: Number},
-        floorDescription: {type: String}
+        floorNumber: {
+            type: Number,
+            unique: true
+        },
+        floorDescription: { type: String },
+        floorMap: {
+            map: [[String]],
+            passageways: [String],
+            rooms: [String],
+            elevators: [String]
+        }
     },
     {
-        timestamps: true   
+        timestamps: true
     }
 )
 
