@@ -13,12 +13,12 @@ export default (app: Router) => {
 
     const ctrl = Container.get(config.controllers.createFloor.name) as ICreateFloorController
     
-    route.post('/createFloor', 
-    celebrate({
-        body: Joi.object({
-            floorNumber:  Joi.number.max(10),
-            floorDescription: Joi.string().max(255),
-        }),
-    }),
-    (req, res, next) => ctrl.createFloor(req, res, next));
+    //route.post('/createFloor', 
+    //celebrate({
+        //body: Joi.object({
+            //floorNumber:  Joi.number.max(10),
+            //floorDescription: Joi.string().max(255),
+        //}),
+    //}),
+    //(req, res, next) => ctrl.createFloor(req, res, next));
 }
