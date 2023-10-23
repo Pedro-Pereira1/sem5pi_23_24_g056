@@ -40,7 +40,9 @@ class RobotTypeId << (v,orange) ValueObject >> << unique >>
 rectangle #36827F{
 class Building  << Root >> << Entity >>
 class BuildingDescription  << (v,#A4C2E5) ValueObject >>
-class BuildingName  << (v,orange) ValueObject >> << unique >>
+class BuildingName  << (v,#A4C2E5) ValueObject >>
+class BuildingCode  << (v,orange) ValueObject >> << unique >>
+class BuildingSize  << (v,#A4C2E5) ValueObject >>
 }
 '========================================================
 rectangle #FF3B1B{
@@ -103,7 +105,9 @@ Elevator "1"->"1" ElevatorCoordinates
 
 Building "1"->"*" Floor
 Building "*"-->"0..1" BuildingDescription
-Building "1"-->"1" BuildingName
+Building "1"-->"0..1" BuildingName
+Building "*"-->"1" BuildingSize
+Building "1"-->"1" BuildingCode
 
 Room "1"-d->"1" RoomId
 Room "1"->"1" RoomCoordinates

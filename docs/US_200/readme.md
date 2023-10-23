@@ -24,17 +24,51 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
 * Floor example:
 
-|  O,N   |  N  |  N  |  N  |  N  | O,N |  N  |  N  |  O  |
-|:------:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|   O    |     |     |     |     |  O  |     |     |  O  |
-|  N,PA  |  N  |  N  | N,P |  N  |  N  | N,P |  N  |  E  |
-|   PA   |     |     |     |     |     |     |     |  E  |
-|  O,N   |  N  |  N  |  N  |  N  |  N  | O,P |     |  O  |
-|   O    |     |     |     |     |     |  O  |     | PA  |
-|   O    |     |     |     |     |     |  O  |     | PA  |
-|   N    |  N  |  N  |  N  |  N  |  N  |  N  |  N  |     |
-* "O" means west wall, "N" means north wall, "P" means door, "PA" means passageway and "E" means elevator.
+|  3  |  2  |  2  |  2  |  2  |  3  |  2  |  2  |  1  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|  1  |     |     |     |     |  1  |     |     |  1  |
+| 18  |  2  |  2  |  6  |  2  |  2  |  6  |  2  |  8  |
+| 16  |     |     |     |     |     |     |     |  8  |
+|  3  |  2  |  2  |  2  |  2  |  2  |  5  |     |  1  |
+|  1  |     |     |     |     |     |  1  |     | 16  |
+|  1  |     |     |     |     |     |  1  |     | 16  |
+|  2  |  2  |  2  |  2  |  2  |  2  |  2  |  2  |     |
 
+
+| description.map[][] | North wall | West wall | Door | Elevator | Passageway |
+|:-------------------:|:----------:|:---------:|:----:|:--------:|:----------:|
+|          0          |     No     |    No     |  No  |    No    |     No     |
+|          1          |     No     |    Yes    |  No  |    No    |     No     |
+|          2          |    Yes     |    No     |  No  |    No    |     No     |
+|          3          |    Yes     |    Yes    |  No  |    No    |     No     |
+|          4          |     No     |    No     | Yes  |    No    |     No     |
+|          5          |     No     |    Yes    | Yes  |    No    |     No     |
+|          6          |    Yes     |    No     | Yes  |    No    |     No     |
+|          7          |    Yes     |    Yes    | Yes  |    No    |     No     |
+|          8          |     No     |    No     |  No  |   Yes    |     No     |
+|          9          |     No     |    Yes    |  No  |   Yes    |     No     |
+|         10          |    Yes     |    No     |  No  |   Yes    |     No     |
+|         11          |    Yes     |    Yes    |  No  |   Yes    |     No     |
+|         12          |     No     |    No     | Yes  |   Yes    |     No     |
+|         13          |     No     |    Yes    | Yes  |   Yes    |     No     |
+|         14          |    Yes     |    No     | Yes  |   Yes    |     No     |
+|         15          |    Yes     |    Yes    | Yes  |   Yes    |     No     |
+|         16          |     No     |    No     |  No  |    No    |    Yes     |
+|         17          |     No     |    Yes    |  No  |    No    |    Yes     |
+|         18          |    Yes     |    No     |  No  |    No    |    Yes     |
+|         19          |    Yes     |    Yes    |  No  |    No    |    Yes     |
+|         20          |     No     |    No     | Yes  |    No    |    Yes     |
+|         21          |     No     |    Yes    | Yes  |    No    |    Yes     |
+|         22          |    Yes     |    No     | Yes  |    No    |    Yes     |
+|         23          |    Yes     |    Yes    | Yes  |    No    |    Yes     |
+|         24          |     No     |    No     |  No  |   Yes    |    Yes     |
+|         25          |     No     |    Yes    |  No  |   Yes    |    Yes     |
+|         26          |    Yes     |    No     |  No  |   Yes    |    Yes     |
+|         27          |    Yes     |    Yes    |  No  |   Yes    |    Yes     |
+|         28          |     No     |    No     | Yes  |   Yes    |    Yes     |
+|         29          |     No     |    Yes    | Yes  |   Yes    |    Yes     |
+|         30          |    Yes     |    No     | Yes  |   Yes    |    Yes     |
+|         31          |    Yes     |    Yes    | Yes  |   Yes    |    Yes     |
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
