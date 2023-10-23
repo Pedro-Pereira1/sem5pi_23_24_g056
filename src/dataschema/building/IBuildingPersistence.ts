@@ -1,4 +1,7 @@
 export interface IBuildingPersistence {
-    buildingName: String
-    buildingDescription: String
+    buildingName: string
+    buildingDescription: string
+    buildingCode: string
+    buildingLength: number
+    buildingWidth: number
 }
