@@ -9,21 +9,27 @@ export class BuildingMap extends Mapper<Building> {
 
     public static toDto(building: Building): IBuildingDTO {
         return {
-            buildingName: building.name.toString(),
-            buildingDescription: building.desctription.description
+            buildingName: building.name.name,
+            buildingDescription: building.desctription.description,
+            buildingCode: building.code.toString(),
+            buildingLength: building.size.length,
+            buildingWidth: building.size.width
         } as IBuildingDTO
     }
 
     public static toDomain(iBuildingDTO: any | Model<IBuildingPersistence & Document>): Building {
-        const buildingOrError = Building.create(iBuildingDTO, new UniqueEntityID(iBuildingDTO.domainId))         
+        const buildingOrError = Building.create(iBuildingDTO)         
 
         return buildingOrError.isSuccess ? buildingOrError.getValue() : null
     }
 
     public static toPersistence(building: Building): any {
         return {
-            buildingName: building.name.toString(),
-            buildingDescription: building.desctription.description
+            buildingName: building.name.name,
+            buildingDescription: building.desctription.description,
+            buildingCode: building.code.toString(),
+            buildingLength: building.size.length,
+            buildingWidth: building.size.width
         }
     }
 }
