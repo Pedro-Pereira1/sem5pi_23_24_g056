@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { IBuildingPersistence } from "../../../dataschema/building/IBuildingPersistence";
-import { BuildingSize } from "../../../domain/Building/BuildingSize";
+import floorSchema from "../floor/floorSchema";
 
 const BuildingSchema = new mongoose.Schema(
     {
@@ -8,7 +8,8 @@ const BuildingSchema = new mongoose.Schema(
         buildingName: {type: String},
         buildingCode: {type: String, unique: true},
         buildingLength: {type: Number},
-        buildingWidth: {type: Number}
+        buildingWidth: {type: Number},
+        buildingFloors: [floorSchema]
     },
     {
         timestamps: true
