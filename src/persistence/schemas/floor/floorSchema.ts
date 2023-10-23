@@ -11,4 +11,4 @@ const FloorSchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model<IFloorPersistence & mongoose.Document>('FLoor', FloorSchema)
+export default mongoose.model<IFloorPersistence & mongoose.Document>('Floor', FloorSchema)
