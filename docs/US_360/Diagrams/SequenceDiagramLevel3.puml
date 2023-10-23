@@ -1,88 +1,67 @@
-@startuml SequenceDiagramLevel3
-'https://plantuml.com/use-case-diagram
+@startuml
 
+autonumber
 
-actor "Fleet Manager" as FM
-participant Robot
-participant Nickname
-participant CreateFloorService
-participant Floor
-participant Building
-participant BuildingMap
-participant FloorMap
-participant FloorDto
-participant FloorRepo
-participant BuildingRepo
-database buildingDatabase
-database floorDatabase
+participant ":RobotRoute" as Route
+participant ":RobotController" as Controller
+participant ":RobotDTO" as DTO
+participant ":RobotService" as Service
+participant ":Robot" as Floor
+participant ":RobotRepo" as Repo
+participant ":RobotMap" as Map
 
-CM -> Robot : data JSON
-activate Robot
+participant ":RobotPersistence" as Persistence
+participant ":RobotDTOResult" as DTOResult
 
-Robot -> Nickname : createFloor(floorJSON, buildingCode)
-activate Nickname
+?o->Route: POST
+activate Route
 
-Nickname -> CreateFloorService : createFloor(floorDto, buildingCode)
-activate CreateFloorService
-activate BuildingRepo
-activate FloorRepo
+Route -> Controller: create()
+activate Controller
 
-CreateFloorService -> BuildingRepo : findByCode(buildingCode)
+Controller -> DTO: toDTO()
+activate DTO
 
-BuildingRepo -> buildingDatabase : findByCode(buildingCode)
+DTO --> Controller:
+deactivate DTO
 
-BuildingRepo -> BuildingMap : toDomain(building)
-activate BuildingMap
+Controller -> Service: createRobot()
+activate Service
+Service -> Floor: create()
 
-BuildingMap -> Building : create(building)
-activate Building
+Service -> Repo: save()
+activate Repo
 
-BuildingRepo --> CreateFloorService
+Repo -> Map: toPersistence()
+activate Map
+deactivate Map
 
-CreateFloorService -> Floor : create(floorDto)
-activate Floor
+Repo -> Persistence: create()
+activate Persistence
+deactivate Persistence
 
-CreateFloorService -> Building : addFloor(floor)
+Repo -> Map: toDomain()
+activate Map
+deactivate Map
 
-CreateFloorService -> FloorRepo : save(floor)
+Repo --> Service:
+deactivate Repo
 
-FloorRepo -> FloorMap : toPersistence(floor)
-activate FloorMap
+Service -> Map: toDTO()
+activate Map
+Map -> DTOResult: create()
+activate DTOResult
+deactivate DTOResult
+deactivate Map
 
-FloorRepo -> floorDatabase : save(floorPersistence)
+Service --> Controller:
+deactivate Service
 
-FloorRepo -> FloorMap : toDomain(floorPersistence)
+Controller --> Route:
+deactivate Controller
 
-FloorRepo --> CreateFloorService
+<--Route:
+deactivate Route
 
-CreateFloorService -> BuildingRepo : save(building)
-
-BuildingRepo -> BuildingMap : toPersistence(building)
-
-BuildingRepo -> buildingDatabase : save(building)
-
-BuildingRepo -> BuildingMap : toDomain(building)
-deactivate BuildingMap
-
-BuildingRepo --> CreateFloorService
-
-CreateFloorService -> FloorMap : toDto(floor)
-deactivate FloorMap
-
-deactivate Building
-deactivate Floor
-deactivate BuildingRepo
-deactivate FloorRepo
-
-CreateFloorService -> Nickname 
-deactivate CreateFloorService
-
-Nickname -> Robot
-
-deactivate Nickname
-
-Robot -> CM
-
-deactivate Robot
 
 @enduml
