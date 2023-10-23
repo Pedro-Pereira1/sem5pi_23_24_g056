@@ -5,15 +5,19 @@ import { FloorNumber } from './FloorNumber';
 import { FloorMap } from './FloorMap';
 
 
-  interface FloorProps {
-    floorDescription: FloorDescription;
-    floormaps: FloorMap[];
+interface FloorProps {
+  floorDescription: FloorDescription;
+  floormaps: FloorMap[];
+}
+
+export class Floor extends AggregateRoot<FloorProps> {
+
+  private constructor(props: FloorProps, floorNumber: FloorNumber) {
+    super(props, floorNumber);
   }
 
-  export class Floor extends AggregateRoot<FloorProps> {
-
-    private constructor (props: FloorProps, floorNumber: FloorNumber) {
-      super(props, floorNumber);
-    }
-
+  get number(): FloorNumber {
+    return this.id
   }
+
+}
