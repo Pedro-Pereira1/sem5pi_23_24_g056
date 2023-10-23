@@ -4,12 +4,12 @@ import floorSchema from "../floor/floorSchema";
 
 const BuildingSchema = new mongoose.Schema(
     {
-        buildingDescription: {type: String},
-        buildingName: {type: String},
-        buildingCode: {type: String, unique: true},
-        buildingLength: {type: Number},
-        buildingWidth: {type: Number},
-        buildingFloors: [floorSchema]
+        buildingCode: { type: String, unique: true },
+        buildingDescription: { type: String },
+        buildingName: { type: String },
+        buildingLength: { type: Number },
+        buildingWidth: { type: Number },
+        buildingFloors: { type: [floorSchema] }
     },
     {
         timestamps: true
