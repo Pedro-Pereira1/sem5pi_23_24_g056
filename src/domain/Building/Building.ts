@@ -6,6 +6,7 @@ import { Floor } from '../Floor/Floor';
 import { IBuildingDTO } from '../../dto/building/IBuildingDTO';
 import { Result } from '../../core/logic/Result';
 import { BuildingSize } from './BuildingSize';
+import BuildingCode from './BuildingCode';
 
 
 interface BuildingProps {
@@ -17,7 +18,7 @@ interface BuildingProps {
 
 export class Building extends AggregateRoot<BuildingProps> {
 
-  private constructor(props: BuildingProps, buildingCode: UniqueEntityID) {
+  private constructor(props: BuildingProps, buildingCode: BuildingCode) {
     super(props, buildingCode);
   }
 
