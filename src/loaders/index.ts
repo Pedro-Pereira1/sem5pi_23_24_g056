@@ -23,7 +23,7 @@ export default async ({ expressApp }) => {
 
   const buildingSchema = {
     name: 'buildingSchema',
-    schema: '../persistence/schema/building/buildingSchema'
+    schema: '../persistence/schemas/building/buildingSchema'
   }
 
   const roleController = {
@@ -57,8 +57,8 @@ export default async ({ expressApp }) => {
   }
 
   const createBuildingService = {
-    name: config.services.createbuilding.name,
-    path: config.services.createbuilding.path
+    name: config.services.createBuilding.name,
+    path: config.services.createBuilding.path
   }
 
   await dependencyInjectorLoader({
