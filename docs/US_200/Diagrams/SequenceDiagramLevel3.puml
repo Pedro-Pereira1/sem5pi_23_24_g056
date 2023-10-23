@@ -1,22 +1,71 @@
 @startuml
-'https://plantuml.com/use-case-diagram
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+autonumber
 
-User -> (Start)
-User --> (Use)
+participant ":FloorRoute" as Route
+participant ":FloorController" as Controller
+participant ":FloorDTO" as DTO
+participant ":FloorService" as Service
+participant ":FloorRepo" as Repo
+participant ":FloorMap" as Map
+participant ":Floor" as Floor
 
-Admin ---> (Use)
+participant ":FloorPersistence" as Persistence
+participant ":FloorDTOResult" as DTOResult
 
-note right of Admin : This is an example.
+?o->Route: PUT
+activate Route
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+Route -> Controller: update()
+activate Controller
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+Controller -> DTO: toDTO()
+activate DTO
+
+DTO --> Controller:
+deactivate DTO
+
+Controller -> Service: updateFloor()
+activate Service
+Service -> Repo: findById()
+activate Repo
+deactivate Repo
+
+Service -> Floor: set()
+activate Floor
+deactivate Floor
+
+Service -> Repo: save()
+activate Repo
+
+Repo -> Map: toPersistence()
+activate Map
+deactivate Map
+
+Repo -> Persistence: save()
+activate Persistence
+deactivate Persistence
+
+
+
+Repo --> Service:
+deactivate Repo
+
+Service -> Map: toDTO()
+activate Map
+Map -> DTOResult: update()
+activate DTOResult
+deactivate DTOResult
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+Controller --> Route:
+deactivate Controller
+
+<--Route:
+deactivate Route
+
+
 @enduml
