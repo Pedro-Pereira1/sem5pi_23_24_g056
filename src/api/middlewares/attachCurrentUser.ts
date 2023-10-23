@@ -4,7 +4,7 @@ import winston from 'winston';
 
 import config from '../../../config';
 
-import IUserRepo from '../../services/IRepos/IUserRepo';
+import IUserRepo from '../../services/IRepos/users/IUserRepo';
 
 /**
  * Attach user to req.user

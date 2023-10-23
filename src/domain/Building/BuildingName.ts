@@ -1,11 +1,16 @@
 import { ValueObject } from '../../core/domain/ValueObject';
-import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 
-  
+interface BuildingNameProps {
+  value: string;
+}
 
+export class BuildingName extends ValueObject<BuildingNameProps> {
 
-  export class BuildingName extends UniqueEntityID {
-
-
-    
+  constructor(props: BuildingNameProps) {
+    super(props);
   }
+
+  get name(): string {
+    return this.props.value
+  }
+}

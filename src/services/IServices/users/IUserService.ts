@@ -1,5 +1,5 @@
-import { Result } from "../../core/logic/Result";
-import { IUserDTO } from "../../dto/IUserDTO";
+import { Result } from "../../../core/logic/Result";
+import { IUserDTO } from "../../../dto/users/IUserDTO";
 
 export default interface IUserService  {
   SignUp(userDTO: IUserDTO): Promise<Result<{userDTO: IUserDTO, token: string}>>;
