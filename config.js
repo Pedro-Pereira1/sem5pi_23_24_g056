@@ -48,6 +48,10 @@ export default {
     createbuilding: {
       name: "CreateBuildingController",
       path: "../controllers/building/create/createBuildingController"
+    },
+    createFloor: {
+      name: "CreateBuildingController",
+      path: "../controllers/floor/create/createFloorController"
     }
   },
 
@@ -63,6 +67,10 @@ export default {
     building: {
       name: "BuildingRepo",
       path: "../repos/building/buildingRepo"
+    },
+    floor: {
+      name: "FloorRepo",
+      path: "../repos/floor/floorRepo"
     }
   },
 
@@ -74,6 +82,10 @@ export default {
     createBuilding: {
       name: "CreateBuildingService",
       path: "../services/building/create/createBuildingService"
+    },
+    createFloor: {
+      name: "CreateFloorService",
+      path: "../services/floor/create/createFloorService"
     }
   },
 };
