@@ -39,7 +39,13 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 
 ### 4.1. Realization
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+Level 2:
+
+![SequenceDiagramLevel2](Diagrams/SequenceDiagramLevel2.svg)
+
+Level 3:
+
+![SequenceDiagramLevel3](Diagrams/SequenceDiagramLevel3.svg)
 
 ### 4.2. Class Diagram
 
