@@ -18,7 +18,7 @@ export default (app: Router) => {
         body: Joi.object({
             buildingName:  Joi.string().alphanum().max(50),
             buildingDescription: Joi.string().max(255),
-            buildingCode: Joi.require().string().alphanum().max(5)
+            buildingCode: Joi.string().alphanum().max(5).required()
         }),
     }),
     (req, res, next) => ctrl.createBuilding(req, res, next));
