@@ -38,6 +38,10 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this.props.buildingSize
   }
 
+  addFloor(floor: Floor) {
+    this.props.floors.push(floor)
+  }
+
   public static create(buildingDto: IBuildingDTO): Result<Building> {
     const name = buildingDto.buildingName
     const description = buildingDto.buildingDescription
