@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { IBuildingPersistence } from "../../../dataschema/building/IBuildingPersistence";
-import floorSchema from "../floor/floorSchema";
+let floorSchema = require("../floor/floorSchema").schema
 
 const BuildingSchema = new mongoose.Schema(
     {
