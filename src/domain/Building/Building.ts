@@ -12,7 +12,7 @@ interface BuildingProps {
   buildingName: BuildingName
   buildingDescription: BuildingDescription;
   buildingSize: BuildingSize
-  //floors: Floor[];
+  floors: Floor[];
 }
 
 export class Building extends AggregateRoot<BuildingProps> {
@@ -51,7 +51,8 @@ export class Building extends AggregateRoot<BuildingProps> {
     const building = new Building({
       buildingName: new BuildingName({value: name}),
       buildingDescription: new BuildingDescription({value: description}),
-      buildingSize: new BuildingSize({length: length, width: width} )
+      buildingSize: new BuildingSize({length: length, width: width} ),
+      floors: []
     }, new UniqueEntityID(buildingDto.buildingCode))
 
     return Result.ok<Building>(building)
