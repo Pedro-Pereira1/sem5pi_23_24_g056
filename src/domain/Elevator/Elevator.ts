@@ -1,18 +1,15 @@
 import { AggregateRoot } from '../../core/domain/AggregateRoot';
-import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { ElevatorCoordinates } from './ElevatorCoordinates';
 import { ElevatorID } from './ElevatorID';
 
-  interface ElevatorProps {
-    elevatorCoordinates: ElevatorCoordinates;
-    elevatorID: ElevatorID;
+interface ElevatorProps {
+  elevatorCoordinates: ElevatorCoordinates;
+}
+
+export class Elevator extends AggregateRoot<ElevatorProps> {
+
+  constructor(props: ElevatorProps, elevatorId?: ElevatorID) {
+    super(props, elevatorId);
   }
 
-  export class Elevator extends AggregateRoot<ElevatorProps> {
-
-    
-    private constructor (props: ElevatorProps, id?: UniqueEntityID) {
-      super(props, id);
-    }
-
-  }
+}
