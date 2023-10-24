@@ -44,7 +44,7 @@ export class Building extends AggregateRoot<BuildingProps> {
     const length = buildingDto.buildingLength
     const width = buildingDto.buildingWidth
 
-    if (checkName(name) || checkDescription(description) || checkCode(code) || checkSize(length, width)) {
+    if (!checkName(name) || !checkDescription(description) || !checkCode(code) || !checkSize(length, width)) {
       return Result.fail<Building>('Missing paramethers')
     }
 
@@ -60,7 +60,7 @@ export class Building extends AggregateRoot<BuildingProps> {
 
 
 function checkName(name: string): boolean{
-  if (!!name === false || name.length === 0 || name.length > 50 || name.search("/^[a-zA-Z0-9]+$/") === -1){
+  if (!!name === false || name.length === 0 || name.length > 50 || name.search("^[a-zA-Z0-9]+$") === -1){
     return false
   }
 
@@ -68,7 +68,7 @@ function checkName(name: string): boolean{
 }
 
 function checkCode(code: string): boolean{
-  if (!!code === false || code.length === 0 || code.length > 5 || code.search("/^[a-zA-Z0-9 ]+$/") === -1){
+  if (!!code === false || code.length === 0 || code.length > 5 || code.search("[a-zA-Z0-9 ]+") === -1){
     return false
   }
 
