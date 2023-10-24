@@ -5,6 +5,7 @@ import { IBuildingPersistence } from "../../dataschema/building/IBuildingPersist
 import { Document, FilterQuery, Model } from 'mongoose';
 import { BuildingMap } from "../../mappers/building/BuildingMap";
 import BuildingCode from "../../domain/Building/BuildingCode";
+import { Result } from "../../core/logic/Result";
 
 @Service()
 export default class BuildingRepo implements IBuildingRepo {
@@ -48,6 +49,10 @@ export default class BuildingRepo implements IBuildingRepo {
 
 
 
+        throw new Error("Method not implemented.");
+    }
+
+    findAll(): Promise<Result<Building[]>> {
         throw new Error("Method not implemented.");
     }
 

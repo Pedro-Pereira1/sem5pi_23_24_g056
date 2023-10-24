@@ -4,4 +4,5 @@ export interface IBuildingDTO {
     buildingCode: string
     buildingLength: number
     buildingWidth: number
+    buildingFloors: string[]
 }

@@ -22,7 +22,7 @@ export class Building extends AggregateRoot<BuildingProps> {
     super(props, buildingCode);
   }
 
-  get code(): UniqueEntityID{
+  get code(): UniqueEntityID {
     return this.id;
   }
 
@@ -60,48 +60,51 @@ export class Building extends AggregateRoot<BuildingProps> {
     const code = buildingDto.buildingCode
     const length = buildingDto.buildingLength
     const width = buildingDto.buildingWidth
+    const floors = buildingDto.buildingFloors
 
     if (checkName(name) || checkDescription(description) || checkCode(code) || checkSize(length, width)) {
       return Result.fail<Building>('Missing paramethers')
     }
 
+
     const building = new Building({
-      buildingName: new BuildingName({value: name}),
-      buildingDescription: new BuildingDescription({value: description}),
-      buildingSize: new BuildingSize({length: length, width: width} ),
+      buildingName: new BuildingName({ value: name }),
+      buildingDescription: new BuildingDescription({ value: description }),
+      buildingSize: new BuildingSize({ length: length, width: width }),
       floors: []
     }, new UniqueEntityID(buildingDto.buildingCode))
 
     return Result.ok<Building>(building)
+
   }
 }
 
 
-function checkName(name: string): boolean{
-  if (!!name === false || name.length === 0 || name.length > 50 || name.search("/^[a-zA-Z0-9]+$/") === -1){
+function checkName(name: string): boolean {
+  if (!!name === false || name.length === 0 || name.length > 50 || name.search("/^[a-zA-Z0-9]+$/") === -1) {
     return false
   }
 
   return true
 }
 
-function checkCode(code: string): boolean{
-  if (!!code === false || code.length === 0 || code.length > 5 || code.search("/^[a-zA-Z0-9 ]+$/") === -1){
+function checkCode(code: string): boolean {
+  if (!!code === false || code.length === 0 || code.length > 5 || code.search("/^[a-zA-Z0-9 ]+$/") === -1) {
     return false
   }
 
   return true
 }
 
-function checkDescription(description: string): boolean{
-  if (!!description === false || description.length === 0 || description.length > 255){
+function checkDescription(description: string): boolean {
+  if (!!description === false || description.length === 0 || description.length > 255) {
     return false
   }
 
   return true
 }
 
-function checkSize(length: number, width: number): boolean{
+function checkSize(length: number, width: number): boolean {
   if (!!length === false || !!width === false || width < 1 || length < 1) return false
 
 
