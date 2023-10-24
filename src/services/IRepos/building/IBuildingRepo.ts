@@ -1,8 +1,8 @@
 import { Repo } from "../../../core/infra/Repo";
 import { Building } from "../../../domain/Building/Building";
-import { BuildingName } from "../../../domain/Building/BuildingName";
+import BuildingCode from "../../../domain/Building/BuildingCode";
 
 export default interface IBuildingRepo extends Repo<Building> {
     save(building: Building): Promise<Building>
-    findByBuildingName(buildingName: BuildingName): Promise<Building>
+    findByBuidingCode(buildingCode: BuildingCode): Promise<Building>
 }
