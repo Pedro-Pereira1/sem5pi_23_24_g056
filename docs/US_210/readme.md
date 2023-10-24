@@ -89,9 +89,6 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 #### Level3
 ![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
 
-### 4.2. Class Diagram
-
-![ClassDiagram](Diagrams/ClassDiagram.svg)
 
 ### 4.3. Applied Patterns
 

@@ -48,9 +48,7 @@ Level 3:
 
 ![SequenceDiagramLevel3](Diagrams/SequenceDiagramLevel3.svg)
 
-### 4.2. Class Diagram
 
-![ClassDiagram](Diagrams/ClassDiagram.svg)
 
 ### 4.3. Applied Patterns
 

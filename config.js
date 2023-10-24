@@ -52,6 +52,10 @@ export default {
     createFloor: {
       name: "CreateBuildingController",
       path: "../controllers/floor/create/createFloorController"
+    },
+    createPassageway: {
+      name: "CreatePassagewayController",
+      path: "../controllers/passageway/create/createPassagewayController"
     }
   },
 
@@ -71,6 +75,10 @@ export default {
     floor: {
       name: "FloorRepo",
       path: "../repos/floor/floorRepo"
+    },
+    passageway: {
+      name: "PassagewayRepo",
+      path: "../repos/passageway/passagewayRepo"
     }
   },
 
@@ -86,6 +94,10 @@ export default {
     createFloor: {
       name: "CreateFloorService",
       path: "../services/floor/create/createFloorService"
+    },
+    createPassageway: {
+      name: "CreatePassagewayService",
+      path: "../services/passageway/create/createPassagewayService"
     }
   },
 };
