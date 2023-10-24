@@ -26,6 +26,26 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/building/buildingSchema'
   }
 
+  const floorSchema = {
+    name: 'floorSchema',
+    schema: '../persistence/schemas/floor/floorSchema'
+  }
+
+  const roomSchema = {
+    name: 'roomSchema',
+    schema: '../persistence/schemas/room/roomSchema'
+  }
+
+  const elevatorSchema = {
+    name: 'elevatorSchema',
+    schema: '../persistence/schemas/elevator/elevatorSchema'
+  }
+
+  const passagewaySchema = {
+    name: 'passagewaySchema',
+    schema: '../persistence/schemas/passageway/passagewaySchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -34,6 +54,16 @@ export default async ({ expressApp }) => {
   const createBuildingController = {
     name: config.controllers.createbuilding.name,
     path: config.controllers.createbuilding.path
+  }
+
+  const createFloorController = {
+    name: config.controllers.createFloor.name,
+    path: config.controllers.createFloor.path
+  }
+
+  const createPassagewayController = {
+    name: config.controllers.createPassageway.name,
+    path: config.controllers.createPassageway.path
   }
 
   const roleRepo = {
@@ -51,6 +81,16 @@ export default async ({ expressApp }) => {
     path: config.repos.building.path
   }
 
+  const floorRepo = {
+    name: config.repos.floor.name,
+    path: config.repos.floor.path
+  }
+
+  const passagewayRepo = {
+    name: config.repos.passageway.name,
+    path: config.repos.passageway.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -61,25 +101,45 @@ export default async ({ expressApp }) => {
     path: config.services.createBuilding.path
   }
 
+  const createFloorService = {
+    name: config.services.createFloor.name,
+    path: config.services.createFloor.path
+  }
+
+  const createPassagewayService = {
+    name: config.services.createPassageway.name,
+    path: config.services.createPassageway.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
       roleSchema,
-      buildingSchema
+      buildingSchema,
+      floorSchema,
+      roomSchema,
+      elevatorSchema,
+      passagewaySchema
     ],
     controllers: [
       roleController,
-      createBuildingController
+      createBuildingController,
+      createFloorController,
+      createPassagewayController
     ],
     repos: [
       roleRepo,
       userRepo,
-      buildingRepo
+      buildingRepo,
+      floorRepo,
+      passagewayRepo
     ],
     services: [
       roleService,
-      createBuildingService
+      createBuildingService,
+      createFloorService,
+      createPassagewayService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

@@ -2,7 +2,9 @@ import { Router } from 'express';
 import auth from './routes/userRoute';
 import user from './routes/userRoute';
 import role from './routes/roleRoute';
-import building from './routes/buildingRoute'
+import building from './routes/buildingRoute';
+import floor from './routes/floorRoute'
+import passageway1 from './routes/passagewayRoute'
 
 export default () => {
 	const app = Router();
@@ -11,6 +13,11 @@ export default () => {
 	user(app);
 	role(app);
 	building(app);
-
+	floor(app);
+	passageway1(app);
 	return app
+}
+
+function passageway(app: Router) {
+	throw new Error('Function not implemented.');
 }

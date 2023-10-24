@@ -3,19 +3,55 @@ import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { FloorDescription } from './FloorDescription';
 import { FloorNumber } from './FloorNumber';
 import { FloorMap } from './FloorMap';
+import { IFloorDTO } from '../../dto/floor/IFloorDTO'
+import { Result } from '../../core/logic/Result';
+import { Passageway } from '../Passageway/Passageway';
 
+interface FloorProps {
+  floorDescription: FloorDescription
+  floormap: FloorMap
+}
 
-  interface FloorProps {
-    floorDescription: FloorDescription;
-    floorNumber: FloorNumber;
-    floormaps: FloorMap[];
+export class Floor extends AggregateRoot<FloorProps> {
+
+  private constructor(props: FloorProps, floorNumber: FloorNumber) {
+    super(props, floorNumber);
   }
 
-  export class Floor extends AggregateRoot<FloorProps> {
+  get number(): FloorNumber {
+    return this.id
+  }
 
-    
-    private constructor (props: FloorProps, id?: UniqueEntityID) {
-      super(props, id);
+  get description(): FloorDescription {
+    return this.props.floorDescription
+  }
+
+  get map(): FloorMap {
+    return this.props.floormap
+  }
+
+  public static create(floorDto: IFloorDTO): Result<Floor> {
+    const number = floorDto.floorNumber
+    const description = floorDto.floorDescription
+
+    if (typeof number !== 'number') {
+      return Result.fail<Floor>('Invalid floor number');
+    }
+  
+    if (typeof description !== 'string' || description.length > 255) {
+      return Result.fail<Floor>('Invalid floor description');
     }
 
+    const floor = new Floor({
+      floorDescription: new FloorDescription({value: description}),
+      floormap: new FloorMap({
+        map: [],
+        passageways: [],
+        rooms: [],
+        elevators: [],
+      })
+    }, new FloorNumber(number))
+
+    return Result.ok<Floor>(floor)
   }
+}

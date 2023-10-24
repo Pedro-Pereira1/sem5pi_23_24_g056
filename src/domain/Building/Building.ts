@@ -6,22 +6,23 @@ import { Floor } from '../Floor/Floor';
 import { IBuildingDTO } from '../../dto/building/IBuildingDTO';
 import { Result } from '../../core/logic/Result';
 import { BuildingSize } from './BuildingSize';
+import BuildingCode from './BuildingCode';
 
 
 interface BuildingProps {
   buildingName: BuildingName
   buildingDescription: BuildingDescription;
   buildingSize: BuildingSize
-  //floors: Floor[];
+  floors: Floor[];
 }
 
 export class Building extends AggregateRoot<BuildingProps> {
 
-  private constructor(props: BuildingProps, buildingCode: UniqueEntityID) {
+  private constructor(props: BuildingProps, buildingCode: BuildingCode) {
     super(props, buildingCode);
   }
 
-  get code(): UniqueEntityID{
+  get code(): UniqueEntityID {
     return this.id;
   }
 
@@ -37,24 +38,44 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this.props.buildingSize
   }
 
+  get floors(): Floor[] {
+    return this.props.floors
+  }
+
+  get floorsNumber(): string[] {
+    let floors: string[] = []
+    this.props.floors.forEach(f => {
+      floors.push(f.id.toString() + ' ')
+    });
+    return floors
+  }
+
+  addFloor(floor: Floor) {
+    this.props.floors.push(floor)
+  }
+
   public static create(buildingDto: IBuildingDTO): Result<Building> {
     const name = buildingDto.buildingName
     const description = buildingDto.buildingDescription
     const code = buildingDto.buildingCode
     const length = buildingDto.buildingLength
     const width = buildingDto.buildingWidth
+    const floors = buildingDto.buildingFloors
 
     if (!checkName(name) || !checkDescription(description) || !checkCode(code) || !checkSize(length, width)) {
       return Result.fail<Building>('Missing paramethers')
     }
 
+
     const building = new Building({
-      buildingName: new BuildingName({value: name}),
-      buildingDescription: new BuildingDescription({value: description}),
-      buildingSize: new BuildingSize({length: length, width: width} )
+      buildingName: new BuildingName({ value: name }),
+      buildingDescription: new BuildingDescription({ value: description }),
+      buildingSize: new BuildingSize({ length: length, width: width }),
+      floors: []
     }, new UniqueEntityID(buildingDto.buildingCode))
 
     return Result.ok<Building>(building)
+
   }
 }
 
@@ -75,15 +96,15 @@ function checkCode(code: string): boolean{
   return true
 }
 
-function checkDescription(description: string): boolean{
-  if (!!description === false || description.length === 0 || description.length > 255){
+function checkDescription(description: string): boolean {
+  if (!!description === false || description.length === 0 || description.length > 255) {
     return false
   }
 
   return true
 }
 
-function checkSize(length: number, width: number): boolean{
+function checkSize(length: number, width: number): boolean {
   if (!!length === false || !!width === false || width < 1 || length < 1) return false
 
 

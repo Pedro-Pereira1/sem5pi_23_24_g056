@@ -136,14 +136,14 @@ describe("Create building", function () {
         let buildingRepo = Container.get('BuildingRepo')
 
         let createBuildingService = Container.get('CreateBuildingService')
-        sinon.stub(createBuildingService, 'createBuilding').returns(Result.ok<IBuildingDTO>({
-            "buildingName": 'buildingA',
-            "buildingDescription": 'This is a building',
-        }))
+        //sinon.stub(createBuildingService, 'createBuilding').returns(Result.ok<IBuildingDTO>({
+        //    "buildingName": 'buildingA',
+        //    "buildingDescription": 'This is a building',
+        //}))
 
         const createBuildingController = new CreateBuildingController(createBuildingService as ICreateBuildingService)
 
-        await createBuildingController.createBuilding(<Request>req, <Response>res)
+        //await createBuildingController.createBuilding(<Request>req, <Response>res)
 
     })*/
 

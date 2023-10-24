@@ -11,7 +11,7 @@ import { ValueObject } from '../../core/domain/ValueObject';
 
   export class RoomCoordinates extends ValueObject<RoomCoordinatesProps> {
 
-    private constructor (props : RoomCoordinatesProps){
+    constructor (props : RoomCoordinatesProps){
       super(props);
     }
     
