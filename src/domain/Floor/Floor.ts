@@ -34,9 +34,12 @@ export class Floor extends AggregateRoot<FloorProps> {
     const number = floorDto.floorNumber
     const description = floorDto.floorDescription
 
-    //TODO verifications
-    if (false) {
-      return Result.fail<Floor>('invalid floor')
+    if (typeof number !== 'number') {
+      return Result.fail<Floor>('Invalid floor number');
+    }
+  
+    if (typeof description !== 'string' || description.length > 255) {
+      return Result.fail<Floor>('Invalid floor description');
     }
 
     const floor = new Floor({
