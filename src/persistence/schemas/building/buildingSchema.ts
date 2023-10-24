@@ -9,7 +9,7 @@ const BuildingSchema = new mongoose.Schema(
         buildingName: { type: String },
         buildingLength: { type: Number },
         buildingWidth: { type: Number },
-        buildingFloors: { type: [floorSchema] }
+        buildingFloors: { type: [String] }
     },
     {
         timestamps: true

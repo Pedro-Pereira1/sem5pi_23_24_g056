@@ -14,4 +14,4 @@ const PassagewaySchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model<IPassagewayPersistence & mongoose.Document>('Room', PassagewaySchema)
+export default mongoose.model<IPassagewayPersistence & mongoose.Document>('Passageway', PassagewaySchema)

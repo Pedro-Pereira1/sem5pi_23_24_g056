@@ -1,5 +1,8 @@
 import mongoose, { Document } from "mongoose";
 import IFloorPersistence from "../../../dataschema/floor/IFloorPersistence";
+let passagewaySchema =  require("../passageway/passagewaySchema").schema
+let roomSchema =  require("../room/roomSchema").schema
+let elevatorSchema =  require("../elevator/elevatorSchema").schema
 
 const FloorSchema = new mongoose.Schema(
     {
