@@ -9,8 +9,8 @@ export class FloorMap extends Mapper<Floor> {
 
     public static toDto(Floor: Floor): IFloorDTO {
         return {
-            floorNumber: Floor.id.toString(),
-            floorDescription: Floor.desctription.description,
+            floorNumber: Floor.id.toValue(),
+            floorDescription: Floor.description.description,
             //floorMap: IFloorMapDTO
         } as IFloorDTO
     }
@@ -24,7 +24,7 @@ export class FloorMap extends Mapper<Floor> {
     public static toPersistence(Floor: Floor): any {
         return {
             floorNumber: Floor.id.toString(),
-            floorDescription: Floor.desctription.description,
+            floorDescription: Floor.description.description,
             //floorMap: IFloorMapDTO
         }
     }
