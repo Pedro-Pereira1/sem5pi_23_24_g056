@@ -31,6 +31,21 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/floor/floorSchema'
   }
 
+  const roomSchema = {
+    name: 'roomSchema',
+    schema: '../persistence/schemas/room/roomSchema'
+  }
+
+  const elevatorSchema = {
+    name: 'elevatorSchema',
+    schema: '../persistence/schemas/elevator/elevatorSchema'
+  }
+
+  const passagewaySchema = {
+    name: 'passagewaySchema',
+    schema: '../persistence/schemas/passageway/passagewaySchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -87,7 +102,10 @@ export default async ({ expressApp }) => {
       userSchema,
       roleSchema,
       buildingSchema,
-      floorSchema
+      floorSchema,
+      roomSchema,
+      elevatorSchema,
+      passagewaySchema
     ],
     controllers: [
       roleController,

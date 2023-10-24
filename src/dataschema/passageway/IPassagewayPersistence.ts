@@ -1,4 +1,4 @@
-export default interface IRoomPersistence {
+export default interface IPassagewayPersistence {
     passagewayId: number
     passagewayCoordinatesTopX: number
     passagewayCoordinatesTopY: number
