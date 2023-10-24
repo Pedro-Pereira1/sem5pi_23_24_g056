@@ -42,9 +42,7 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 
 ![SequenceDiagram](Diagrams/SequenceDiagram.svg)
 
-### 4.2. Class Diagram
 
-![ClassDiagram](Diagrams/ClassDiagram.svg)
 
 ### 4.3. Applied Patterns
 
