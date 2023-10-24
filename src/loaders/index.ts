@@ -117,7 +117,10 @@ export default async ({ expressApp }) => {
       userSchema,
       roleSchema,
       buildingSchema,
-      floorSchema
+      floorSchema,
+      roomSchema,
+      elevatorSchema,
+      passagewaySchema
     ],
     controllers: [
       roleController,

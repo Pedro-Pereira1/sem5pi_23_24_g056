@@ -1,7 +1,7 @@
 import { Inject, Service } from "typedi";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import { Elevator } from "../../domain/Elevator/Elevator";
-import { Document } from "mongodb";
+import { Document } from "mongoose";
 import { Model } from "mongoose";
 import ElevatorMap from "../../mappers/elevator/ElevatorMap";
 import IElevatorPersistence from "../../dataschema/elevator/IElevatorPersistence";

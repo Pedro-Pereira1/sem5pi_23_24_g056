@@ -2,7 +2,7 @@ import { Inject, Service } from "typedi";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import { Model } from "mongoose";
 import IRoomPersistence from "../../dataschema/room/IRoomPersistence";
-import { Document } from "mongodb";
+import { Document } from "mongoose";
 import { Room } from "../../domain/Room/Room";
 import RoomMap from "../../mappers/room/RoomMap";
 
@@ -35,7 +35,7 @@ export default class RoomRepo implements IRoomRepo {
 
             } else {
 
-                roomDocument.roomCoordinatesTopX = room.props.roomCoordinates.props.topX
+                roomDocument.roomCoordinatesBottomX = room.props.roomCoordinates.props.topX
                 roomDocument.roomCoordinatesTopY = room.props.roomCoordinates.props.topY
                 roomDocument.roomCoordinatesBottomX = room.props.roomCoordinates.props.bottonX
                 roomDocument.roomCoordinatesBottomY = room.props.roomCoordinates.props.bottonY
