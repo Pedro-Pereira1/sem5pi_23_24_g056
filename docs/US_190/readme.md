@@ -111,9 +111,7 @@ We will make also use of CreateFloorRoute file, inside this file we will put our
 
 ![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
 
-### 4.2. Class Diagram
 
-![ClassDiagram](Diagrams/ClassDiagram.svg)
 
 ### 4.3. Applied Patterns
 
