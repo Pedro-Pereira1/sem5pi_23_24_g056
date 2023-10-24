@@ -1,5 +1,5 @@
 import mongoose, { Document } from "mongoose";
-import IRoomPersistence from "../../../dataschema/room/IRoomPersistence";
+import IElevatorPersistence from "../../../dataschema/elevator/IElevatorPersistence";
 
 const ElevatorSchema = new mongoose.Schema(
     {
@@ -14,4 +14,4 @@ const ElevatorSchema = new mongoose.Schema(
     }
 )
 
-export default mongoose.model<IRoomPersistence & mongoose.Document>('Elevator', ElevatorSchema)
+export default mongoose.model<IElevatorPersistence & mongoose.Document>('Elevator', ElevatorSchema)
