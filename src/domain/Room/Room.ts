@@ -4,7 +4,6 @@ import { RoomID } from './RoomID';
 
   interface RoomProps {
     roomCoordinates: RoomCoordinates;
-    roomID: RoomID;
   }
 
   export class Room extends AggregateRoot<RoomProps> {
