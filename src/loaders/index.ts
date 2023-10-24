@@ -31,6 +31,11 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/floor/floorSchema'
   }
 
+  const passagewaySchema = {
+    name: 'passagewaySchema',
+    schema: '../persistence/schemas/passageway/passagewaySchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -44,6 +49,11 @@ export default async ({ expressApp }) => {
   const createFloorController = {
     name: config.controllers.createFloor.name,
     path: config.controllers.createFloor.path
+  }
+
+  const createPassagewayController = {
+    name: config.controllers.createPassageway.name,
+    path: config.controllers.createPassageway.path
   }
 
   const roleRepo = {
@@ -66,6 +76,11 @@ export default async ({ expressApp }) => {
     path: config.repos.floor.path
   }
 
+  const passagewayRepo = {
+    name: config.repos.passageway.name,
+    path: config.repos.passageway.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -81,29 +96,38 @@ export default async ({ expressApp }) => {
     path: config.services.createFloor.path
   }
 
+  const createPassagewayService = {
+    name: config.services.createPassageway.name,
+    path: config.services.createPassageway.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
       roleSchema,
       buildingSchema,
-      floorSchema
+      floorSchema,
+      passagewaySchema
     ],
     controllers: [
       roleController,
       createBuildingController,
-      createFloorController
+      createFloorController,
+      createPassagewayController
     ],
     repos: [
       roleRepo,
       userRepo,
       buildingRepo,
-      floorRepo
+      floorRepo,
+      passagewayRepo
     ],
     services: [
       roleService,
       createBuildingService,
-      createFloorService
+      createFloorService,
+      createPassagewayService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
