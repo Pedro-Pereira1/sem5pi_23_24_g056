@@ -1,7 +1,7 @@
 import { AggregateRoot } from '../../core/domain/AggregateRoot';
 import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { FloorDescription } from './FloorDescription';
-import { FloorNumber } from './FloorNumber';
+import FloorId from './FloorId';
 import { FloorMap } from './FloorMap';
 import { IFloorDTO } from '../../dto/floor/IFloorDTO'
 import { Result } from '../../core/logic/Result';
@@ -9,16 +9,17 @@ import { Passageway } from '../Passageway/Passageway';
 
 interface FloorProps {
   floorDescription: FloorDescription
+  floorNumber: number
   floormap: FloorMap
 }
 
 export class Floor extends AggregateRoot<FloorProps> {
 
-  private constructor(props: FloorProps, floorNumber: FloorNumber) {
+  private constructor(props: FloorProps, floorNumber: FloorId) {
     super(props, floorNumber);
   }
 
-  get number(): FloorNumber {
+  get number(): FloorId {
     return this.id
   }
 
@@ -39,13 +40,14 @@ export class Floor extends AggregateRoot<FloorProps> {
 
     const floor = new Floor({
       floorDescription: floorProp.floorDescription,
+      floorNumber: floorProp.floorNumber,
       floormap: new FloorMap({
         map: floorProp.floormap.props.map,
         passageways: floorProp.floormap.props.passageways,
         rooms: floorProp.floormap.props.rooms,
         elevators: floorProp.floormap.props.elevators,
       })
-    }, new FloorNumber(floorId))
+    }, new FloorId(floorId))
 
     return Result.ok<Floor>(floor)
   }

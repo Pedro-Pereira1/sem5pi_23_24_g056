@@ -5,7 +5,9 @@ import ICreateFloorService from "../../IServices/floor/create/ICreateFloorServic
 import config from "../../../../config";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import { Floor } from "../../../domain/Floor/Floor";
-import { FloorMap } from "../../../mappers/floor/FloorMaper";
+import { FloorMaper } from "../../../mappers/floor/FloorMaper";
+import { FloorDescription } from "../../../domain/Floor/FloorDescription";
+import { FloorMap } from "../../../domain/Floor/FloorMap";
 
 @Service()
 export default class CreateFloorService implements ICreateFloorService {
@@ -14,9 +16,19 @@ export default class CreateFloorService implements ICreateFloorService {
         @Inject(config.repos.floor.name) private floorRepo: IFloorRepo
     ) { }
 
-    public async createFloor(FloorDto: IFloorDTO): Promise<Result<IFloorDTO>> {
-        try{
-            const FloorOrError = await Floor.create(FloorDto)
+    public async createFloor(floorDto: IFloorDTO): Promise<Result<IFloorDTO>> {
+        try {
+            const FloorOrError = await Floor.create(
+                {
+                    floorDescription: new FloorDescription({ value: floorDto.floorDescription }),
+                    floorNumber: floorDto.floorNumber,
+                    floormap: new FloorMap({
+                        map: [],
+                        passageways: [],
+                        elevators: [],
+                        rooms: []
+                    })
+                }, floorDto.floorId)
 
             if (FloorOrError.isFailure) {
                 return Result.fail<IFloorDTO>(FloorOrError.errorValue())
@@ -26,10 +38,10 @@ export default class CreateFloorService implements ICreateFloorService {
 
             await this.floorRepo.save(floorResult);
 
-            const floorDtoResult = FloorMap.toDto(floorResult) as IFloorDTO
+            const floorDtoResult = FloorMaper.toDto(floorResult) as IFloorDTO
             return Result.ok<IFloorDTO>(floorDtoResult)
 
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
