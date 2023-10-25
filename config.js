@@ -60,6 +60,10 @@ export default {
     createElevator: {
       name: "CreateElevatoryController",
       path: "../controllers/elevator/create/createElevatorController"
+    },
+    listAllBuildigns: {
+      name: "ListAllBuildingsController",
+      path: "../controllers/building/list/listAllBuildingsController"
     }
   },
 
@@ -114,6 +118,10 @@ export default {
     createElevator: {
       name: "CreateElevatorService",
       path: "../services/elevator/create/createElevatorService"
+    },
+    listAllBuildigns: {
+      name: "ListAllBuildingsService",
+      path: "../services/building/list/listAllBuildingsService"
     }
   },
 };

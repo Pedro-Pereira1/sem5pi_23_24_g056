@@ -1,4 +1,5 @@
 export interface IFloorDTO {
+    floorId: number
     floorNumber: number
     floorDescription: string
     floorMap: {
