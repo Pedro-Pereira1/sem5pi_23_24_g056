@@ -16,11 +16,11 @@ export default (app: Router) => {
     route.post('/createPassageway', 
     celebrate({
         body: Joi.object({
-            passagewayId: Joi.number.required(),
-            passagewayCoordinatesTopX : Joi.number.required(),
-            passagewayCoordinatesTopY : Joi.number.required(),
-            passagewayCoordinatesBottomX : Joi.number.required(),
-            passagewayCoordinatesBottomY : Joi.number.required(),
+            passagewayId: Joi.number().required(),
+            passagewayCoordinatesTopX : Joi.number().required(),
+            passagewayCoordinatesTopY : Joi.number().required(),
+            passagewayCoordinatesBottomX : Joi.number().required(),
+            passagewayCoordinatesBottomY : Joi.number().required(),
         }),
     }),
     (req, res, next) => ctrl.createPassageway(req, res, next));
