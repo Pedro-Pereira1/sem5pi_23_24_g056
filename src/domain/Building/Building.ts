@@ -20,7 +20,7 @@ interface BuildingProps {
 
 export class Building extends AggregateRoot<BuildingProps> {
 
-  private constructor(props: BuildingProps, buildingCode: BuildingCode) {
+  private constructor(buildingCode: BuildingCode, props?: BuildingProps) {
     super(props, buildingCode);
   }
 
@@ -67,12 +67,13 @@ export class Building extends AggregateRoot<BuildingProps> {
       return Result.fail<Building>('Missing paramethers')
     }
 
-    const building = new Building({
+    const building = new Building(new BuildingCode(buildingCode),
+    {
       buildingName: name,
       buildingDescription: description,
       buildingSize: new BuildingSize({ length: length, width: width }),
       floors: floors
-    }, new BuildingCode(buildingCode))
+    })
 
     return Result.ok<Building>(building)
 
