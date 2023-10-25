@@ -13,6 +13,11 @@ export default class ElevatorMap extends Mapper<Elevator> {
             elevatorCoordinatesTopY: elevator.props.elevatorCoordinates.props.topY,
             elevatorCoordinatesBottomX: elevator.props.elevatorCoordinates.props.bottonX,
             elevatorCoordinatesBottomY: elevator.props.elevatorCoordinates.props.bottonY,
+            elevatorIdentificationNumber: elevator.props.elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator.props.elevatorBrand.brand,
+            elevatorDescription: elevator.props.elevatorDescription.description,
+            elevatorModel: elevator.props.elevatorModel.model,
+            elevatorSerialNumber: elevator.props.elevatorSerialNumber.serialNumber
         } as IElevatorDTO
     }
 
@@ -29,7 +34,11 @@ export default class ElevatorMap extends Mapper<Elevator> {
             elevatorCoordinatesTopY: elevator.props.elevatorCoordinates.props.topY,
             elevatorCoordinatesBottomX: elevator.props.elevatorCoordinates.props.bottonX,
             elevatorCoordinatesBottomY: elevator.props.elevatorCoordinates.props.bottonY,
+            elevatorIdentificationNumber: elevator.props.elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator.props.elevatorBrand.brand,
+            elevatorDescription: elevator.props.elevatorDescription.description,
+            elevatorModel: elevator.props.elevatorModel.model,
+            elevatorSerialNumber: elevator.props.elevatorSerialNumber.serialNumber
         }
     }
-
 }
