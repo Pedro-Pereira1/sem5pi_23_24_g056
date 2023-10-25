@@ -48,7 +48,7 @@ export default class ElevatorRepo implements IElevatorRepo {
         }
     }
 
-    findById(id: number): Elevator {
+    findById(id: number): Promise<Elevator> {
         throw new Error("Method not implemented.");
     }
 

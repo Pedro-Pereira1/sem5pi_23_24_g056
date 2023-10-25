@@ -13,7 +13,7 @@ export default class RoomRepo implements IRoomRepo {
         @Inject('roomSchema') private roomSchema: Model<IRoomPersistence & Document>
     ) { }
 
-    findById(id: number): Room {
+    findById(id: number): Promise<Room> {
         throw new Error("Method not implemented.");
     }
     exists(t: Room): Promise<boolean> {
