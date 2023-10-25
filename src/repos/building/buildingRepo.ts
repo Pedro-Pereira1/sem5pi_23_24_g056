@@ -52,12 +52,32 @@ export default class BuildingRepo implements IBuildingRepo {
         throw new Error("Method not implemented.");
     }
 
-    findAll(): Promise<Result<Building[]>> {
+    findAll(): Promise<Building[]> {
         throw new Error("Method not implemented.");
     }
 
     findByBuidingCode(buildingCode: BuildingCode): Promise<Building> {
         throw new Error("Method not implemented.");
+    }
+
+
+
+    public async findBuildingsMaxMinFloors(max:number, min:number): Promise<Building[]> {
+        try {
+            const buildings = await this.findAll(); 
+            const filteredBuildings: Building[] = [];
+
+        for (const element of buildings) {
+            if(element.floors.length>=min && element.floors.length<=max){
+                filteredBuildings.push(element);
+            }
+        }
+
+        return filteredBuildings;
+        } catch (error) {
+            console.error("Error in findBuildingsMaxMinFloors:", error);
+            throw error;
+        }
     }
 
 }
