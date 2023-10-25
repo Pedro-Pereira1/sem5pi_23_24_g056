@@ -76,6 +76,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllBuildigns.path
   }
 
+  const listBuildingsMaxMinFloorsController = {
+    name: config.controllers.listBuildingsMaxMinFloors.name,
+    path: config.controllers.listBuildingsMaxMinFloors.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -141,6 +146,11 @@ export default async ({ expressApp }) => {
     path: config.services.listAllBuildigns.path
   }
 
+  const listBuildingsMaxMinFloorsService = {
+    name: config.services.listBuildingsMaxMinFloors.name,
+    path: config.services.listBuildingsMaxMinFloors.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -159,6 +169,7 @@ export default async ({ expressApp }) => {
       createPassagewayController,
       createElevatorController,
       listAllBuildingsController
+      listBuildingsMaxMinFloorsController
     ],
     repos: [
       roleRepo,
@@ -175,6 +186,7 @@ export default async ({ expressApp }) => {
       createFloorService,
       createPassagewayService,
       createElevatorService,
+      listBuildingsMaxMinFloorsService
       listAllBuildingsService
     ]
   });
