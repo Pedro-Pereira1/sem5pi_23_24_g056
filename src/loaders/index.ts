@@ -66,6 +66,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.createPassageway.path
   }
 
+  const createElevatorController = {
+    name: config.controllers.createElevator.name,
+    path: config.controllers.createElevator.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -91,6 +96,11 @@ export default async ({ expressApp }) => {
     path: config.repos.passageway.path
   }
 
+  const elevatorRepo = {
+    name: config.repos.elevator.name,
+    path: config.repos.elevator.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -111,32 +121,41 @@ export default async ({ expressApp }) => {
     path: config.services.createPassageway.path
   }
 
+  const createElevatorService = {
+    name: config.services.createElevator.name,
+    path: config.services.createElevator.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
       userSchema,
       roleSchema,
       buildingSchema,
-      floorSchema
+      floorSchema,
+      elevatorSchema
     ],
     controllers: [
       roleController,
       createBuildingController,
       createFloorController,
-      createPassagewayController
+      createPassagewayController,
+      createElevatorController
     ],
     repos: [
       roleRepo,
       userRepo,
       buildingRepo,
       floorRepo,
-      passagewayRepo
+      passagewayRepo,
+      elevatorRepo
     ],
     services: [
       roleService,
       createBuildingService,
       createFloorService,
-      createPassagewayService
+      createPassagewayService,
+      createElevatorService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
