@@ -82,11 +82,11 @@ export default {
     },
     elevator: {
       name: "ElevatorRepo",
-      path: "./src/repos/elevator/elevatorRepo"
+      path: "../repos/elevator/elevatorRepo"
     },
     room: {
       name: "RoomRepo",
-      path: "./src/repos/room/roomRepo"
+      path: "../repos/room/roomRepo"
     }
   },
 
