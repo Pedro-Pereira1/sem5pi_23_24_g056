@@ -1,8 +1,10 @@
-import { IFloorMapDTO } from "./IFloorMapDTO"
-
-
 export interface IFloorDTO {
     floorNumber: number
     floorDescription: string
-    floorMap: IFloorMapDTO
+    floorMap: {
+        map: string[][],
+        passageways: string[],
+        rooms: string[],
+        elevators: string[]
+    }
 }
