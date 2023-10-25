@@ -91,6 +91,16 @@ export default async ({ expressApp }) => {
     path: config.repos.passageway.path
   }
 
+  const elevatorRepo = {
+    name: config.repos.elevator.name,
+    path: config.repos.elevator.path
+  }
+
+  const roomRepo = {
+    name: config.repos.room.name,
+    path: config.repos.room.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -133,7 +143,9 @@ export default async ({ expressApp }) => {
       userRepo,
       buildingRepo,
       floorRepo,
-      passagewayRepo
+      passagewayRepo,
+      elevatorRepo,
+      roomRepo
     ],
     services: [
       roleService,

@@ -79,6 +79,14 @@ export default {
     passageway: {
       name: "PassagewayRepo",
       path: "../repos/passageway/passagewayRepo"
+    },
+    elevator: {
+      name: "ElevatorRepo",
+      path: "./src/repos/elevator/elevatorRepo"
+    },
+    room: {
+      name: "RoomRepo",
+      path: "./src/repos/room/roomRepo"
     }
   },
 
