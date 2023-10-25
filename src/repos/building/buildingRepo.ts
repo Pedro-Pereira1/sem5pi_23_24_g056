@@ -14,8 +14,14 @@ export default class BuildingRepo implements IBuildingRepo {
         @Inject('buildingSchema') private buildingSchema: Model<IBuildingPersistence & Document>
     ) { }
 
-    exists(t: Building): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public async exists(building: Building): Promise<boolean> {
+
+            const idX = building.id instanceof BuildingCode ? (<BuildingCode>building.id).toValue() : building.id;
+
+        const query = { domainId: idX}; 
+        const buildingDocument = await this.buildingSchema.findOne( query as FilterQuery<IBuildingPersistence & Document>);
+
+        return !!buildingDocument === true;
     }
 
     public async save(building: Building): Promise<Building> {
