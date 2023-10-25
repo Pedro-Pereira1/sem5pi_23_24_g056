@@ -9,7 +9,7 @@ import IListAllBuildingsService from "../../../services/IServices/building/IList
 export default class ListAllBuildingsController implements IListAllBuildingsController {
 
     constructor(
-        @Inject(config.services.listAllBuildins.name) private listAllBuildingsService: IListAllBuildingsService
+        @Inject(config.services.listAllBuildigns.name) private listAllBuildingsService: IListAllBuildingsService
     )
     {}
 
