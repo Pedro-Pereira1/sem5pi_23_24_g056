@@ -52,8 +52,16 @@ export default class BuildingRepo implements IBuildingRepo {
         throw new Error("Method not implemented.");
     }
 
-    findAll(): Promise<Result<Building[]>> {
-        throw new Error("Method not implemented.");
+    public async findAll(): Promise<Building[]> {
+        let buildings: Building[] = []
+
+        const cursor = this.buildingSchema.find<Building>({});
+
+        for await (const doc of cursor) {
+            buildings.push(BuildingMap.toDomain(doc))
+        }
+
+        return buildings
     }
 
     findByBuidingCode(buildingCode: BuildingCode): Promise<Building> {

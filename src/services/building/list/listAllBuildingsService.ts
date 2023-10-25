@@ -16,16 +16,15 @@ export default class listAllBuildingsService implements IListAllBuildingsService
     {}
 
     public async listAllBuildings(): Promise<Result<IBuildingDTO[]>> {
-        const buildingsOrError = await this.buildingRepo.findAll()
+        const buildings = await this.buildingRepo.findAll()
 
-        if(buildingsOrError.isFailure) {
-            return Result.fail<IBuildingDTO[]>(buildingsOrError.errorValue)
+        if(buildings.length === 0) {
+            return Result.fail<IBuildingDTO[]>(null)
         }
         
-        let list: Building[] = buildingsOrError.getValue()
         let resolve: IBuildingDTO[] = []
 
-        list.forEach(b => {
+        buildings.forEach(b => {
             resolve.push(BuildingMap.toDto(b))
         })
         
