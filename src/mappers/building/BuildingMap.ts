@@ -5,6 +5,11 @@ import { Building } from "../../domain/Building/Building";
 import { IBuildingDTO } from "../../dto/building/IBuildingDTO";
 import Container from "typedi";
 import config from "../../../config";
+import IFloorRepo from "../../services/IRepos/floor/IFloorRepo";
+import { Floor } from "../../domain/Floor/Floor";
+import { BuildingName } from "../../domain/Building/BuildingName";
+import { BuildingDescription } from "../../domain/Building/BuildingDescription";
+import { BuildingSize } from "../../domain/Building/BuildingSize";
 
 export class BuildingMap extends Mapper<Building> {
 
@@ -19,10 +24,22 @@ export class BuildingMap extends Mapper<Building> {
         } as IBuildingDTO
     }
 
-    public static toDomain(iBuildingDTO: any | Model<IBuildingPersistence & Document>): Building {
-        const floorRepo = Container.get(config.repos.floor.name)
+    public static toDomain(buildingRaw: any | Model<IBuildingPersistence & Document>): Building {
+        const floorRepo: IFloorRepo = Container.get(config.repos.floor.name)
 
-        const buildingOrError = Building.create(iBuildingDTO)         
+        let floorsOfBuilding: Floor[] = []
+
+        buildingRaw.buildingFloors.forEach(async (f: number) => {
+            floorsOfBuilding.push(await floorRepo.findByNumber(f))
+        });
+
+        const buildingOrError = Building.create(
+            {
+                buildingName: new BuildingName({ value: buildingRaw.buildingName }),
+                buildingDescription: new BuildingDescription({ value: buildingRaw.buildingDescription }),
+                buildingSize: new BuildingSize({ length: buildingRaw.buildingLength, width: buildingRaw.buildingWidth }),
+                floors: floorsOfBuilding,
+            }, buildingRaw.buildingCode)
 
         return buildingOrError.isSuccess ? buildingOrError.getValue() : null
     }
