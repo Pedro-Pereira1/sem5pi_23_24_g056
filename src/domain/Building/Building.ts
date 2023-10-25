@@ -7,6 +7,8 @@ import { IBuildingDTO } from '../../dto/building/IBuildingDTO';
 import { Result } from '../../core/logic/Result';
 import { BuildingSize } from './BuildingSize';
 import BuildingCode from './BuildingCode';
+import { CONNREFUSED } from 'dns';
+import { ExceptionHandler } from 'winston';
 
 
 interface BuildingProps {
@@ -77,17 +79,19 @@ export class Building extends AggregateRoot<BuildingProps> {
   }
 }
 
-
 function checkName(name: string): boolean{
-  if (!!name === false || name.length === 0 || name.length > 50 || name.search("^[a-zA-Z0-9]+$") === -1){
+  let strRegex = new RegExp(/^[a-z0-9]+$/i);
+  if (!!name === false || name.length === 0 || name.length > 50 || !strRegex.test(name)){
     return false
+  
   }
 
   return true
 }
 
 function checkCode(code: string): boolean{
-  if (!!code === false || code.length === 0 || code.length > 5 || code.search("[a-zA-Z0-9 ]+") === -1){
+  let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
+  if (!!code === false || code.length === 0 || code.length > 5 || !strRegex.test(code)){
     return false
   }
 
@@ -104,7 +108,6 @@ function checkDescription(description: string): boolean {
 
 function checkSize(length: number, width: number): boolean {
   if (!!length === false || !!width === false || width < 1 || length < 1) return false
-
 
   return true
 }
