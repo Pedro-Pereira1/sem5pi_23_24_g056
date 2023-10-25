@@ -30,7 +30,7 @@ export class BuildingMap extends Mapper<Building> {
         let floorsOfBuilding: Floor[] = []
 
         buildingRaw.buildingFloors.forEach(async (f: number) => {
-            floorsOfBuilding.push(await floorRepo.findByNumber(f))
+            floorsOfBuilding.push(await floorRepo.findById(f))
         });
 
         const buildingOrError = Building.create(
