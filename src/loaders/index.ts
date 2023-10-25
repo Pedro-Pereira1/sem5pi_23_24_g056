@@ -168,7 +168,7 @@ export default async ({ expressApp }) => {
       createFloorController,
       createPassagewayController,
       createElevatorController,
-      listAllBuildingsController
+      listAllBuildingsController,
       listBuildingsMaxMinFloorsController
     ],
     repos: [
@@ -186,7 +186,7 @@ export default async ({ expressApp }) => {
       createFloorService,
       createPassagewayService,
       createElevatorService,
-      listBuildingsMaxMinFloorsService
+      listBuildingsMaxMinFloorsService,
       listAllBuildingsService
     ]
   });
