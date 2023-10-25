@@ -72,7 +72,7 @@ export class Building extends AggregateRoot<BuildingProps> {
       buildingDescription: description,
       buildingSize: new BuildingSize({ length: length, width: width }),
       floors: floors
-    }, new UniqueEntityID(buildingCode))
+    }, new BuildingCode(buildingCode))
 
     return Result.ok<Building>(building)
 
