@@ -22,11 +22,8 @@ export default class FloorRepo implements IFloorRepo {
     return !!floorDocument;
   }
 
-
-
-
   public async save(floor: Floor): Promise<Floor> {
-    const query = { floorNumber: floor.number.toString() };
+    const query = { floorId: floor.id.toValue() };
 
     const floorDocument = await this.floorSchema.findOne(query);
 
@@ -48,8 +45,6 @@ export default class FloorRepo implements IFloorRepo {
       throw err;
     }
   }
-
-
 
   public async findByNumber(number: number): Promise<Floor> {
     const query = { domainId: FloorNumber };
