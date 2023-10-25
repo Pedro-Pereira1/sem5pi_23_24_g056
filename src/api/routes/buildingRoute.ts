@@ -3,6 +3,8 @@ import { celebrate, Joi } from 'celebrate';
 
 import { Container } from 'typedi';
 import ICreateBuildingController from '../../controllers/IControllers/building/createBuilding/ICreateBuildingController';
+import IListBuildingsMaxMinFloorsController from '../../controllers/IControllers/building/list/IListBuildingsMaxMinFloorsController';
+
 
 import config from "../../../config";
 import IListAllBuildingsController from '../../controllers/IControllers/building/list/IListAllBUildingsController';
@@ -14,8 +16,9 @@ export default (app: Router) => {
 
     const ctrlCreate = Container.get(config.controllers.createbuilding.name) as ICreateBuildingController
     const ctrlListAllBuildings = Container.get(config.controllers.listAllBuildigns.name) as IListAllBuildingsController
+    const ctrl1 = Container.get(config.controllers.listBuildingsMaxMinFloors.name) as IListBuildingsMaxMinFloorsController
 
-    route.post('/createBuilding',
+  route.post('/createBuilding',
         celebrate({
             body: Joi.object({
                 buildingName: Joi.string().alphanum().max(50),
@@ -28,5 +31,9 @@ export default (app: Router) => {
 
     route.get('/listAllBuildings', (req, res, next) => {
         ctrlListAllBuildings.listAllBuildings(req, res, next)
-    })
+    });
+
+  route.get('/listBuildingsMaxMinFloors', (req, res, next) =>
+    ctrl1.listBuildingsMaxMinFloors(req, res, next)
+  );
 }
