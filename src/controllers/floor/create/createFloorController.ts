@@ -3,7 +3,7 @@ import ICreateFloorController from "../../IControllers/floor/create/ICreateFloor
 import { Inject, Service } from "typedi";
 import config from "../../../../config";
 import ICreateFloorService from "../../../services/IServices/floor/create/ICreateFloorService";
-import { FloorMap } from "../../../mappers/floor/FloorMap";
+import { FloorMap } from "../../../mappers/floor/FloorMaper";
 import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
 import { Result } from "../../../core/logic/Result";
 

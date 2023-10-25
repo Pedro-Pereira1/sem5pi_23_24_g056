@@ -30,27 +30,22 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.floormap
   }
 
-  public static create(floorDto: IFloorDTO): Result<Floor> {
-    const number = floorDto.floorNumber
-    const description = floorDto.floorDescription
+  public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
 
-    if (typeof number !== 'number') {
-      return Result.fail<Floor>('Invalid floor number');
-    }
-  
-    if (typeof description !== 'string' || description.length > 255) {
-      return Result.fail<Floor>('Invalid floor description');
+    //TODO vericications
+    if (false) {
+      return Result.fail<Floor>('error')
     }
 
     const floor = new Floor({
-      floorDescription: new FloorDescription({value: description}),
+      floorDescription: floorProp.floorDescription,
       floormap: new FloorMap({
-        map: [],
-        passageways: [],
-        rooms: [],
-        elevators: [],
+        map: floorProp.floormap.props.map,
+        passageways: floorProp.floormap.props.passageways,
+        rooms: floorProp.floormap.props.rooms,
+        elevators: floorProp.floormap.props.elevators,
       })
-    }, new FloorNumber(number))
+    }, new FloorNumber(floorId))
 
     return Result.ok<Floor>(floor)
   }

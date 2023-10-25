@@ -5,7 +5,7 @@ import ICreateFloorService from "../../IServices/floor/create/ICreateFloorServic
 import config from "../../../../config";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import { Floor } from "../../../domain/Floor/Floor";
-import { FloorMap } from "../../../mappers/floor/FloorMap";
+import { FloorMap } from "../../../mappers/floor/FloorMaper";
 
 @Service()
 export default class CreateFloorService implements ICreateFloorService {

@@ -4,7 +4,7 @@ import { Floor } from "../../domain/Floor/Floor";
 import IFloorPersistence from "../../dataschema/floor/IFloorPersistence";
 import { Document, FilterQuery, Model } from 'mongoose';
 import { FloorNumber } from "../../domain/Floor/FloorNumber";
-import { FloorMap } from "../../mappers/floor/FloorMap";
+import { FloorMap } from "../../mappers/floor/FloorMaper";
 
 @Service()
 export default class FloorRepo implements IFloorRepo {
