@@ -18,18 +18,18 @@ describe("Create building", function () {
     const sandbox = sinon.createSandbox();
 
     beforeEach(function () {
-        /* Container.reset();
- 
-         let buildingSchemaInstance = require('../src/persistence/schemas/building/buildingSchema').default()
-         Container.set('buildingSchema', buildingSchemaInstance)
- 
-         let buildingRepoClass = require('../src/repos/building/buildingRepo').default
-         let buildingRepoInstance = Container.get(buildingRepoClass)
-         Container.set('BuildingRepo', buildingRepoInstance)
- 
-         let createBuildingServiceClass = require('../src/services/building/create/createBuildingService')
-         let createBuildingServiceInstance = Container.get(createBuildingServiceClass)
-         Container.set('CreateBuildingService', createBuildingServiceInstance)*/
+        Container.reset();
+
+        let buildingSchemaInstance = require('../../../src/persistence/schemas/building/buildingSchema').default
+        Container.set('buildingSchema', buildingSchemaInstance)
+
+        let buildingRepoClass = require('../../../src/repos/building/buildingRepo').default
+        let buildingRepoInstance = Container.get(buildingRepoClass)
+        Container.set('BuildingRepo', buildingRepoInstance)
+
+        let createBuildingServiceClass = require('../../../src/services/building/create/createBuildingService').default
+        let createBuildingServiceInstance = Container.get(createBuildingServiceClass)
+        Container.set('CreateBuildingService', createBuildingServiceInstance)
     });
 
     afterEach(function () {
@@ -51,7 +51,7 @@ describe("Create building", function () {
             buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
             floors: [],
         }, buildingDTO.buildingCode)
-        
+
 
         assert.equal(building.isSuccess, true)
     })
@@ -284,7 +284,7 @@ describe("Create building", function () {
             buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
             floors: [],
         }, buildingDTO.buildingCode)
-        
+
         assert.equal(building.isSuccess, false)
     })
 
@@ -340,7 +340,7 @@ describe("Create building", function () {
             buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
             floors: [],
         }, buildingDTO.buildingCode)
-    
+
         assert.equal(building.isSuccess, false)
     })
 
