@@ -14,7 +14,7 @@ export default {
   /**
    * Your favorite port : optional change to 4000 by JRT
    */
-  port: parseInt(process.env.PORT, 10) || 4000, 
+  port: parseInt(process.env.PORT, 10) || 4000,
 
   /**
    * That long string from mlab
@@ -56,6 +56,10 @@ export default {
     createPassageway: {
       name: "CreatePassagewayController",
       path: "../controllers/passageway/create/createPassagewayController"
+    },
+    createElevator: {
+      name: "CreateElevatoryController",
+      path: "../controllers/elevator/create/createElevatorController"
     }
   },
 
@@ -106,6 +110,10 @@ export default {
     createPassageway: {
       name: "CreatePassagewayService",
       path: "../services/passageway/create/createPassagewayService"
+    },
+    createElevator: {
+      name: "CreateElevatorService",
+      path: "../services/elevator/create/createElevatorService"
     }
   },
 };
