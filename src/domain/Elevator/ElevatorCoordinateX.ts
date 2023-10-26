@@ -16,12 +16,21 @@ export class ElevatorCoordinateX extends ValueObject<ElevatorCoordinateXProps> {
     return this.props.elevatorCoordinateX
   }
 
-  public static create (elevatorCoordinateX: number): Result<ElevatorCoordinateX> {
+  public static create (elevatorCoordinateX: number, buildingColumns: number): Result<ElevatorCoordinateX> {
     const guardResult = Guard.againstNullOrUndefined(elevatorCoordinateX, 'elevatorCoordinateX');
+    const maxPos = buildingColumns +1;
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorCoordinateX>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorCoordinateX>(new ElevatorCoordinateX({elevatorCoordinateX : elevatorCoordinateX}))
+    } 
+    
+    if (elevatorCoordinateX <= 0) {
+      return Result.fail<ElevatorCoordinateX>('Elevator Position X must be a positive number');
     }
+
+    if (elevatorCoordinateX > maxPos) {
+      return Result.fail<ElevatorCoordinateX>('Elevator Position X must be lower than ' + maxPos);
+    }
+
+      return Result.ok<ElevatorCoordinateX>(new ElevatorCoordinateX({elevatorCoordinateX : elevatorCoordinateX}))
   }
 }
