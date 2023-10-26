@@ -19,7 +19,6 @@ interface BuildingProps {
 }
 
 export class Building extends AggregateRoot<BuildingProps> {
-
   private constructor(buildingCode: BuildingCode, props?: BuildingProps) {
     super(props, buildingCode);
   }
@@ -57,24 +56,12 @@ export class Building extends AggregateRoot<BuildingProps> {
   }
 
   public static create(buildingProps: BuildingProps, buildingCode: string): Result<Building> {
-    if (!!buildingProps === false) {
-      if (!checkCode(buildingCode)) {
-        return Result.fail<Building>('Missing paramethers')
-      }
-
-      const building = new Building(new BuildingCode(buildingCode))
-
-      return Result.ok<Building>(building)
-    }
-
     const name = buildingProps.buildingName
     const description = buildingProps.buildingDescription
     const length = buildingProps.buildingSize.length
     const width = buildingProps.buildingSize.width
     const floors = buildingProps.floors
 
-    
-    
     if (!checkName(name.name) || !checkDescription(description.description) || !checkCode(buildingCode) || !checkSize(length, width)) {
       return Result.fail<Building>('Missing paramethers')
     }
@@ -86,7 +73,6 @@ export class Building extends AggregateRoot<BuildingProps> {
         floors: floors
       })
 
-
     return Result.ok<Building>(building)
   }
 }
@@ -95,7 +81,6 @@ function checkName(name: string): boolean {
   let strRegex = new RegExp(/^[a-z0-9]+$/i);
   if (name.length === 0 || name.length > 50 || !strRegex.test(name)) {
     return false
-
   }
 
   return true
