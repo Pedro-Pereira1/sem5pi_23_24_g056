@@ -36,9 +36,13 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
     const elevatorDescription = elevatorDto.elevatorDescription
     const elevatorModel = elevatorDto.elevatorModel
     const elevatorSerialNumber = elevatorDto.elevatorSerialNumber
-    //TODO
-    if (false) {
-      return Result.fail<Elevator>('error')
+
+    if (!checkBrand(elevatorBrand) || !checkIdentificationNumber(elevatorIdentificationNumber) || !checkDescription(elevatorDescription) || !checkModel(elevatorModel) || checkSerialNumber(elevatorSerialNumber)) {
+      return Result.fail<Elevator>('Wrong Parameters')
+    }
+  
+    if (elevatorBrand.length > 0 && elevatorModel.length < 1) {
+      return Result.fail<Elevator>('Brand was given so model is requiered!')
     }
 
     const elevator = new Elevator({
@@ -56,12 +60,11 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
 
     return Result.ok<Elevator>(elevator)
   }
-
 }
 
 function checkBrand(brand: string): boolean{
   let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
-  if (!!brand === false || brand.length === 0 || brand.length > 50 || !strRegex.test(brand)) return false
+  if (brand.length > 50 || !strRegex.test(brand)) return false
 
   return true
 }
@@ -74,21 +77,21 @@ function checkIdentificationNumber(idNumber: number): boolean{
 
 function checkDescription(description: string): boolean{
   let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
-  if (!!description === false || description.length === 0 || description.length > 250 || !strRegex.test(description)) return false
+  if (description.length > 250 || !strRegex.test(description)) return false
 
   return true
 }
 
 function checkModel(model: string): boolean{
   let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
-  if (!!model === false || model.length === 0 || model.length > 50 || !strRegex.test(model)) return false
+  if (model.length > 50 || !strRegex.test(model)) return false
 
   return true
 }
 
 function checkSerialNumber(serialNumber: string): boolean{
   let strRegex = new RegExp(/^[a-z0-9]+$/i);
-  if (!!serialNumber === false || serialNumber.length === 0 || serialNumber.length > 50 || !strRegex.test(serialNumber)) return false
+  if (serialNumber.length > 50 || !strRegex.test(serialNumber)) return false
 
   return true
 }
