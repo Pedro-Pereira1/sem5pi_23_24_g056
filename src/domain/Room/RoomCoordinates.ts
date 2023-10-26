@@ -3,10 +3,8 @@ import { ValueObject } from '../../core/domain/ValueObject';
 
   
   interface RoomCoordinatesProps {
-    topX: number;
-    topY: number;
-    bottonX: number;
-    bottonY: number;
+    x: number;
+    y: number;
   }
 
   export class RoomCoordinates extends ValueObject<RoomCoordinatesProps> {

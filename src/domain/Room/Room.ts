@@ -16,10 +16,8 @@ export class Room extends AggregateRoot<RoomProps> {
 
   public static create(roomDto: IRoomDTO): Result<Room> {
     const roomId: number = roomDto.roomId
-    const roomCoordinatesTopX: number = roomDto.roomCoordinatesTopX
-    const roomCoordinatesTopY: number = roomDto.roomCoordinatesTopY
-    const roomCoordinatesBottomX: number = roomDto.roomCoordinatesBottomX
-    const roomCoordinatesBottomY: number = roomDto.roomCoordinatesBottomY
+    const roomCoordinatesTopX: number = roomDto.x
+    const roomCoordinatesTopY: number = roomDto.y
 
     //TODO
     if (false) {
@@ -28,10 +26,8 @@ export class Room extends AggregateRoot<RoomProps> {
 
     const room = new Room({
       roomCoordinates: new RoomCoordinates({
-        topX: roomCoordinatesTopX,
-        topY: roomCoordinatesTopY,
-        bottonX: roomCoordinatesBottomX,
-        bottonY: roomCoordinatesBottomY
+        x: roomCoordinatesTopX,
+        y: roomCoordinatesTopY,
       })
     }, new RoomID(roomId))
   
