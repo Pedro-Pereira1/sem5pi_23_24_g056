@@ -8,7 +8,7 @@ interface ElevatorIdentificationNumberProps {
 
 export class ElevatorIdentificationNumber extends ValueObject<ElevatorIdentificationNumberProps> {
 
-  private constructor(props: ElevatorIdentificationNumberProps) {
+  constructor(props: ElevatorIdentificationNumberProps) {
     super(props);
   }
 

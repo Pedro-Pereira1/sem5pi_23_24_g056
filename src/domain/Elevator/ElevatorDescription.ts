@@ -8,7 +8,7 @@ interface ElevatorDescriptionProps {
 
 export class ElevatorDescription extends ValueObject<ElevatorDescriptionProps> {
 
-  private constructor(props: ElevatorDescriptionProps) {
+  constructor(props: ElevatorDescriptionProps) {
     super(props);
   }
 
