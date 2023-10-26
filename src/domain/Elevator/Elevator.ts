@@ -21,7 +21,7 @@ interface ElevatorProps {
 
 export class Elevator extends AggregateRoot<ElevatorProps> {
 
-  constructor(props: ElevatorProps, elevatorId?: ElevatorID) {
+  constructor(props: ElevatorProps, elevatorId: ElevatorID) {
     super(props, elevatorId);
   }
 
