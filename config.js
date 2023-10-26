@@ -60,6 +60,14 @@ export default {
     createElevator: {
       name: "CreateElevatoryController",
       path: "../controllers/elevator/create/createElevatorController"
+    },
+    listAllBuildigns: {
+      name: "ListAllBuildingsController",
+      path: "../controllers/building/list/listAllBuildingsController"
+    },
+    listBuildingsMaxMinFloors: {
+      name: "ListBuildingsMaxMinFloorsController",
+      path: "../controllers/building/list/listBuildingsMaxMinFloorsController"
     }
   },
 
@@ -114,6 +122,14 @@ export default {
     createElevator: {
       name: "CreateElevatorService",
       path: "../services/elevator/create/createElevatorService"
+    },
+    listBuildingsMaxMinFloors: {
+      name: "ListBuildingsMaxMinFloorsService",
+      path: "../services/building/list/listBuildingsMaxMinFloorsService"
+    },
+    listAllBuildigns: {
+      name: "ListAllBuildingsService",
+      path: "../services/building/list/listAllBuildingsService"
     }
   },
 };

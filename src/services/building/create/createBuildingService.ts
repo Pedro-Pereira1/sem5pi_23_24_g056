@@ -6,6 +6,10 @@ import config from "../../../../config";
 import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
 import { Building } from "../../../domain/Building/Building";
 import { BuildingMap } from "../../../mappers/building/BuildingMap";
+import { BuildingName } from "../../../domain/Building/BuildingName";
+import { Floor } from "../../../domain/Floor/Floor";
+import { BuildingDescription } from "../../../domain/Building/BuildingDescription";
+import { BuildingSize } from "../../../domain/Building/BuildingSize";
 
 @Service()
 export default class CreateBuildingService implements ICreateBuildingService {
@@ -15,8 +19,14 @@ export default class CreateBuildingService implements ICreateBuildingService {
     ) { }
 
     public async createBuilding(buildingDto: IBuildingDTO): Promise<Result<IBuildingDTO>> {
-        try{
-            const buildingOrError = await Building.create(buildingDto)
+        try {
+            const buildingOrError = Building.create(
+                {
+                    buildingName: new BuildingName({ value: buildingDto.buildingName }),
+                    buildingDescription: new BuildingDescription({ value: buildingDto.buildingDescription}),
+                    buildingSize: new BuildingSize({length: buildingDto.buildingLength, width: buildingDto.buildingWidth}),
+                    floors: [],
+                }, buildingDto.buildingCode)
 
             if (buildingOrError.isFailure) {
                 return Result.fail<IBuildingDTO>(buildingOrError.errorValue())
@@ -29,7 +39,7 @@ export default class CreateBuildingService implements ICreateBuildingService {
             const buildingDtoResult = BuildingMap.toDto(buildingResult) as IBuildingDTO
             return Result.ok<IBuildingDTO>(buildingDtoResult)
 
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }

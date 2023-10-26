@@ -66,10 +66,10 @@ class ElevatorCoordinates << (v,#A4C2E5) ValueObject >>
 '========================================================
 rectangle #D499B9{
 class Floor  << Root >> << Entity >>
-class FloorNumber  << (v,orange) ValueObject >> << unique >>
+class FloorId  << (v,orange) ValueObject >> << unique >>
 class FloorDescription  << (v,#A4C2E5) ValueObject >>
 class FloorMap  << Entity >>
-
+class FloorNumber << (v,#A4C2E5) ValueObject >>
 }
 
 '========================================================
@@ -119,6 +119,7 @@ Passageway "1"->"1" PassagewayCoordinates
 Floor "1"-d->"1" FloorMap
 Floor "*"-u>"1" FloorNumber
 Floor "*"->"1" FloorDescription
+Floor "1" -> "1" FloorId
 
 FloorMap "2"--->"0..*" Passageway
 FloorMap "1"-d---->"0..1" Elevator

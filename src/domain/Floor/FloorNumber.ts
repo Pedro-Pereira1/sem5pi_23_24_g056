@@ -1,13 +1,13 @@
-import { ValueObject } from '../../core/domain/ValueObject';
-import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
+import { ValueObject } from "../../core/domain/ValueObject";
 
+interface IFloorNumberProps {
+    number: number
+}
 
+export default class FloorNumber extends ValueObject<IFloorNumberProps> {
 
-
-export class FloorNumber extends UniqueEntityID {
-
-  constructor(number: number) {
-    super(number)
+  constructor(floorNumberProps: IFloorNumberProps) {
+    super(floorNumberProps)
   }
 
 

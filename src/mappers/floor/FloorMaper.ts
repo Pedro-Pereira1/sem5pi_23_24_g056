@@ -10,7 +10,7 @@ import { Passageway } from "../../domain/Passageway/Passageway";
 import { Room } from "../../domain/Room/Room";
 import { FloorDescription } from "../../domain/Floor/FloorDescription";
 import { FloorMap } from "../../domain/Floor/FloorMap";
-import { FloorNumber } from "../../domain/Floor/FloorNumber";
+import FloorNumber from "../../domain/Floor/FloorId";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
@@ -57,17 +57,17 @@ export class FloorMaper extends Mapper<Floor> {
             rooms.push(a)
         })
 
-
         const FloorOrError = Floor.create(
             {
                 floorDescription: new FloorDescription({ value: description }),
+                floorNumber: floorNumber,
                 floormap: new FloorMap({
                     map: map,
                     passageways: passageways,
                     elevators: elevators,
                     rooms: rooms
                 })
-            }, floorNumber)
+            }, floorDTO.floorId)
 
         return FloorOrError.isSuccess ? FloorOrError.getValue() : null
     }
