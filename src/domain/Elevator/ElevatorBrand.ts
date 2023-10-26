@@ -16,12 +16,20 @@ export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
     return this.props.brand
   }
 
-  public static create (brand: string): Result<ElevatorBrand> {
-    const guardResult = Guard.againstNullOrUndefined(brand, 'brand');
+  public static create (elevatorBrand: string): Result<ElevatorBrand> {
+    const guardResult = Guard.againstNullOrUndefined(elevatorBrand, 'brand');
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorBrand>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: brand }))
     }
+
+    if(elevatorBrand === undefined){
+      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: '' }))
+    }
+
+    if(elevatorBrand.length>50){
+      return Result.fail<ElevatorBrand>(guardResult.message);
+    }
+
+      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: elevatorBrand }))
   }
 }
