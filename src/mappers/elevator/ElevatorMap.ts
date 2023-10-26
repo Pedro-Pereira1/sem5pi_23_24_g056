@@ -8,11 +8,8 @@ export default class ElevatorMap extends Mapper<Elevator> {
 
     public static toDto(elevator: Elevator): IElevatorDTO {
         return {
-            elevatorId: elevator.id.toValue(),
-            elevatorCoordinatesTopX: elevator.props.elevatorCoordinates.props.topX,
-            elevatorCoordinatesTopY: elevator.props.elevatorCoordinates.props.topY,
-            elevatorCoordinatesBottomX: elevator.props.elevatorCoordinates.props.bottonX,
-            elevatorCoordinatesBottomY: elevator.props.elevatorCoordinates.props.bottonY,
+            elevatorCoordinateX: elevator.props.elevatorCoordinateX.x,
+            elevatorCoordinateY: elevator.props.elevatorCoordinateY.y,
             elevatorIdentificationNumber: elevator.props.elevatorIdentificationNumber.identificationNumber,
             elevatorBrand: elevator.props.elevatorBrand.brand,
             elevatorDescription: elevator.props.elevatorDescription.description,
@@ -30,10 +27,8 @@ export default class ElevatorMap extends Mapper<Elevator> {
     public static toPersistence(elevator: Elevator): any {
         return {
             elevatorId: elevator.id.toValue(),
-            elevatorCoordinatesTopX: elevator.props.elevatorCoordinates.props.topX,
-            elevatorCoordinatesTopY: elevator.props.elevatorCoordinates.props.topY,
-            elevatorCoordinatesBottomX: elevator.props.elevatorCoordinates.props.bottonX,
-            elevatorCoordinatesBottomY: elevator.props.elevatorCoordinates.props.bottonY,
+            elevatorCoordinateX: elevator.props.elevatorCoordinateX.x,
+            elevatorCoordinateY: elevator.props.elevatorCoordinateY.y,
             elevatorIdentificationNumber: elevator.props.elevatorIdentificationNumber.identificationNumber,
             elevatorBrand: elevator.props.elevatorBrand.brand,
             elevatorDescription: elevator.props.elevatorDescription.description,
