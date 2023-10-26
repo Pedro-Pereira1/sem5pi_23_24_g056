@@ -384,8 +384,25 @@ describe("Create building", function () {
         //assert.equal(buildingDTO, actual.getValue())
     })
 
-    it('Service unit test with stud repo, invalid building', async function () {
+    it('Service unit test with stub repo, invalid building', async function () {
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "cod12345",
+            buildingLength: 2,
+            buildingWidth: 2,
+            buildingFloors: []
+        } as IBuildingDTO
 
+        let buildingRepo = sinon.spy()
+
+        const createBuildingService = new CreateBuildingService(buildingRepo as IBuildingRepo)
+
+        const actual = await createBuildingService.createBuilding(buildingDTO)
+
+        assert(buildingRepo.notCalled)
+        assert.notEqual(actual.errorValue(), buildingDTO)
+        assert.equal(actual.isFailure, true)
     })
 
     it('Repo unit test, valid building', async function () {
@@ -396,8 +413,116 @@ describe("Create building", function () {
 
     })
 
-    it('Controller + service integration test using BuildingRepo and Building stub', async function () {
+    it('Controller + service integration test using BuildingRepo stub (valid building)', async function () {
+        let body = {
+            "buildingCode": "bdgA1",
+            "buildingName": "buildingTest",
+            "buildingDescription": "this is a building",
+            "buildingLength": 10,
+            "buildingWidth": 10,
+        }
 
+        let expected = {
+            "buildingCode": "bdgA1",
+            "buildingName": "buildingTest",
+            "buildingDescription": "this is a building",
+            "buildingLength": 10,
+            "buildingWidth": 10,
+            "buildingFloor": "[]"
+        }
+
+        const buildingDTO = {
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingCode: "bgdA1",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const buildingResult = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode)
+
+        let req: Partial<Request> = {}
+        req.body = body
+
+        let res: Partial<Response> = {
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+        
+        let buildingRepo = Container.get('BuildingRepo')
+        sinon.stub(buildingRepo, 'save').returns(buildingResult)
+
+        const createBuildingService = new CreateBuildingService(buildingRepo as IBuildingRepo)
+
+        const createBuildingController = new CreateBuildingController(createBuildingService as ICreateBuildingService)
+
+        await createBuildingController.createBuilding(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.json)
+        sinon.match(expected)
+    })
+
+    it('Controller + service integration test using BuildingRepo stub (valid building)', async function () {
+        let body = {
+            "buildingCode": "bdgA1",
+            "buildingName": "buildingTest",
+            "buildingDescription": "this is a building",
+            "buildingLength": 10,
+            "buildingWidth": 10,
+        }
+
+        let expected = {
+            "buildingCode": "bdgA1",
+            "buildingName": "buildingTest",
+            "buildingDescription": "this is a building",
+            "buildingLength": 10,
+            "buildingWidth": 10,
+            "buildingFloor": "[]"
+        }
+
+        const buildingDTO = {
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingCode: "bgdA1",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const buildingResult = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode)
+
+        let req: Partial<Request> = {}
+        req.body = body
+
+        let res: Partial<Response> = {
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+        
+        let buildingRepo = Container.get('BuildingRepo')
+        sinon.stub(buildingRepo, 'save').returns(buildingResult)
+
+        const createBuildingService = new CreateBuildingService(buildingRepo as IBuildingRepo)
+
+        const createBuildingController = new CreateBuildingController(createBuildingService as ICreateBuildingService)
+
+        await createBuildingController.createBuilding(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.json)
+        sinon.match(expected)
     })
 
     it('Controller + service + repo integration test', async function () {
