@@ -112,7 +112,7 @@ export default {
       path: "../services/roleService"
     },
     createBuilding: {
-      name: "vreateBuildingService",
+      name: "createBuildingService",
       path: "../services/building/create/createBuildingService"
     },
     createFloor: {
