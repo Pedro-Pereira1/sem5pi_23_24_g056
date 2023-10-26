@@ -19,7 +19,7 @@ export default {
   /**
    * That long string from mlab
    */
-  databaseURL: process.env.MONGODB_URI || "mongodb://vsgate-s1.dei.isep.ipp.pt:10746",
+  databaseURL: process.env.MONGODB_URI || "mongodb://mongoadmin:f47522692e278dc5a889a9c8@vsgate-s1.dei.isep.ipp.pt:10746/?authMechanism=DEFAULT",
 
   /**
    * Your secret sauce
@@ -46,28 +46,32 @@ export default {
       path: "../controllers/users/roleController"
     },
     createbuilding: {
-      name: "CreateBuildingController",
+      name: "createBuildingController",
       path: "../controllers/building/create/createBuildingController"
     },
     createFloor: {
-      name: "CreateBuildingController",
+      name: "createFloorController",
       path: "../controllers/floor/create/createFloorController"
     },
     createPassageway: {
-      name: "CreatePassagewayController",
+      name: "createPassagewayController",
       path: "../controllers/passageway/create/createPassagewayController"
     },
     createElevator: {
-      name: "CreateElevatoryController",
+      name: "createElevatorController",
       path: "../controllers/elevator/create/createElevatorController"
     },
     listAllBuildigns: {
-      name: "ListAllBuildingsController",
+      name: "listAllBuildingsController",
       path: "../controllers/building/list/listAllBuildingsController"
     },
     listBuildingsMaxMinFloors: {
-      name: "ListBuildingsMaxMinFloorsController",
+      name: "listBuildingsMaxMinFloorsController",
       path: "../controllers/building/list/listBuildingsMaxMinFloorsController"
+    },
+    listAllFloors: {
+      name: "listAllFloorsController",
+      path: "../controllers/floor/list/listAllFloorsController"
     }
   },
 
@@ -81,55 +85,59 @@ export default {
       path: "../repos/userRepo"
     },
     building: {
-      name: "BuildingRepo",
+      name: "buildingRepo",
       path: "../repos/building/buildingRepo"
     },
     floor: {
-      name: "FloorRepo",
+      name: "floorRepo",
       path: "../repos/floor/floorRepo"
     },
     passageway: {
-      name: "PassagewayRepo",
+      name: "passagewayRepo",
       path: "../repos/passageway/passagewayRepo"
     },
     elevator: {
-      name: "ElevatorRepo",
+      name: "elevatorRepo",
       path: "../repos/elevator/elevatorRepo"
     },
     room: {
-      name: "RoomRepo",
+      name: "roomRepo",
       path: "../repos/room/roomRepo"
     }
   },
 
   services: {
     role: {
-      name: "RoleService",
+      name: "roleService",
       path: "../services/roleService"
     },
     createBuilding: {
-      name: "CreateBuildingService",
+      name: "vreateBuildingService",
       path: "../services/building/create/createBuildingService"
     },
     createFloor: {
-      name: "CreateFloorService",
+      name: "createFloorService",
       path: "../services/floor/create/createFloorService"
     },
     createPassageway: {
-      name: "CreatePassagewayService",
+      name: "createPassagewayService",
       path: "../services/passageway/create/createPassagewayService"
     },
     createElevator: {
-      name: "CreateElevatorService",
+      name: "createElevatorService",
       path: "../services/elevator/create/createElevatorService"
     },
     listBuildingsMaxMinFloors: {
-      name: "ListBuildingsMaxMinFloorsService",
+      name: "listBuildingsMaxMinFloorsService",
       path: "../services/building/list/listBuildingsMaxMinFloorsService"
     },
     listAllBuildigns: {
-      name: "ListAllBuildingsService",
+      name: "listAllBuildingsService",
       path: "../services/building/list/listAllBuildingsService"
+    },
+    listAllFloors: {
+      name: "listAllFloors",
+      path: "../services/floor/list/listAllFloorsService"
     }
   },
 };
