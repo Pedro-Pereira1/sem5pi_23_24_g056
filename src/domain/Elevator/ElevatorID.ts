@@ -6,7 +6,7 @@ export class ElevatorID extends Entity<any> {
     return this._id;
   }
 
-  private constructor (id?: UniqueEntityID) {
+  constructor (id?: UniqueEntityID) {
     super(null, id)
   }
 }

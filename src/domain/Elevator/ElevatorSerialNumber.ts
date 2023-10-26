@@ -8,7 +8,7 @@ interface ElevatorSerialNumberProps {
 
 export class ElevatorSerialNumber extends ValueObject<ElevatorSerialNumberProps> {
 
-  private constructor(props: ElevatorSerialNumberProps) {
+  constructor(props: ElevatorSerialNumberProps) {
     super(props);
   }
 

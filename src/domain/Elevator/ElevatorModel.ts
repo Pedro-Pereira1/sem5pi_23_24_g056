@@ -8,7 +8,7 @@ interface ElevatorModelProps {
 
 export class ElevatorModel extends ValueObject<ElevatorModelProps> {
 
-  private constructor(props: ElevatorModelProps) {
+  constructor(props: ElevatorModelProps) {
     super(props);
   }
 

@@ -8,7 +8,7 @@ interface ElevatorBrandProps {
 
 export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
 
-  private constructor(props: ElevatorBrandProps) {
+  constructor(props: ElevatorBrandProps) {
     super(props);
   }
 
