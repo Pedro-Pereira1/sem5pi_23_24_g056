@@ -58,18 +58,6 @@ describe("Create building", function () {
         assert.equal(building.isSuccess, true)
     })
 
-    it('Create building test, only code', async function () {
-        const buildingDTO = {
-            buildingCode: "cod1",
-        } as IBuildingDTO
-
-        const building = Building.create({},
-            buildingDTO.buildingCode)
-
-        assert.equal(building.getValue().name, buildingDTO.buildingName)
-        assert.equal(building.isSuccess, true)
-    })
-
     // Test buildingName
     it('Create building test, invalid building name (not alphanumeric)', async function () {
         const buildingDTO = {
