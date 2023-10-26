@@ -16,12 +16,16 @@ export class ElevatorIdentificationNumber extends ValueObject<ElevatorIdentifica
     return this.props.identificationNumber
   }
 
-  public static create (identificationNumber: number): Result<ElevatorIdentificationNumber> {
-    const guardResult = Guard.againstNullOrUndefined(identificationNumber, 'identificationNUmber');
+  public static create (elevatorIdentificationNumber: number): Result<ElevatorIdentificationNumber> {
+    const guardResult = Guard.againstNullOrUndefined(elevatorIdentificationNumber, 'identificationNUmber');
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorIdentificationNumber>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorIdentificationNumber>(new ElevatorIdentificationNumber({ identificationNumber: identificationNumber }))
     }
+
+    if (elevatorIdentificationNumber <= 0) {
+      return Result.fail<ElevatorIdentificationNumber>('Elevator Identification Number must be a positive number');
+    }
+
+      return Result.ok<ElevatorIdentificationNumber>(new ElevatorIdentificationNumber({ identificationNumber: elevatorIdentificationNumber }))
   }
 }
