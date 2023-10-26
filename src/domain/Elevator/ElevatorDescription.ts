@@ -16,12 +16,20 @@ export class ElevatorDescription extends ValueObject<ElevatorDescriptionProps> {
     return this.props.description
   }
 
-  public static create (description: string): Result<ElevatorDescription> {
-    const guardResult = Guard.againstNullOrUndefined(description, 'description');
+  public static create (elevatorDescription: string): Result<ElevatorDescription> {
+    const guardResult = Guard.againstNullOrUndefined(elevatorDescription, 'description');
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorDescription>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: description }))
     }
+
+    if(elevatorDescription === undefined){
+      return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: '' }))
+    }
+
+    if(elevatorDescription.length>255){
+      return Result.fail<ElevatorDescription>(guardResult.message);
+    }
+
+      return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: elevatorDescription }))
   }
 }
