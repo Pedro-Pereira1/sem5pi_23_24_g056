@@ -1,9 +1,6 @@
 export default interface IElevatorDTO {
-    elevatorId: number
-    elevatorCoordinatesTopX: number
-    elevatorCoordinatesTopY: number
-    elevatorCoordinatesBottomX: number
-    elevatorCoordinatesBottomY: number
+    elevatorCoordinateX: number
+    elevatorCoordinateY: number
     elevatorIdentificationNumber: number
     elevatorBrand: string
     elevatorDescription: string
