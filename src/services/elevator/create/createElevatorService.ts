@@ -36,7 +36,7 @@ export default class CreateElevatorService implements ICreateElevatorService {
                     elevatorDescription: new ElevatorDescription({description: elevatorDto.elevatorDescription}),
                     elevatorModel: new ElevatorModel({model: elevatorDto.elevatorModel}),
                     elevatorSerialNumber: new ElevatorSerialNumber({serialNumber: elevatorDto.elevatorSerialNumber})
-                }, )
+                })
 
             if (ElevatorOrError.isFailure) {
                 return Result.fail<IElevatorDTO>(ElevatorOrError.errorValue())
