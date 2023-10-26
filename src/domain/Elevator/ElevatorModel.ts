@@ -1,3 +1,4 @@
+import e from 'express';
 import { ValueObject } from '../../core/domain/ValueObject';
 import { Guard } from '../../core/logic/Guard';
 import { Result } from '../../core/logic/Result';
@@ -16,12 +17,20 @@ export class ElevatorModel extends ValueObject<ElevatorModelProps> {
     return this.props.model
   }
 
-  public static create (model: string): Result<ElevatorModel> {
-    const guardResult = Guard.againstNullOrUndefined(model, 'model');
+  public static create (elevatorModel: string): Result<ElevatorModel> {
+    const guardResult = Guard.againstNullOrUndefined(elevatorModel, 'model');
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorModel>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorModel>(new ElevatorModel({ model: model }))
     }
+
+    if(elevatorModel === undefined){
+      return Result.ok<ElevatorModel>(new ElevatorModel({ model: '' }))
+    }
+
+    if(elevatorModel.length>50){
+      return Result.fail<ElevatorModel>(guardResult.message);
+    }
+
+      return Result.ok<ElevatorModel>(new ElevatorModel({ model: elevatorModel }))
   }
 }
