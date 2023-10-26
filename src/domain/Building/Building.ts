@@ -79,7 +79,7 @@ export class Building extends AggregateRoot<BuildingProps> {
 
 function checkName(name: string): boolean {
   let strRegex = new RegExp(/^[a-z0-9]+$/i);
-  if (name.length === 0 || name.length > 50 || !strRegex.test(name)) {
+  if (name.length > 50 || !strRegex.test(name)) {
     return false
   }
 
@@ -96,7 +96,7 @@ function checkCode(code: string): boolean {
 }
 
 function checkDescription(description: string): boolean {
-  if (description.length === 0 || description.length > 255) {
+  if (description.length > 255) {
     return false
   }
 
