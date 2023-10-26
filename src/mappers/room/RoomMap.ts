@@ -10,10 +10,8 @@ export default class RoomMap extends Mapper<Room> {
     public static toDto(room: Room): IRoomDTO {
         return {
             roomId: room.id.toValue(),
-            roomCoordinatesTopX: room.props.roomCoordinates.props.topX,
-            roomCoordinatesTopY: room.props.roomCoordinates.props.topY,
-            roomCoordinatesBottomX: room.props.roomCoordinates.props.bottonX,
-            roomCoordinatesBottomY: room.props.roomCoordinates.props.bottonY
+            x: room.props.roomCoordinates.props.x,
+            y: room.props.roomCoordinates.props.y
         } as IRoomDTO
     }
 
@@ -26,10 +24,8 @@ export default class RoomMap extends Mapper<Room> {
     public static toPersistence(room: Room): any {
         return {
             roomId: room.id.toValue(),
-            roomCoordinatesTopX: room.props.roomCoordinates.props.topX,
-            roomCoordinatesTopY: room.props.roomCoordinates.props.topY,
-            roomCoordinatesBottomX: room.props.roomCoordinates.props.bottonX,
-            roomCoordinatesBottomY: room.props.roomCoordinates.props.bottonY
+            x: room.props.roomCoordinates.props.x,
+            y: room.props.roomCoordinates.props.y
         }
     }
 

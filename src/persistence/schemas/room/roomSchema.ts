@@ -4,10 +4,8 @@ import IRoomPersistence from "../../../dataschema/room/IRoomPersistence";
 const RoomSchema = new mongoose.Schema(
     {
         roomId: { type: Number, unique: true },
-        roomCoordinatesTopX: { type: Number },
-        roomCoordinatesTopY: { type: Number },
-        roomCoordinatesBottomX: { type: Number },
-        roomCoordinatesBottomY: {type: Number },
+        x: { type: Number },
+        y: { type: Number },
     },
     {
         timestamps: true
