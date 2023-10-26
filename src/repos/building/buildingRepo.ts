@@ -16,10 +16,10 @@ export default class BuildingRepo implements IBuildingRepo {
 
     public async exists(building: Building): Promise<boolean> {
 
-            const idX = building.id instanceof BuildingCode ? (<BuildingCode>building.id).toValue() : building.id;
+        const idX = building.id instanceof BuildingCode ? (<BuildingCode>building.id).toValue() : building.id;
 
-        const query = { domainId: idX}; 
-        const buildingDocument = await this.buildingSchema.findOne( query as FilterQuery<IBuildingPersistence & Document>);
+        const query = { domainId: idX };
+        const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
 
         return !!buildingDocument === true;
     }
@@ -30,7 +30,7 @@ export default class BuildingRepo implements IBuildingRepo {
         const buildingDocument = await this.buildingSchema.findOne(query)
 
         try {
-            if(buildingDocument === null) {
+            if (buildingDocument === null) {
 
                 const rawBuilding: any = BuildingMap.toPersistence(building)
 
@@ -52,10 +52,6 @@ export default class BuildingRepo implements IBuildingRepo {
         } catch (err) {
             throw err
         }
-
-
-
-        throw new Error("Method not implemented.");
     }
 
     public async findAll(): Promise<Building[]> {
@@ -70,24 +66,30 @@ export default class BuildingRepo implements IBuildingRepo {
         return buildings
     }
 
-    findByBuidingCode(buildingCode: BuildingCode): Promise<Building> {
-        throw new Error("Method not implemented.");
+    public async findByBuidingCode(buildingCode: BuildingCode): Promise<Building> {
+        const query = { buildingCode: buildingCode };
+
+        const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
+
+        if (buildingDocument != null) {
+            return BuildingMap.toDomain(buildingDocument)
+        }
+        else
+            return null;
     }
 
-
-
-    public async findBuildingsMaxMinFloors(max:number, min:number): Promise<Building[]> {
+    public async findBuildingsMaxMinFloors(max: number, min: number): Promise<Building[]> {
         try {
             const buildings = await this.findAll();
             const filteredBuildings: Building[] = [];
 
-        for (const element of buildings) {
-            if(element.floors.length>=min && element.floors.length<=max){
-                filteredBuildings.push(element);
+            for (const element of buildings) {
+                if (element.floors.length >= min && element.floors.length <= max) {
+                    filteredBuildings.push(element);
+                }
             }
-        }
 
-        return filteredBuildings;
+            return filteredBuildings;
         } catch (error) {
             console.error("Error in findBuildingsMaxMinFloors:", error);
             throw error;
