@@ -16,12 +16,21 @@ export class ElevatorSerialNumber extends ValueObject<ElevatorSerialNumberProps>
     return this.props.serialNumber
   }
 
-  public static create (serialNumber: string): Result<ElevatorSerialNumber> {
-    const guardResult = Guard.againstNullOrUndefined(serialNumber, 'serialNumber');
+  public static create (elevatorSerialNumber: string): Result<ElevatorSerialNumber> {
+    const guardResult = Guard.againstNullOrUndefined(elevatorSerialNumber, 'serialNumber');
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorSerialNumber>(guardResult.message);
-    } else {
-      return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: serialNumber }))
     }
+
+    if(elevatorSerialNumber === undefined){
+      return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: '' }))
+    }
+
+    if(elevatorSerialNumber.length>50){
+      return Result.fail<ElevatorSerialNumber>(guardResult.message);
+    }
+
+      return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: elevatorSerialNumber }))
+    
   }
 }
