@@ -3,9 +3,9 @@ import auth from './routes/userRoute';
 import user from './routes/userRoute';
 import role from './routes/roleRoute';
 import building from './routes/buildingRoute';
-import floor from './routes/floorRoute'
-import passageway1 from './routes/passagewayRoute'
-import elevator from './routes/elevatorRoute'
+import floor from './routes/floorRoute';
+import passageway1 from './routes/passagewayRoute';
+import elevator from './routes/elevatorRoute';
 
 export default () => {
 	const app = Router();
