@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 import {Result} from "../../src/core/logic/Result";
 import {ElevatorDescription} from "../../src/domain/Elevator/ElevatorDescription";
+import assert from "assert";
 
 describe("Check elevator description", function () {
     const sandbox = sinon.createSandbox();
@@ -16,16 +17,16 @@ describe("Check elevator description", function () {
         const elevatorDescription: string = 'Apple';
         const result: Result<ElevatorDescription> = ElevatorDescription.create(elevatorDescription);
 
-        expect(result.isSuccess).toBe(true)
-        expect(result.getValue().description).toBe(elevatorDescription)
+        assert.equal(result.isSuccess,true)
+        assert.equal(result.getValue().description,elevatorDescription)
     })
 
     it('Create elevator test, elevator description over word limit (255+ words)', async function () {
         const elevatorDescription: string = 'A'.repeat(256);
         const result: Result<ElevatorDescription> = ElevatorDescription.create(elevatorDescription);
 
-        expect(result.isFailure).toBe(true)
-        expect(result.error).toBe('Elevator description must be shorter than 255 words')
+        assert.equal(result.isFailure,true)
+        assert.equal(result.error,'Elevator description must be shorter than 255 words')
     })
 
 })
