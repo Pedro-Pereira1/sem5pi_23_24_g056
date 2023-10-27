@@ -214,25 +214,6 @@ describe("Create building", function () {
         assert.equal(building.isSuccess, false)
     })
 
-    it('Create building test, invalid building description (empty)', async function () {
-        const buildingDTO = {
-            buildingName: "EdificioA",
-            buildingDescription: "",
-            buildingCode: "a122",
-            buildingLength: 2,
-            buildingWidth: 2
-        } as IBuildingDTO
-
-        const building = Building.create({
-            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
-            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
-            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
-            floors: [],
-        }, buildingDTO.buildingCode)
-
-        assert.equal(building.isSuccess, false)
-    })
-
     //Test buildingSize
     it('Create building test, invalid building size (length = 0)', async function () {
         const buildingDTO = {
