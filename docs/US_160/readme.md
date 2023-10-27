@@ -22,7 +22,7 @@ buildings and change any information execpt the building code.
 
 ### 3.1. Domain Model Excerpt
 
-![DomainModelExcerpt](./Diagrams/domainModelExcerpt.svg)
+![DomainModelExcerpt](./Diagrams/DomainModelExerpt.svg)
 
 ## 4. Design
 
@@ -32,7 +32,7 @@ buildings and change any information execpt the building code.
 
 * Logical:
 
-![Logical](./Diagrams/Level1/logicalLevel1.svg)
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
 * Process
 
@@ -46,7 +46,7 @@ buildings and change any information execpt the building code.
 
 * Logical:
 
-![Logical](./Diagrams/Level2/logicalLevel2.svg)
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
 
 * Process
 
@@ -54,25 +54,25 @@ buildings and change any information execpt the building code.
 
 * Physical
 
-![physical](./Diagrams/Level2/PhysicalLevel2.svg)
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level2/ProcessLevel2.svg)
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalLevel3.svg)
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
 
 * Process
 
 ![Process](./Diagrams/Level3/ProcessLevel3.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ProcessLevel3.svg)
 
 ### 4.2. Applied Patterns
 
