@@ -23,22 +23,20 @@ export default class FloorRepo implements IFloorRepo {
   }
 
   public async save(floor: Floor): Promise<Floor> {
-    const query = { floorId: floor.id.toValue() };
+    const query = { floorId: Number(floor.id.toValue()) };
 
     const floorDocument = await this.floorSchema.findOne(query);
 
+    console.log(floor.id)
     try {
       if (floorDocument === null) {
         const rawFloor: any = FloorMaper.toPersistence(floor);
-
         const floorCreated = await this.floorSchema.create(rawFloor);
-
         return FloorMaper.toDomain(floorCreated);
+        
       } else {
-
-        floorDocument.floorNumber = Number(floor.number.toValue);
+        floorDocument.floorNumber = Number(floor.number.toValue());
         await floorDocument.save();
-
         return floor;
       }
     } catch (err) {
