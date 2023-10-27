@@ -16,6 +16,18 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     super(props);
   }
 
+  addPassageway(passageway: Passageway) {
+    this.props.passageways.push(passageway)
+  }
+
+  addelevators(elevator: Elevator) {
+    this.props.elevators.push(elevator)
+  }
+
+  addRoom(room: Room) {
+    this.props.rooms.push(room)
+  }
+
   get passagewaysId(): string[] {
     let ids: string[] = []
     this.props.passageways.forEach(m => {
