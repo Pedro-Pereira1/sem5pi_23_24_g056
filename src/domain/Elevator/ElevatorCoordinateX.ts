@@ -18,7 +18,6 @@ export class ElevatorCoordinateX extends ValueObject<ElevatorCoordinateXProps> {
 
   public static create (elevatorCoordinateX: number, buildingColumns: number): Result<ElevatorCoordinateX> {
     const guardResult = Guard.againstNullOrUndefined(elevatorCoordinateX, 'elevatorCoordinateX');
-    const maxPos = buildingColumns +1;
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorCoordinateX>(guardResult.message);
     } 
@@ -27,8 +26,8 @@ export class ElevatorCoordinateX extends ValueObject<ElevatorCoordinateXProps> {
       return Result.fail<ElevatorCoordinateX>('Elevator Position X must be a positive number');
     }
 
-    if (elevatorCoordinateX > maxPos) {
-      return Result.fail<ElevatorCoordinateX>('Elevator Position X must be lower than ' + maxPos);
+    if (elevatorCoordinateX >= buildingColumns) {
+      return Result.fail<ElevatorCoordinateX>('Elevator Position X must be lower than ' + buildingColumns);
     }
 
       return Result.ok<ElevatorCoordinateX>(new ElevatorCoordinateX({elevatorCoordinateX : elevatorCoordinateX}))
