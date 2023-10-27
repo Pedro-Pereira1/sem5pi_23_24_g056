@@ -19,7 +19,8 @@ export class FloorMaper extends Mapper<Floor> {
 
     public static toDto(floor: Floor): IFloorDTO {
         return {
-            floorNumber: floor.id.toValue(),
+            floorNumber: floor.props.floorNumber,
+            floorId: floor.id.toValue(),
             floorDescription: floor.description.description,
             floorMap: {
                 map: floor.props.floormap.props.map,
@@ -42,7 +43,7 @@ export class FloorMaper extends Mapper<Floor> {
         let rooms: Room[] = []
         let map: string[][] = floorDTO.floorMap.map
 
-        floorDTO.floorMap.passageways.forEach(async p => {
+        /*floorDTO.floorMap.passageways.forEach(async p => {
             const a = await passagewayRepo.findById(p)
             passageways.push(a)
         });
@@ -55,7 +56,7 @@ export class FloorMaper extends Mapper<Floor> {
         floorDTO.floorMap.rooms.forEach(async r => {
             const a = await roomRepo.findById(r)
             rooms.push(a)
-        })
+        })*/
 
         const FloorOrError = Floor.create(
             {
@@ -74,7 +75,8 @@ export class FloorMaper extends Mapper<Floor> {
 
     public static toPersistence(floor: Floor): any {
         return {
-            floorNumber: floor.id.toValue(),
+            floorNumber: floor.props.floorNumber,
+            floorId: floor.id.toValue(),
             floorDescription: floor.description.description,
             floorMap: {
                 map: floor.props.floormap.props.map,
