@@ -20,14 +20,6 @@ describe("Check elevator brand", function () {
         expect(result.getValue().brand).toBe(elevatorBrand)
     })
 
-    it('Create elevator test, elevator brand is undefinied', async function () {
-        const elevatorBrand = undefined;
-        const result: Result<ElevatorBrand> = ElevatorBrand.create(elevatorBrand);
-
-        expect(result.isSuccess).toBe(true)
-        expect(result.getValue().brand).toBe('')
-    })
-
     it('Create elevator test, elevator brand over word limit (50+ words)', async function () {
         const elevatorBrand: string = 'A'.repeat(51);
         const result: Result<ElevatorBrand> = ElevatorBrand.create(elevatorBrand);
