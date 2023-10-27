@@ -15,13 +15,9 @@ export default (app: Router) => {
     const ctrl = Container.get(config.controllers.createFloor.name) as ICreateFloorController
     const ctrllistAllFloors = Container.get(config.controllers.listAllFloors.name) as IListAllFloorsController
 
-    route.get('/listAllFloors',
-    celebrate({
-        body: Joi.object({
-          buildingID: Joi.string().alphanum().max(5).required(),
-        }),
-    }),
-    (req, res, next) => { ctrllistAllFloors.listAllFloors(req, res, next)
+    route.get('/listAllFloors/:buildingId',
+    (req, res, next) => { ctrllistAllFloors.listAllFloors(req, res, next);
+        req.params.buildingId
     });
 
    route.post('/createFloor',
