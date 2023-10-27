@@ -12,8 +12,8 @@ export default (app: Router) => {
     app.use('/passageways', route)
 
     const ctrl = Container.get(config.controllers.createPassageway.name) as ICreatePassagewayController
-    
-    route.post('/createPassageway', 
+
+    route.post('/createPassageway',
     celebrate({
         body: Joi.object({
             passagewayId: Joi.number().required(),
@@ -21,6 +21,8 @@ export default (app: Router) => {
             passagewayCoordinatesTopY : Joi.number().required(),
             passagewayCoordinatesBottomX : Joi.number().required(),
             passagewayCoordinatesBottomY : Joi.number().required(),
+            building1ID: Joi.string().alphanum().max(5).required(),
+            building2ID: Joi.string().alphanum().max(5).required()
         }),
     }),
     (req, res, next) => ctrl.createPassageway(req, res, next));
