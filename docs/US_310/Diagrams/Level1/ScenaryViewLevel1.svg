@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="108px" preserveAspectRatio="none" style="width:402px;height:108px;background:#FFFFFF;" version="1.1" viewBox="0 0 402 108" width="402px" zoomAndPan="magnify"><defs/><g><!--MD5=[1478444cbd0d707d5292787239839939]
+cluster RobDroneGo--><g id="cluster_RobDroneGo"><path d="M180.5,6 L272.5,6 A3.75,3.75 0 0 1 275,8.5 L282,29.6094 L392.5,29.6094 A2.5,2.5 0 0 1 395,32.1094 L395,97.5 A2.5,2.5 0 0 1 392.5,100 L180.5,100 A2.5,2.5 0 0 1 178,97.5 L178,8.5 A2.5,2.5 0 0 1 180.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="178" x2="282" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="182" y="22.5332">RobDroneGo</text></g><g id="elem_UC13"><ellipse cx="286.566" cy="62.9132" fill="#F1F1F1" rx="92.566" ry="20.9132" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="144" x="214.566" y="66.6417">Create Rooms of Floor</text></g><!--MD5=[99f3cfe8ce18ee9cb444babb539f6fb5]
+entity CM--><g id="elem_CM"><ellipse cx="70" cy="40" fill="#F1F1F1" rx="16" ry="16" style="stroke:#181818;stroke-width:1.5;"/><path d="M70,60 C74,60 77,60 81,56 C89,56 97,64 97,72 L97,76 C97,80 93,84 89,84 L51,84 C47,84 43,80 43,76 L43,72 C43,64 51,56 59,56 C63,60 66,60 70,60 " fill="#F1F1F1" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="6" y="100.0332">UI Campus Manager</text></g><!--MD5=[ade07d9c495d68ea197cf04dbfa5694f]
+link CM to UC13--><g id="link_CM_UC13"><path d="M134.2,63 C151.25,63 170.11,63 188.56,63 " fill="none" id="CM-to-UC13" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="193.75,63,184.75,59,188.75,63,184.75,67,193.75,63" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9fb8b680d76eda0209f7425e607106f7]
+@startuml
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Campus Manager" as CM
+
+
+package  RobDroneGo  {
+  
+  usecase "Create Rooms of Floor" as UC13
+  
+}
+
+CM - -> UC13
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

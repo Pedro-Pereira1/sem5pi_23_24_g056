@@ -4,10 +4,10 @@
 autonumber
 actor "Campus Manager" as CM
 
-CM -> System: Starts the process to  creat a building
-System --> CM:
-CM -> System:
-CM <-- System:
 
+activate System
+CM -> System: Create new room 
+CM <-- System: Inform Success
+deactivate System
 
 @enduml
