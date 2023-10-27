@@ -31,6 +31,7 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.floormap
   }
 
+
   public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
 
     //TODO vericications
