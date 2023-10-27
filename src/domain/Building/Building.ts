@@ -43,10 +43,10 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this.props.floors
   }
 
-  get floorsNumber(): string[] {
-    let floors: string[] = []
+  get floorsNumber(): number[] {
+    let floors: number[] = []
     this.props.floors.forEach(f => {
-      floors.push(f.id.toString() + ' ')
+      floors.push(Number(f.id.toValue()))
     });
     return floors
   }
