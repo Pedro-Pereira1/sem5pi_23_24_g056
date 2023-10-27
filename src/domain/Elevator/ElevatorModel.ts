@@ -23,12 +23,8 @@ export class ElevatorModel extends ValueObject<ElevatorModelProps> {
       return Result.fail<ElevatorModel>(guardResult.message);
     }
 
-    if(elevatorModel === undefined){
-      return Result.ok<ElevatorModel>(new ElevatorModel({ model: '' }))
-    }
-
     if(elevatorModel.length>50){
-      return Result.fail<ElevatorModel>(guardResult.message);
+      return Result.fail<ElevatorModel>('Elevator model must be shorter than 50 words');
     }
 
       return Result.ok<ElevatorModel>(new ElevatorModel({ model: elevatorModel }))

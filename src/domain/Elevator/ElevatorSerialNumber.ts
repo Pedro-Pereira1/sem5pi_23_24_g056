@@ -22,12 +22,8 @@ export class ElevatorSerialNumber extends ValueObject<ElevatorSerialNumberProps>
       return Result.fail<ElevatorSerialNumber>(guardResult.message);
     }
 
-    if(elevatorSerialNumber === undefined){
-      return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: '' }))
-    }
-
     if(elevatorSerialNumber.length>50){
-      return Result.fail<ElevatorSerialNumber>(guardResult.message);
+      return Result.fail<ElevatorSerialNumber>('Elevator serial number must be shorter than 50 words');
     }
 
       return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: elevatorSerialNumber }))

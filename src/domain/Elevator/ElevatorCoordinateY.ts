@@ -17,7 +17,6 @@ export class ElevatorCoordinateY extends ValueObject<ElevatorCoordinateYProps> {
 
   public static create (elevatorCoordinateY: number, buildingLines: number): Result<ElevatorCoordinateY> {
     const guardResult = Guard.againstNullOrUndefined(elevatorCoordinateY, 'elevatorCoordinateY');
-    const maxPos = buildingLines +1;
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorCoordinateY>(guardResult.message);
     } 
@@ -26,8 +25,8 @@ export class ElevatorCoordinateY extends ValueObject<ElevatorCoordinateYProps> {
       return Result.fail<ElevatorCoordinateY>('Elevator Position Y must be a positive number');
     }
 
-    if (elevatorCoordinateY > maxPos) {
-      return Result.fail<ElevatorCoordinateY>('Elevator Position Y must be lower than ' + maxPos);
+    if (elevatorCoordinateY >= buildingLines) {
+      return Result.fail<ElevatorCoordinateY>('Elevator Position Y must be lower than ' + buildingLines);
     }
 
       return Result.ok<ElevatorCoordinateY>(new ElevatorCoordinateY({elevatorCoordinateY : elevatorCoordinateY}))

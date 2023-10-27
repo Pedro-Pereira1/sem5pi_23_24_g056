@@ -22,12 +22,8 @@ export class ElevatorDescription extends ValueObject<ElevatorDescriptionProps> {
       return Result.fail<ElevatorDescription>(guardResult.message);
     }
 
-    if(elevatorDescription === undefined){
-      return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: '' }))
-    }
-
     if(elevatorDescription.length>255){
-      return Result.fail<ElevatorDescription>(guardResult.message);
+      return Result.fail<ElevatorDescription>('Elevator description must be shorter than 255 words');
     }
 
       return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: elevatorDescription }))

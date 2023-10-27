@@ -22,12 +22,8 @@ export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
       return Result.fail<ElevatorBrand>(guardResult.message);
     }
 
-    if(elevatorBrand === undefined){
-      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: '' }))
-    }
-
     if(elevatorBrand.length>50){
-      return Result.fail<ElevatorBrand>(guardResult.message);
+      return Result.fail<ElevatorBrand>('Elevator brand must be shorter than 50 words');
     }
 
       return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: elevatorBrand }))
