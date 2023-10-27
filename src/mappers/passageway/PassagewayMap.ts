@@ -3,7 +3,6 @@ import { Mapper } from "../../core/infra/Mapper";
 import IPassagewayPersistence from "../../dataschema/passageway/IPassagewayPersistence";
 import { Passageway } from "../../domain/Passageway/Passageway";
 import { IPassagewayDTO } from "../../dto/passageway/IPassagewayDTO";
-import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 
 export class PassagewayMap extends Mapper<Passageway> {
 
@@ -12,8 +11,8 @@ export class PassagewayMap extends Mapper<Passageway> {
             passagewayId: Number(passageway.id.toValue),
             passagewayCoordinatesTopX : passageway.coordinates.props.topX,
             passagewayCoordinatesTopY : passageway.coordinates.props.topY,
-            passagewayCoordinatesBottomX : passageway.coordinates.props.bottonX,
-            passagewayCoordinatesBottomY : passageway.coordinates.props.bottonY,
+            passagewayCoordinatesBottomX : passageway.coordinates.props.bottomX,
+            passagewayCoordinatesBottomY : passageway.coordinates.props.bottomY,
         } as IPassagewayDTO
     }
 
@@ -28,8 +27,8 @@ export class PassagewayMap extends Mapper<Passageway> {
             passagewayId: Number(passageway.id.toValue),
             passagewayCoordinatesTopX : passageway.coordinates.props.topX,
             passagewayCoordinatesTopY : passageway.coordinates.props.topY,
-            passagewayCoordinatesBottomX : passageway.coordinates.props.bottonX,
-            passagewayCoordinatesBottomY : passageway.coordinates.props.bottonY,
+            passagewayCoordinatesBottomX : passageway.coordinates.props.bottomX,
+            passagewayCoordinatesBottomY : passageway.coordinates.props.bottomY,
         }
     }
 }
