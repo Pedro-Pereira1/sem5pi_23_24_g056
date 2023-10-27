@@ -10,6 +10,8 @@ import { Floor } from "../../domain/Floor/Floor";
 import { BuildingName } from "../../domain/Building/BuildingName";
 import { BuildingDescription } from "../../domain/Building/BuildingDescription";
 import { BuildingSize } from "../../domain/Building/BuildingSize";
+import { resolve } from "path";
+import { reject } from "lodash";
 
 export class BuildingMap extends Mapper<Building> {
 
@@ -24,22 +26,24 @@ export class BuildingMap extends Mapper<Building> {
         } as IBuildingDTO
     }
 
-    public static toDomain(buildingRaw: any | Model<IBuildingPersistence & Document>): Building {
+    public static async toDomain(buildingRaw: any | Model<IBuildingPersistence & Document>): Promise<Building> {
         const floorRepo: IFloorRepo = Container.get(config.repos.floor.name)
-
         let floorsOfBuilding: Floor[] = []
+        
 
-        buildingRaw.buildingFloors.forEach(async (f: number) => {
+        for (const f of buildingRaw.buildingFloors) {
             floorsOfBuilding.push(await floorRepo.findById(f))
-        });
+        }
+        
 
-        const buildingOrError = Building.create(
+         const buildingOrError = Building.create(
             {
                 buildingName: new BuildingName({ value: buildingRaw.buildingName }),
                 buildingDescription: new BuildingDescription({ value: buildingRaw.buildingDescription }),
                 buildingSize: new BuildingSize({ length: buildingRaw.buildingLength, width: buildingRaw.buildingWidth }),
                 floors: floorsOfBuilding,
             }, buildingRaw.buildingCode)
+ 
 
         return buildingOrError.isSuccess ? buildingOrError.getValue() : null
     }
