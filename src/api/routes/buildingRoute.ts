@@ -35,7 +35,10 @@ export default (app: Router) => {
         ctrlListAllBuildings.listAllBuildings(req, res, next)
     });
 
-  route.get('/listBuildingsMaxMinFloors', (req, res, next) =>
-    ctrl1.listBuildingsMaxMinFloors(req, res, next)
+  route.get('/listBuildingsMaxMinFloors/:max/:min',
+    (req, res, next) =>  { ctrl1.listBuildingsMaxMinFloors(req, res, next);
+      req.params.max;
+      req.params.min;
+    }
   );
 }
