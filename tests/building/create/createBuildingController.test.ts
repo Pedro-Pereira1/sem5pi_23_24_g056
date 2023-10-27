@@ -27,11 +27,11 @@ describe("Create building", function () {
 
         let buildingRepoClass = require('../../../src/repos/building/buildingRepo').default
         let buildingRepoInstance = Container.get(buildingRepoClass)
-        Container.set('BuildingRepo', buildingRepoInstance)
+        Container.set('buildingRepo', buildingRepoInstance)
 
         let createBuildingServiceClass = require('../../../src/services/building/create/createBuildingService').default
         let createBuildingServiceInstance = Container.get(createBuildingServiceClass)
-        Container.set('CreateBuildingService', createBuildingServiceInstance)
+        Container.set('createBuildingService', createBuildingServiceInstance)
     });
 
     afterEach(function () {
@@ -301,7 +301,7 @@ describe("Create building", function () {
 
         let next: Partial<NextFunction> = () => { }
 
-        let createBuildingService = Container.get('CreateBuildingService')
+        let createBuildingService = Container.get('createBuildingService')
         sinon.stub(createBuildingService, 'createBuilding').returns(Result.ok<IBuildingDTO>({
             buildingCode: "bgdA1",
             buildingName: "buildingtest",
@@ -327,7 +327,7 @@ describe("Create building", function () {
 
         let next: Partial<NextFunction> = () => { }
 
-        let createBuildingService = Container.get('CreateBuildingService')
+        let createBuildingService = Container.get('createBuildingService')
         sinon.stub(createBuildingService, 'createBuilding').returns(Result.fail<Building>('Error'))
 
         const createBuildingController = new CreateBuildingController(createBuildingService as ICreateBuildingService)
@@ -357,7 +357,7 @@ describe("Create building", function () {
 
         const building = buildingResult.getValue()
 
-        const buildingRepoInstance = Container.get('BuildingRepo')
+        const buildingRepoInstance = Container.get('buildingRepo')
         const buildingRepoMock = sinon.mock(buildingRepoInstance, "save")
         buildingRepoMock.expects("save")
             .once()
@@ -444,7 +444,7 @@ describe("Create building", function () {
 
         let next: Partial<NextFunction> = () => { }
         
-        let buildingRepo = Container.get('BuildingRepo')
+        let buildingRepo = Container.get('buildingRepo')
         sinon.stub(buildingRepo, 'save').returns(buildingResult)
 
         const createBuildingService = new CreateBuildingService(buildingRepo as IBuildingRepo)
@@ -457,7 +457,7 @@ describe("Create building", function () {
         sinon.match(expected)
     })
 
-    it('Controller + service integration test using BuildingRepo stub (valid building)', async function () {
+    it('Controller + service integration test using buildingRepo stub (valid building)', async function () {
         let body = {
             "buildingCode": "bdgA1",
             "buildingName": "buildingTest",
@@ -500,7 +500,7 @@ describe("Create building", function () {
 
         let next: Partial<NextFunction> = () => { }
         
-        let buildingRepo = Container.get('BuildingRepo')
+        let buildingRepo = Container.get('buildingRepo')
         sinon.stub(buildingRepo, 'save').returns(buildingResult)
 
         const createBuildingService = new CreateBuildingService(buildingRepo as IBuildingRepo)
