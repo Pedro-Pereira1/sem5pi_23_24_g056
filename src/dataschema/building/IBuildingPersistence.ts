@@ -4,5 +4,5 @@ export interface IBuildingPersistence {
     buildingCode: string
     buildingLength: number
     buildingWidth: number
-    floors: string[]
+    buildingFloors: number[]
 }
