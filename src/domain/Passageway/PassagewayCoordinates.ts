@@ -4,8 +4,12 @@ import { Result } from '../../core/logic/Result';
 interface PassagewayCoordinatesProps {
   topX: number;
   topY: number;
-  bottonX: number;
-  bottonY: number;
+  bottomX: number;
+  bottomY: number;
+  topXB2: number;
+  topYB2: number;
+  bottomXB2: number;
+  bottomYB2: number;
 }
 
 export class PassagewayCoordinates extends ValueObject<PassagewayCoordinatesProps> {
@@ -15,7 +19,7 @@ export class PassagewayCoordinates extends ValueObject<PassagewayCoordinatesProp
   }
 
   public static create(props: PassagewayCoordinatesProps): Result<PassagewayCoordinates> {
-    if (props.topX < 0 || props.topY < 0 || props.bottonX < 0 || props.bottonY < 0) {
+    if (props.topX < 0 || props.topY < 0 || props.bottomX < 0 || props.bottomY < 0 || props.topXB2 < 0 || props.topYB2 < 0 || props.bottomXB2 < 0 || props.bottomYB2 < 0) {
       return Result.fail<PassagewayCoordinates>('Coordinates cannot be negative.');
     }
 

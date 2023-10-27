@@ -1,0 +1,12 @@
+@startuml
+
+() "UI Campus Manager" as CM
+
+component RDG [
+  <<component>>
+  **RobDroneGo**
+]
+
+CM -d- RDG
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml processLevel3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant EditBuildintRoute
+participant EditBuildingController
+participant EditBuildingService
+participant BuildingMap
+participant Building
+participant BuildingDto
+participant BuildingRepo
+database buildingDatabase
+
+EditBuildintRoute -> EditBuildingController : editBuilding
+activate EditBuildintRoute
+activate EditBuildingController
+
+EditBuildingController -> EditBuildingService : editBuilding
+activate EditBuildingService
+
+EditBuildingService -> BuildingMap : toDomain
+activate BuildingMap
+
+BuildingMap -> Building : create
+activate Building
+
+Building --> BuildingMap
+
+BuildingMap --> EditBuildingService
+
+EditBuildingService -> BuildingRepo : save
+activate BuildingRepo
+
+BuildingRepo -> BuildingMap : toPersistence
+
+BuildingMap --> BuildingRepo
+
+BuildingRepo -> buildingDatabase : save
+
+BuildingRepo --> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> BuildingMap : toDto
+deactivate Building
+
+BuildingMap -> BuildingDto : create
+activate BuildingDto
+
+BuildingDto --> BuildingMap
+
+BuildingMap --> EditBuildingService
+deactivate BuildingMap
+
+EditBuildingService --> EditBuildingController
+deactivate EditBuildingService
+deactivate BuildingDto
+
+EditBuildingController --> EditBuildintRoute
+deactivate EditBuildingController
+
+deactivate EditBuildintRoute
+
+@enduml

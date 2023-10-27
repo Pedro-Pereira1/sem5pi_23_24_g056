@@ -1,22 +1,59 @@
-@startuml
-'https://plantuml.com/use-case-diagram
+@startuml domain
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+skinparam linetype ortho
 
-User -> (Start)
-User --> (Use)
 
-Admin ---> (Use)
 
-note right of Admin : This is an example.
 
-note right of (Use)
-A note can also
-be on several lines
-end note
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+
+rectangle #36827F{
+class Building  << Root >> << Entity >>
+class BuildingDescription  << (v,#A4C2E5) ValueObject >>
+class BuildingName  << (v,#A4C2E5) ValueObject >>
+class BuildingCode  << (v,orange) ValueObject >> << unique >>
+class BuildingSize  << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #FF3B1B{
+class Room << Root >> << Entity >>
+class RoomName << (v,orange) ValueObject >> << unique >>
+class RoomCoordinateTopX << (v,#A4C2E5) ValueObject >>
+class RoomCoordinateTopY << (v,#A4C2E5) ValueObject >>
+class RoomCoordinateBottomX << (v,#A4C2E5) ValueObject >>
+class RoomCoordinateBottomY << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #D499B9{
+class Floor  << Root >> << Entity >>
+class FloorId  << (v,orange) ValueObject >> << unique >>
+class FloorDescription  << (v,#A4C2E5) ValueObject >>
+class FloorMap  << Entity >>
+class FloorNumber << (v,#A4C2E5) ValueObject >>
+}
+
+'========================================================
+
+
+
+
+Building "1"->"*" Floor
+Building "*"-->"0..1" BuildingDescription
+Building "1"-->"0..1" BuildingName
+Building "*"-->"1" BuildingSize
+Building "1"-->"1" BuildingCode
+
+Room "1"-d->"1" RoomName
+Room "1"-l->"1" RoomCoordinateTopX
+Room "1"-u->"1" RoomCoordinateTopY
+Room "1"-d->"1" RoomCoordinateBottomX
+Room "1"->"1" RoomCoordinateBottomY
+
+Floor "1"-d->"1" FloorMap
+Floor "*"-u->"1" FloorNumber
+Floor "*"-u->"1" FloorDescription
+Floor "1" -> "1" FloorId
+
+FloorMap "1"->"*" Room
+
 @enduml

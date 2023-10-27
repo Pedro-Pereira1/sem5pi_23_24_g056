@@ -6,8 +6,6 @@ import config from "../../../../config";
 import IPassagewayRepo from "../../IRepos/passageway/IPassagewayRepo";
 import { Passageway } from "../../../domain/Passageway/Passageway";
 import { PassagewayMap } from "../../../mappers/passageway/PassagewayMap";
-import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
-import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import { ICreatePassagewayDTO } from "../../../dto/passageway/ICreatePassagewayDTO";
 

@@ -25,12 +25,20 @@ export class Passageway extends AggregateRoot<PassagewayProps> {
     const passagewayCoordinatesTopY = passagewayDTO.passagewayCoordinatesTopY
     const passagewayCoordinatesBottomX = passagewayDTO.passagewayCoordinatesBottomX
     const passagewayCoordinatesBottomY = passagewayDTO.passagewayCoordinatesBottomY
+    const passagewayCoordinatesTopXB2 = passagewayDTO.passagewayCoordinatesTopXB2
+    const passagewayCoordinatesTopYB2 = passagewayDTO.passagewayCoordinatesTopYB2
+    const passagewayCoordinatesBottomXB2 = passagewayDTO.passagewayCoordinatesBottomXB2
+    const passagewayCoordinatesBottomYB2 = passagewayDTO.passagewayCoordinatesBottomYB2
 
     const passagewayCoordinates = PassagewayCoordinates.create({
       topX: passagewayCoordinatesTopX,
       topY: passagewayCoordinatesTopY,
-      bottonX: passagewayCoordinatesBottomX,
-      bottonY: passagewayCoordinatesBottomY,
+      bottomX: passagewayCoordinatesBottomX,
+      bottomY: passagewayCoordinatesBottomY,
+      topXB2: passagewayCoordinatesTopXB2,
+      topYB2: passagewayCoordinatesTopYB2,
+      bottomXB2: passagewayCoordinatesBottomXB2,
+      bottomYB2: passagewayCoordinatesBottomYB2,
     });
 
     if (passagewayCoordinates.isFailure) {
