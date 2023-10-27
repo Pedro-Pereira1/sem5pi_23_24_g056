@@ -17,8 +17,9 @@ export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
   }
 
   public static create (elevatorBrand: string): Result<ElevatorBrand> {
-    if(elevatorBrand === undefined){
-      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: '' }))
+    const guardResult = Guard.againstNullOrUndefined(elevatorBrand, 'brand');
+    if (!guardResult.succeeded) {
+      return Result.fail<ElevatorBrand>(guardResult.message);
     }
 
     if(elevatorBrand.length>50){
