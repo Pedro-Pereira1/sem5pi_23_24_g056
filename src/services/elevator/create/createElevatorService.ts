@@ -21,9 +21,6 @@ export default class CreateElevatorService implements ICreateElevatorService {
     constructor(
         @Inject(config.repos.elevator.name) private elevatorRepo: IElevatorRepo
     ) { }
-    createPassageway(PassagewayDTO: IElevatorDTO): Promise<Result<IElevatorDTO>> {
-        throw new Error("Method not implemented.");
-    }
 
     public async createElevator(elevatorDto: IElevatorDTO): Promise<Result<IElevatorDTO>> {
         try{
