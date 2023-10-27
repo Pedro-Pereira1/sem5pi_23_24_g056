@@ -72,6 +72,10 @@ export default {
     listAllFloors: {
       name: "listAllFloorsController",
       path: "../controllers/floor/list/listAllFloorsController"
+    },
+    editBuilding: {
+      name: "editBuildingController",
+      path: "../controllers/building/edit/EditBuildingController"
     }
   },
 
@@ -138,6 +142,10 @@ export default {
     listAllFloors: {
       name: "listAllFloors",
       path: "../services/floor/list/listAllFloorsService"
+    },
+    editBuilding: {
+      name: "editBuildingService",
+      path: "../services/building/edit/EditBuildingService"
     }
   },
 };
