@@ -11,9 +11,9 @@ const FloorSchema = new mongoose.Schema(
         floorDescription: { type: String },
         floorMap: {
             map: [[String]],
-            passageways: [String],
-            rooms: [String],
-            elevators: [String]
+            passageways: [Number],
+            rooms: [Number],
+            elevators: [Number]
         }
     },
     {

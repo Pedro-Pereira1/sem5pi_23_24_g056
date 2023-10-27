@@ -6,8 +6,8 @@ export default interface IFloorPersistence {
     floorDescription: string
     floorMap: {
         map: [[String]],
-        passageways: [String],
-        rooms: [String],
-        elevators: [String]
+        passageways: [Number],
+        rooms: [Number],
+        elevators: [Number]
     }
 }
