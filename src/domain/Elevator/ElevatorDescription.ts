@@ -18,12 +18,18 @@ export class ElevatorDescription extends ValueObject<ElevatorDescriptionProps> {
 
   public static create (elevatorDescription: string): Result<ElevatorDescription> {
     const guardResult = Guard.againstNullOrUndefined(elevatorDescription, 'description');
+    let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
+
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorDescription>(guardResult.message);
     }
 
-    if(elevatorDescription.length>255){
-      return Result.fail<ElevatorDescription>('Elevator description must be shorter than 255 words');
+    if(!strRegex.test(elevatorDescription)){
+      return Result.fail<ElevatorDescription>('Description must be alphanumeric');
+    }
+
+    if(elevatorDescription.length>250){
+      return Result.fail<ElevatorDescription>('Elevator description must be shorter than 250 words');
     }
 
       return Result.ok<ElevatorDescription>(new ElevatorDescription({ description: elevatorDescription }))
