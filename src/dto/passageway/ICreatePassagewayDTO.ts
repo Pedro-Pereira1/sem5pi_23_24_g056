@@ -8,6 +8,8 @@ export interface ICreatePassagewayDTO {
     passagewayCoordinatesTopYB2: number
     passagewayCoordinatesBottomXB2: number
     passagewayCoordinatesBottomYB2: number
-    building1ID: number
-    building2ID: number
+    building1Id: string
+    floor1Id: number
+    building2Id: string
+    floor2Id: number
 }

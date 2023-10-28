@@ -6,6 +6,8 @@ import { FloorMap } from './FloorMap';
 import { IFloorDTO } from '../../dto/floor/IFloorDTO'
 import { Result } from '../../core/logic/Result';
 import { Passageway } from '../Passageway/Passageway';
+import { Room } from '../Room/Room';
+import { Elevator } from '../Elevator/Elevator';
 
 interface FloorProps {
   floorDescription: FloorDescription
@@ -14,6 +16,7 @@ interface FloorProps {
 }
 
 export class Floor extends AggregateRoot<FloorProps> {
+  [x: string]: any;
 
   private constructor(props: FloorProps, floorNumber: FloorId) {
     super(props, floorNumber);
@@ -52,4 +55,18 @@ export class Floor extends AggregateRoot<FloorProps> {
 
     return Result.ok<Floor>(floor)
   }
+
+
+  addPassageway(passageway: Passageway) {
+    this.map.addPassageway(passageway)
+  }
+
+  addelevators(elevator: Elevator) {
+    this.map.addelevators(elevator)
+  }
+
+  addRoom(room: Room) {
+    this.map.addRoom(room)
+  }
+
 }

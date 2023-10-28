@@ -28,26 +28,26 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     this.props.rooms.push(room)
   }
 
-  get passagewaysId(): string[] {
-    let ids: string[] = []
+  get passagewaysId(): number[] {
+    let ids: number[] = []
     this.props.passageways.forEach(m => {
-      ids.push(m.id.toString())
+      ids.push(Number(m.id.toValue()))
     })
     return ids
   }
 
-  get elevatorsId(): string[] {
-    let ids: string[] = []
+  get elevatorsId(): number[] {
+    let ids: number[] = []
     this.props.elevators.forEach(m => {
-      ids.push(m.id.toString())
+      ids.push(Number(m.id.toValue()))
     })
     return ids
   }
 
-  get roomsId(): string[] {
-    let ids: string[] = []
+  get roomsId(): number[] {
+    let ids: number[] = []
     this.props.rooms.forEach(m => {
-      ids.push(m.id.toString())
+      ids.push(Number(m.id.toValue()))
     })
     return ids
   }

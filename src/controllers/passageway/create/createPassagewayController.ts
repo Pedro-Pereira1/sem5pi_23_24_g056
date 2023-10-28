@@ -6,6 +6,7 @@ import ICreatePassagewayService from "../../../services/IServices/passageway/cre
 import { PassagewayMap } from "../../../mappers/passageway/PassagewayMap";
 import { IPassagewayDTO } from "../../../dto/passageway/IPassagewayDTO";
 import { Result } from "../../../core/logic/Result";
+import { ICreatePassagewayDTO } from "../../../dto/passageway/ICreatePassagewayDTO";
 
 @Service()
 export default class CreatePassagewayController implements ICreatePassagewayController {
@@ -17,10 +18,10 @@ export default class CreatePassagewayController implements ICreatePassagewayCont
 
     public async createPassageway(req: Request, res: Response, next: NextFunction) {
         try {
-            const PassagewayOrError = await this.service.createPassageway(req.body as IPassagewayDTO) as Result<IPassagewayDTO>
+            const PassagewayOrError = await this.service.createPassageway(req.body as ICreatePassagewayDTO) as Result<IPassagewayDTO>
 
             if (PassagewayOrError.isFailure) {
-                return res.status(402).send
+                return res.status(402).send(PassagewayOrError.errorValue())
             }
 
             const PassagewayDTO = PassagewayOrError.getValue();

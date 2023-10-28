@@ -4,8 +4,8 @@ export interface IFloorDTO {
     floorDescription: string
     floorMap: {
         map: string[][],
-        passageways: string[],
-        rooms: string[],
-        elevators: string[]
+        passageways: number[],
+        rooms: number[],
+        elevators: number[]
     }
 }

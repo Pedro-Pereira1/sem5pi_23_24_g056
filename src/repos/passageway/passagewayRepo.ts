@@ -14,32 +14,33 @@ export default class PassagewayRepo implements IPassagewayRepo {
     )
     {}
 
-    async exists(passageway: Passageway): Promise<boolean> {
-        const idX = passageway.id instanceof PassagewayID ? (<PassagewayID>passageway.id).toValue() : passageway.id;
-    
-        const query = { domainId: idX };
-        const passagewayDocument = await this.passagewaychema.findOne(query as FilterQuery<IPassagewayPersistence & Document>);
-    
-        return !!passagewayDocument;
+    async exists(passageway: Passageway): Promise<boolean> {    
+      const query = { passagewayId: passageway.id};
+      const passagewayRecord = await this.passagewaychema.findOne( query as FilterQuery<IPassagewayPersistence & Document> );
+  
+      if( passagewayRecord != null) {
+        return true
+      }else
+        return false;
       }
 
 
 
 
-    public async  save(passageway: Passageway): Promise<Passageway> {
-        const query = { PassagewayID: passageway.id.toString()}; 
-    
+    public async save(passageway: Passageway): Promise<Passageway> {
+        const query = { passagewayId: Number(passageway.id)}; 
+
         const passagewayDocument = await this.passagewaychema.findOne( query );
-    
+
         try {
           if (passagewayDocument === null ) {
+
             const rawPassageway: any = PassagewayMap.toPersistence(passageway);
-    
+
             const passagewayCreated = await this.passagewaychema.create(rawPassageway);
-    
+
             return PassagewayMap.toDomain(passagewayCreated);
           } else {
-            
             passagewayDocument.id = passageway.id;
             await passagewayDocument.save();
     
@@ -52,13 +53,12 @@ export default class PassagewayRepo implements IPassagewayRepo {
     
 
       public async findById(number: number): Promise<Passageway> {
-        const query = { domainId: PassagewayID};
+        const query = { passagewayId: number};
         const passagewayRecord = await this.passagewaychema.findOne( query as FilterQuery<IPassagewayPersistence & Document> );
     
         if( passagewayRecord != null) {
           return PassagewayMap.toDomain(passagewayRecord);
-        }
-        else
+        }else
           return null;
       }
 }

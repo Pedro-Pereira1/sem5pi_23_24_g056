@@ -31,7 +31,8 @@ export class FloorMaper extends Mapper<Floor> {
         } as IFloorDTO
     }
 
-    public static toDomain(floorDTO: any | Model<IFloorPersistence & Document>): Floor {
+    public static async toDomain(floorDTO: any | Model<IFloorPersistence & Document>): Promise<Floor> {
+
         const elevatorRepo: IElevatorRepo = Container.get(config.repos.elevator.name)
         const roomRepo: IRoomRepo = Container.get(config.repos.room.name)
         const passagewayRepo: IPassagewayRepo = Container.get(config.repos.passageway.name)
@@ -43,20 +44,19 @@ export class FloorMaper extends Mapper<Floor> {
         let rooms: Room[] = []
         let map: string[][] = floorDTO.floorMap.map
 
-        /*floorDTO.floorMap.passageways.forEach(async p => {
-            const a = await passagewayRepo.findById(p)
-            passageways.push(a)
-        });
 
-        floorDTO.floorMap.elevator.forEach(async e => {
-            const a = await elevatorRepo.findById(e)
-            elevators.push(a)
-        });
 
-        floorDTO.floorMap.rooms.forEach(async r => {
-            const a = await roomRepo.findById(r)
-            rooms.push(a)
-        })*/
+        for (const f of floorDTO.floorMap.passageways) {
+            passageways.push(await passagewayRepo.findById(f))
+        }
+
+        for (const f of floorDTO.floorMap.elevators) {
+            elevators.push(await elevatorRepo.findById(f))
+        }
+  
+        for (const f of floorDTO.floorMap.rooms) {
+            rooms.push(await roomRepo.findById(f))
+        }
 
         const FloorOrError = Floor.create(
             {
