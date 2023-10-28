@@ -18,8 +18,14 @@ export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
 
   public static create (elevatorBrand: string): Result<ElevatorBrand> {
     const guardResult = Guard.againstNullOrUndefined(elevatorBrand, 'brand');
+    let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
+
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorBrand>(guardResult.message);
+    }
+
+    if(!strRegex.test(elevatorBrand)){
+      return Result.fail<ElevatorBrand>('Brand must be alphanumeric');
     }
 
     if(elevatorBrand.length>50){

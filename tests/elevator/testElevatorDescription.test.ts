@@ -21,12 +21,12 @@ describe("Check elevator description", function () {
         assert.equal(result.getValue().description,elevatorDescription)
     })
 
-    it('Create elevator test, elevator description over word limit (255+ words)', async function () {
-        const elevatorDescription: string = 'A'.repeat(256);
+    it('Create elevator test, elevator description over word limit (250+ words)', async function () {
+        const elevatorDescription: string = 'A'.repeat(251);
         const result: Result<ElevatorDescription> = ElevatorDescription.create(elevatorDescription);
 
         assert.equal(result.isFailure,true)
-        assert.equal(result.error,'Elevator description must be shorter than 255 words')
+        assert.equal(result.error,'Elevator description must be shorter than 250 words')
     })
 
 })

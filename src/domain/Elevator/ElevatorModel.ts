@@ -19,8 +19,14 @@ export class ElevatorModel extends ValueObject<ElevatorModelProps> {
 
   public static create (elevatorModel: string): Result<ElevatorModel> {
     const guardResult = Guard.againstNullOrUndefined(elevatorModel, 'model');
+    let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
+
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorModel>(guardResult.message);
+    }
+
+    if(!strRegex.test(elevatorModel)){
+      return Result.fail<ElevatorModel>('Model must be alphanumeric');
     }
 
     if(elevatorModel.length>50){

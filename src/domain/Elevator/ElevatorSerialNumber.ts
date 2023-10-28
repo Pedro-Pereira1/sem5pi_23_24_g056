@@ -18,8 +18,14 @@ export class ElevatorSerialNumber extends ValueObject<ElevatorSerialNumberProps>
 
   public static create (elevatorSerialNumber: string): Result<ElevatorSerialNumber> {
     const guardResult = Guard.againstNullOrUndefined(elevatorSerialNumber, 'serialNumber');
+    let strRegex = new RegExp(/^[a-z0-9]+$/i);
+
     if (!guardResult.succeeded) {
       return Result.fail<ElevatorSerialNumber>(guardResult.message);
+    }
+
+    if(!strRegex.test(elevatorSerialNumber)){
+      return Result.fail<ElevatorSerialNumber>('Serial Number must be alphanumeric');
     }
 
     if(elevatorSerialNumber.length>50){
