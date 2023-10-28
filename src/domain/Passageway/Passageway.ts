@@ -3,6 +3,7 @@ import { PassagewayCoordinates } from './PassagewayCoordinates';
 import { PassagewayID } from './PassagewayID';
 import { IPassagewayDTO } from '../../dto/passageway/IPassagewayDTO'
 import { Result } from '../../core/logic/Result';
+import { ICreatePassagewayDTO } from '../../dto/passageway/ICreatePassagewayDTO';
 
 interface PassagewayProps {
   passagewayCoordinates: PassagewayCoordinates;
@@ -19,7 +20,7 @@ export class Passageway extends AggregateRoot<PassagewayProps> {
   }
 
 
-  public static create(passagewayDTO: IPassagewayDTO): Result<Passageway> {
+  public static create(passagewayDTO: ICreatePassagewayDTO,maxWidhtB1: number,maxLenghtB1: number,maxWidhtB2: number,maxLenghtB2: number ): Result<Passageway> {
     const passagewayId = passagewayDTO.passagewayId
     const passagewayCoordinatesTopX = passagewayDTO.passagewayCoordinatesTopX
     const passagewayCoordinatesTopY = passagewayDTO.passagewayCoordinatesTopY
@@ -38,8 +39,8 @@ export class Passageway extends AggregateRoot<PassagewayProps> {
       topXB2: passagewayCoordinatesTopXB2,
       topYB2: passagewayCoordinatesTopYB2,
       bottomXB2: passagewayCoordinatesBottomXB2,
-      bottomYB2: passagewayCoordinatesBottomYB2,
-    });
+      bottomYB2: passagewayCoordinatesBottomYB2
+    },maxWidhtB1,maxLenghtB1,maxWidhtB2,maxLenghtB2);
 
     if (passagewayCoordinates.isFailure) {
       return Result.fail<Passageway>(passagewayCoordinates.error);
