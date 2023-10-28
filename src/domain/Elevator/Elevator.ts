@@ -9,6 +9,8 @@ import { UniqueEntityID } from '../../core/domain/UniqueEntityID';
 import { Guard } from "../../core/logic/Guard";
 import { ElevatorCoordinateX } from './ElevatorCoordinateX';
 import { ElevatorCoordinateY } from './ElevatorCoordinateY';
+import {ElevatorID} from "./ElevatorID";
+import {UserId} from "../userId";
 
 interface ElevatorProps {
   elevatorCoordinateX: ElevatorCoordinateX;
@@ -24,6 +26,10 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
 
   constructor(props: ElevatorProps, id?: UniqueEntityID) {
     super(props, id);
+  }
+
+  get elevatorId (): ElevatorID {
+    return ElevatorID.caller(this.id)
   }
 
   get elevatorCoordinateX(): ElevatorCoordinateX {
