@@ -27,7 +27,6 @@ export default class FloorRepo implements IFloorRepo {
 
     const floorDocument = await this.floorSchema.findOne(query);
 
-    console.log(floor.id)
     try {
       if (floorDocument === null) {
         const rawFloor: any = FloorMaper.toPersistence(floor);
@@ -36,6 +35,10 @@ export default class FloorRepo implements IFloorRepo {
         
       } else {
         floorDocument.floorNumber = Number(floor.number.toValue());
+        floorDocument.floorMap.elevators = floor.props.floormap.elevatorsId;
+        floorDocument.floorMap.passageways = floor.props.floormap.passagewaysId;
+        floorDocument.floorMap.rooms = floor.props.floormap.roomsId;
+        floorDocument.floorMap.map = floor.props.floormap.props.map
         await floorDocument.save();
         return floor;
       }
