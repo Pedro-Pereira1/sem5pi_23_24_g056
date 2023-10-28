@@ -46,8 +46,6 @@ export default class BuildingRepo implements IBuildingRepo {
                 buildingDocument.buildingWidth = building.props.buildingSize.width
                 buildingDocument.buildingFloors = building.floorsNumber
 
-                console.log(buildingDocument.buildingFloors)
-
                 await buildingDocument.save();
 
                 return building;
