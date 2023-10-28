@@ -8,11 +8,15 @@ export class PassagewayMap extends Mapper<Passageway> {
 
     public static toDto(passageway: Passageway): IPassagewayDTO {
         return {
-            passagewayId: Number(passageway.id.toValue),
+            passagewayId: Number(passageway.id.toValue()),
             passagewayCoordinatesTopX : passageway.coordinates.props.topX,
             passagewayCoordinatesTopY : passageway.coordinates.props.topY,
             passagewayCoordinatesBottomX : passageway.coordinates.props.bottomX,
             passagewayCoordinatesBottomY : passageway.coordinates.props.bottomY,
+            passagewayCoordinatesTopXB2 : passageway.coordinates.props.topXB2,
+            passagewayCoordinatesTopYB2 : passageway.coordinates.props.topYB2,
+            passagewayCoordinatesBottomXB2 : passageway.coordinates.props.bottomXB2,
+            passagewayCoordinatesBottomYB2 : passageway.coordinates.props.bottomYB2,
         } as IPassagewayDTO
     }
 
@@ -24,11 +28,15 @@ export class PassagewayMap extends Mapper<Passageway> {
 
     public static toPersistence(passageway: Passageway): any {
         return {
-            passagewayId: Number(passageway.id.toValue),
+            passagewayId: Number(passageway.id.toValue()),
             passagewayCoordinatesTopX : passageway.coordinates.props.topX,
             passagewayCoordinatesTopY : passageway.coordinates.props.topY,
             passagewayCoordinatesBottomX : passageway.coordinates.props.bottomX,
             passagewayCoordinatesBottomY : passageway.coordinates.props.bottomY,
+            passagewayCoordinatesTopXB2 : passageway.coordinates.props.topXB2,
+            passagewayCoordinatesTopYB2 : passageway.coordinates.props.topYB2,
+            passagewayCoordinatesBottomXB2 : passageway.coordinates.props.bottomXB2,
+            passagewayCoordinatesBottomYB2 : passageway.coordinates.props.bottomYB2,
         }
     }
 }
