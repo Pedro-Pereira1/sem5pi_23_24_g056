@@ -85,6 +85,10 @@ export default {
       name: "createRobotTypeController",
       path: "../controllers/robotType/create/createRobotTypeController"
     },
+    createRobot: {
+      name: "createRobotController",
+      path: "../controllers/robot/create/createRobotController"
+    },
   },
 
   repos: {
@@ -119,6 +123,10 @@ export default {
     robotType: {
       name: "robotTypeRepo",
       path: "../repos/robotType/robotTypeRepo"
+    },
+    robot: {
+      name: "robotRepo",
+      path: "../repos/robot/robotRepo"
     },
   },
 
@@ -166,6 +174,10 @@ export default {
     createRobotType: {
       name: "createRobotTypeService",
       path: "../services/robotType/create/createRobotTypeService"
+    },
+    createRobot: {
+      name: "createRobotService",
+      path: "../services/robot/create/createRobotService"
     },
   },
 };
