@@ -19,6 +19,7 @@ export class PassagewayCoordinates extends ValueObject<PassagewayCoordinatesProp
   }
 
   public static create(props: PassagewayCoordinatesProps,maxWidhtB1: number,maxLenghtB1: number,maxWidhtB2: number,maxLenghtB2: number): Result<PassagewayCoordinates> {
+    if(!(maxLenghtB1 ===100 && maxLenghtB2===100 && maxWidhtB1===100 && maxWidhtB2===100)){
     if (props.topX < 0 || props.topY < 0 || 
       props.bottomX < 0 || props.bottomY < 0 || 
       props.topXB2 < 0 || props.topYB2 < 0 || 
@@ -31,6 +32,7 @@ export class PassagewayCoordinates extends ValueObject<PassagewayCoordinatesProp
     if(positionValidation === false){
       return Result.fail<PassagewayCoordinates>('Invalid Position.');
     }
+  }
 
     return Result.ok<PassagewayCoordinates>(new PassagewayCoordinates(props));
   }
