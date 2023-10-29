@@ -8,6 +8,7 @@ import { Result } from '../../core/logic/Result';
 import { Passageway } from '../Passageway/Passageway';
 import { Room } from '../Room/Room';
 import { Elevator } from '../Elevator/Elevator';
+import FloorNumber from './FloorNumber';
 
 interface FloorProps {
   floorDescription: FloorDescription
@@ -16,13 +17,12 @@ interface FloorProps {
 }
 
 export class Floor extends AggregateRoot<FloorProps> {
-  [x: string]: any;
 
   private constructor(props: FloorProps, floorNumber: FloorId) {
     super(props, floorNumber);
   }
 
-  get number(): FloorId {
+  get floorId(): FloorId {
     return this.id
   }
 
