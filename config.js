@@ -76,6 +76,10 @@ export default {
     editBuilding: {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
+    },
+    editFloor: {
+      name: "editFloorController",
+      path: "../controllers/floor/edit/editFloorController"
     }
   },
 
@@ -146,6 +150,10 @@ export default {
     editBuilding: {
       name: "editBuildingService",
       path: "../services/building/edit/EditBuildingService"
+    },
+    editFloor: {
+      name: "editFloorService",
+      path: "../services/floor/edit/editFloorService"
     }
   },
 };

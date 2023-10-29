@@ -91,6 +91,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const editFloorController = {
+    name: config.controllers.editFloor.name,
+    path: config.controllers.editFloor.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -171,6 +176,12 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const editFloorService = {
+    name: config.services.editFloor.name,
+    path: config.services.editFloor.path
+  }
+
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -191,7 +202,8 @@ export default async ({ expressApp }) => {
       listAllBuildingsController,
       listBuildingsMaxMinFloorsController,
       editBuildingController,
-      listAllFloorsController
+      listAllFloorsController,
+      editFloorController
     ],
     repos: [
       roleRepo,
@@ -211,7 +223,8 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsService,
       listAllBuildingsService,
       editBuildingService,
-      listAllFloorsService
+      listAllFloorsService,
+      editFloorService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
