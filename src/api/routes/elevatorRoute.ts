@@ -22,7 +22,9 @@ export default (app: Router) => {
             elevatorBrand: Joi.string(),
             elevatorDescription: Joi.string(),
             elevatorModel: Joi.string(),
-            elevatorSerialNumber: Joi.string()
+            elevatorSerialNumber: Joi.string(),
+            buildingCode: Joi.string().required(),
+            floorId: Joi.number().required()
         }),
     }),
     (req, res, next) => ctrl.createElevator(req, res, next));
