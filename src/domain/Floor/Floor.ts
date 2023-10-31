@@ -35,7 +35,7 @@ export class Floor extends AggregateRoot<FloorProps> {
 
   public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
 
-    if (floorId > 0 && floorProp.floorDescription.description.length <= 250) {
+    if (floorId < 0 || floorProp.floorDescription.description.length > 250) {
       return Result.fail<Floor>('Invalid floor')
     }
 
