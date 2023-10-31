@@ -61,8 +61,8 @@ export class Floor extends AggregateRoot<FloorProps> {
     this.map.addPassageway(passageway)
   }
 
-  addelevators(elevator: Elevator) {
-    this.map.addelevators(elevator)
+  addElevators(elevator: Elevator) {
+    this.map.addElevators(elevator)
   }
 
   addRoom(room: Room) {
