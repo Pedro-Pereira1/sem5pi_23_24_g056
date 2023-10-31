@@ -1,9 +1,7 @@
 import { AggregateRoot } from '../../core/domain/AggregateRoot';
-import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { FloorDescription } from './FloorDescription';
 import FloorId from './FloorId';
 import { FloorMap } from './FloorMap';
-import { IFloorDTO } from '../../dto/floor/IFloorDTO'
 import { Result } from '../../core/logic/Result';
 import { Passageway } from '../Passageway/Passageway';
 import { Room } from '../Room/Room';
@@ -37,9 +35,8 @@ export class Floor extends AggregateRoot<FloorProps> {
 
   public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
 
-    //TODO vericications
-    if (false) {
-      return Result.fail<Floor>('error')
+    if (floorId > 0 && floorProp.floorDescription.description.length <= 250) {
+      return Result.fail<Floor>('Invalid floor')
     }
 
     const floor = new Floor({
