@@ -46,6 +46,16 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/passageway/passagewaySchema'
   }
 
+  const robotTypeSchema = {
+    name: 'robotTypeSchema',
+    schema: '../persistence/schemas/robotType/robotTypeSchema'
+  }
+
+  const robotSchema = {
+    name: 'robotSchema',
+    schema: '../persistence/schemas/robot/robotSchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -96,6 +106,16 @@ export default async ({ expressApp }) => {
     path: config.controllers.editFloor.path
   }
 
+  const createRobotTypeController = {
+    name: config.controllers.createRobotType.name,
+    path: config.controllers.createRobotType.path
+  }
+
+  const createRobotController = {
+    name: config.controllers.createRobot.name,
+    path: config.controllers.createRobot.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -129,6 +149,16 @@ export default async ({ expressApp }) => {
   const roomRepo = {
     name: config.repos.room.name,
     path: config.repos.room.path
+  }
+
+  const robotTypeRepo = {
+    name: config.repos.robotType.name,
+    path: config.repos.robotType.path
+  }
+
+  const robotRepo = {
+    name: config.repos.robot.name,
+    path: config.repos.robot.path
   }
 
   const roleService = {
@@ -181,6 +211,16 @@ export default async ({ expressApp }) => {
     path: config.services.editFloor.path
   }
 
+  const createRobotTypeService = {
+    name: config.services.createRobotType.name,
+    path: config.services.createRobotType.path
+  }
+
+  const createRobotService = {
+    name: config.services.createRobot.name,
+    path: config.services.createRobot.path
+  }
+
 
   await dependencyInjectorLoader({
     mongoConnection,
@@ -191,7 +231,9 @@ export default async ({ expressApp }) => {
       floorSchema,
       roomSchema,
       elevatorSchema,
-      passagewaySchema
+      passagewaySchema,
+      robotTypeSchema,
+      robotSchema
     ],
     controllers: [
       roleController,
@@ -203,7 +245,9 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
-      editFloorController
+      editFloorController,
+      createRobotTypeController,
+      createRobotController
     ],
     repos: [
       roleRepo,
@@ -212,7 +256,9 @@ export default async ({ expressApp }) => {
       floorRepo,
       passagewayRepo,
       elevatorRepo,
-      roomRepo
+      roomRepo,
+      robotTypeRepo,
+      robotRepo
     ],
     services: [
       roleService,
@@ -224,7 +270,9 @@ export default async ({ expressApp }) => {
       listAllBuildingsService,
       editBuildingService,
       listAllFloorsService,
-      editFloorService
+      editFloorService,
+      createRobotTypeService,
+      createRobotService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

@@ -80,7 +80,15 @@ export default {
     editFloor: {
       name: "editFloorController",
       path: "../controllers/floor/edit/editFloorController"
-    }
+    },
+    createRobotType: {
+      name: "createRobotTypeController",
+      path: "../controllers/robotType/create/createRobotTypeController"
+    },
+    createRobot: {
+      name: "createRobotController",
+      path: "../controllers/robot/create/createRobotController"
+    },
   },
 
   repos: {
@@ -111,7 +119,15 @@ export default {
     room: {
       name: "roomRepo",
       path: "../repos/room/roomRepo"
-    }
+    },
+    robotType: {
+      name: "robotTypeRepo",
+      path: "../repos/robotType/robotTypeRepo"
+    },
+    robot: {
+      name: "robotRepo",
+      path: "../repos/robot/robotRepo"
+    },
   },
 
   services: {
@@ -154,6 +170,14 @@ export default {
     editFloor: {
       name: "editFloorService",
       path: "../services/floor/edit/editFloorService"
-    }
+    },
+    createRobotType: {
+      name: "createRobotTypeService",
+      path: "../services/robotType/create/createRobotTypeService"
+    },
+    createRobot: {
+      name: "createRobotService",
+      path: "../services/robot/create/createRobotService"
+    },
   },
 };
