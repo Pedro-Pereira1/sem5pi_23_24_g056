@@ -16,8 +16,8 @@ export default (app: Router) => {
     route.post('/createElevator', 
     celebrate({
         body: Joi.object({
-            elevatorCoordinateX: Joi.number(),
-            elevatorCoordinateY: Joi.number(),
+            elevatorCoordinateX: Joi.number().required(),
+            elevatorCoordinateY: Joi.number().required(),
             elevatorIdentificationNumber: Joi.number().required(),
             elevatorBrand: Joi.string(),
             elevatorDescription: Joi.string(),
