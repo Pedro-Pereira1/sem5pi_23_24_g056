@@ -3,9 +3,11 @@ import auth from './routes/userRoute';
 import user from './routes/userRoute';
 import role from './routes/roleRoute';
 import building from './routes/buildingRoute';
-import floor from './routes/floorRoute'
-import passageway1 from './routes/passagewayRoute'
-import elevator from './routes/elevatorRoute'
+import floor from './routes/floorRoute';
+import passageway1 from './routes/passagewayRoute';
+import elevator from './routes/elevatorRoute';
+import robotType from './routes/robotTypeRoute';
+import robot from './routes/robotRoute';
 
 export default () => {
 	const app = Router();
@@ -17,6 +19,8 @@ export default () => {
 	floor(app);
 	passageway1(app);
 	elevator(app);
+	robotType(app);
+	robot(app);
 	return app
 }
 

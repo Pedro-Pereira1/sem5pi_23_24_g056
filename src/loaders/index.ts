@@ -46,6 +46,16 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/passageway/passagewaySchema'
   }
 
+  const robotTypeSchema = {
+    name: 'robotTypeSchema',
+    schema: '../persistence/schemas/robotType/robotTypeSchema'
+  }
+
+  const robotSchema = {
+    name: 'robotSchema',
+    schema: '../persistence/schemas/robot/robotSchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -79,6 +89,31 @@ export default async ({ expressApp }) => {
   const listBuildingsMaxMinFloorsController = {
     name: config.controllers.listBuildingsMaxMinFloors.name,
     path: config.controllers.listBuildingsMaxMinFloors.path
+  }
+
+  const editBuildingController = {
+    name: config.controllers.editBuilding.name,
+    path: config.controllers.editBuilding.path
+  }
+
+  const listAllFloorsController = {
+    name: config.controllers.listAllFloors.name,
+    path: config.controllers.listAllFloors.path
+  }
+
+  const editFloorController = {
+    name: config.controllers.editFloor.name,
+    path: config.controllers.editFloor.path
+  }
+
+  const createRobotTypeController = {
+    name: config.controllers.createRobotType.name,
+    path: config.controllers.createRobotType.path
+  }
+
+  const createRobotController = {
+    name: config.controllers.createRobot.name,
+    path: config.controllers.createRobot.path
   }
 
   const roleRepo = {
@@ -116,6 +151,16 @@ export default async ({ expressApp }) => {
     path: config.repos.room.path
   }
 
+  const robotTypeRepo = {
+    name: config.repos.robotType.name,
+    path: config.repos.robotType.path
+  }
+
+  const robotRepo = {
+    name: config.repos.robot.name,
+    path: config.repos.robot.path
+  }
+
   const roleService = {
     name: config.services.role.name,
     path: config.services.role.path
@@ -151,6 +196,32 @@ export default async ({ expressApp }) => {
     path: config.services.listBuildingsMaxMinFloors.path
   }
 
+  const editBuildingService = {
+    name: config.services.editBuilding.name,
+    path: config.services.editBuilding.path
+  }
+
+  const listAllFloorsService = {
+    name: config.services.listAllFloors.name,
+    path: config.services.listAllFloors.path
+  }
+
+  const editFloorService = {
+    name: config.services.editFloor.name,
+    path: config.services.editFloor.path
+  }
+
+  const createRobotTypeService = {
+    name: config.services.createRobotType.name,
+    path: config.services.createRobotType.path
+  }
+
+  const createRobotService = {
+    name: config.services.createRobot.name,
+    path: config.services.createRobot.path
+  }
+
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -160,7 +231,9 @@ export default async ({ expressApp }) => {
       floorSchema,
       roomSchema,
       elevatorSchema,
-      passagewaySchema
+      passagewaySchema,
+      robotTypeSchema,
+      robotSchema
     ],
     controllers: [
       roleController,
@@ -169,7 +242,12 @@ export default async ({ expressApp }) => {
       createPassagewayController,
       createElevatorController,
       listAllBuildingsController,
-      listBuildingsMaxMinFloorsController
+      listBuildingsMaxMinFloorsController,
+      editBuildingController,
+      listAllFloorsController,
+      editFloorController,
+      createRobotTypeController,
+      createRobotController
     ],
     repos: [
       roleRepo,
@@ -178,7 +256,9 @@ export default async ({ expressApp }) => {
       floorRepo,
       passagewayRepo,
       elevatorRepo,
-      roomRepo
+      roomRepo,
+      robotTypeRepo,
+      robotRepo
     ],
     services: [
       roleService,
@@ -187,7 +267,12 @@ export default async ({ expressApp }) => {
       createPassagewayService,
       createElevatorService,
       listBuildingsMaxMinFloorsService,
-      listAllBuildingsService
+      listAllBuildingsService,
+      editBuildingService,
+      listAllFloorsService,
+      editFloorService,
+      createRobotTypeService,
+      createRobotService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

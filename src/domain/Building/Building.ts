@@ -12,15 +12,14 @@ import { ExceptionHandler } from 'winston';
 
 
 interface BuildingProps {
-  buildingName: BuildingName
-  buildingDescription: BuildingDescription;
-  buildingSize: BuildingSize
-  floors: Floor[];
+  buildingName?: BuildingName
+  buildingDescription?: BuildingDescription;
+  buildingSize?: BuildingSize
+  floors?: Floor[];
 }
 
 export class Building extends AggregateRoot<BuildingProps> {
-
-  private constructor(props: BuildingProps, buildingCode: BuildingCode) {
+  private constructor(buildingCode: BuildingCode, props?: BuildingProps) {
     super(props, buildingCode);
   }
 
@@ -44,10 +43,10 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this.props.floors
   }
 
-  get floorsNumber(): string[] {
-    let floors: string[] = []
+  get floorsNumber(): number[] {
+    let floors: number[] = []
     this.props.floors.forEach(f => {
-      floors.push(f.id.toString() + ' ')
+      floors.push(Number(f.id.toValue()))
     });
     return floors
   }
@@ -66,32 +65,30 @@ export class Building extends AggregateRoot<BuildingProps> {
     if (!checkName(name.name) || !checkDescription(description.description) || !checkCode(buildingCode) || !checkSize(length, width)) {
       return Result.fail<Building>('Missing paramethers')
     }
-
-    const building = new Building({
-      buildingName: name,
-      buildingDescription: description,
-      buildingSize: new BuildingSize({ length: length, width: width }),
-      floors: floors
-    }, new UniqueEntityID(buildingCode))
+    const building = new Building(new BuildingCode(buildingCode),
+      {
+        buildingName: name,
+        buildingDescription: description,
+        buildingSize: new BuildingSize({ length: length, width: width }),
+        floors: floors
+      })
 
     return Result.ok<Building>(building)
-
   }
 }
 
-function checkName(name: string): boolean{
+function checkName(name: string): boolean {
   let strRegex = new RegExp(/^[a-z0-9]+$/i);
-  if (!!name === false || name.length === 0 || name.length > 50 || !strRegex.test(name)){
+  if (name.length > 50 || !strRegex.test(name)) {
     return false
-  
   }
 
   return true
 }
 
-function checkCode(code: string): boolean{
+function checkCode(code: string): boolean {
   let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
-  if (!!code === false || code.length === 0 || code.length > 5 || !strRegex.test(code)){
+  if (!!code === false || code.length === 0 || code.length > 5 || !strRegex.test(code)) {
     return false
   }
 
@@ -99,7 +96,7 @@ function checkCode(code: string): boolean{
 }
 
 function checkDescription(description: string): boolean {
-  if (!!description === false || description.length === 0 || description.length > 255) {
+  if (description.length > 255) {
     return false
   }
 
@@ -107,7 +104,7 @@ function checkDescription(description: string): boolean {
 }
 
 function checkSize(length: number, width: number): boolean {
-  if (!!length === false || !!width === false || width < 1 || length < 1) return false
+  if (width < 1 || length < 1) return false
 
   return true
 }

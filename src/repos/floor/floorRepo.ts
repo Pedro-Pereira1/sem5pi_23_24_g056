@@ -14,33 +14,37 @@ export default class FloorRepo implements IFloorRepo {
   ) { }
 
   async exists(floor: Floor): Promise<boolean> {
-    const idX = floor.number instanceof FloorNumber ? (<FloorNumber>floor.number).toValue() : floor.number;
-
-    const query = { domainId: idX };
-    const floorDocument = await this.floorSchema.findOne(query as FilterQuery<IFloorPersistence & Document>);
-
-    return !!floorDocument;
+    const query = { floorId: floor.id.toValue() };
+    const floorRecord = await this.floorSchema.findOne(query as FilterQuery<IFloorPersistence & Document>);
+    if (floorRecord != null) {
+      return true;
+    }
+    else
+      return false;
   }
 
   public async save(floor: Floor): Promise<Floor> {
-    const query = { floorId: floor.id.toValue() };
-
+    
+    const query = { floorId: Number(floor.id.toValue()) };
     const floorDocument = await this.floorSchema.findOne(query);
-
     try {
       if (floorDocument === null) {
         const rawFloor: any = FloorMaper.toPersistence(floor);
-
         const floorCreated = await this.floorSchema.create(rawFloor);
-
         return FloorMaper.toDomain(floorCreated);
+        
       } else {
+        if (floor.props.floorNumber !== undefined) {
+          floorDocument.floorNumber = floor.props.floorNumber;
+        }
+        
+        if (floor.description.description !== undefined) {
+          floorDocument.floorDescription = floor.description.description;
+        }
 
-        floorDocument.floorNumber = Number(floor.number.toValue);
         await floorDocument.save();
-
         return floor;
-      }
+     }
     } catch (err) {
       throw err;
     }
@@ -51,6 +55,7 @@ export default class FloorRepo implements IFloorRepo {
     const floorRecord = await this.floorSchema.findOne(query as FilterQuery<IFloorPersistence & Document>);
 
     if (floorRecord != null) {
+      console.log((await FloorMaper.toDomain(floorRecord)).map.passagewaysId); 
       return FloorMaper.toDomain(floorRecord);
     }
     else

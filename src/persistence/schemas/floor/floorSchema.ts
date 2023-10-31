@@ -7,13 +7,13 @@ let elevatorSchema =  require("../elevator/elevatorSchema").schema
 const FloorSchema = new mongoose.Schema(
     {
         floorNumber: { type: Number },
-        floorid: { type: Number, unique: true },
+        floorId: { type: Number, unique: true },
         floorDescription: { type: String },
         floorMap: {
             map: [[String]],
-            passageways: [String],
-            rooms: [String],
-            elevators: [String]
+            passageways: [Number],
+            rooms: [Number],
+            elevators: [Number]
         }
     },
     {

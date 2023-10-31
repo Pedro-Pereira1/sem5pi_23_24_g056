@@ -19,7 +19,7 @@ export default class listAllBuildingsService implements IListAllBuildingsService
         const buildings = await this.buildingRepo.findAll()
 
         if(buildings.length === 0) {
-            return Result.fail<IBuildingDTO[]>(null)
+            return Result.fail<IBuildingDTO[]>("null")
         }
         
         let resolve: IBuildingDTO[] = []

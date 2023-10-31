@@ -60,7 +60,14 @@ class PassagewayCoordinates << (v,#A4C2E5) ValueObject >>
 rectangle #9055A2{
 class Elevator  << Root >> << Entity >>
 class ElevatorId  << (v,orange) ValueObject >> << unique >>
-class ElevatorCoordinates << (v,#A4C2E5) ValueObject >>
+class ElevatorCoordinateX << (v,#A4C2E5) ValueObject >>
+class ElevatorCoordinateY << (v,#A4C2E5) ValueObject >>
+class ElevatorBrand << (v,#A4C2E5) ValueObject >>
+class ElevatorModel << (v,#A4C2E5) ValueObject >>
+class ElevatorDescription << (v,#A4C2E5) ValueObject >>
+class ElevatorIdentificationNumber << (v,#A4C2E5) ValueObject >>
+class ElevatorSerialNumber << (v,#A4C2E5) ValueObject >>
+
 }
 
 '========================================================
@@ -100,8 +107,14 @@ Path "*"-r-->"1..*" Robot : "Made by"
 
 
 
-Elevator "1"-d->"1" ElevatorId
-Elevator "1"->"1" ElevatorCoordinates
+Elevator "1"-->"1" ElevatorId
+Elevator "1"-->"1" ElevatorCoordinateX
+Elevator "1"-->"1" ElevatorCoordinateY
+Elevator "1"-->"1" ElevatorBrand
+Elevator "1"-->"1" ElevatorModel
+Elevator "1"-->"1" ElevatorIdentificationNumber
+Elevator "1"-->"1" ElevatorDescription
+Elevator "1"-->"1" ElevatorSerialNumber
 
 Building "1"->"*" Floor
 Building "*"-->"0..1" BuildingDescription

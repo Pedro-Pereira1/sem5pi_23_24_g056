@@ -1,0 +1,12 @@
+@startuml scenaryLevel1
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Campus Manager" as CM
+
+package  RobDroneGo  {
+  usecase "Edit Passageway" as UC2
+}
+CM --> UC2
+@enduml

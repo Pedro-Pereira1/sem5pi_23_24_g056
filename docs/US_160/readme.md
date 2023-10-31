@@ -1,51 +1,88 @@
-# US 1001
-
-*This is an example template*
+# US 160 As a Campus Manager I want to edit an building
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* First time that this task is developed.
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 160 -** As a Campus Manager, I want to:
 
-*Example*
+* Edit a building
 
-**US G002** As {Ator} I Want...
-
-- G002.1. Blá Blá Blá ...
-
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+**Dependencies:**
+There are no Dependencies associated with this US.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+Regarding this requirement we understand that as a Campus Manager, an actor of the system, I will be able to access
+the system and edit the information of a certain building. The Campus Manager can choose a building of the list of
+buildings and change any information execpt the building code.
+
+### 3.1. Domain Model Excerpt
+
+![DomainModelExcerpt](./Diagrams/DomainModelExerpt.svg)
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
 
-### 4.2. Class Diagram
+### Level 1
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+* Logical:
 
-### 4.3. Applied Patterns
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.4. Tests
+* Process
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+![Process](./Diagrams/Level1/ProcessLevel1.svg)
 
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+* Scenary
+
+![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
+
+### level 2
+
+* Logical:
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process
+
+![Process](./Diagrams/Level2/ProcessLevel2.svg)
+
+* Physical
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/ProcessLevel3.svg)
+
+### 4.2. Applied Patterns
+
+* Controller
+* Service
+* Repository
+* Mapper
+* Dto
+
+### 4.3. Tests
 
 ## 5. Implementation
 
@@ -55,14 +92,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
-
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*

@@ -35,10 +35,8 @@ export default class RoomRepo implements IRoomRepo {
 
             } else {
 
-                roomDocument.roomCoordinatesBottomX = room.props.roomCoordinates.props.topX
-                roomDocument.roomCoordinatesTopY = room.props.roomCoordinates.props.topY
-                roomDocument.roomCoordinatesBottomX = room.props.roomCoordinates.props.bottonX
-                roomDocument.roomCoordinatesBottomY = room.props.roomCoordinates.props.bottonY
+                roomDocument.x = room.props.roomCoordinates.props.x
+                roomDocument.y = room.props.roomCoordinates.props.y
 
                 await roomDocument.save();
 
