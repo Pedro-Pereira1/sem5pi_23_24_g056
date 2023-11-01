@@ -1,36 +1,60 @@
 import { AggregateRoot } from '../../core/domain/AggregateRoot';
+import { UniqueEntityID } from '../../core/domain/UniqueEntityID';
+import { Guard } from '../../core/logic/Guard';
 import { Result } from '../../core/logic/Result';
-import IRoomDTO from '../../dto/room/IRoomDTO';
-import { RoomCoordinates } from './RoomCoordinates';
-import { RoomID } from './RoomID';
+import { RoomCategory } from './RoomCategory';
+import { RoomDescription } from './RoomDescription';
+import { RoomName } from './RoomName';
 
 interface RoomProps {
-  roomCoordinates: RoomCoordinates;
+  roomDescription: RoomDescription;
+  roomCategory: RoomCategory;
 }
 
 export class Room extends AggregateRoot<RoomProps> {
-
-  constructor(props: RoomProps, roomId: RoomID) {
-    super(props, roomId);
+  get id (): UniqueEntityID {
+    return this._id
   }
 
-  public static create(roomDto: IRoomDTO): Result<Room> {
-    const roomId: number = roomDto.roomId
-    const roomCoordinatesTopX: number = roomDto.x
-    const roomCoordinatesTopY: number = roomDto.y
+  get description (): RoomDescription {
+    return this.props.roomDescription
+  }
 
-    //TODO
-    if (false) {
-      return Result.fail<Room>('error')
-    }
+  get category (): RoomCategory {
+    return this.props.roomCategory
+  }
 
-    const room = new Room({
-      roomCoordinates: new RoomCoordinates({
-        x: roomCoordinatesTopX,
-        y: roomCoordinatesTopY,
-      })
-    }, new RoomID(roomId))
+  set description (value : RoomDescription) {
+    this.props.roomDescription = value
+  }
   
-    return Result.ok<Room>(room)
+  set category (value : RoomCategory) {
+    this.props.roomCategory = value
+  }
+
+  constructor(props: RoomProps, id: RoomName) {
+    super(props, id);
+  }
+
+  public static create(props: RoomProps, name: RoomName): Result<Room> {
+    
+    const guardedProps = [
+      {argument: name, argumentName: 'roomName'},
+      {argument: props.roomDescription, argumentName: 'roomDescription'},
+      {argument: props.roomCategory, argumentName: 'roomCategory'}
+    ]
+    
+    const guardResult = Guard.againstNullOrUndefinedBulk(guardedProps)
+
+    if (!guardResult.succeeded) {
+      return Result.fail<Room>(guardResult.message)
+    }     
+    else {
+      const room = new Room({
+        ...props
+      }, name);
+
+      return Result.ok<Room>(room);
+    }
   }
 }
