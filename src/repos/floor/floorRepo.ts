@@ -24,7 +24,7 @@ export default class FloorRepo implements IFloorRepo {
   }
 
   public async save(floor: Floor): Promise<Floor> {
-    
+
     const query = { floorId: Number(floor.id.toValue()) };
     const floorDocument = await this.floorSchema.findOne(query);
     try {
@@ -32,12 +32,12 @@ export default class FloorRepo implements IFloorRepo {
         const rawFloor: any = FloorMaper.toPersistence(floor);
         const floorCreated = await this.floorSchema.create(rawFloor);
         return FloorMaper.toDomain(floorCreated);
-        
+
       } else {
         if (floor.props.floorNumber !== undefined) {
           floorDocument.floorNumber = floor.props.floorNumber;
         }
-        
+
         if (floor.description.description !== undefined) {
           floorDocument.floorDescription = floor.description.description;
         }
@@ -55,7 +55,6 @@ export default class FloorRepo implements IFloorRepo {
     const floorRecord = await this.floorSchema.findOne(query as FilterQuery<IFloorPersistence & Document>);
 
     if (floorRecord != null) {
-      console.log((await FloorMaper.toDomain(floorRecord)).map.passagewaysId); 
       return FloorMaper.toDomain(floorRecord);
     }
     else
