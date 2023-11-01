@@ -6,6 +6,7 @@ import ICreateFloorController from '../../controllers/IControllers/floor/create/
 
 import config from "../../../config";
 import IListAllFloorsController from '../../controllers/IControllers/floor/list/IListAllFloorsController';
+import IEditFloorController from '../../controllers/IControllers/floor/edit/IEditFloorController';
 import ILoadFloorMapController from '../../controllers/IControllers/floor/floorMap/ILoadFloorMapController';
 
 import multer from 'multer'
@@ -23,6 +24,7 @@ export default (app: Router) => {
 
     const ctrl = Container.get(config.controllers.createFloor.name) as ICreateFloorController
     const ctrllistAllFloors = Container.get(config.controllers.listAllFloors.name) as IListAllFloorsController
+    const ctrlEditFloor = Container.get(config.controllers.editFloor.name) as IEditFloorController
     const ctrlLoadFLoorMap = Container.get(config.controllers.loadFloorMap.name) as ILoadFloorMapController
 
     route.get('/listAllFloors/:buildingId',
@@ -41,6 +43,17 @@ export default (app: Router) => {
             }),
         }),
         (req, res, next) => ctrl.createFloor(req, res, next));
+
+    route.put('/editFloor',
+		celebrate({
+            body: Joi.object({
+                floorId: Joi.number().required(),
+                floorNumber:  Joi.number().max(10),
+                floorDescription: Joi.string().max(255),
+            }),
+		}),
+		(req, res, next) => ctrlEditFloor.editFloor(req, res, next)
+	);
 
     route.patch('/loadFloorMap',
     celebrate({

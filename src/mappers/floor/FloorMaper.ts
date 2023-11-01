@@ -18,9 +18,10 @@ import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
 export class FloorMaper extends Mapper<Floor> {
 
     public static toDto(floor: Floor): IFloorDTO {
+
         return {
             floorNumber: floor.props.floorNumber,
-            floorId: floor.id.toValue(),
+            floorId: floor.floorId.toValue(),
             floorDescription: floor.description.description,
             floorMap: {
                 map: floor.props.floormap.props.map,
@@ -36,6 +37,7 @@ export class FloorMaper extends Mapper<Floor> {
         const elevatorRepo: IElevatorRepo = Container.get(config.repos.elevator.name)
         const roomRepo: IRoomRepo = Container.get(config.repos.room.name)
         const passagewayRepo: IPassagewayRepo = Container.get(config.repos.passageway.name)
+
 
         let floorNumber = floorDTO.floorNumber
         let description = floorDTO.description
@@ -53,10 +55,11 @@ export class FloorMaper extends Mapper<Floor> {
         for (const f of floorDTO.floorMap.elevators) {
             elevators.push(await elevatorRepo.findById(f))
         }
-  
+
         for (const f of floorDTO.floorMap.rooms) {
             rooms.push(await roomRepo.findById(f))
         }
+
 
         const FloorOrError = Floor.create(
             {

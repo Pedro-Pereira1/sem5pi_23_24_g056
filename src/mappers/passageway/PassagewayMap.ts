@@ -21,7 +21,7 @@ export class PassagewayMap extends Mapper<Passageway> {
     }
 
     public static toDomain(IPassagewayDTO: any | Model<IPassagewayPersistence & Document>): Passageway {
-        const PassagewayOrError = Passageway.create(IPassagewayDTO)         
+        const PassagewayOrError = Passageway.create(IPassagewayDTO,100,100,100,100)     
 
         return PassagewayOrError.isSuccess ? PassagewayOrError.getValue() : null
     }

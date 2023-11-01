@@ -1,0 +1,21 @@
+@startuml processLevel1
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manger" as CM
+participant Vizualization
+participant MasterDataBuilding
+
+CM -> Vizualization : createPassageway
+activate Vizualization
+
+Vizualization -> MasterDataBuilding : createPassageway
+activate MasterDataBuilding
+
+MasterDataBuilding --> Vizualization
+deactivate MasterDataBuilding
+
+Vizualization --> CM
+deactivate Vizualization
+
+@enduml

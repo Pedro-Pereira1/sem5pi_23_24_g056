@@ -46,19 +46,19 @@ export default class CreatePassagewayService implements ICreatePassagewayService
             if (!(building1Result.floorsNumber.includes(createPassagewayDTO.floor1Id) && building2Result.floorsNumber.includes(createPassagewayDTO.floor2Id))) {
                 return Result.fail<IPassagewayDTO>("Building dont have this floors.");
             }
-
+            
             const floor1Result = await this.floorRepo.findById(createPassagewayDTO.floor1Id);
             floor1Result.addPassageway(passagewayResult);
-
+            
             const floor2Result = await this.floorRepo.findById(createPassagewayDTO.floor2Id);
             floor2Result.addPassageway(passagewayResult);
 
+            
             await this.passagewayRepo.save(passagewayResult);
 
-            if(floor2Result.props.floormap.passagewaysId.length > 0 && floor1Result.props.floormap.passagewaysId.length > 0){
-                await this.floorRepo.save(floor1Result);
-                await this.floorRepo.save(floor2Result);
-            }
+            await this.floorRepo.save(floor1Result);
+            await this.floorRepo.save(floor2Result);
+            
 
             const PassagewayDtoResult = PassagewayMap.toDto(passagewayResult) as IPassagewayDTO
             return Result.ok<IPassagewayDTO>(PassagewayDtoResult)

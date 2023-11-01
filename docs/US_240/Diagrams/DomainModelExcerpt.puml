@@ -1,22 +1,25 @@
-@startuml
-'https://plantuml.com/use-case-diagram
+@startuml domain
 
-:Main Admin: as Admin
-(Use the application) as (Use)
 
-User -> (Start)
-User --> (Use)
+'========================================================
+rectangle #EDB182{
+class Passageway  << Root >> << Entity >>
+class PassagewayId  << (v,orange) ValueObject >> << unique >>
+class PassagewayCoordinates << (v,#A4C2E5) ValueObject >>
+}
+'========================================================
+rectangle #D499B9{
+class Floor  << Root >> << Entity >>
+class FloorMap  << Entity >>
+}
 
-Admin ---> (Use)
+'========================================================
 
-note right of Admin : This is an example.
+Passageway "1"-d->"1" PassagewayId
+Passageway "1"->"1" PassagewayCoordinates
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+Floor "1"-d->"1" FloorMap
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+FloorMap "2"--->"0..*" Passageway
+
 @enduml

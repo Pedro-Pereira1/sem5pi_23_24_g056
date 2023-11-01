@@ -25,51 +25,34 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * The floor information is based on: Floor Number, Floor Description and each floor coordinate info(wall,door,elevator,etc)
 * Floor example:
 
-|  3  |  2  |  2  |  2  |  2  |  3  |  2  |  2  |  1  |
+|  7  |  6  |  6  |  6  |  6  |  7  |  6  |  6  |  2  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  1  |     |     |     |     |  1  |     |     |  1  |
-| 18  |  2  |  2  |  6  |  2  |  2  |  6  |  2  |  8  |
-| 16  |     |     |     |     |     |     |     |  8  |
-|  3  |  2  |  2  |  2  |  2  |  2  |  5  |     |  1  |
-|  1  |     |     |     |     |     |  1  |     | 16  |
-|  1  |     |     |     |     |     |  1  |     | 16  |
-|  2  |  2  |  2  |  2  |  2  |  2  |  2  |  2  |     |
+|  5  |  4  |  4  |  4  |  4  |  5  |  4  |  4  |  2  |
+| 13  |  2  |  2  |  9  |  2  |  2  |  9  |  2  | 14  |
+|  0  |  0  |  0  |  0  |  0  |  0  |  0  |  0  | 14  |
+|  7  |  6  |  6  |  6  |  6  |  6  |  8  |  0  |  2  |
+|  5  |  4  |  4  |  4  |  4  |  4  |  1  |  0  | 12  |
+|  5  |  4  |  4  |  4  |  4  |  4  |  1  |  0  | 12  |
+|  2  |  2  |  2  |  2  |  2  |  2  |  2  |  2  |  0  |
 
 
-| description.map[][] | North wall | West wall | Door | Elevator | Passageway |
-|:-------------------:|:----------:|:---------:|:----:|:--------:|:----------:|
-|          0          |     No     |    No     |  No  |    No    |     No     |
-|          1          |     No     |    Yes    |  No  |    No    |     No     |
-|          2          |    Yes     |    No     |  No  |    No    |     No     |
-|          3          |    Yes     |    Yes    |  No  |    No    |     No     |
-|          4          |     No     |    No     | Yes  |    No    |     No     |
-|          5          |     No     |    Yes    | Yes  |    No    |     No     |
-|          6          |    Yes     |    No     | Yes  |    No    |     No     |
-|          7          |    Yes     |    Yes    | Yes  |    No    |     No     |
-|          8          |     No     |    No     |  No  |   Yes    |     No     |
-|          9          |     No     |    Yes    |  No  |   Yes    |     No     |
-|         10          |    Yes     |    No     |  No  |   Yes    |     No     |
-|         11          |    Yes     |    Yes    |  No  |   Yes    |     No     |
-|         12          |     No     |    No     | Yes  |   Yes    |     No     |
-|         13          |     No     |    Yes    | Yes  |   Yes    |     No     |
-|         14          |    Yes     |    No     | Yes  |   Yes    |     No     |
-|         15          |    Yes     |    Yes    | Yes  |   Yes    |     No     |
-|         16          |     No     |    No     |  No  |    No    |    Yes     |
-|         17          |     No     |    Yes    |  No  |    No    |    Yes     |
-|         18          |    Yes     |    No     |  No  |    No    |    Yes     |
-|         19          |    Yes     |    Yes    |  No  |    No    |    Yes     |
-|         20          |     No     |    No     | Yes  |    No    |    Yes     |
-|         21          |     No     |    Yes    | Yes  |    No    |    Yes     |
-|         22          |    Yes     |    No     | Yes  |    No    |    Yes     |
-|         23          |    Yes     |    Yes    | Yes  |    No    |    Yes     |
-|         24          |     No     |    No     |  No  |   Yes    |    Yes     |
-|         25          |     No     |    Yes    |  No  |   Yes    |    Yes     |
-|         26          |    Yes     |    No     |  No  |   Yes    |    Yes     |
-|         27          |    Yes     |    Yes    |  No  |   Yes    |    Yes     |
-|         28          |     No     |    No     | Yes  |   Yes    |    Yes     |
-|         29          |     No     |    Yes    | Yes  |   Yes    |    Yes     |
-|         30          |    Yes     |    No     | Yes  |   Yes    |    Yes     |
-|         31          |    Yes     |    Yes    | Yes  |   Yes    |    Yes     |
+| description.map[][] | North wall | West wall | Door | Elevator | Passageway | Room |
+|:-------------------:|:----------:|:---------:|:----:|:--------:|:----------:|:----:|
+|          0          |     No     |    No     |  No  |    No    |     No     |  No  |
+|          1          |     No     |    Yes    |  No  |    No    |     No     |  No  |
+|          2          |    Yes     |    No     |  No  |    No    |     No     |  No  |
+|          3          |    Yes     |    Yes    |  No  |    No    |     No     |  No  |
+|          4          |     No     |    No     |  No  |    No    |     No     | Yes  |
+|          5          |     No     |    Yes    |  No  |    No    |     No     | Yes  |
+|          6          |    Yes     |    No     |  No  |    No    |     No     | Yes  |
+|          7          |    Yes     |    Yes    |  No  |    No    |     No     | Yes  |
+|          8          |     No     |    Yes    | Yes  |    No    |     No     |  No  |
+|          9          |    Yes     |    No     | Yes  |    No    |     No     |  No  |
+|         10          |     No     |    Yes    | Yes  |    No    |     No     | Yes  |
+|         11          |    Yes     |    No     | Yes  |    No    |     No     | Yes  |
+|         12          |     No     |    No     |  No  |    No    |    Yes     |  No  |
+|         13          |    Yes     |    No     |  No  |    No    |    Yes     |  No  |
+|         14          |     No     |    No     |  No  |   Yes    |     No     |  No  |
 
 
 

@@ -6,22 +6,44 @@ import { Nickname } from './Nickname';
 import { OperationStatus } from './OperationStatus';
 import { SerialNumber } from './SerialNumber';
 import { RobotType } from '../RobotType/RobotType';
+import { Result } from '../../core/logic/Result';
+import { RobotDescription } from './RobotDescription';
 
 
 
   interface RobotProps {
-    code: Code;
     nickname: Nickname;
     operationStatus: OperationStatus;
     serialNumber: SerialNumber;
     type: RobotType;
+    description: RobotDescription;
   }
 
   export class Robot extends AggregateRoot<RobotProps> {
 
     
-    private constructor (props: RobotProps, id?: UniqueEntityID) {
-      super(props, id);
+    private constructor (code: Code,props: RobotProps) {
+      super(props, code);
+    }
+
+    public static create(robotProps: RobotProps, code: string): Result<Robot> {
+      const nickname = robotProps.nickname
+      const operationStatus = OperationStatus.create().getValue()
+      const serialNumber = robotProps.serialNumber
+      const type = robotProps.type
+      const description = robotProps.description
+
+
+      const robot = new Robot(new Code(code),
+        {
+          nickname: nickname,
+          operationStatus: operationStatus,
+          serialNumber: serialNumber,
+          type: type,
+          description: description
+        })
+  
+      return Result.ok<Robot>(robot)
     }
 
   }

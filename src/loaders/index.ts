@@ -46,6 +46,16 @@ export default async ({ expressApp }) => {
     schema: '../persistence/schemas/passageway/passagewaySchema'
   }
 
+  const robotTypeSchema = {
+    name: 'robotTypeSchema',
+    schema: '../persistence/schemas/robotType/robotTypeSchema'
+  }
+
+  const robotSchema = {
+    name: 'robotSchema',
+    schema: '../persistence/schemas/robot/robotSchema'
+  }
+
   const roleController = {
     name: config.controllers.role.name,
     path: config.controllers.role.path
@@ -91,6 +101,21 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const editFloorController = {
+    name: config.controllers.editFloor.name,
+    path: config.controllers.editFloor.path
+  }
+
+  const createRobotTypeController = {
+    name: config.controllers.createRobotType.name,
+    path: config.controllers.createRobotType.path
+  }
+
+  const createRobotController = {
+    name: config.controllers.createRobot.name,
+    path: config.controllers.createRobot.path
+  }
+
   const loadFlorMapController = {
     name: config.controllers.loadFloorMap.name,
     path: config.controllers.loadFloorMap.path
@@ -129,6 +154,16 @@ export default async ({ expressApp }) => {
   const roomRepo = {
     name: config.repos.room.name,
     path: config.repos.room.path
+  }
+
+  const robotTypeRepo = {
+    name: config.repos.robotType.name,
+    path: config.repos.robotType.path
+  }
+
+  const robotRepo = {
+    name: config.repos.robot.name,
+    path: config.repos.robot.path
   }
 
   const roleService = {
@@ -176,6 +211,22 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const editFloorService = {
+    name: config.services.editFloor.name,
+    path: config.services.editFloor.path
+  }
+
+  const createRobotTypeService = {
+    name: config.services.createRobotType.name,
+    path: config.services.createRobotType.path
+  }
+
+  const createRobotService = {
+    name: config.services.createRobot.name,
+    path: config.services.createRobot.path
+  }
+
+
   const loadFlorMapService = {
     name: config.services.loadFloorMap.name,
     path: config.services.loadFloorMap.path
@@ -190,7 +241,9 @@ export default async ({ expressApp }) => {
       floorSchema,
       roomSchema,
       elevatorSchema,
-      passagewaySchema
+      passagewaySchema,
+      robotTypeSchema,
+      robotSchema
     ],
     controllers: [
       roleController,
@@ -202,6 +255,9 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
+      editFloorController,
+      createRobotTypeController,
+      createRobotController,
       loadFlorMapController
     ],
     repos: [
@@ -211,7 +267,9 @@ export default async ({ expressApp }) => {
       floorRepo,
       passagewayRepo,
       elevatorRepo,
-      roomRepo
+      roomRepo,
+      robotTypeRepo,
+      robotRepo
     ],
     services: [
       roleService,
@@ -223,6 +281,9 @@ export default async ({ expressApp }) => {
       listAllBuildingsService,
       editBuildingService,
       listAllFloorsService,
+      editFloorService,
+      createRobotTypeService,
+      createRobotService,
       loadFlorMapService
     ]
   });
