@@ -35,7 +35,7 @@ export default class FloorRepo implements IFloorRepo {
 
       } else {
         if (floor.props.floorNumber !== undefined) {
-          floorDocument.floorNumber = floor.props.floorNumber;
+          floorDocument.floorNumber = floor.floorNumber.number
         }
 
         if (floor.description.description !== undefined) {

@@ -39,7 +39,7 @@ export default class EditFloorService implements IEditFloorService {
 
 				if (floorDTO.floorNumber) {
 					const floorNumber = floorDTO.floorNumber;
-					floor.props.floorNumber = floorNumber;
+					floor.props.floorNumber.props.number = floorNumber;
 				}
 				
 				

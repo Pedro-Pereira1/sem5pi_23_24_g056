@@ -9,10 +9,9 @@ import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 import { FloorDescription } from "../../../domain/Floor/FloorDescription";
 import { FloorMap } from "../../../domain/Floor/FloorMap";
 import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
-import { IBuildingDTO } from "../../../dto/building/IBuildingDTO";
-import { BuildingMap } from "../../../mappers/building/BuildingMap";
 import { ICreateFloorDTO } from "../../../dto/floor/ICreateFloorDTO";
 import BuildingCode from "../../../domain/Building/BuildingCode";
+import FloorNumber from "../../../domain/Floor/FloorNumber";
 
 @Service()
 export default class CreateFloorService implements ICreateFloorService {
@@ -37,7 +36,7 @@ export default class CreateFloorService implements ICreateFloorService {
 
             const floors = buildingResult.floors
             for (let i = 0; i < floors.length; i++) {
-                if (floors[i].props.floorNumber == createFloorDTO.floorNumber) {
+                if (floors[i].floorNumber.number == createFloorDTO.floorNumber) {
                     return Result.fail<IFloorDTO>("Floor number already exists")
                 }
             }
@@ -45,12 +44,15 @@ export default class CreateFloorService implements ICreateFloorService {
             const FloorOrError = await Floor.create(
                 {
                     floorDescription: new FloorDescription({ value: createFloorDTO.floorDescription }),
-                    floorNumber: createFloorDTO.floorNumber,
+                    floorNumber: new FloorNumber({number: createFloorDTO.floorNumber}),
                     floormap: new FloorMap({
                         map: [],
                         passageways: [],
                         elevators: [],
-                        rooms: []
+                        rooms: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
                     })
                 }, createFloorDTO.floorId)
 
