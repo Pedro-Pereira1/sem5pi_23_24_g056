@@ -41,7 +41,6 @@ export default class CreateRoomService implements ICreateRoomService {
             await this.roomRepo.save(roomResult);
                         
             floor.addRoom(roomResult)
-            console.log(floor.props.floormap.props.rooms)
 
             await this.floorRepo.save(floor);
 
