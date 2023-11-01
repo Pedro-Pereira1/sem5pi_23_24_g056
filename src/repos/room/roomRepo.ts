@@ -14,7 +14,7 @@ export default class RoomRepo implements IRoomRepo {
     ) { }
 
     public async findById(id: string): Promise<Room> {
-        const query = { roomId: id };
+        const query = { roomName: id };
         const roomRecord = await this.roomSchema.findOne(query as FilterQuery<IRoomPersistence & Document>);
 
         if (roomRecord != null) {
@@ -24,7 +24,7 @@ export default class RoomRepo implements IRoomRepo {
             return null;
     }
     public async exists(room: Room): Promise<boolean> {
-        const query = { roomId: room.id.toValue() };
+        const query = { roomName: room.id.toValue() };
         const roomRecord = await this.roomSchema.findOne(query as FilterQuery<IRoomPersistence & Document>);
         if (roomRecord != null) {
             return true;
@@ -34,7 +34,7 @@ export default class RoomRepo implements IRoomRepo {
     }
 
     public async save(room: Room): Promise<Room> {
-        const query = { roomId: room.id.toString() };
+        const query = { roomName: room.id.toString() };
 
         const roomDocument = await this.roomSchema.findOne(query);
 
