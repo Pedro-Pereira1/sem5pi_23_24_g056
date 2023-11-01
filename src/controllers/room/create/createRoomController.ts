@@ -17,14 +17,14 @@ export default class CreateRoomController implements ICreateRoomController {
 
     public async createRoom(req: Request, res: Response, next: NextFunction) {
         try {
-            const ElevatorOrError = await this.service.createRoom(req.body as ICreateRoomDTO) as Result<IRoomDTO>
+            const roomOrError = await this.service.createRoom(req.body as ICreateRoomDTO) as Result<IRoomDTO>
 
-            if (ElevatorOrError.isFailure) {
-                return res.status(402).send
+            if (roomOrError.isFailure) {
+                return res.status(402).send(roomOrError.errorValue())
             }
 
-            const ElevatorDTO = ElevatorOrError.getValue();
-            return res.json(ElevatorDTO).status(201);
+            const roomDTO = roomOrError.getValue();
+            return res.json(roomDTO).status(201);
 
         }catch (e){
             return next(e);
