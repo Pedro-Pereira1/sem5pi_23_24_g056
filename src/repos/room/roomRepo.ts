@@ -23,8 +23,9 @@ export default class RoomRepo implements IRoomRepo {
         else
             return null;
     }
+    
     public async exists(room: Room): Promise<boolean> {
-        const query = { roomId: room.id.toValue() };
+        const query = { roomId: room.id.toString() };
         const roomRecord = await this.roomSchema.findOne(query as FilterQuery<IRoomPersistence & Document>);
         if (roomRecord != null) {
             return true;
