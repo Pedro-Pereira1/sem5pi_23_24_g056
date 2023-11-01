@@ -10,7 +10,7 @@ import FloorNumber from './FloorNumber';
 
 interface FloorProps {
   floorDescription: FloorDescription
-  floorNumber: number
+  floorNumber: FloorNumber
   floormap: FloorMap
 }
 
@@ -22,6 +22,10 @@ export class Floor extends AggregateRoot<FloorProps> {
 
   get floorId(): FloorId {
     return this.id
+  }
+
+  get floorNumber(): FloorNumber {
+    return this.props.floorNumber
   }
 
   get description(): FloorDescription {
@@ -50,6 +54,9 @@ export class Floor extends AggregateRoot<FloorProps> {
         passageways: floorProp.floormap.props.passageways,
         rooms: floorProp.floormap.props.rooms,
         elevators: floorProp.floormap.props.elevators,
+        passagewaysCoords: floorProp.floormap.props.passagewaysCoords,
+        elevatorsCoords: floorProp.floormap.props.elevatorsCoords,
+        roomsCoords: floorProp.floormap.props.roomsCoords
       })
     }, new FloorId(floorId))
 

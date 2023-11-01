@@ -1,16 +1,20 @@
-import { AggregateRoot } from '../../core/domain/AggregateRoot';
 import { Passageway } from '../Passageway/Passageway';
 import { Room } from '../Room/Room';
 import { Elevator } from '../Elevator/Elevator';
+import IdCoords from './IdCoords';
+import { Entity } from '../../core/domain/Entity';
 
 interface FloorMapProps {
   map: number[][]
   passageways: Passageway[]
   rooms: Room[]
   elevators: Elevator[]
+  passagewaysCoords: IdCoords[]
+  elevatorsCoords: IdCoords[]
+  roomsCoords: IdCoords[]
 }
 
-export class FloorMap extends AggregateRoot<FloorMapProps> {
+export class FloorMap extends Entity<FloorMapProps> {
 
   constructor(props: FloorMapProps) {
     super(props);
@@ -40,6 +44,17 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     return ids
   }
 
+  get passagewaysCoords(): number[][] {
+    let coords: number[][] = []
+
+    for(let i = 0; i < this.props.passagewaysCoords.length; i++) {
+      coords[i][0] = this.props.passagewaysCoords[i].x
+      coords[i][1] = this.props.passagewaysCoords[i].y
+    }
+
+    return coords
+  }
+
   get elevatorsId(): number[] {
     let ids: number[] = []
     this.props.elevators.forEach(m => {
@@ -48,11 +63,33 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     return ids
   }
 
+  get elevatorsCoords(): number[][] {
+    let coords: number[][] = []
+
+    for(let i = 0; i < this.props.passagewaysCoords.length; i++) {
+      coords[i][0] = this.props.elevatorsCoords[i].x
+      coords[i][1] = this.props.elevatorsCoords[i].y
+    }
+
+    return coords
+  }
+
   get roomsId(): string[] {
     let ids: string[] = []
     this.props.rooms.forEach(m => {
-      ids.push(String(m.id.toValue()))
+      ids.push((m.id.toString()))
     })
     return ids
+  }
+
+  get roomsCoords(): number[][] {
+    let coords: number[][] = []
+
+    for(let i = 0; i < this.props.passagewaysCoords.length; i++) {
+      coords[i][0] = this.props.roomsCoords[i].x
+      coords[i][1] = this.props.roomsCoords[i].y
+    }
+
+    return coords
   }
 }
