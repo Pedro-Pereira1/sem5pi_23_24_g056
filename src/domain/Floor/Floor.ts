@@ -34,6 +34,9 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.floormap
   }
 
+  loadFloorMapAndUpdate(layout: number[][]) {
+    this.props.floormap.loadFloorMap(layout)
+  }
 
   public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
 
