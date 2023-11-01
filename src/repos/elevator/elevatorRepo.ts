@@ -1,7 +1,7 @@
 import { Inject, Service } from "typedi";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import { Elevator } from "../../domain/Elevator/Elevator";
-import { Document } from "mongoose";
+import { Document, FilterQuery } from "mongoose";
 import { Model } from "mongoose";
 import ElevatorMap from "../../mappers/elevator/ElevatorMap";
 import IElevatorPersistence from "../../dataschema/elevator/IElevatorPersistence";
@@ -32,11 +32,12 @@ export default class ElevatorRepo implements IElevatorRepo {
                 return ElevatorMap.toDomain(ElevatorCreated)
 
             } else {
-
-                elevatorDocument.elevatorCoordinatesTopX = elevator.props.elevatorCoordinates.props.topX
-                elevatorDocument.elevatorCoordinatesTopY = elevator.props.elevatorCoordinates.props.topY
-                elevatorDocument.elevatorCoordinatesBottomX = elevator.props.elevatorCoordinates.props.bottonX
-                elevatorDocument.elevatorCoordinatesBottomY = elevator.props.elevatorCoordinates.props.bottonY
+                elevatorDocument.elevatorBrand = elevator.props.elevatorBrand.brand
+                elevatorDocument.elevatorDescription = elevator.props.elevatorDescription.description
+                elevatorDocument.elevatorIdentificationNumber = elevator.props.elevatorIdentificationNumber.identificationNumber
+                elevatorDocument.elevatorModel = elevator.props.elevatorModel.model
+                elevatorDocument.elevatorSerialNumber = elevator.props.elevatorSerialNumber.serialNumber
+                
 
                 await elevatorDocument.save()
 
@@ -48,9 +49,15 @@ export default class ElevatorRepo implements IElevatorRepo {
         }
     }
 
-    findById(id: number): Promise<Elevator> {
-        throw new Error("Method not implemented.");
+    public async findById(id: number): Promise<Elevator> {
+        const query = { elevatorId: id };
+        const elevatorRecord = await this.elevatorSchema.findOne(query as FilterQuery<IElevatorPersistence & Document>);
+
+        if (elevatorRecord != null) {
+            return ElevatorMap.toDomain(elevatorRecord);
+        }
+        else
+            return null;
+        
     }
-
-
 }
