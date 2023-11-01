@@ -23,8 +23,25 @@ export default class CreateFloorService implements ICreateFloorService {
     ) { }
 
     public async createFloor(createFloorDTO: ICreateFloorDTO): Promise<Result<IFloorDTO>> {
-        
+
         try {
+            const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(createFloorDTO.buildingCode))
+            if (buildingResult == null) {
+                return Result.fail<IFloorDTO>("Building not found")
+            }
+
+            const floor = await this.floorRepo.findById(createFloorDTO.floorNumber)
+            if(floor != null){
+                return Result.fail<IFloorDTO>("Floor already exists")
+            }
+
+            const floors = buildingResult.floors
+            for (let i = 0; i < floors.length; i++) {
+                if (floors[i].props.floorNumber == createFloorDTO.floorNumber) {
+                    return Result.fail<IFloorDTO>("Floor number already exists")
+                }
+            }
+
             const FloorOrError = await Floor.create(
                 {
                     floorDescription: new FloorDescription({ value: createFloorDTO.floorDescription }),
@@ -42,10 +59,9 @@ export default class CreateFloorService implements ICreateFloorService {
                 return Result.fail<IFloorDTO>(FloorOrError.errorValue())
             }
 
-            
+
             const floorResult = FloorOrError.getValue()
-            const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(createFloorDTO.buildingCode))
-            
+
 
             buildingResult.addFloor(floorResult);
 
