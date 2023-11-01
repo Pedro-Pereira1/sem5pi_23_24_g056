@@ -1,12 +1,24 @@
-import { Entity } from "../../core/domain/Entity";
 import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
+import { Guard } from "../../core/logic/Guard";
+import { Result } from "../../core/logic/Result";
 
-export class ElevatorID extends Entity<any> {
-  get id (): UniqueEntityID {
-    return this._id;
+export class ElevatorID extends UniqueEntityID {
+  constructor(value: number) {
+    super(value)
   }
 
-  constructor (id?: UniqueEntityID) {
-    super(null, id)
+  get id(): string {
+    return this.id
+  }
+
+  public static create (id: number): Result<ElevatorID> {
+    const guardResult = Guard.againstNullOrUndefined(id, 'elevatorId');
+    if (!guardResult.succeeded) {
+      return Result.fail<ElevatorID>(guardResult.message);
+    } 
+    
+    if (id < 1) return Result.fail<ElevatorID>('Id must be bigger than zero!')
+    
+    return Result.ok<ElevatorID>(new ElevatorID(id))
   }
 }
