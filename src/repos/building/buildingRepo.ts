@@ -19,7 +19,7 @@ export default class BuildingRepo implements IBuildingRepo {
 
         const idX = building.id instanceof BuildingCode ? (<BuildingCode>building.id).toValue() : building.id;
 
-        const query = { domainId: idX };
+        const query = { buildingCode: idX };
         const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
 
         return !!buildingDocument === true;

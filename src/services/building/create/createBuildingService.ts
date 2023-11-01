@@ -34,6 +34,10 @@ export default class CreateBuildingService implements ICreateBuildingService {
 
             const buildingResult = buildingOrError.getValue()
 
+            if (this.buildingRepo.exists(buildingResult)) {
+                return Result.fail<IBuildingDTO>('A building with that code already exists')
+            }
+
             await this.buildingRepo.save(buildingResult);
 
             const buildingDtoResult = BuildingMap.toDto(buildingResult) as IBuildingDTO
