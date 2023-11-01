@@ -19,12 +19,12 @@ interface ElevatorProps {
 
 export class Elevator extends AggregateRoot<ElevatorProps> {
 
-  constructor(props: ElevatorProps, id?: UniqueEntityID) {
+  constructor(props: ElevatorProps, id: ElevatorID) {
     super(props, id);
   }
 
-  get elevatorId (): ElevatorID {
-    return ElevatorID.caller(this.id)
+  get id (): UniqueEntityID {
+    return this._id
   }
 
   get elevatorIdentificationNumber(): ElevatorIdentificationNumber {
@@ -67,9 +67,10 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
     this.props.elevatorSerialNumber = value;
   }
 
-  public static create(elevatorProps: ElevatorProps, id?: UniqueEntityID): Result<Elevator> {
+  public static create(elevatorProps: ElevatorProps, id: ElevatorID): Result<Elevator> {
 
     const guardedProps = [
+      { argument: id, argumentName: 'elevatorId' },
       { argument: elevatorProps.elevatorIdentificationNumber, argumentName: 'identificationNumber' },
       { argument: elevatorProps.elevatorBrand, argumentName: 'brand' },
       { argument: elevatorProps.elevatorDescription, argumentName: 'description' },
