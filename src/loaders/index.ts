@@ -81,6 +81,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.createElevator.path
   }
 
+  const createRoomController = {
+    name: config.controllers.createRoom.name,
+    path: config.controllers.createRoom.path
+  }
+
   const listAllBuildingsController = {
     name: config.controllers.listAllBuildigns.name,
     path: config.controllers.listAllBuildigns.path
@@ -191,6 +196,11 @@ export default async ({ expressApp }) => {
     path: config.services.createElevator.path
   }
 
+  const createRoomService = {
+    name: config.services.createRoom.name,
+    path: config.services.createRoom.path
+  }
+
   const listAllBuildingsService = {
     name: config.services.listAllBuildigns.name,
     path: config.services.listAllBuildigns.path
@@ -251,6 +261,7 @@ export default async ({ expressApp }) => {
       createFloorController,
       createPassagewayController,
       createElevatorController,
+      createRoomController,
       listAllBuildingsController,
       listBuildingsMaxMinFloorsController,
       editBuildingController,
@@ -277,6 +288,7 @@ export default async ({ expressApp }) => {
       createFloorService,
       createPassagewayService,
       createElevatorService,
+      createRoomService,
       listBuildingsMaxMinFloorsService,
       listAllBuildingsService,
       editBuildingService,

@@ -3,9 +3,9 @@ import IRoomPersistence from "../../../dataschema/room/IRoomPersistence";
 
 const RoomSchema = new mongoose.Schema(
     {
-        roomId: { type: Number, unique: true },
-        x: { type: Number },
-        y: { type: Number },
+        roomName: { type: String, unique: true },
+        roomDescription: { type: String },
+        roomCategory: { type: String },
     },
     {
         timestamps: true

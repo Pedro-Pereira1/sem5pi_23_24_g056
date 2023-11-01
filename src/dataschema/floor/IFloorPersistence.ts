@@ -5,9 +5,9 @@ export default interface IFloorPersistence {
     floorId: number
     floorDescription: string
     floorMap: {
-        map: String[][],
+        map: number[][],
         passageways: number[],
-        rooms: number[],
+        rooms: string[],
         elevators: number[]
     }
 }

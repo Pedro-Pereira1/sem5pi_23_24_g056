@@ -1,5 +1,5 @@
 export default interface IRoomPersistence {
-    roomId: number
-    x: number
-    y: number
+    roomName: string
+    roomDescription: string
+    roomCategory: string
 }

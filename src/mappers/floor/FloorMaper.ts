@@ -33,20 +33,17 @@ export class FloorMaper extends Mapper<Floor> {
     }
 
     public static async toDomain(floorDTO: any | Model<IFloorPersistence & Document>): Promise<Floor> {
-
         const elevatorRepo: IElevatorRepo = Container.get(config.repos.elevator.name)
         const roomRepo: IRoomRepo = Container.get(config.repos.room.name)
         const passagewayRepo: IPassagewayRepo = Container.get(config.repos.passageway.name)
 
 
         let floorNumber = floorDTO.floorNumber
-        let description = floorDTO.description
+        let description = floorDTO.floorDescription
         let elevators: Elevator[] = []
         let passageways: Passageway[] = []
         let rooms: Room[] = []
-        let map: string[][] = floorDTO.floorMap.map
-
-
+        let map: number[][] = floorDTO.floorMap.map
 
         for (const f of floorDTO.floorMap.passageways) {
             passageways.push(await passagewayRepo.findById(f))
@@ -59,7 +56,6 @@ export class FloorMaper extends Mapper<Floor> {
         for (const f of floorDTO.floorMap.rooms) {
             rooms.push(await roomRepo.findById(f))
         }
-
 
         const FloorOrError = Floor.create(
             {

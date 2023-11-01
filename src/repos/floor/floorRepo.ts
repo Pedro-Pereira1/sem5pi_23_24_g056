@@ -42,6 +42,16 @@ export default class FloorRepo implements IFloorRepo {
           floorDocument.floorDescription = floor.description.description;
         }
 
+         // console.log(floor.props.floormap.elevatorsId)
+
+        if (floor.props.floormap.elevatorsId !== undefined) {
+          floorDocument.floorMap.elevators = floor.props.floormap.elevatorsId;
+        }
+
+        if (floor.props.floormap.roomsId !== undefined) {
+          floorDocument.floorMap.rooms = floor.props.floormap.roomsId;
+        }
+
         await floorDocument.save();
         return floor;
      }

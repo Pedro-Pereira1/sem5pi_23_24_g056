@@ -61,6 +61,10 @@ export default {
       name: "createElevatorController",
       path: "../controllers/elevator/create/createElevatorController"
     },
+    createRoom:{
+      name:"createRoomController",
+      path: "../controllers/room/create/createRoomController"
+    },
     listAllBuildigns: {
       name: "listAllBuildingsController",
       path: "../controllers/building/list/listAllBuildingsController"
@@ -150,6 +154,10 @@ export default {
     createPassageway: {
       name: "createPassagewayService",
       path: "../services/passageway/create/createPassagewayService"
+    },
+    createRoom: {
+      name: "createRoomService",
+      path: "../services/room/create/createRoomService"
     },
     createElevator: {
       name: "createElevatorService",

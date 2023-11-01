@@ -1,6 +1,6 @@
 import { Inject, Service } from "typedi";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
-import { Model } from "mongoose";
+import { FilterQuery, Model } from "mongoose";
 import IRoomPersistence from "../../dataschema/room/IRoomPersistence";
 import { Document } from "mongoose";
 import { Room } from "../../domain/Room/Room";
@@ -13,15 +13,28 @@ export default class RoomRepo implements IRoomRepo {
         @Inject('roomSchema') private roomSchema: Model<IRoomPersistence & Document>
     ) { }
 
-    findById(id: number): Promise<Room> {
-        throw new Error("Method not implemented.");
+    public async findById(id: string): Promise<Room> {
+        const query = { roomId: id };
+        const roomRecord = await this.roomSchema.findOne(query as FilterQuery<IRoomPersistence & Document>);
+
+        if (roomRecord != null) {
+            return RoomMap.toDomain(roomRecord);
+        }
+        else
+            return null;
     }
-    exists(t: Room): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public async exists(room: Room): Promise<boolean> {
+        const query = { roomId: room.id.toValue() };
+        const roomRecord = await this.roomSchema.findOne(query as FilterQuery<IRoomPersistence & Document>);
+        if (roomRecord != null) {
+            return true;
+        }
+        else
+            return false;
     }
 
     public async save(room: Room): Promise<Room> {
-        const query = { roomId: Number(room.id.toValue()) };
+        const query = { roomId: room.id.toString() };
 
         const roomDocument = await this.roomSchema.findOne(query);
 
@@ -35,8 +48,8 @@ export default class RoomRepo implements IRoomRepo {
 
             } else {
 
-                roomDocument.x = room.props.roomCoordinates.props.x
-                roomDocument.y = room.props.roomCoordinates.props.y
+                roomDocument.roomDescription = room.props.roomDescription.description
+                roomDocument.roomCategory = room.props.roomCategory.category
 
                 await roomDocument.save();
 
