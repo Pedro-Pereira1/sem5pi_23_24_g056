@@ -52,6 +52,10 @@ export default class FloorRepo implements IFloorRepo {
           floorDocument.floorMap.rooms = floor.props.floormap.roomsId;
         }
 
+        if (floor.props.floormap.map !== undefined) {
+          floorDocument.floorMap.map = floor.map.map
+        }
+
         await floorDocument.save();
         return floor;
      }
