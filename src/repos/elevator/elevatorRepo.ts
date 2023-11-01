@@ -14,8 +14,14 @@ export default class ElevatorRepo implements IElevatorRepo {
     ) {}
 
 
-    exists(t: Elevator): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    public async exists(elevator: Elevator): Promise<boolean> {
+        const query = { elevatorId: elevator.id.toValue() };
+        const elevatorRecord = await this.elevatorSchema.findOne(query as FilterQuery<IElevatorPersistence & Document>);
+        if (elevatorRecord != null) {
+            return true;
+        }
+        else
+            return false;
     }
 
     public async save(elevator: Elevator): Promise<Elevator> {
@@ -38,7 +44,6 @@ export default class ElevatorRepo implements IElevatorRepo {
                 elevatorDocument.elevatorModel = elevator.props.elevatorModel.model
                 elevatorDocument.elevatorSerialNumber = elevator.props.elevatorSerialNumber.serialNumber
                 
-
                 await elevatorDocument.save()
 
                 return elevator
@@ -58,6 +63,5 @@ export default class ElevatorRepo implements IElevatorRepo {
         }
         else
             return null;
-        
     }
 }
