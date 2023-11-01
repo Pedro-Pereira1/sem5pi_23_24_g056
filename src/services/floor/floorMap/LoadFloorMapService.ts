@@ -46,13 +46,13 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             return Result.fail<IFloorDTO>('The floor map has a bigger width than the maximum allowed by that building')
         }
 
-        let number = 0
-
+        let number: number = 0
         for(let i = 0; i < mapString.length; i++) {
-            for(let j = 0; i < mapString[0].length; j++) {
-                number = Number(mapString[i][j])
+            map[i] = []
+            for(let j = 0; j < mapString[0].length; j++) {
+                number = parseInt(mapString[i][j], 10)
 
-                if (number > 14) {
+                if (number > 14 || Number.isNaN(number)) {
                     return Result.fail<IFloorDTO>('invalid sintax')
                 }
 
