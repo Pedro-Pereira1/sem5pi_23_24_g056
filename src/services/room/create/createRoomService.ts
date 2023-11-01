@@ -38,7 +38,7 @@ export default class CreateRoomService implements ICreateRoomService {
             }
             
             const roomResult = roomOrError.getValue();
-            console.log(roomResult)
+            
             await this.roomRepo.save(roomResult);
 
             floor.addRoom(roomResult)
