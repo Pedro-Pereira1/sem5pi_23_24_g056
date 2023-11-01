@@ -16,23 +16,20 @@ export class ElevatorSerialNumber extends ValueObject<ElevatorSerialNumberProps>
     return this.props.serialNumber
   }
 
-  public static create (elevatorSerialNumber: string): Result<ElevatorSerialNumber> {
+  public static create(elevatorSerialNumber: string): Result<ElevatorSerialNumber> {
     const guardResult = Guard.againstNullOrUndefined(elevatorSerialNumber, 'serialNumber');
     let strRegex = new RegExp(/^[a-z0-9]+$/i);
 
-    if (!guardResult.succeeded) {
-      return Result.fail<ElevatorSerialNumber>(guardResult.message);
+    if (guardResult.succeeded) {
+      if (!strRegex.test(elevatorSerialNumber)) {
+        return Result.fail<ElevatorSerialNumber>('Serial Number must be alphanumeric');
+      }
+
+      if (elevatorSerialNumber.length > 50) {
+        return Result.fail<ElevatorSerialNumber>('Elevator serial number must be shorter than 50 words');
+      }
     }
 
-    if(!strRegex.test(elevatorSerialNumber)){
-      return Result.fail<ElevatorSerialNumber>('Serial Number must be alphanumeric');
-    }
-
-    if(elevatorSerialNumber.length>50){
-      return Result.fail<ElevatorSerialNumber>('Elevator serial number must be shorter than 50 words');
-    }
-
-      return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: elevatorSerialNumber }))
-    
+    return Result.ok<ElevatorSerialNumber>(new ElevatorSerialNumber({ serialNumber: elevatorSerialNumber }))
   }
 }

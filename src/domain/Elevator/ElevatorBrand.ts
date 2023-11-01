@@ -16,22 +16,20 @@ export class ElevatorBrand extends ValueObject<ElevatorBrandProps> {
     return this.props.brand
   }
 
-  public static create (elevatorBrand: string): Result<ElevatorBrand> {
+  public static create(elevatorBrand: string): Result<ElevatorBrand> {
     const guardResult = Guard.againstNullOrUndefined(elevatorBrand, 'brand');
     let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
 
-    if (!guardResult.succeeded) {
-      return Result.fail<ElevatorBrand>(guardResult.message);
+    if (guardResult.succeeded) {
+      if (!strRegex.test(elevatorBrand)) {
+        return Result.fail<ElevatorBrand>('Brand must be alphanumeric');
+      }
+
+      if (elevatorBrand.length > 50) {
+        return Result.fail<ElevatorBrand>('Elevator brand must be shorter than 50 words');
+      }
     }
 
-    if(!strRegex.test(elevatorBrand)){
-      return Result.fail<ElevatorBrand>('Brand must be alphanumeric');
-    }
-
-    if(elevatorBrand.length>50){
-      return Result.fail<ElevatorBrand>('Elevator brand must be shorter than 50 words');
-    }
-
-      return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: elevatorBrand }))
+    return Result.ok<ElevatorBrand>(new ElevatorBrand({ brand: elevatorBrand }))
   }
 }
