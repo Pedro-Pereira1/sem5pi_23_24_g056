@@ -92,4 +92,8 @@ export class FloorMap extends Entity<FloorMapProps> {
 
     return coords
   }
+
+  get map(): number[][] {
+    return this.props.map
+  }
 }
