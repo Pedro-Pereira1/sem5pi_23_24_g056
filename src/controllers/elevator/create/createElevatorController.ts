@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import ICreateElevatorController from "../../IControllers/elevator/create/ICreateElevatorController";
 import { Inject, Service } from "typedi";
 import config from "../../../../config";
-import  ElevatorMap from "../../../mappers/elevator/ElevatorMap";
 import IElevatorDTO from "../../../dto/elevator/IElevatorDTO";
 import { Result } from "../../../core/logic/Result";
 import ICreateElevatorService from "../../../services/IServices/elevator/ICreateElevatorService";
+import ICreateElevatorDTO from "../../../dto/elevator/ICreateElevatorDTO";
 
 @Service()
 export default class CreateElevatorController implements ICreateElevatorController {
@@ -17,7 +17,7 @@ export default class CreateElevatorController implements ICreateElevatorControll
 
     public async createElevator(req: Request, res: Response, next: NextFunction) {
         try {
-            const ElevatorOrError = await this.service.createElevator(req.body as IElevatorDTO) as Result<IElevatorDTO>
+            const ElevatorOrError = await this.service.createElevator(req.body as ICreateElevatorDTO) as Result<IElevatorDTO>
 
             if (ElevatorOrError.isFailure) {
                 return res.status(402).send
