@@ -22,7 +22,7 @@ export default class CreateFloorController implements ICreateFloorController {
             const FloorOrError = await this.service.createFloor(req.body as ICreateFloorDTO) as Result<IFloorDTO>
 
             if (FloorOrError.isFailure) {
-                return res.status(402).send
+                return res.status(400).send(FloorOrError.errorValue())
             }
 
             const FloorDTO = FloorOrError.getValue();

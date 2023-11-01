@@ -17,22 +17,20 @@ export class ElevatorModel extends ValueObject<ElevatorModelProps> {
     return this.props.model
   }
 
-  public static create (elevatorModel: string): Result<ElevatorModel> {
+  public static create(elevatorModel: string): Result<ElevatorModel> {
     const guardResult = Guard.againstNullOrUndefined(elevatorModel, 'model');
     let strRegex = new RegExp(/^[a-z0-9 ]+$/i);
 
-    if (!guardResult.succeeded) {
-      return Result.fail<ElevatorModel>(guardResult.message);
-    }
+    if (guardResult.succeeded) {
+      if (!strRegex.test(elevatorModel)) {
+        return Result.fail<ElevatorModel>('Model must be alphanumeric');
+      }
 
-    if(!strRegex.test(elevatorModel)){
-      return Result.fail<ElevatorModel>('Model must be alphanumeric');
+      if (elevatorModel.length > 50) {
+        return Result.fail<ElevatorModel>('Elevator model must be shorter than 50 words');
+      }
     }
-
-    if(elevatorModel.length>50){
-      return Result.fail<ElevatorModel>('Elevator model must be shorter than 50 words');
-    }
-
-      return Result.ok<ElevatorModel>(new ElevatorModel({ model: elevatorModel }))
+    
+    return Result.ok<ElevatorModel>(new ElevatorModel({ model: elevatorModel }))
   }
 }

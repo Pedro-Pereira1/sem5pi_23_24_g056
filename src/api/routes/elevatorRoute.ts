@@ -16,13 +16,15 @@ export default (app: Router) => {
     route.post('/createElevator', 
     celebrate({
         body: Joi.object({
-            elevatorCoordinateX: Joi.number(),
-            elevatorCoordinateY: Joi.number(),
+            elevatorCoordinateX: Joi.number().required(),
+            elevatorCoordinateY: Joi.number().required(),
             elevatorIdentificationNumber: Joi.number().required(),
             elevatorBrand: Joi.string(),
             elevatorDescription: Joi.string(),
             elevatorModel: Joi.string(),
-            elevatorSerialNumber: Joi.string()
+            elevatorSerialNumber: Joi.string(),
+            buildingCode: Joi.string().required(),
+            floorId: Joi.number().required()
         }),
     }),
     (req, res, next) => ctrl.createElevator(req, res, next));

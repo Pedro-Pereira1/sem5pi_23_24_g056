@@ -4,10 +4,11 @@ import IElevatorPersistence from "../../../dataschema/elevator/IElevatorPersiste
 const ElevatorSchema = new mongoose.Schema(
     {
         elevatorId: { type: Number, unique: true },
-        elevatorCoordinatesTopX: { type: Number },
-        elevatorCoordinatesTopY: { type: Number },
-        elevatorCoordinatesBottomX: { type: Number },
-        elevatorCoordinatesBottomY: {type: Number },
+        elevatorIdentificationNumber: { type: Number },
+        elevatorBrand: { type: String},
+        elevatorDescription: { type: String},
+        elevatorModel: { type: String},
+        elevatorSerialNumber: { type: String}
     },
     {
         timestamps: true

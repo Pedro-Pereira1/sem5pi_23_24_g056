@@ -7,14 +7,9 @@ import { ElevatorModel } from './ElevatorModel';
 import { ElevatorSerialNumber } from './ElevatorSerialNumber';
 import { UniqueEntityID } from '../../core/domain/UniqueEntityID';
 import { Guard } from "../../core/logic/Guard";
-import { ElevatorCoordinateX } from './ElevatorCoordinateX';
-import { ElevatorCoordinateY } from './ElevatorCoordinateY';
 import {ElevatorID} from "./ElevatorID";
-import {UserId} from "../userId";
 
 interface ElevatorProps {
-  elevatorCoordinateX: ElevatorCoordinateX;
-  elevatorCoordinateY: ElevatorCoordinateY;
   elevatorIdentificationNumber: ElevatorIdentificationNumber,
   elevatorBrand: ElevatorBrand,
   elevatorDescription: ElevatorDescription,
@@ -30,14 +25,6 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
 
   get elevatorId (): ElevatorID {
     return ElevatorID.caller(this.id)
-  }
-
-  get elevatorCoordinateX(): ElevatorCoordinateX {
-    return this.props.elevatorCoordinateX
-  }
-
-  get elevatorCoordinateY(): ElevatorCoordinateY {
-    return this.props.elevatorCoordinateY
   }
 
   get elevatorIdentificationNumber(): ElevatorIdentificationNumber {
@@ -58,14 +45,6 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
 
   get elevatorSerialNumber(): ElevatorSerialNumber {
     return this.props.elevatorSerialNumber
-  }
-
-  set elevatorCoordinateX(value: ElevatorCoordinateX) {
-    this.props.elevatorCoordinateX = value;
-  }
-
-  set elevatorCoordinateY(value: ElevatorCoordinateY) {
-    this.props.elevatorCoordinateY = value;
   }
 
   set elevatorIdentificationNumber(value: ElevatorIdentificationNumber) {
@@ -91,8 +70,6 @@ export class Elevator extends AggregateRoot<ElevatorProps> {
   public static create(elevatorProps: ElevatorProps, id?: UniqueEntityID): Result<Elevator> {
 
     const guardedProps = [
-      { argument: elevatorProps.elevatorCoordinateX, argumentName: 'coordinateX' },
-      { argument: elevatorProps.elevatorCoordinateY, argumentName: 'coordinateY' },
       { argument: elevatorProps.elevatorIdentificationNumber, argumentName: 'identificationNumber' },
       { argument: elevatorProps.elevatorBrand, argumentName: 'brand' },
       { argument: elevatorProps.elevatorDescription, argumentName: 'description' },
