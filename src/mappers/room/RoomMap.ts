@@ -4,28 +4,34 @@ import IRoomPersistence from "../../dataschema/passageway/IPassagewayPersistence
 import { Room } from "../../domain/Room/Room";
 import IRoomDTO from "../../dto/room/IRoomDTO";
 import { Model } from "mongoose";
+import { RoomDescription } from "../../domain/Room/RoomDescription";
+import { RoomCategory } from "../../domain/Room/RoomCategory";
+import { RoomName } from "../../domain/Room/RoomName";
 
 export default class RoomMap extends Mapper<Room> {
 
     public static toDto(room: Room): IRoomDTO {
         return {
-            roomId: room.id.toValue(),
-            x: room.props.roomCoordinates.props.x,
-            y: room.props.roomCoordinates.props.y
+            roomName: room.id.toString(),
+            roomDescription: room.props.roomDescription.description,
+            roomCategory: room.props.roomCategory.category
         } as IRoomDTO
     }
 
-    public static toDomain(roomdto: any | Model<IRoomPersistence & Document>): Room {
-        const roomORError = Room.create(roomdto)
+    public static toDomain(roomDto: any | Model<IRoomPersistence & Document>): Room {
+        const roomORError = Room.create({
+            roomDescription: RoomDescription.create(roomDto.roomDescription).getValue(),
+            roomCategory: RoomCategory.create(roomDto.roomCategory).getValue()
+        }, RoomName.create(roomDto.roomName).getValue())
 
         return roomORError.isSuccess ? roomORError.getValue() : null
     }
 
     public static toPersistence(room: Room): any {
         return {
-            roomId: room.id.toValue(),
-            x: room.props.roomCoordinates.props.x,
-            y: room.props.roomCoordinates.props.y
+            roomName: room.id.toString(),
+            roomDescription: room.props.roomDescription.description,
+            roomCategory: room.props.roomCategory.category
         }
     }
 
