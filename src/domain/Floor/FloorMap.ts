@@ -4,7 +4,7 @@ import { Room } from '../Room/Room';
 import { Elevator } from '../Elevator/Elevator';
 
 interface FloorMapProps {
-  map: String[][]
+  map: number[][]
   passageways: Passageway[]
   rooms: Room[]
   elevators: Elevator[]
@@ -20,7 +20,7 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     this.props.passageways.push(passageway)
   }
 
-  addelevators(elevator: Elevator) {
+  addElevators(elevator: Elevator) {
     this.props.elevators.push(elevator)
   }
 
@@ -44,10 +44,10 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     return ids
   }
 
-  get roomsId(): number[] {
-    let ids: number[] = []
+  get roomsId(): string[] {
+    let ids: string[] = []
     this.props.rooms.forEach(m => {
-      ids.push(Number(m.id.toValue()))
+      ids.push(String(m.id.toValue()))
     })
     return ids
   }
