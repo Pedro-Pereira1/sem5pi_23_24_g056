@@ -1,0 +1,20 @@
+@startuml
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+CM -> Visualization: Edit elevator
+activate Visualization
+
+Visualization -> GI: PUT editElevator
+activate GI
+GI --> Visualization: 
+deactivate GI
+
+CM <-- Visualization: Inform Success
+deactivate Visualization
+
+
+@enduml

@@ -1,22 +1,57 @@
-@startuml
-'https://plantuml.com/use-case-diagram
+@startuml domain
 
-:Main Admin: as Admin
-(Use the application) as (Use)
+skinparam linetype ortho
 
-User -> (Start)
-User --> (Use)
+'========================================================
+rectangle #36827F{
+class Building  << Root >> << Entity >>
+class BuildingDescription  << (v,#A4C2E5) ValueObject >>
+class BuildingName  << (v,#A4C2E5) ValueObject >>
+class BuildingCode  << (v,orange) ValueObject >> << unique >>
+class BuildingSize  << (v,#A4C2E5) ValueObject >>
+}
 
-Admin ---> (Use)
+'========================================================
+rectangle #9055A2{
+class Elevator  << Root >> << Entity >>
+class ElevatorId  << (v,orange) ValueObject >> << unique >>
+class ElevatorBrand << (v,#A4C2E5) ValueObject >>
+class ElevatorModel << (v,#A4C2E5) ValueObject >>
+class ElevatorDescription << (v,#A4C2E5) ValueObject >>
+class ElevatorIdentificationNumber << (v,#A4C2E5) ValueObject >>
+class ElevatorSerialNumber << (v,#A4C2E5) ValueObject >>
 
-note right of Admin : This is an example.
+}
 
-note right of (Use)
-A note can also
-be on several lines
-end note
+'========================================================
+rectangle #D499B9{
+class Floor  << Root >> << Entity >>
+class FloorId  << (v,orange) ValueObject >> << unique >>
+class FloorDescription  << (v,#A4C2E5) ValueObject >>
+class FloorMap  << Entity >>
+class FloorNumber << (v,#A4C2E5) ValueObject >>
+}
 
-note "This note is connected\nto several objects." as N2
-(Start) .. N2
-N2 .. (Use)
+'========================================================
+
+Elevator "1"--l>"1" ElevatorId
+Elevator "1"-->"1" ElevatorBrand
+Elevator "1"-->"1" ElevatorModel
+Elevator "1"-->"1" ElevatorIdentificationNumber
+Elevator "1"-->"1" ElevatorDescription
+Elevator "1"--r>"1" ElevatorSerialNumber
+
+Building "1"->"*" Floor
+Building "*"-->"0..1" BuildingDescription
+Building "1"-->"0..1" BuildingName
+Building "*"-->"1" BuildingSize
+Building "1"-->"1" BuildingCode
+
+Floor "1"-d->"1" FloorMap
+Floor "*"-u>"1" FloorNumber
+Floor "*"-->"1" FloorDescription
+Floor "1" -> "1" FloorId
+
+FloorMap "1"-d---->"0..1" Elevator
+
 @enduml
