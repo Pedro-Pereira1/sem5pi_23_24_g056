@@ -17,7 +17,6 @@ export default (app: Router) => {
     celebrate({
         body: Joi.object({
             elevatorId: Joi.number().required().min(1),
-            elevatorIdentificationNumber: Joi.number().required(),
             elevatorBrand: Joi.string(),
             elevatorDescription: Joi.string(),
             elevatorModel: Joi.string(),
