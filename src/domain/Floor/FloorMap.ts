@@ -28,6 +28,11 @@ export class FloorMap extends AggregateRoot<FloorMapProps> {
     this.props.rooms.push(room)
   }
 
+  removeElevator(theElevator: Elevator) {
+    const index = this.props.elevators.findIndex(elevator => elevator.id === theElevator.id)
+    this.props.elevators.splice(index, 1)
+  }
+
   get passagewaysId(): number[] {
     let ids: number[] = []
     this.props.passageways.forEach(m => {
