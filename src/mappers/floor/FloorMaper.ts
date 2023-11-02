@@ -65,8 +65,8 @@ export class FloorMaper extends Mapper<Floor> {
         }
 
         let i = 0
-        for (const p of passageways) {
-            passagewaysCoords.push(new IdCoords({
+        for (const p of floorDTO.floorMap.passagewaysCoords) {
+            passagewaysCoords.push(IdCoords.create({
                 id: p.id.toValue(),
                 x: floorDTO.passagewaysCoords[i][0],
                 y: floorDTO.passagewaysCoords[i][1]
@@ -75,21 +75,21 @@ export class FloorMaper extends Mapper<Floor> {
         }
 
         i = 0
-        for (const e of elevators) {
-            elevatorsCoords.push(new IdCoords({
+        for (const e of floorDTO.floorMap.elevatorsCoords) {
+            elevatorsCoords.push(IdCoords.create({
                 id: e.id.toValue(),
-                x: floorDTO.passagewaysCoords[i][0],
-                y: floorDTO.passagewaysCoords[i][1]
+                x: floorDTO.elevatorsCoords[i][0],
+                y: floorDTO.elevatorsCoords[i][1]
             }))
             i++
         }
 
         i = 0
-        for (const r of elevators) {
-            roomCoords.push(new IdCoords({
+        for (const r of floorDTO.floorMap.roomCoords) {
+            roomCoords.push(IdCoords.create({
                 id: r.id.toValue(),
-                x: floorDTO.passagewaysCoords[i][0],
-                y: floorDTO.passagewaysCoords[i][1]
+                x: floorDTO.roomCoords[i][0],
+                y: floorDTO.roomCoords[i][1]
             }))
             i++
         }

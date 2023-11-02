@@ -36,6 +36,12 @@ export class FloorMap extends Entity<FloorMapProps> {
     this.props.map = layout
   }
 
+  updateFloorObjectsCoordinates(passageways: IdCoords[], elevators: IdCoords[], rooms: IdCoords[]) {
+    this.props.passagewaysCoords = passageways
+    this.props.elevatorsCoords = elevators
+    this.props.roomsCoords = rooms
+  }
+
   get passagewaysId(): number[] {
     let ids: number[] = []
     this.props.passageways.forEach(m => {
@@ -67,8 +73,9 @@ export class FloorMap extends Entity<FloorMapProps> {
     let coords: number[][] = []
 
     for(let i = 0; i < this.props.passagewaysCoords.length; i++) {
-      coords[i][0] = this.props.elevatorsCoords[i].x
-      coords[i][1] = this.props.elevatorsCoords[i].y
+      coords[i] = []
+      coords[i][1] = this.props.elevatorsCoords[i].x
+      coords[i][2] = this.props.elevatorsCoords[i].y
     }
 
     return coords
