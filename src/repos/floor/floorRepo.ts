@@ -34,7 +34,7 @@ export default class FloorRepo implements IFloorRepo {
         return FloorMaper.toDomain(floorCreated);
 
       } else {
-        if (floor.props.floorNumber !== undefined) {
+        if (floor.props.floorNumber.number !== undefined) {
           floorDocument.floorNumber = floor.floorNumber.number
         }
 
