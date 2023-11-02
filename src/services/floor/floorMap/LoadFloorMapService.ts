@@ -7,6 +7,8 @@ import { Result } from "../../../core/logic/Result";
 import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
 import BuildingCode from "../../../domain/Building/BuildingCode";
+import ILoadFloorMapDTO from "../../../dto/floor/ILoadFloorMapDTO";
+import IdCoords from "../../../domain/Floor/IdCoords";
 
 @Service()
 export default class LoadFloorMapService implements ILoadFloorMapService {
@@ -14,9 +16,9 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
     constructor(
         @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
         @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
-    ){}
+    ) { }
 
-    public async loadFloorMap(buildingCode: string, floorId: number, floorLayout: Buffer): Promise<Result<IFloorDTO>> {
+    public async loadFloorMap(buildingCode: string, floorId: number, floorLayout: ILoadFloorMapDTO): Promise<Result<IFloorDTO>> {
         const buildingOrError = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingCode))
         const floorOrError = await this.floorRepo.findById(floorId)
 
@@ -28,40 +30,52 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             return Result.fail<IFloorDTO>('There is no floor with that ID')
         }
 
-        const rawLayout = floorLayout.toString('utf-8')
-        const layers = rawLayout.split('\n')
+        let map: number[][] = floorLayout.map
 
-        let mapString:string[][] = []
-        let map: number[][] = []
-
-        for (let layer of layers) {
-            mapString.push(layer.split(','))
-        }
-
-        if (mapString.length > buildingOrError.size.length) {
+        if (map.length > buildingOrError.size.length) {
             return Result.fail<IFloorDTO>('The floor map has a bigger length than the maximum allowed by that building')
         }
 
-        if (mapString[0].length > buildingOrError.size.width) {
-            return Result.fail<IFloorDTO>('The floor map has a bigger width than the maximum allowed by that building')
-        }
-
-        let number: number = 0
-        for(let i = 0; i < mapString.length; i++) {
-            map[i] = []
-            for(let j = 0; j < mapString[0].length; j++) {
-                number = parseInt(mapString[i][j], 10)
-
-                if (number > 14 || Number.isNaN(number)) {
-                    return Result.fail<IFloorDTO>('invalid sintax')
-                }
-
-                map[i][j] = number
+        for (let i = 0; i < map.length; i++) {
+            if (map[i].length > buildingOrError.size.width) {
+                return Result.fail<IFloorDTO>('The floor map has a bigger width than the maximum allowed by that building')
             }
         }
 
+        let passagewaysCoords: IdCoords[] = []
+        let elevatorsCoords: IdCoords[] = []
+        let roomsCoords: IdCoords[] = []
 
-        floorOrError.loadFloorMapAndUpdate(map)
+        for (let i = 0; i < floorLayout.passageways.length; i++) {
+            passagewaysCoords[i] = IdCoords.create({
+                id: floorLayout.passageways[i][0],
+                x: floorLayout.passageways[i][1],
+                y: floorLayout.passageways[i][2],
+                x1: floorLayout.passageways[i][3],
+                y1: floorLayout.passageways[i][4]
+            })
+        }
+
+        for (let i = 0; i < floorLayout.elevators.length; i++) {
+            elevatorsCoords[i] = IdCoords.create({
+                id: floorLayout.elevators[i][0],
+                x: floorLayout.elevators[i][1],
+                y: floorLayout.elevators[i][2]
+            })
+        }
+
+        for (let i = 0; i < floorLayout.rooms.length; i++) {
+            roomsCoords[i] = IdCoords.create({
+                id: floorLayout.rooms[i][0],
+                x: floorLayout.rooms[i][1],
+                y: floorLayout.rooms[i][2],
+                x1: floorLayout.rooms[i][3],
+                y1: floorLayout.rooms[i][4]
+            })
+        }
+
+        floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
+        console.log(floorOrError.map.props.elevatorsCoords)
 
         return Result.ok<IFloorDTO>(FloorMaper.toDto(await this.floorRepo.save(floorOrError)))
     }
