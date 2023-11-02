@@ -19,7 +19,7 @@ export default {
   /**
    * That long string from mlab
    */
-  databaseURL: process.env.MONGODB_URI || "mongodb://mongoadmin:f47522692e278dc5a889a9c8@vsgate-s1.dei.isep.ipp.pt:10746/?authMechanism=DEFAULT",
+  databaseURL: process.env.MONGODB_URI || "mongodb://mongoadmin:4a5627f241f602c27f1b4f7d@vsgate-s1.dei.isep.ipp.pt:11098/?authMechanism=DEFAULT",
 
   /**
    * Your secret sauce
@@ -84,6 +84,10 @@ export default {
     editFloor: {
       name: "editFloorController",
       path: "../controllers/floor/edit/editFloorController"
+    },
+    editElevator: {
+      name: "editElevatorController",
+      path: "../controllers/elevator/edit/editElevatorController"
     },
     createRobotType: {
       name: "createRobotTypeController",
@@ -178,6 +182,10 @@ export default {
     editFloor: {
       name: "editFloorService",
       path: "../services/floor/edit/editFloorService"
+    },
+    editElevator: {
+      name: "editElevatorService",
+      path: "../services/elevator/edit/editElevatorService"
     },
     createRobotType: {
       name: "createRobotTypeService",
