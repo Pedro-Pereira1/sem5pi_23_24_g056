@@ -17,12 +17,15 @@ export default class ListBuildingsMaxMinFloorsController implements IListBuildin
     {}
 
     public async listBuildingsMaxMinFloors(req: Request, res: Response, next: NextFunction) {
-        const max = Number(req.params.max);
-        const min = Number(req.params.min);
-
         try{
-            const buildings = await this.listBuildingsMaxMinFloorsService.listBuildingsMaxMinFloors(max,min)
-            res.json(buildings).status(200);
+            const max = Number(req.params.max);
+            const min = Number(req.params.min);
+
+            const buildingsOrError = await this.listBuildingsMaxMinFloorsService.listBuildingsMaxMinFloors(max,min)
+            if(buildingsOrError.isFailure){
+                return res.status(402).send(buildingsOrError.errorValue())
+            }
+            res.json(buildingsOrError.getValue()).status(200);
         }catch(error){
             console.error("Error in listBuildingsMaxMinFloors:", error);
             res.status(500).json({ error: "Internal Server Error" });
