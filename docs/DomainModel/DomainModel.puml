@@ -47,8 +47,9 @@ class BuildingSize  << (v,#A4C2E5) ValueObject >>
 '========================================================
 rectangle #FF3B1B{
 class Room << Root >> << Entity >>
-class RoomId << (v,orange) ValueObject >> << unique >>
-class RoomCoordinates << (v,#A4C2E5) ValueObject >>
+class RoomName << (v,orange) ValueObject >> << unique >>
+class RoomCategory << (v,#A4C2E5) ValueObject >>
+class RoomDescription << (v,#A4C2E5) ValueObject >>
 }
 '========================================================
 rectangle #EDB182{
@@ -60,8 +61,6 @@ class PassagewayCoordinates << (v,#A4C2E5) ValueObject >>
 rectangle #9055A2{
 class Elevator  << Root >> << Entity >>
 class ElevatorId  << (v,orange) ValueObject >> << unique >>
-class ElevatorCoordinateX << (v,#A4C2E5) ValueObject >>
-class ElevatorCoordinateY << (v,#A4C2E5) ValueObject >>
 class ElevatorBrand << (v,#A4C2E5) ValueObject >>
 class ElevatorModel << (v,#A4C2E5) ValueObject >>
 class ElevatorDescription << (v,#A4C2E5) ValueObject >>
@@ -106,10 +105,7 @@ Route "*"-->"1..*" Path
 Path "*"-r-->"1..*" Robot : "Made by"
 
 
-
 Elevator "1"-->"1" ElevatorId
-Elevator "1"-->"1" ElevatorCoordinateX
-Elevator "1"-->"1" ElevatorCoordinateY
 Elevator "1"-->"1" ElevatorBrand
 Elevator "1"-->"1" ElevatorModel
 Elevator "1"-->"1" ElevatorIdentificationNumber
@@ -122,8 +118,9 @@ Building "1"-->"0..1" BuildingName
 Building "*"-->"1" BuildingSize
 Building "1"-->"1" BuildingCode
 
-Room "1"-d->"1" RoomId
-Room "1"->"1" RoomCoordinates
+Room "1"-d->"1" RoomName
+Room "1"-u->"1" RoomCategory
+Room "1"->"1" RoomDescription
 
 Passageway "1"-d->"1" PassagewayId
 Passageway "1"->"1" PassagewayCoordinates
