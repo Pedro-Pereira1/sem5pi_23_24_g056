@@ -111,6 +111,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.editFloor.path
   }
 
+  const editElevatorController = {
+    name: config.controllers.editElevator.name,
+    path: config.controllers.editElevator.path
+  }
+
   const createRobotTypeController = {
     name: config.controllers.createRobotType.name,
     path: config.controllers.createRobotType.path
@@ -221,6 +226,11 @@ export default async ({ expressApp }) => {
     path: config.services.editFloor.path
   }
 
+  const editElevatorService = {
+    name: config.services.editElevator.name,
+    path: config.services.editElevator.path
+  }
+
   const createRobotTypeService = {
     name: config.services.createRobotType.name,
     path: config.services.createRobotType.path
@@ -257,6 +267,7 @@ export default async ({ expressApp }) => {
       editBuildingController,
       listAllFloorsController,
       editFloorController,
+      editElevatorController,
       createRobotTypeController,
       createRobotController
     ],
@@ -283,6 +294,7 @@ export default async ({ expressApp }) => {
       editBuildingService,
       listAllFloorsService,
       editFloorService,
+      editElevatorService,
       createRobotTypeService,
       createRobotService
     ]
