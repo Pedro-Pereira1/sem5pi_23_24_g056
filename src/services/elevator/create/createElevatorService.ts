@@ -16,6 +16,9 @@ import ICreateElevatorDTO from "../../../dto/elevator/ICreateElevatorDTO";
 import BuildingCode from "../../../domain/Building/BuildingCode";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import { UniqueEntityID } from "../../../core/domain/UniqueEntityID";
+import { ElevatorID } from "../../../domain/Elevator/ElevatorID";
+import { forEach } from "lodash";
+import { Floor } from "../../../domain/Floor/Floor";
 
 @Service()
 export default class CreateElevatorService implements ICreateElevatorService {
@@ -28,13 +31,17 @@ export default class CreateElevatorService implements ICreateElevatorService {
 
     public async createElevator(elevatorDto: ICreateElevatorDTO): Promise<Result<IElevatorDTO>> {
         try{
+            if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) throw new Error("An Elevator with this Id already exists!")
+
             const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
             if (!building) throw new Error("Building does not exist!")
 
-            const floor = await this.floorRepo.findById(elevatorDto.floorId)
-            if (floor === null) throw new Error("Floor does not exist!")
-
-            //console.log(floor.props.floormap.elevatorsId)
+            let floors: Floor[] = [];
+            for (var floorId of elevatorDto.floorIds) {
+                const floor = await this.floorRepo.findById(floorId)
+                if (floor === null) throw new Error("Floor does not exist!")
+                floors.push(floor)
+            }
 
             const elevatorOrError = await Elevator.create(
                 {
@@ -43,7 +50,7 @@ export default class CreateElevatorService implements ICreateElevatorService {
                     elevatorDescription: ElevatorDescription.create(elevatorDto.elevatorDescription).getValue(),
                     elevatorModel: ElevatorModel.create(elevatorDto.elevatorModel).getValue(),
                     elevatorSerialNumber: ElevatorSerialNumber.create(elevatorDto.elevatorSerialNumber).getValue()
-                }, new UniqueEntityID (1))
+                }, ElevatorID.create(elevatorDto.elevatorId).getValue())
                 
             
             if (elevatorOrError.isFailure) {
@@ -51,11 +58,13 @@ export default class CreateElevatorService implements ICreateElevatorService {
             }
             
             const elevatorResult = elevatorOrError.getValue();
-            
-            floor.addElevators(elevatorResult)
             await this.elevatorRepo.save(elevatorResult);
 
-            await this.floorRepo.save(floor);
+            for (var floor of floors){
+                floor.addElevators(elevatorResult)
+                await this.floorRepo.save(floor);
+            }
+            
             const ElevatorDtoResult = ElevatorMap.toDto(elevatorResult) as IElevatorDTO
 
             return Result.ok<IElevatorDTO>(ElevatorDtoResult)

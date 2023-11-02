@@ -10,6 +10,7 @@ import { BuildingName } from "../../../domain/Building/BuildingName";
 import { Floor } from "../../../domain/Floor/Floor";
 import { BuildingDescription } from "../../../domain/Building/BuildingDescription";
 import { BuildingSize } from "../../../domain/Building/BuildingSize";
+import BuildingCode from "../../../domain/Building/BuildingCode";
 
 @Service()
 export default class CreateBuildingService implements ICreateBuildingService {
@@ -20,6 +21,7 @@ export default class CreateBuildingService implements ICreateBuildingService {
 
     public async createBuilding(buildingDto: IBuildingDTO): Promise<Result<IBuildingDTO>> {
         try {
+            if (await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingDto.buildingCode)) !== null) return Result.fail<IBuildingDTO>('A building with that code already exists')
             const buildingOrError = Building.create(
                 {
                     buildingName: new BuildingName({ value: buildingDto.buildingName }),
@@ -33,10 +35,6 @@ export default class CreateBuildingService implements ICreateBuildingService {
             }
 
             const buildingResult = buildingOrError.getValue()
-
-            if (this.buildingRepo.exists(buildingResult)) {
-                return Result.fail<IBuildingDTO>('A building with that code already exists')
-            }
 
             await this.buildingRepo.save(buildingResult);
 

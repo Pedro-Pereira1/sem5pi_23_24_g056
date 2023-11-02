@@ -20,7 +20,7 @@ export default class CreateBuildingController implements ICreateBuildingControll
             const buildingOrError = await this.service.createBuilding(req.body as IBuildingDTO) as Result<IBuildingDTO>
         
             if (buildingOrError.isFailure) {
-                return res.status(402).send()
+                return res.status(402).send(buildingOrError.errorValue())
             }
         
             const buildingDTO = buildingOrError.getValue();
