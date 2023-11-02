@@ -29,7 +29,7 @@ export default class CreateFloorService implements ICreateFloorService {
                 return Result.fail<IFloorDTO>("Building not found")
             }
 
-            const floor = await this.floorRepo.findById(createFloorDTO.floorNumber)
+            const floor = await this.floorRepo.findById(createFloorDTO.floorId)
             if(floor != null){
                 return Result.fail<IFloorDTO>("Floor already exists")
             }
