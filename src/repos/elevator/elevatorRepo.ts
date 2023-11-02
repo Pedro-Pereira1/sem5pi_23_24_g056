@@ -5,6 +5,7 @@ import { Document, FilterQuery } from "mongoose";
 import { Model } from "mongoose";
 import ElevatorMap from "../../mappers/elevator/ElevatorMap";
 import IElevatorPersistence from "../../dataschema/elevator/IElevatorPersistence";
+import BuildingCode from "../../domain/Building/BuildingCode";
 
 @Service()
 export default class ElevatorRepo implements IElevatorRepo {
@@ -38,11 +39,10 @@ export default class ElevatorRepo implements IElevatorRepo {
                 return ElevatorMap.toDomain(ElevatorCreated)
 
             } else {
-                elevatorDocument.elevatorBrand = elevator.props.elevatorBrand.brand
-                elevatorDocument.elevatorDescription = elevator.props.elevatorDescription.description
-                elevatorDocument.elevatorIdentificationNumber = elevator.props.elevatorIdentificationNumber.identificationNumber
-                elevatorDocument.elevatorModel = elevator.props.elevatorModel.model
-                elevatorDocument.elevatorSerialNumber = elevator.props.elevatorSerialNumber.serialNumber
+                if (elevator.props.elevatorBrand !== undefined) elevatorDocument.elevatorBrand = elevator.props.elevatorBrand.brand;
+                if (elevator.props.elevatorDescription !== undefined) elevatorDocument.elevatorDescription = elevator.props.elevatorDescription.description;
+                if (elevator.props.elevatorModel !== undefined) elevatorDocument.elevatorModel = elevator.props.elevatorModel.model;
+                if (elevator.props.elevatorSerialNumber !== undefined) elevatorDocument.elevatorSerialNumber = elevator.props.elevatorSerialNumber.serialNumber;
                 
                 await elevatorDocument.save()
 
