@@ -17,19 +17,24 @@ export default class listBuildingsMaxMinFloorsService implements IListBuildingsM
     {}
 
     public async listBuildingsMaxMinFloors(max: number, min: number): Promise<Result<IBuildingDTO[]>> {
+        if(max < min) return Result.fail<IBuildingDTO[]>("max < min")
+
         let values: IBuildingDTO[]  = [];
 
         const buildings = await this.buildingRepo.findBuildingsMaxMinFloors(max,min)
+        
+
+        if(buildings.length === 0) {
+            return Result.fail<IBuildingDTO[]>("No buildings found")
+        }
 
         buildings.forEach((element) => {
             values.push(BuildingMap.toDto(element))
         })
 
-        if(buildings.length === 0) {
-            return Result.fail<IBuildingDTO[]>("null")
-        }
 
-        
+
+
         return Result.ok<IBuildingDTO[]>(values)
     }
 
