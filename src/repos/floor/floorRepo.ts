@@ -56,6 +56,18 @@ export default class FloorRepo implements IFloorRepo {
           floorDocument.floorMap.map = floor.map.map
         }
 
+        if (floor.map.passagewaysCoords !== undefined) {
+          floorDocument.floorMap.passagewaysCoords = floor.map.passagewaysCoords
+        }
+
+        if (floor.map.elevatorsCoords !== undefined) {
+          floorDocument.floorMap.elevatorsCoords = floor.map.elevatorsCoords
+        }
+
+        if (floor.map.roomsCoords !== undefined) {
+          floorDocument.floorMap.roomCoords = floor.map.roomsCoords
+        }
+
         await floorDocument.save();
         return floor;
      }
