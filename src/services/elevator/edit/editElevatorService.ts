@@ -83,6 +83,9 @@ export default class EditElevatorService implements IEditElevatorService {
                     if (floor === null) throw new Error("Floor does not exist!")
                     floors.push(floor)
                 }
+
+                const floorsOfElevator = await this.floorRepo.findByElevator(Number(theElevator.id.toValue()))
+                if (floorsOfElevator.length === 1) throw new Error("Remove floor is not possible because elevator is only associated with onde floor!")
     
                 for (var floor of floors){
                     floor.removeElevator(theElevator)
