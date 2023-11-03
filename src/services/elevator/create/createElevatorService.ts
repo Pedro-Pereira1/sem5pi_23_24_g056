@@ -15,9 +15,7 @@ import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
 import ICreateElevatorDTO from "../../../dto/elevator/ICreateElevatorDTO";
 import BuildingCode from "../../../domain/Building/BuildingCode";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
-import { UniqueEntityID } from "../../../core/domain/UniqueEntityID";
 import { ElevatorID } from "../../../domain/Elevator/ElevatorID";
-import { forEach } from "lodash";
 import { Floor } from "../../../domain/Floor/Floor";
 
 @Service()
@@ -36,16 +34,29 @@ export default class CreateElevatorService implements ICreateElevatorService {
             const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
             if (!building) throw new Error("Building does not exist!")
 
+           let maxIdNum = 1
+
+            for (var floor of building.floors) {
+                for (var elevatorId of floor.props.floormap.elevatorsId){
+                    const elevator = await this.elevatorRepo.findById(elevatorId)
+                    if (maxIdNum <= elevator.props.elevatorIdentificationNumber.identificationNumber){
+                        maxIdNum = elevator.props.elevatorIdentificationNumber.identificationNumber + 1
+                    }
+                }
+            }
+
             let floors: Floor[] = [];
             for (var floorId of elevatorDto.floorIds) {
                 const floor = await this.floorRepo.findById(floorId)
                 if (floor === null) throw new Error("Floor does not exist!")
                 floors.push(floor)
             }
-
+            
+            if (elevatorDto.elevatorBrand !== undefined && elevatorDto.elevatorModel === undefined) throw new Error("Brand was provided so Model is also required!")
+            
             const elevatorOrError = await Elevator.create(
                 {
-                    elevatorIdentificationNumber: ElevatorIdentificationNumber.create(elevatorDto.elevatorIdentificationNumber).getValue(),
+                    elevatorIdentificationNumber: ElevatorIdentificationNumber.create(maxIdNum).getValue(),
                     elevatorBrand: ElevatorBrand.create(elevatorDto.elevatorBrand).getValue(),
                     elevatorDescription: ElevatorDescription.create(elevatorDto.elevatorDescription).getValue(),
                     elevatorModel: ElevatorModel.create(elevatorDto.elevatorModel).getValue(),

@@ -18,10 +18,9 @@ class BuildingSize  << (v,#A4C2E5) ValueObject >>
 rectangle #FF3B1B{
 class Room << Root >> << Entity >>
 class RoomName << (v,orange) ValueObject >> << unique >>
-class RoomCoordinateTopX << (v,#A4C2E5) ValueObject >>
-class RoomCoordinateTopY << (v,#A4C2E5) ValueObject >>
-class RoomCoordinateBottomX << (v,#A4C2E5) ValueObject >>
-class RoomCoordinateBottomY << (v,#A4C2E5) ValueObject >>
+class RoomDescription  << (v,#A4C2E5) ValueObject >>
+class RoomCategory  << (v,#A4C2E5) ValueObject >>
+
 }
 '========================================================
 rectangle #D499B9{
@@ -44,10 +43,8 @@ Building "*"-->"1" BuildingSize
 Building "1"-->"1" BuildingCode
 
 Room "1"-d->"1" RoomName
-Room "1"-l->"1" RoomCoordinateTopX
-Room "1"-u->"1" RoomCoordinateTopY
-Room "1"-d->"1" RoomCoordinateBottomX
-Room "1"->"1" RoomCoordinateBottomY
+Room "1"-u->"1" RoomCategory
+Room "1"->"1" RoomDescription
 
 Floor "1"-d->"1" FloorMap
 Floor "*"-u->"1" FloorNumber

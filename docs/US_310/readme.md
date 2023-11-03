@@ -19,7 +19,7 @@
 * Campus Manager is a user role that manages the data of the routes and maps.
 * Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
-* Room is a past of a the floor defined by Name, and two sets of coordinates from oposite corners.
+* Room is a part of a the floor defined by Name, and two sets of coordinates from oposite corners.
 
 ### 3.1. Domain Model Excerpt
 
