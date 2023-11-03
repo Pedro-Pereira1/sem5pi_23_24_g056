@@ -43,6 +43,24 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
+        for(const p of floorLayout.passageways) {
+            if (p.length !== 5) {
+                return Result.fail<IFloorDTO>('There is a problem with the coordinates of the passageway with id ' + p[0])
+            }
+        }
+
+        for(const e of floorLayout.elevators) {
+            if (e.length !== 3) {
+                return Result.fail<IFloorDTO>('There is a problem with the coordinates of the elevator with id ' + e[0])
+            }
+        }
+
+        for(const r of floorLayout.rooms) {
+            if (r.length !== 5) {
+                return Result.fail<IFloorDTO>('There is a problem with the coordinates of the room with id ' + r[0])
+            }
+        }
+
         let passagewaysCoords: DoubleCoords[] = []
         let elevatorsCoords: SingleCoords[] = []
         let roomsCoords: DoubleCoords[] = []
@@ -75,6 +93,23 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             })
         }
 
+        for (const p of passagewaysCoords) {
+            if (map[p.x][p.y] !== 12 || map[p.x][p.y] !== 13 || map[p.x1][p.y1] !== 12 || map[p.x1][p.y1] !== 13) {
+                return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
+            }
+        }
+
+        for (const e of elevatorsCoords) {
+            if (map[e.x][e.y] !== 14) {
+                return Result.fail<IFloorDTO>('There is no elevator in the coords: X1:' + e.x + ' Y1:' + e.y)
+            }
+        }
+
+        for (const r of roomsCoords) {
+            if (map[r.x][r.y] !== 7 || map[r.x1][r.y1] !== 4 ) {
+                return Result.fail<IFloorDTO>('There is no room in the coords: X1:' + r.x + ' Y1:' + r.y + ' X2:' + r.x1 + ' Y2: ' + r.y1)
+            }
+        }
 
         const passagewaysIds = floorOrError.map.passagewaysId
         for (const p of passagewaysCoords) {
@@ -96,7 +131,6 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
                 return Result.fail<IFloorDTO>('There is no room with id ' + r.id + ' in this floor')
             }
         }
-
 
         floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
 
