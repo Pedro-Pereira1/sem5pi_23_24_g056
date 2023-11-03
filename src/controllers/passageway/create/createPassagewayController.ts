@@ -25,7 +25,7 @@ export default class CreatePassagewayController implements ICreatePassagewayCont
             }
 
             const PassagewayDTO = PassagewayOrError.getValue();
-            return res.json(PassagewayDTO).status(201);
+            return res.status(201).json(PassagewayDTO);
 
         }catch (e){
             return next(e);
