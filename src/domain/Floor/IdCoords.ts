@@ -38,10 +38,18 @@ export default class IdCoords extends ValueObject<IdCoordsProps> {
     }
 
     get x(): number {
-        return this.x
+        return this.props.x
     }
 
     get y(): number {
-        return this.y
+        return this.props.y
+    }
+
+    get x1(): number {
+        return this.props.x1
+    }
+
+    get y1(): number {
+        return this.props.y1
     }
 }
