@@ -17,7 +17,6 @@ import BuildingCode from "../../../domain/Building/BuildingCode";
 import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import { ElevatorID } from "../../../domain/Elevator/ElevatorID";
 import { Floor } from "../../../domain/Floor/Floor";
-import { Db } from "mongodb";
 
 @Service()
 export default class CreateElevatorService implements ICreateElevatorService {

@@ -1,8 +1,7 @@
 import IElevatorDTO from "../../../dto/elevator/IElevatorDTO";
 import { Result } from "../../../core/logic/Result";
-
-
+import ICreateElevatorDTO from "../../../dto/elevator/ICreateElevatorDTO";
 
 export default interface ICreateElevatorService {
-    createElevator(PassagewayDTO: IElevatorDTO): Promise<Result<IElevatorDTO>>
+    createElevator(elevatorDto: ICreateElevatorDTO): Promise<Result<IElevatorDTO>>
 }

@@ -72,7 +72,12 @@ export class Floor extends AggregateRoot<FloorProps> {
   }
 
   addElevators(elevator: Elevator) {
+    if (this.props.floormap.props.elevators.includes(elevator)) throw new Error("Floor with Number" + this.props.floorNumber + "already has this elevator!")
     this.map.addElevators(elevator)
+  }
+
+  removeElevator(elevator: Elevator) {
+    this.map.removeElevator(elevator)
   }
 
   addRoom(room: Room) {
