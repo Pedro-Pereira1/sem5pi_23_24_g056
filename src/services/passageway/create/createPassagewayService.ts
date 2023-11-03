@@ -24,14 +24,16 @@ export default class CreatePassagewayService implements ICreatePassagewayService
 
         try{
             var building1Result = await this.buildingRepo.findByBuidingCode(new BuildingCode(createPassagewayDTO.building1Id.toString()))
-            var building2Result = await this.buildingRepo.findByBuidingCode(new BuildingCode(createPassagewayDTO.building2Id.toString()))
+            if(building1Result == null) return Result.fail<IPassagewayDTO>("Building dont exists.");
 
-            const maxWidhtB1 = building1Result.size.width;
-            const maxLenghtB1 = building1Result.size.length;
-            const maxWidhtB2 = building2Result.size.width;
-            const maxLenghtB2 = building2Result.size.length;
-            
-            const PassagewayOrError = await Passageway.create(createPassagewayDTO,maxWidhtB1,maxLenghtB1,maxWidhtB2,maxLenghtB2)
+            var building2Result = await this.buildingRepo.findByBuidingCode(new BuildingCode(createPassagewayDTO.building2Id.toString()))
+            if(building2Result == null) return Result.fail<IPassagewayDTO>("Building dont exists.");
+
+            if (!(building1Result.floorsNumber.includes(createPassagewayDTO.floor1Id) && building2Result.floorsNumber.includes(createPassagewayDTO.floor2Id))) {
+                return Result.fail<IPassagewayDTO>("Building dont have this floors.");
+            }
+
+            const PassagewayOrError = await Passageway.create(createPassagewayDTO);
 
             if (PassagewayOrError.isFailure) {
                 return Result.fail<IPassagewayDTO>(PassagewayOrError.errorValue())
@@ -39,26 +41,18 @@ export default class CreatePassagewayService implements ICreatePassagewayService
 
             const passagewayResult = PassagewayOrError.getValue()
 
-            if (await this.passagewayRepo.exists(passagewayResult)) {
-                return Result.fail<IPassagewayDTO>("Passageway already exists.");
-            }
-
-            if (!(building1Result.floorsNumber.includes(createPassagewayDTO.floor1Id) && building2Result.floorsNumber.includes(createPassagewayDTO.floor2Id))) {
-                return Result.fail<IPassagewayDTO>("Building dont have this floors.");
-            }
-            
             const floor1Result = await this.floorRepo.findById(createPassagewayDTO.floor1Id);
             floor1Result.addPassageway(passagewayResult);
-            
+
             const floor2Result = await this.floorRepo.findById(createPassagewayDTO.floor2Id);
             floor2Result.addPassageway(passagewayResult);
 
-            
+
             await this.passagewayRepo.save(passagewayResult);
 
             await this.floorRepo.save(floor1Result);
             await this.floorRepo.save(floor2Result);
-            
+
 
             const PassagewayDtoResult = PassagewayMap.toDto(passagewayResult) as IPassagewayDTO
             return Result.ok<IPassagewayDTO>(PassagewayDtoResult)
