@@ -1,0 +1,80 @@
+@startuml
+
+autonumber
+
+participant ":ElevatorRoute" as Route
+participant ":CreateElevatorController" as Controller
+participant ":CreateElevatorService" as Service
+participant ":Elevator" as Elevator
+participant ":ElevatorRepo" as Repo
+participant ":ElevatorSchema" as Schema
+participant ":ElevatorPersistence" as Persistence
+participant ":ElevatorMap" as Map
+participant ":ElevatorDTO" as DTO
+participant ":Building" as Building
+participant ":BuildingRepo" as BuildingRepo
+participant ":FloorRepo" as FloorRepo
+participant ":FloorSchema" as FloorSchema
+participant ":Floor" as Floor
+
+
+?o->Route: PUT
+activate Route
+
+Route -> Controller: createElevator(req, res, next)
+activate Controller
+
+Controller -> Map: toDto(req.body)
+activate Map
+
+Controller <-- Map
+deactivate Map
+
+
+Controller -> Service: createElevator(elevatorDto)
+activate Service
+
+Service -> BuildingRepo: findByBuildingCode(buildingCode)
+activate BuildingRepo
+Service <-- BuildingRepo
+deactivate BuildingRepo
+
+Service -> Building: elevator = get elevator with selected identification number
+
+Service -> Elevator: set property changes
+
+Service -> Repo: save(elevator)
+activate Repo
+
+Repo -> Schema: save
+deactivate Repo
+
+Service -> FloorRepo: floorsToRemove = find(floorsIdToRemove)
+activate FloorRepo
+Service <-- FloorRepo
+deactivate FloorRepo
+
+Service -> Floor: removeElevator(elevator)
+Service -> FloorRepo: save(floor)
+
+deactivate FloorRepo
+
+Service -> Map:toDto(room)
+
+Map -> DTO: create
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+alt success
+Controller --> Route: code 200
+else insuccess
+Controller --> Route: code 402
+deactivate Controller
+end alt
+<--Route:
+
+
+
+@enduml
