@@ -42,7 +42,7 @@ export default class FloorRepo implements IFloorRepo {
           floorDocument.floorDescription = floor.description.description;
         }
 
-         // console.log(floor.props.floormap.elevatorsId)
+        // console.log(floor.props.floormap.elevatorsId)
 
         if (floor.props.floormap.elevatorsId !== undefined) {
           floorDocument.floorMap.elevators = floor.props.floormap.elevatorsId;
@@ -54,7 +54,7 @@ export default class FloorRepo implements IFloorRepo {
 
         await floorDocument.save();
         return floor;
-     }
+      }
     } catch (err) {
       throw err;
     }
@@ -71,5 +71,17 @@ export default class FloorRepo implements IFloorRepo {
       return null;
   }
 
+  public async findByElevator(id: number): Promise<Floor[]> {
+    const query = { 'floorMap.elevators': id };
+    const floorRecords = await this.floorSchema.find(query as FilterQuery<IFloorPersistence & Document>);
 
+    if (floorRecords.length > 0) {
+      const floors = await Promise.all(
+        floorRecords.map(async (record) => FloorMaper.toDomain(record))
+      );
+      return floors;
+    } else {
+      return [];
+    }
+  }
 }
