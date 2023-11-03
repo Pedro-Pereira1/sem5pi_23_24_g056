@@ -60,19 +60,17 @@ Service -> FloorRepo: save(floor)
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
-
+activate Map
 Map -> DTO: create
 deactivate Map
 
 Service --> Controller:
 deactivate Service
 
-alt success
-Controller --> Route: code 200
-else insuccess
-Controller --> Route: code 402
+
+Controller --> Route: inform success
 deactivate Controller
-end alt
+
 <--Route:
 
 
