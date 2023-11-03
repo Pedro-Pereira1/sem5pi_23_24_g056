@@ -14,7 +14,8 @@ import FloorNumber from "../../domain/Floor/FloorId";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
-import IdCoords from "../../domain/Floor/IdCoords";
+import DoubleCoords from "../../domain/Floor/DoubleCoords";
+import SingleCoords from "../../domain/Floor/SingleCoords";
 
 export class FloorMaper extends Mapper<Floor> {
 
@@ -47,9 +48,9 @@ export class FloorMaper extends Mapper<Floor> {
         let passageways: Passageway[] = []
         let rooms: Room[] = []
         let map: number[][] = floorDTO.floorMap.map
-        let passagewaysCoords: IdCoords[] = []
-        let elevatorsCoords: IdCoords[] = []
-        let roomCoords: IdCoords[] = []
+        let passagewaysCoords: DoubleCoords[] = []
+        let elevatorsCoords: SingleCoords[] = []
+        let roomCoords: DoubleCoords[] = []
 
 
         for (const f of floorDTO.floorMap.passageways) {
@@ -65,7 +66,7 @@ export class FloorMaper extends Mapper<Floor> {
         }
 
         for (let i = 0; i < floorDTO.floorMap.passagewaysCoords.length; i++) {
-            passagewaysCoords.push(IdCoords.create({
+            passagewaysCoords.push(DoubleCoords.create({
                 id: Number(floorDTO.floorMap.passagewaysCoords[i][0]),
                 x:  floorDTO.floorMap.passagewaysCoords[i][1],
                 y:  floorDTO.floorMap.passagewaysCoords[i][2],
@@ -75,7 +76,7 @@ export class FloorMaper extends Mapper<Floor> {
         }
 
         for (let i = 0; i < floorDTO.floorMap.elevatorsCoords.length; i++) {
-            elevatorsCoords.push(IdCoords.create({
+            elevatorsCoords.push(SingleCoords.create({
                 id: Number(floorDTO.floorMap.elevatorsCoords[i][0]),
                 x: floorDTO.floorMap.elevatorsCoords[i][1],
                 y: floorDTO.floorMap.elevatorsCoords[i][2]
@@ -83,7 +84,7 @@ export class FloorMaper extends Mapper<Floor> {
         }
 
         for (let i = 0; i < floorDTO.floorMap.roomCoords.length; i++) {
-            roomCoords.push(IdCoords.create({
+            roomCoords.push(DoubleCoords.create({
                 id: floorDTO.floorMap.roomCoords[i][0].toString(),
                 x:  floorDTO.floorMap.roomCoords[i][1],
                 y:  floorDTO.floorMap.roomCoords[i][2],

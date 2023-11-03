@@ -7,7 +7,8 @@ import { Passageway } from '../Passageway/Passageway';
 import { Room } from '../Room/Room';
 import { Elevator } from '../Elevator/Elevator';
 import FloorNumber from './FloorNumber';
-import IdCoords from './IdCoords';
+import DoubleCoords from './DoubleCoords';
+import SingleCoords from './SingleCoords';
 
 interface FloorProps {
   floorDescription: FloorDescription
@@ -37,7 +38,7 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.floormap
   }
 
-  loadFloorMapAndUpdate(layout: number[][], passageways: IdCoords[], elevators: IdCoords[], rooms: IdCoords[]) {
+  loadFloorMapAndUpdate(layout: number[][], passageways: DoubleCoords[], elevators: SingleCoords[], rooms: DoubleCoords[]) {
     this.map.loadFloorMap(layout)
     this.map.updateFloorObjectsCoordinates(passageways, elevators, rooms)
   }
