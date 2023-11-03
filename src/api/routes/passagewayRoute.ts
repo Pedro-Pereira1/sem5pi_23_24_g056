@@ -17,17 +17,9 @@ export default (app: Router) => {
     celebrate({
         body: Joi.object({
             passagewayId: Joi.number().required(),
-            passagewayCoordinatesTopX : Joi.number().required(),
-            passagewayCoordinatesTopY : Joi.number().required(),
-            passagewayCoordinatesBottomX : Joi.number().required(),
-            passagewayCoordinatesBottomY : Joi.number().required(),
-            passagewayCoordinatesTopXB2 : Joi.number().required(),
-            passagewayCoordinatesTopYB2 : Joi.number().required(),
-            passagewayCoordinatesBottomXB2 : Joi.number().required(),
-            passagewayCoordinatesBottomYB2 : Joi.number().required(),
-            building1Id: Joi.string().alphanum().max(5).required(),
+            building1Id: Joi.string().alphanum().required(),
             floor1Id: Joi.number().required(),
-            building2Id: Joi.string().alphanum().max(5).required(),
+            building2Id: Joi.string().alphanum().required(),
             floor2Id: Joi.number().required()
         }),
     }),
