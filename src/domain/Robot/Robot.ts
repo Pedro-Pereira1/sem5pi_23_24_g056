@@ -11,39 +11,39 @@ import { RobotDescription } from './RobotDescription';
 
 
 
-  interface RobotProps {
-    nickname: Nickname;
-    operationStatus: OperationStatus;
-    serialNumber: SerialNumber;
-    type: RobotType;
-    description: RobotDescription;
+interface RobotProps {
+  nickname: Nickname;
+  operationStatus: OperationStatus;
+  serialNumber: SerialNumber;
+  type: RobotType;
+  description: RobotDescription;
+}
+
+export class Robot extends AggregateRoot<RobotProps> {
+
+
+  private constructor(code: Code, props: RobotProps) {
+    super(props, code);
   }
 
-  export class Robot extends AggregateRoot<RobotProps> {
-
-    
-    private constructor (code: Code,props: RobotProps) {
-      super(props, code);
-    }
-
-    public static create(robotProps: RobotProps, code: string): Result<Robot> {
-      const nickname = robotProps.nickname
-      const operationStatus = OperationStatus.create().getValue()
-      const serialNumber = robotProps.serialNumber
-      const type = robotProps.type
-      const description = robotProps.description
+  public static create(robotProps: RobotProps, code: string): Result<Robot> {
+    const nickname = robotProps.nickname
+    const operationStatus = OperationStatus.create().getValue()
+    const serialNumber = robotProps.serialNumber
+    const type = robotProps.type
+    const description = robotProps.description
 
 
-      const robot = new Robot(new Code(code),
-        {
-          nickname: nickname,
-          operationStatus: operationStatus,
-          serialNumber: serialNumber,
-          type: type,
-          description: description
-        })
-  
-      return Result.ok<Robot>(robot)
-    }
+    const robot = new Robot(new Code(code),
+      {
+        nickname: nickname,
+        operationStatus: operationStatus,
+        serialNumber: serialNumber,
+        type: type,
+        description: description
+      })
 
+    return Result.ok<Robot>(robot)
   }
+
+}
