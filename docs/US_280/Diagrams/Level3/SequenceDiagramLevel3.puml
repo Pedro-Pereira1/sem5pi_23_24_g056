@@ -5,14 +5,17 @@ autonumber
 participant ":ElevatorRoute" as Route
 participant ":EditElevatorController" as Controller
 participant ":EditElevatorService" as Service
-participant ":Elevator"
+participant ":Elevator" as Elevator
 participant ":ElevatorRepo" as Repo
 participant ":ElevatorSchema" as Schema
+participant ":ElevatorPersistence" as Persistence
 participant ":ElevatorMap" as Map
 participant ":ElevatorDTO" as DTO
+participant ":Building" as Building
+participant ":BuildingRepo" as BuildingRepo
 participant ":FloorRepo" as FloorRepo
 participant ":FloorSchema" as FloorSchema
-participant ":Floor"
+participant ":Floor" as Floor
 
 
 ?o->Route: PUT
@@ -24,11 +27,21 @@ activate Controller
 Controller -> Map: toDto(req.body)
 activate Map
 
+Controller <-- Map
+deactivate Map
+
+
 Controller -> Service: editElevator(elevatorDto)
 activate Service
 
+Service -> BuildingRepo: findByBuildingCode(buildingCode)
+activate BuildingRepo
+Service <-- BuildingRepo
+deactivate BuildingRepo
 
-Service -> Room: room = create(elevatorProps)
+Service -> Building: elevator = get elevator with selected identification number
+
+Service -> Elevator: set property changes
 
 Service -> Repo: save(elevator)
 activate Repo
@@ -36,15 +49,20 @@ activate Repo
 Repo -> Schema: save
 deactivate Repo
 
-Service -> FloorRepo: floor = find(floor)
+Service -> FloorRepo: get all floors to remove/add elevator
 activate FloorRepo
 Service <-- FloorRepo
-Service -> Floor: addRoom(room)
-Service -> FloorRepo: save(floor)
+deactivate FloorRepo
 
+Service -> Floor: remove/add elevator from floors
+Service -> FloorRepo: save(all floors)
+activate FloorRepo
+
+FloorRepo -> FloorSchema
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
+activate Map
 
 Map -> DTO: create
 deactivate Map
@@ -53,11 +71,8 @@ Service --> Controller:
 deactivate Service
 
 alt success
-Controller --> Route: code 201
-else insuccess
-Controller --> Route: code 402
-deactivate Controller
-end alt
+Controller --> Route: inform success
+
 <--Route:
 
 
