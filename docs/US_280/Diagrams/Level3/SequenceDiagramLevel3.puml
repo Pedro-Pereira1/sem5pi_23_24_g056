@@ -58,7 +58,7 @@ Service -> Floor: remove/add elevator from floors
 Service -> FloorRepo: save(all floors)
 activate FloorRepo
 
-FloorRepo -> FloorSchema
+FloorRepo -> FloorSchema: save
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
@@ -70,9 +70,8 @@ deactivate Map
 Service --> Controller:
 deactivate Service
 
-alt success
 Controller --> Route: inform success
-
+deactivate Controller
 <--Route:
 
 
