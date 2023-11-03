@@ -64,34 +64,32 @@ export class FloorMaper extends Mapper<Floor> {
             rooms.push(await roomRepo.findById(f))
         }
 
-        let i = 0
-        for (const p of floorDTO.floorMap.passagewaysCoords) {
+        for (let i = 0; i < floorDTO.floorMap.passagewaysCoords.length; i++) {
             passagewaysCoords.push(IdCoords.create({
-                id: p.id.toValue(),
-                x: floorDTO.passagewaysCoords[i][0],
-                y: floorDTO.passagewaysCoords[i][1]
+                id: Number(floorDTO.floorMap.passagewaysCoords[i][0]),
+                x:  floorDTO.floorMap.passagewaysCoords[i][1],
+                y:  floorDTO.floorMap.passagewaysCoords[i][2],
+                x1: floorDTO.floorMap.roomCoords[i][3],
+                y1: floorDTO.floorMap.roomCoords[i][4]
             }))
-            i++
         }
 
-        i = 0
-        for (const e of floorDTO.floorMap.elevatorsCoords) {
+        for (let i = 0; i < floorDTO.floorMap.elevatorsCoords.length; i++) {
             elevatorsCoords.push(IdCoords.create({
-                id: e.id.toValue(),
-                x: floorDTO.elevatorsCoords[i][0],
-                y: floorDTO.elevatorsCoords[i][1]
+                id: Number(floorDTO.floorMap.elevatorsCoords[i][0]),
+                x: floorDTO.floorMap.elevatorsCoords[i][1],
+                y: floorDTO.floorMap.elevatorsCoords[i][2]
             }))
-            i++
         }
 
-        i = 0
-        for (const r of floorDTO.floorMap.roomCoords) {
+        for (let i = 0; i < floorDTO.floorMap.roomCoords.length; i++) {
             roomCoords.push(IdCoords.create({
-                id: r.id.toValue(),
-                x: floorDTO.roomCoords[i][0],
-                y: floorDTO.roomCoords[i][1]
+                id: floorDTO.floorMap.roomCoords[i][0].toString(),
+                x:  floorDTO.floorMap.roomCoords[i][1],
+                y:  floorDTO.floorMap.roomCoords[i][2],
+                x1: floorDTO.floorMap.roomCoords[i][3],
+                y1: floorDTO.floorMap.roomCoords[i][4]
             }))
-            i++
         }
 
         const FloorOrError = Floor.create(
