@@ -41,7 +41,7 @@
 
 ![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
 
-### level 2
+### Level 2
 
 * Logical View
 
