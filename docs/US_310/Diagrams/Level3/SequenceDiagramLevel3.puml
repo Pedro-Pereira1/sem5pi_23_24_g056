@@ -5,13 +5,14 @@ autonumber
 participant ":RoomRoute" as Route
 participant ":CreateRoomController" as Controller
 participant ":CreateRoomService" as Service
-participant ":Room"
+participant ":Room" as Room
 participant ":RoomRepo" as Repo
+participant ":RoomSchema" as Schema
 participant ":RoomMap" as Map
 participant ":RoomDTO" as DTO
 participant ":FloorRepo" as FloorRepo
-participant ":Floor"
-database Database
+participant ":FloorSchema" as FloorSchema
+participant ":Floor" as Floor
 
 ?o->Route: POST
 activate Route
@@ -21,6 +22,8 @@ activate Controller
 
 Controller -> Map: toDto(req.body)
 activate Map
+Controller <-- Map
+deactivate Map
 
 Controller -> Service: createRoom(roomDto)
 activate Service
@@ -31,32 +34,33 @@ Service -> Room: room = create(roomProps)
 Service -> Repo: save(room)
 activate Repo
 
-Repo -> Database: save
+Repo -> Schema: save
 deactivate Repo
 
 Service -> FloorRepo: floor = find(floor)
 activate FloorRepo
 Service <-- FloorRepo
-Service -> Floor: addRoom(room)
-Service -> FloorRepo: save(floor)
+deactivate FloorRepo
 
-FloorRepo-> Database: save
+Service -> Floor: addRoom(room)
+
+Service -> FloorRepo: save(floor)
+activate FloorRepo
+
+FloorRepo-> FloorSchema: save
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
-
+activate Map
 Map -> DTO: create
 deactivate Map
 
 Service --> Controller:
 deactivate Service
 
-alt success
-Controller --> Route: code 201
-else insuccess
-Controller --> Route: code 402
+Controller --> Route: success
 deactivate Controller
-end alt
+
 <--Route:
 
 

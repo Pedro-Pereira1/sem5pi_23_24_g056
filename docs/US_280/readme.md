@@ -13,24 +13,21 @@
 * edit an elevator in a building.
 
 **Client Clarifications**
-* Question: "Em relação às User Stories de edição, temos já uma ideia das informações que são opcionais, mas queremos ter a certeza daquilo que é editável ou não. Posto isto, poderia indicar que informações pretende editar nas US160, US200, US250 e US280?"
+>**Question**: "Em relação às User Stories de edição, temos já uma ideia das informações que são opcionais, mas queremos ter a certeza daquilo que é editável ou não. Posto isto, poderia indicar que informações pretende editar nas US160, US200, US250 e US280?"<br>
+><br> **Answer** : "... requisito 280 - editar elevador - todas as informações à exceção do edificio a que o piso se refere"
 
-* Answer: "... requisito 280 - editar elevador - todas as informações à exceção do edificio a que o piso se refere"
 
-
-* Question: "Como tal, gostaria de saber que atributos deveria ter o elevador, para além de uma lista de pisos aos quais consegue aceder dentro do seu edifício. Algumas das ideias que me surgiram foram o piso em que estava localizado naquele momento, número de série, fabricante ou descrição."
-
-* Answer: "- edificio (obrigatório)<br>
+>**Question**: "Como tal, gostaria de saber que atributos deveria ter o elevador, para além de uma lista de pisos aos quais consegue aceder dentro do seu edifício. Algumas das ideias que me surgiram foram o piso em que estava localizado naquele momento, número de série, fabricante ou descrição."<br><br>
+>**Answer**: "- edificio (obrigatório)<br>
 			- número identificativo (obrigatório, único no edificio)<br>
 			-lista de pisos do edificio servidos pelo elevador (obrigatório)<br>
 			- marca (opcional, alfanumerico, 50 caracteres)<br>
 			- modelo (opcional, mas obrigatório se marca for introduzido, alfanumerico, 50 caracteres)<br>
 			- número de série do fabricante (opcional, alfanumerico, 50 caracteres)<br>
-			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>
-			
+			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>		
 
 **Dependencies:**
-* This User Stories requires that there are buildings and elevators created, so it has dependencies on US150 and US270.
+* This User Stories requires that there are buildings, floors and elevators created, so it has dependencies on US150, US190 and US270.
 
 ## 3. Analysis
 Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to edit the
@@ -61,7 +58,7 @@ information of an elevator, such as brand, description, model, identification nu
 
 ![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
 
-### level 2
+### Level 2
 
 * Logical View
 
