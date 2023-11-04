@@ -29,7 +29,6 @@ export default class ListBuildingsMaxMinFloorsController implements IListBuildin
 
             res.status(200).json(buildingsOrError.getValue());
         }catch(error){
-            console.error("Error in listBuildingsMaxMinFloors:", error);
             res.status(500).json({ error: "Internal Server Error" });
         }
     }

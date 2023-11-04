@@ -121,6 +121,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.editElevator.path
   }
 
+  const editPassagewayController = {
+    name: config.controllers.editPassageway.name,
+    path: config.controllers.editPassageway.path
+  }
+
   const createRobotTypeController = {
     name: config.controllers.createRobotType.name,
     path: config.controllers.createRobotType.path
@@ -246,6 +251,11 @@ export default async ({ expressApp }) => {
     path: config.services.editElevator.path
   }
 
+  const editPassagewayService = {
+    name: config.services.editPassageway.name,
+    path: config.services.editPassageway.path
+  }
+
   const createRobotTypeService = {
     name: config.services.createRobotType.name,
     path: config.services.createRobotType.path
@@ -289,6 +299,7 @@ export default async ({ expressApp }) => {
       listElevatorsInBuildingController,
       editFloorController,
       editElevatorController,
+      editPassagewayController,
       createRobotTypeController,
       createRobotController,
       loadFlorMapController
@@ -318,6 +329,7 @@ export default async ({ expressApp }) => {
       listElevatorsInBuildingService,
       editFloorService,
       editElevatorService,
+      editPassagewayService,
       createRobotTypeService,
       createRobotService,
       loadFlorMapService

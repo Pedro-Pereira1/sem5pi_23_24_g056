@@ -25,6 +25,11 @@ export class FloorMap extends Entity<FloorMapProps> {
     this.props.passageways.push(passageway)
   }
 
+  removePassageway(thePassageway: Passageway){
+    const index = this.props.passageways.findIndex(passageway => passageway.id === thePassageway.id)
+    this.props.passageways.splice(index, 1)
+  }
+
   addElevators(elevator: Elevator) {
     this.props.elevators.push(elevator)
   }

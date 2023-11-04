@@ -9,6 +9,7 @@
 
 **US 370 -** As a Fleet Manager, I want to disable a robot
 
+**Client Clarifications**
 > **Q**: ...para além deste "estado" que outros estados pretende que existam? em funcionamento, ocupado, livre, a executar tarefa? Ou basta apenas inibido - desinibido?
 <br>
 > **A**: ... de um ponto de vista funcional pretende-se que seja possivel inibir ou desinibr um robot e que essa informação seja devidamente utilizada nos restantes casos de uso. por exemplo, um robot inibido não pode executar tarefas.
@@ -16,12 +17,13 @@
 **Dependencies:**
 
 - **US350 -** As a fleet manager, I want to add a new type of robot indicating its designation and what types of tasks it can perform from the predefined list of tasks.
-
 - **US360 -** As a fleet manager, I want to add a new robot to the fleet indicating its type, name, etc.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+**Analyzing this User Story we understand that:**
+* Fleet Manager is a user role that manages the data of the robots and drones and the types of tasks.
+* A robot has an operation status that is true when the robot is enabled and false when it is disabled.
 
 ### 3.1. Domain Model Excerpt
 

@@ -71,6 +71,10 @@ export class Floor extends AggregateRoot<FloorProps> {
     this.map.addPassageway(passageway)
   }
 
+  removePassageway(passageway: Passageway) {
+    this.map.removePassageway(passageway)
+  }
+
   addElevators(elevator: Elevator) {
     if (this.props.floormap.props.elevators.includes(elevator)) throw new Error("Floor with Number" + this.props.floorNumber + "already has this elevator!")
     this.map.addElevators(elevator)
