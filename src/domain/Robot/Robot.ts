@@ -8,6 +8,8 @@ import { SerialNumber } from './SerialNumber';
 import { RobotType } from '../RobotType/RobotType';
 import { Result } from '../../core/logic/Result';
 import { RobotDescription } from './RobotDescription';
+import { ICreateRobotDTO } from '../../dto/robot/ICreateRobotDTO';
+import { IRobotDTO } from '../../dto/robot/IRobotDTO';
 
 
 
@@ -21,18 +23,42 @@ import { RobotDescription } from './RobotDescription';
 
   export class Robot extends AggregateRoot<RobotProps> {
 
-    
+
     private constructor (code: Code,props: RobotProps) {
       super(props, code);
     }
 
-    public static create(robotProps: RobotProps, code: string): Result<Robot> {
-      const nickname = robotProps.nickname
-      const operationStatus = OperationStatus.create().getValue()
-      const serialNumber = robotProps.serialNumber
-      const type = robotProps.type
-      const description = robotProps.description
+    public static create(robotDTO: ICreateRobotDTO,robotType: RobotType, code: string): Result<Robot> {
+      const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
+      if(nicknameOrError.isFailure){
+        return Result.fail<Robot>(nicknameOrError.errorValue())
+      }
 
+      const operationStatusOrError = OperationStatus.create()
+      if(operationStatusOrError.isFailure){
+        return Result.fail<Robot>(operationStatusOrError.errorValue())
+      }
+
+      const serialNumberOrError = SerialNumber.create({ serialNumber: robotDTO.serialNumber })
+      if(serialNumberOrError.isFailure){
+        return Result.fail<Robot>(serialNumberOrError.errorValue())
+      }
+
+      let descriptionOrError
+      if(robotDTO.description != undefined){
+        descriptionOrError = RobotDescription.create({ description: robotDTO.description })
+        if(descriptionOrError.isFailure){
+            return Result.fail<Robot>(descriptionOrError.errorValue())
+        }
+      }else{
+        descriptionOrError = RobotDescription.create({ description: "" })
+      }
+
+      const nickname = nicknameOrError.getValue()
+      const operationStatus = operationStatusOrError.getValue()
+      const serialNumber = serialNumberOrError.getValue()
+      const type = robotType
+      const description = descriptionOrError.getValue()
 
       const robot = new Robot(new Code(code),
         {

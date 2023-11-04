@@ -21,11 +21,11 @@ export default class createRobotController implements ICreateRobotController {
             const robotOrError = await this.service.createRobot(req.body as ICreateRobotDTO) as Result<IRobotDTO>
         
             if (robotOrError.isFailure) {
-                return res.status(402).send(robotOrError.errorValue())
+                return res.status(400).send(robotOrError.errorValue())
             }
         
             const robotDTO = robotOrError.getValue();
-            return res.json(robotDTO).status(201);
+            return res.status(201).json(robotDTO);
 
         }catch (e){
             return next(e);
