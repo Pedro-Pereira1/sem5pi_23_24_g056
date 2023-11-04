@@ -16,15 +16,15 @@ export default class ListAllFloorsController implements IListAllFloorsController
 
     public async listAllFloors(req: Request, res: Response, next: NextFunction) {
         try {
-            const buildingID = req.params.buildingId.toString();
+            const buildingId = req.params.buildingId.toString();
 
-            const floors = await this.listAllFloorsService.listAllFloors(buildingID)
+            const floorsOrError = await this.listAllFloorsService.listAllFloors(buildingId)
 
-            if(floors.isFailure) {
-                return res.status(404).send()
+            if(floorsOrError.isFailure) {
+                return res.status(400).send(floorsOrError.errorValue())
             }
 
-            return res.json(floors).status(200)
+            return res.status(200).json(floorsOrError.getValue())
         } catch(err) {
             throw err
         }
