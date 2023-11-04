@@ -15,12 +15,7 @@ export default class LoadFloorController implements ILoadFloorMapController {
 
     public async loadFloorMap(req: Request, res: Response, next: NextFunction) {
 
-        const floorBuffer = req.file.buffer.toString()
-        const floorLayout = JSON.parse(floorBuffer) as ILoadFloorMapDTO
-        const floorId = req.body.floorId as number
-        const buildingCode = req.body.buildingCode as string
-
-        const floorDto = await this.loadFloorMapService.loadFloorMap(buildingCode, floorId, floorLayout)
+        const floorDto = await this.loadFloorMapService.loadFloorMap(req.body as ILoadFloorMapDTO)
 
         if (floorDto.isFailure) {
             return res.status(400).send(floorDto.errorValue())

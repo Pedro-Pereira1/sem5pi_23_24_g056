@@ -9,18 +9,10 @@ import IListAllFloorsController from '../../controllers/IControllers/floor/list/
 import IEditFloorController from '../../controllers/IControllers/floor/edit/IEditFloorController';
 import ILoadFloorMapController from '../../controllers/IControllers/floor/floorMap/ILoadFloorMapController';
 
-import multer from 'multer'
-import bodyParser from 'body-parser';
-
 const route = Router();
 
 export default (app: Router) => {
     app.use('/floors', route)
-
-    app.use(multer)
-    app.use(bodyParser.urlencoded({ extended: false }))
-
-    const upload = multer({ storage: multer.memoryStorage() })
 
     const ctrl = Container.get(config.controllers.createFloor.name) as ICreateFloorController
     const ctrllistAllFloors = Container.get(config.controllers.listAllFloors.name) as IListAllFloorsController
@@ -55,11 +47,11 @@ export default (app: Router) => {
 		(req, res, next) => ctrlEditFloor.editFloor(req, res, next)
 	);
 
-    route.patch('/loadFloorMap',
+    route.patch('/loadFloorMap', /*
     celebrate({
         body: Joi.object({
             //floorId: Joi.number().required(),
             //floorMap: Joi.required(),
         })
-    }), upload.single('floorMap'), (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
+    }),*/ (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 }
