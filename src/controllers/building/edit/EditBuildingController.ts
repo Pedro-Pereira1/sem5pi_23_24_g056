@@ -19,11 +19,11 @@ export default class EditBuildingController implements IEditBuildingontroller {
             const buildingOrError = await this.editBuildingService.editBuilding(req.body as IBuildingDTO)
 
             if (buildingOrError.isFailure) {
-                return res.status(402).send
+                return res.status(400).send
             }
 
             const buildingDTO = buildingOrError.getValue();
-            return res.json(buildingDTO).status(200);
+            return res.status(201).json(buildingDTO);
         } catch (err) {
             return next(err)
         }

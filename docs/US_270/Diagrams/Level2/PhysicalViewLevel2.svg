@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="373px" preserveAspectRatio="none" style="width:297px;height:373px;background:#FFFFFF;" version="1.1" viewBox="0 0 297 373" width="297px" zoomAndPan="magnify"><defs/><g><!--MD5=[d9d6adadc1b98074ab894dec1a4e057e]
+cluster Server1--><g id="cluster_Server1"><polygon fill="none" points="33,16,43,6,271,6,271,185,261,195,33,195,33,16" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="261" x2="271" y1="16" y2="6"/><line style="stroke:#181818;stroke-width:1.0;" x1="33" x2="261" y1="16" y2="16"/><line style="stroke:#181818;stroke-width:1.0;" x1="261" x2="261" y1="16" y2="195"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="56" x="120" y="33.5332">Server1</text></g><!--MD5=[42e6adeea204b379b27fb1a6362bdcfe]
+cluster BRW--><g id="cluster_BRW"><rect fill="none" height="100" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="166" x="73" y="63"/><rect fill="none" height="10" style="stroke:#181818;stroke-width:1.0;" width="15" x="219" y="68"/><rect fill="none" height="2" style="stroke:#181818;stroke-width:1.0;" width="4" x="217" y="70"/><rect fill="none" height="2" style="stroke:#181818;stroke-width:1.0;" width="4" x="217" y="74"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="110.5" y="90.5332">&lt;&lt;Browser&gt;&gt;</text></g><!--MD5=[4915eaa5dd0c2e60382807b5b2444d45]
+cluster Server2--><g id="cluster_Server2"><polygon fill="none" points="33,245,43,235,280,235,280,346,270,356,33,356,33,245" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="270" x2="280" y1="245" y2="235"/><line style="stroke:#181818;stroke-width:1.0;" x1="33" x2="270" y1="245" y2="245"/><line style="stroke:#181818;stroke-width:1.0;" x1="270" x2="270" y1="245" y2="356"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="56" x="124.5" y="262.5332">Server2</text></g><!--MD5=[9c35c66068622dad62ecac52c54c307b]
+entity V--><g id="elem_V"><rect fill="#F1F1F1" height="47.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134" x="89" y="99"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="203" y="104"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="201" y="106"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="201" y="110"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94" x="104" y="133.5332">«Visualização»</text></g><!--MD5=[f0ba8f2b594b0ea9cf5d8d5d65864cd7]
+entity MDB--><g id="elem_MDB"><rect fill="#F1F1F1" height="47.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="179" x="76.5" y="284"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="235.5" y="289"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="233.5" y="291"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="233.5" y="295"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="91.5" y="318.5332">«MasterDataBuilding»</text></g><!--MD5=[afa20805cdcb1e6172d37117fd3618ae]
+link Server1 to Server2--><g id="link_Server1_Server2"><path d="M41,195.4318 C41,196.7594 41,198.0929 41,199.4309 C41,204.7831 41,210.2094 41,215.635 C41,221.0606 41,226.4856 41,231.8353 C41,232.504 41,233.1716 41,233.8378 C41,234.1709 41,234.5037 41,234.8361 " fill="none" id="Server1-Server2" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="33" x="7" y="212.0151">http/s</text></g><!--MD5=[00301d44a44fc58ecc6102f3bc606be7]
+@startuml
+
+skinparam linetype ortho
+
+node Server1{
+  component "<<Browser>>" as BRW{
+   component "<<Visualização>>" as V {
+    }
+  }
+}
+
+node Server2{
+  component "<<MasterDataBuilding>>" as MDB{
+  }
+}
+
+Server1 -d- Server2: http/s
+
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

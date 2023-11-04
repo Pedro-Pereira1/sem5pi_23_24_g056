@@ -26,22 +26,63 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-### 3.2. System Sequence Diagram
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
-
 ## 4. Design
+### Level 1
 
-### 4.1. Realization
+* Logical View
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.2. Class Diagram
+* Process View
 
-![ClassDiagram](Diagrams/ClassDiagram.svg)
+![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
 
-### 4.3. Applied Patterns
+* Scenary View
 
-### 4.4. Tests
+![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+
+### Level 2
+
+* Logical View
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process View
+
+![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+
+* Physical View
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation View
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+
+### 4.2. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 

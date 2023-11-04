@@ -1,0 +1,59 @@
+@startuml
+
+autonumber
+
+participant ":ElevatorRoute" as Route
+participant ":EditElevatorController" as Controller
+participant ":EditElevatorService" as Service
+participant ":ElevatorRepo" as Repo
+participant ":ElevatorSchema" as Schema
+participant ":ElevatorMap" as Map
+participant ":ElevatorDTO" as DTO
+
+participant ":BuildingRepo" as BuildingRepo
+participant ":BuildingSchema" as BuildingSchema
+
+
+
+?o->Route: GET
+activate Route
+
+Route -> Controller: listElevatorsInBuilding(req, res, next)
+activate Controller
+
+Controller -> Service: listElevatorsInBuilding(buildingCode)
+activate Service
+
+Service -> BuildingRepo: findByBuildingCode(buildingCode)
+activate BuildingRepo
+BuildingRepo -> BuildingSchema: findOne(buildingCode)
+activate BuildingSchema
+BuildingRepo <-- BuildingSchema
+deactivate BuildingSchema
+Service <-- BuildingRepo
+deactivate BuildingRepo
+
+
+
+
+Service -> Repo: get elevators which have the same id as the ones stored in building
+activate Repo
+Repo -> Schema: get elevators
+deactivate Repo
+
+Service -> Map:toDto(elevators)
+activate Map
+
+Map -> DTO: create
+deactivate Map
+
+Service --> Controller: elevators list
+deactivate Service
+
+Controller --> Route: elevators list
+deactivate Controller
+<--Route:
+
+
+
+@enduml

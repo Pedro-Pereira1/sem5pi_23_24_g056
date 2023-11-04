@@ -3,8 +3,8 @@
 autonumber
 
 participant ":ElevatorRoute" as Route
-participant ":EditElevatorController" as Controller
-participant ":EditElevatorService" as Service
+participant ":CreateElevatorController" as Controller
+participant ":CreateElevatorService" as Service
 participant ":Elevator" as Elevator
 participant ":ElevatorRepo" as Repo
 participant ":ElevatorSchema" as Schema
@@ -21,7 +21,7 @@ participant ":Floor" as Floor
 ?o->Route: PUT
 activate Route
 
-Route -> Controller: editElevator(req, res, next)
+Route -> Controller: createElevator(req, res, next)
 activate Controller
 
 Controller -> Map: toDto(req.body)
@@ -31,7 +31,7 @@ Controller <-- Map
 deactivate Map
 
 
-Controller -> Service: editElevator(elevatorDto)
+Controller -> Service: createElevator(elevatorDto)
 activate Service
 
 Service -> BuildingRepo: findByBuildingCode(buildingCode)
@@ -49,29 +49,28 @@ activate Repo
 Repo -> Schema: save
 deactivate Repo
 
-Service -> FloorRepo: get all floors to remove/add elevator
+Service -> FloorRepo: floorsToRemove = find(floorsIdToRemove)
 activate FloorRepo
 Service <-- FloorRepo
 deactivate FloorRepo
 
-Service -> Floor: remove/add elevator from floors
-Service -> FloorRepo: save(all floors)
-activate FloorRepo
+Service -> Floor: removeElevator(elevator)
+Service -> FloorRepo: save(floor)
 
-FloorRepo -> FloorSchema: save
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
 activate Map
-
 Map -> DTO: create
 deactivate Map
 
 Service --> Controller:
 deactivate Service
 
+
 Controller --> Route: inform success
 deactivate Controller
+
 <--Route:
 
 

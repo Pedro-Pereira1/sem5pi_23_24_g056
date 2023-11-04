@@ -82,7 +82,7 @@ export class FloorMap extends Entity<FloorMapProps> {
   get elevatorsCoords(): number[][] {
     let coords: number[][] = []
 
-    for (let i = 0; i < this.props.elevators.length; i++) {
+    for (let i = 0; i < this.props.elevatorsCoords.length; i++) {
       coords[i] = []
       coords[i][0] = Number(this.props.elevatorsCoords[i].id)
       coords[i][1] = this.props.elevatorsCoords[i].x
@@ -103,7 +103,7 @@ export class FloorMap extends Entity<FloorMapProps> {
   get roomsCoords(): number[][] { //strings
     let coords: number[][] = []
 
-    for (let i = 0; i < this.props.rooms.length; i++) {
+    for (let i = 0; i < this.props.roomsCoords.length; i++) {
       coords[i] = []
       coords[i][0] = Number(this.props.roomsCoords[i].id)
       coords[i][1] = this.props.roomsCoords[i].x
