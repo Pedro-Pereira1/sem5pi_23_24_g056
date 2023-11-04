@@ -20,11 +20,11 @@ export default class CreateElevatorController implements ICreateElevatorControll
             const elevatorOrError = await this.service.createElevator(req.body as ICreateElevatorDTO) as Result<IElevatorDTO>
 
             if (elevatorOrError.isFailure) {
-                return res.status(402).send(elevatorOrError.errorValue())
+                return res.status(400).send(elevatorOrError.errorValue())
             }
 
             const elevatorDTO = elevatorOrError.getValue();
-            return res.json(elevatorDTO).status(201);
+            return res.status(201).json(elevatorDTO);
 
         }catch (e){
             return next(e);
