@@ -85,6 +85,10 @@ export default {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
     },
+    loadFloorMap: {
+      name: "loadFloorMapController",
+      path: "../controllers/floor/floorMap/LoadFloorMapController"
+    },
     editFloor: {
       name: "editFloorController",
       path: "../controllers/floor/edit/editFloorController"
@@ -186,6 +190,10 @@ export default {
     editBuilding: {
       name: "editBuildingService",
       path: "../services/building/edit/EditBuildingService"
+    },
+    loadFloorMap: {
+      name: "loadFloorMapService",
+      path: "../services/floor/floorMap/LoadFloorMapService"
     },
     editFloor: {
       name: "editFloorService",

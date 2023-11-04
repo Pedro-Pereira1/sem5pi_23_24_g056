@@ -14,20 +14,24 @@ import FloorNumber from "../../domain/Floor/FloorId";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
+import DoubleCoords from "../../domain/Floor/DoubleCoords";
+import SingleCoords from "../../domain/Floor/SingleCoords";
 
 export class FloorMaper extends Mapper<Floor> {
 
     public static toDto(floor: Floor): IFloorDTO {
-
         return {
-            floorNumber: floor.props.floorNumber,
-            floorId: floor.floorId.toValue(),
+            floorId: floor.id.toValue(),
+            floorNumber: floor.floorNumber.number,
             floorDescription: floor.description.description,
             floorMap: {
-                map: floor.props.floormap.props.map,
+                map: floor.map.props.map,
                 passageways: floor.map.passagewaysId,
-                elevators: floor.map.elevatorsId,
                 rooms: floor.map.roomsId,
+                elevators: floor.map.elevatorsId,
+                passagewaysCoords: floor.map.passagewaysCoords,
+                elevatorsCoords: floor.map.elevatorsCoords,
+                roomCoords:floor.map.roomsCoords
             }
         } as IFloorDTO
     }
@@ -44,6 +48,10 @@ export class FloorMaper extends Mapper<Floor> {
         let passageways: Passageway[] = []
         let rooms: Room[] = []
         let map: number[][] = floorDTO.floorMap.map
+        let passagewaysCoords: DoubleCoords[] = []
+        let elevatorsCoords: SingleCoords[] = []
+        let roomCoords: DoubleCoords[] = []
+
 
         for (const f of floorDTO.floorMap.passageways) {
             passageways.push(await passagewayRepo.findById(f))
@@ -57,15 +65,46 @@ export class FloorMaper extends Mapper<Floor> {
             rooms.push(await roomRepo.findById(f))
         }
 
+        for (let i = 0; i < floorDTO.floorMap.passagewaysCoords.length; i++) {
+            passagewaysCoords.push(DoubleCoords.create({
+                id: Number(floorDTO.floorMap.passagewaysCoords[i][0]),
+                x:  floorDTO.floorMap.passagewaysCoords[i][1],
+                y:  floorDTO.floorMap.passagewaysCoords[i][2],
+                x1: floorDTO.floorMap.roomCoords[i][3],
+                y1: floorDTO.floorMap.roomCoords[i][4]
+            }))
+        }
+
+        for (let i = 0; i < floorDTO.floorMap.elevatorsCoords.length; i++) {
+            elevatorsCoords.push(SingleCoords.create({
+                id: Number(floorDTO.floorMap.elevatorsCoords[i][0]),
+                x: floorDTO.floorMap.elevatorsCoords[i][1],
+                y: floorDTO.floorMap.elevatorsCoords[i][2]
+            }))
+        }
+
+        for (let i = 0; i < floorDTO.floorMap.roomCoords.length; i++) {
+            roomCoords.push(DoubleCoords.create({
+                id: floorDTO.floorMap.roomCoords[i][0].toString(),
+                x:  floorDTO.floorMap.roomCoords[i][1],
+                y:  floorDTO.floorMap.roomCoords[i][2],
+                x1: floorDTO.floorMap.roomCoords[i][3],
+                y1: floorDTO.floorMap.roomCoords[i][4]
+            }))
+        }
+
         const FloorOrError = Floor.create(
             {
-                floorDescription: new FloorDescription({ value: description }),
                 floorNumber: floorNumber,
+                floorDescription: new FloorDescription({ value: description }),
                 floormap: new FloorMap({
                     map: map,
                     passageways: passageways,
                     elevators: elevators,
-                    rooms: rooms
+                    rooms: rooms,
+                    passagewaysCoords: passagewaysCoords,
+                    elevatorsCoords: elevatorsCoords,
+                    roomsCoords: roomCoords
                 })
             }, floorDTO.floorId)
 
@@ -74,15 +113,18 @@ export class FloorMaper extends Mapper<Floor> {
 
     public static toPersistence(floor: Floor): any {
         return {
-            floorNumber: floor.props.floorNumber,
             floorId: floor.id.toValue(),
+            floorNumber: floor.floorNumber.number,
             floorDescription: floor.description.description,
             floorMap: {
-                map: floor.props.floormap.props.map,
+                map: floor.map.props.map,
                 passageways: floor.map.passagewaysId,
-                elevators: floor.map.elevatorsId,
                 rooms: floor.map.roomsId,
+                elevators: floor.map.elevatorsId,
+                passagewaysCoords: floor.map.passagewaysCoords,
+                elevatorsCoords: floor.map.elevatorsCoords,
+                roomCoords:floor.map.roomsCoords
             }
-        } as IFloorDTO
+        }
     }
 }

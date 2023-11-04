@@ -131,6 +131,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.createRobot.path
   }
 
+  const loadFlorMapController = {
+    name: config.controllers.loadFloorMap.name,
+    path: config.controllers.loadFloorMap.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -252,6 +257,11 @@ export default async ({ expressApp }) => {
   }
 
 
+  const loadFlorMapService = {
+    name: config.services.loadFloorMap.name,
+    path: config.services.loadFloorMap.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -280,7 +290,8 @@ export default async ({ expressApp }) => {
       editFloorController,
       editElevatorController,
       createRobotTypeController,
-      createRobotController
+      createRobotController,
+      loadFlorMapController
     ],
     repos: [
       roleRepo,
@@ -308,7 +319,8 @@ export default async ({ expressApp }) => {
       editFloorService,
       editElevatorService,
       createRobotTypeService,
-      createRobotService
+      createRobotService,
+      loadFlorMapService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

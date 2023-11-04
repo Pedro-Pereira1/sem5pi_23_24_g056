@@ -2,9 +2,9 @@
 
 autonumber
 
-participant ":Building" as Floor
-participant ":ListBuildingController" as Controller
-participant ":BuildingService" as Service
+participant ":BuildingRoute" as Floor
+participant ":ListBuildingsMaxMinFloorsController" as Controller
+participant ":ListBuildingsMaxMinFloorsService" as Service
 participant ":BuildingRepo" as Repo
 participant ":BuildingMap" as Map
 participant ":BuildingDTO" as DTO
@@ -12,13 +12,13 @@ participant ":BuildingDTO" as DTO
 ?o->Floor: GET
 activate Floor
 
-Floor -> Controller: getBuildingsByMaxAndMinFloors(min,max)
+Floor -> Controller: listBuildingsByMaxAndMinFloors(req, res, next)
 activate Controller
 
-Controller -> Service: getBuildingsByMaxAndMinFloors(min,max)
+Controller -> Service: listBuildingsByMaxAndMinFloors(max,min)
 activate Service
 
-Service -> Repo: getBuildingsByMaxAndMinFloors(min,max)
+Service -> Repo: findBuildingsByMaxAndMinFloors(max,min)
 activate Repo
 
 

@@ -34,22 +34,40 @@ export default class FloorRepo implements IFloorRepo {
         return FloorMaper.toDomain(floorCreated);
 
       } else {
-        if (floor.props.floorNumber !== undefined) {
-          floorDocument.floorNumber = floor.props.floorNumber;
+        if (floor.props.floorNumber.number !== undefined) {
+          floorDocument.floorNumber = floor.floorNumber.number
         }
 
         if (floor.description.description !== undefined) {
           floorDocument.floorDescription = floor.description.description;
         }
 
-        // console.log(floor.props.floormap.elevatorsId)
-
         if (floor.props.floormap.elevatorsId !== undefined) {
           floorDocument.floorMap.elevators = floor.props.floormap.elevatorsId;
         }
 
+        if (floor.props.floormap.passagewaysId !== undefined) {
+          floorDocument.floorMap.passageways = floor.props.floormap.passagewaysId;
+        }
+
         if (floor.props.floormap.roomsId !== undefined) {
           floorDocument.floorMap.rooms = floor.props.floormap.roomsId;
+        }
+
+        if (floor.props.floormap.map !== undefined) {
+          floorDocument.floorMap.map = floor.map.map
+        }
+
+        if (floor.map.passagewaysCoords !== undefined) {
+          floorDocument.floorMap.passagewaysCoords = floor.map.passagewaysCoords
+        }
+
+        if (floor.map.elevatorsCoords !== undefined) {
+          floorDocument.floorMap.elevatorsCoords = floor.map.elevatorsCoords
+        }
+
+        if (floor.map.roomsCoords !== undefined) {
+          floorDocument.floorMap.roomCoords = floor.map.roomsCoords
         }
 
         await floorDocument.save();
