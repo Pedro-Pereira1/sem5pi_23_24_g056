@@ -1,38 +1,81 @@
-# US 1001
-
-*This is an example template*
+# US 370 - As a Fleet Manager, I want to disable a robot
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* First time that this task is developed.
+* This task is relative to system user Fleet Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 370 -** As a Fleet Manager, I want to disable a robot
 
-*Example*
+> **Q**: ...para além deste "estado" que outros estados pretende que existam? em funcionamento, ocupado, livre, a executar tarefa? Ou basta apenas inibido - desinibido?
+<br>
+> **A**: ... de um ponto de vista funcional pretende-se que seja possivel inibir ou desinibr um robot e que essa informação seja devidamente utilizada nos restantes casos de uso. por exemplo, um robot inibido não pode executar tarefas.
 
-**US G002** As {Ator} I Want...
+**Dependencies:**
 
-- G002.1. Blá Blá Blá ...
+- **US350 -** As a fleet manager, I want to add a new type of robot indicating its designation and what types of tasks it can perform from the predefined list of tasks.
 
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+- **US360 -** As a fleet manager, I want to add a new robot to the fleet indicating its type, name, etc.
 
 ## 3. Analysis
 
 *In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
 
-## 4. Design
+### 3.1. Domain Model Excerpt
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
+![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
+
+## 4. Design
 
 ### 4.1. Realization
 
-### 4.2. Class Diagram
+### Level 1
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+* Logical:
+
+![Logical](./Diagrams/Level1/LogicalView.svg)
+
+* Process
+
+![Process](./Diagrams/Level1/ProcessLevel1.svg)
+
+* Scenary
+
+![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
+
+### level 2
+
+* Logical:
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process
+
+![Process](./Diagrams/Level2/ProcessLevel2.svg)
+
+* Physical
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/ProcessLevel3.svg)
 
 ### 4.3. Applied Patterns
 
