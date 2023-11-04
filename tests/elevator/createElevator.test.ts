@@ -32,7 +32,7 @@ import BuildingCode from "../../src/domain/Building/BuildingCode";
 import {IFloorDTO} from "../../src/dto/floor/IFloorDTO";
 import {FloorMap} from "../../src/domain/Floor/FloorMap";
 
-describe.only("Create elevator", function () {
+describe("Create elevator", function () {
     const sandbox = sinon.createSandbox();
     let buildingRepoMock;
     let floorRepoMock;
