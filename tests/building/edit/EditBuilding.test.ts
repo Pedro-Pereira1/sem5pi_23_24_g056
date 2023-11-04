@@ -12,7 +12,7 @@ import { BuildingSize } from '../../../src/domain/Building/BuildingSize';
 import EditBuildingService from '../../../src/services/building/edit/EditBuildingService'
 import IBuildingRepo from '../../../src/services/IRepos/building/IBuildingRepo';
 
-describe.only('Edit building test', function () {
+describe('Edit building test', function () {
 
     beforeEach(function () {
         Container.reset()
