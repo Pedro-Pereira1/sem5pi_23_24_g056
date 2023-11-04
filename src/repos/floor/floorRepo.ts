@@ -5,6 +5,7 @@ import IFloorPersistence from "../../dataschema/floor/IFloorPersistence";
 import { Document, FilterQuery, Model } from 'mongoose';
 import FloorNumber from "../../domain/Floor/FloorId";
 import { FloorMaper } from "../../mappers/floor/FloorMaper";
+import {Building} from "../../domain/Building/Building";
 
 @Service()
 export default class FloorRepo implements IFloorRepo {
@@ -96,6 +97,20 @@ export default class FloorRepo implements IFloorRepo {
     if (floorRecords.length > 0) {
       const floors = await Promise.all(
         floorRecords.map(async (record) => FloorMaper.toDomain(record))
+      );
+      return floors;
+    } else {
+      return [];
+    }
+  }
+
+  public async findByPassageway(passagewayId: number): Promise<Floor[]> {
+    const query = { 'floorMap.passageways': passagewayId };
+    const floorRecords = await this.floorSchema.find(query as FilterQuery<IFloorPersistence & Document>);
+
+    if (floorRecords.length > 0) {
+      const floors = await Promise.all(
+          floorRecords.map(async (record) => FloorMaper.toDomain(record))
       );
       return floors;
     } else {
