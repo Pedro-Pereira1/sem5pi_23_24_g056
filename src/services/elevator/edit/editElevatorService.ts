@@ -28,7 +28,7 @@ export default class EditElevatorService implements IEditElevatorService {
     public async editElevator(elevatorDto: IEditElevatorDTO): Promise<Result<IElevatorDTO>> {
         try{
             const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
-            if (!building) throw new Error("Building does not exist!")
+            if (!building) return Result.fail<IElevatorDTO>('Building does not exist!')
 
             let theElevator: Elevator = undefined
             for (var floor of building.floors) {
@@ -41,10 +41,10 @@ export default class EditElevatorService implements IEditElevatorService {
                 }
             }
 
-            if (theElevator === undefined) throw new Error("Elevator does not exist!")
+            if (theElevator === undefined) return Result.fail<IElevatorDTO>('Elevator does not exist!')
 
             if (elevatorDto.elevatorBrand !== undefined){
-                if (elevatorDto.elevatorModel === undefined && theElevator.props.elevatorModel === null) throw new Error("Brand was provided so Model is required!")
+                if (elevatorDto.elevatorModel === undefined && theElevator.props.elevatorModel === null) return Result.fail<IElevatorDTO>('Brand was provided so Model is required!')
 
                 const brandOrError = ElevatorBrand.create(elevatorDto.elevatorBrand)
 
@@ -80,12 +80,12 @@ export default class EditElevatorService implements IEditElevatorService {
                 let floors: Floor[] = [];
                 for (var floorId of elevatorDto.floorsIdToRemove) {
                     const floor = await this.floorRepo.findById(floorId)
-                    if (floor === null) throw new Error("Floor does not exist!")
+                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
                     floors.push(floor)
                 }
 
                 const floorsOfElevator = await this.floorRepo.findByElevator(Number(theElevator.id.toValue()))
-                if (floorsOfElevator.length === 1) throw new Error("Remove floor is not possible because elevator is only associated with onde floor!")
+                if (floorsOfElevator.length === 1) return Result.fail<IElevatorDTO>('Remove floor is not possible because elevator is only associated with one floor!')
     
                 for (var floor of floors){
                     floor.removeElevator(theElevator)
@@ -97,7 +97,8 @@ export default class EditElevatorService implements IEditElevatorService {
                 let floors: Floor[] = [];
                 for (var floorId of elevatorDto.floorsIdToAdd) {
                     const floor = await this.floorRepo.findById(floorId)
-                    if (floor === null) throw new Error("Floor does not exist!")
+                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                    if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
                     floors.push(floor)
                 }
     
