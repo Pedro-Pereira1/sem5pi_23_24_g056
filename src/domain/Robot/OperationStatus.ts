@@ -17,6 +17,10 @@ export class OperationStatus extends ValueObject<OperationStatusProps> {
     return this.props.status;
   }
 
+  inhibit() {
+    this.props.status = false
+  }
+
   public static create(): Result<OperationStatus> {
     return Result.ok<OperationStatus>(new OperationStatus({ status: true }));
   }

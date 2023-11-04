@@ -26,6 +26,14 @@ export class Robot extends AggregateRoot<RobotProps> {
     super(props, code);
   }
 
+  get operationStatus(): OperationStatus {
+    return this.props.operationStatus
+  }
+
+  inhibit() {
+    this.operationStatus.inhibit
+  }
+
   public static create(robotProps: RobotProps, code: string): Result<Robot> {
     const nickname = robotProps.nickname
     const operationStatus = OperationStatus.create().getValue()
