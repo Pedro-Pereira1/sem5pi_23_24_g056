@@ -43,6 +43,19 @@ export class Building extends AggregateRoot<BuildingProps> {
     return this.props.floors
   }
 
+  changeName(name: string) {
+    this.name.props.value = name
+  }
+
+  changeDescription(description: string) {
+    this.desctription.props.value = description
+  }
+
+  changeSize(length: number, width: number) {
+    this.size.props.length = length
+    this.size.props.width = width
+  }
+
   get floorsNumber(): number[] {
     let floors: number[] = []
     this.props.floors.forEach(f => {
