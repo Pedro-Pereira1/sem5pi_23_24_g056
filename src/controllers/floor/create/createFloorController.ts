@@ -26,7 +26,7 @@ export default class CreateFloorController implements ICreateFloorController {
             }
 
             const FloorDTO = FloorOrError.getValue();
-            return res.json(FloorDTO).status(201);
+            return res.status(201).json(FloorDTO);
 
         }catch (e){
             return next(e);
