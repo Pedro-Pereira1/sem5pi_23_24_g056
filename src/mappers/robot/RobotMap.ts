@@ -10,6 +10,7 @@ import { Nickname } from "../../domain/Robot/Nickname";
 import { SerialNumber } from "../../domain/Robot/SerialNumber";
 import { RobotType } from "../../domain/RobotType/RobotType";
 import { RobotDescription } from "../../domain/Robot/RobotDescription";
+import { Code } from "../../domain/Robot/Code";
 
 
 export class RobotMap extends Mapper<Robot> {
@@ -27,21 +28,7 @@ export class RobotMap extends Mapper<Robot> {
 
     public static async toDomain(robotDTO: any | Model<IRobotPersistence & Document>): Promise<Robot> {
 
-        const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
-        const operationStatusOrError = OperationStatus.create()
-        const serialNumberOrError = SerialNumber.create({ serialNumber: robotDTO.serialNumber })
-        const typeOrError = robotDTO.type
-        const descriptionOrError = RobotDescription.create({ description: robotDTO.description })
-        
-        const RobotOrError = Robot.create(
-            {
-                nickname: nicknameOrError.getValue(),
-                operationStatus: operationStatusOrError.getValue(),
-                serialNumber: serialNumberOrError.getValue(),
-                type: typeOrError,
-                description: descriptionOrError.getValue()
-            }, robotDTO.code)
-
+        const RobotOrError = Robot.create(robotDTO, robotDTO.type, robotDTO.code)
 
         return RobotOrError.isSuccess ? RobotOrError.getValue() : null
     }
