@@ -82,7 +82,7 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
 
 * Process
 
