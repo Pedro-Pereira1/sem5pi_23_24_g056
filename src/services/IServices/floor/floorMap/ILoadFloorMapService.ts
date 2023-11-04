@@ -3,5 +3,5 @@ import { IFloorDTO } from "../../../../dto/floor/IFloorDTO";
 import ILoadFloorMapDTO from "../../../../dto/floor/ILoadFloorMapDTO";
 
 export default interface ILoadFloorMapService {
-    loadFloorMap(buildingCode: string, floorId: number, floorLayout: ILoadFloorMapDTO): Promise<Result<IFloorDTO>>
+    loadFloorMap(floorLayout: ILoadFloorMapDTO): Promise<Result<IFloorDTO>>
 }

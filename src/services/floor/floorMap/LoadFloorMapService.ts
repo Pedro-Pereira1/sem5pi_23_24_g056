@@ -19,9 +19,9 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
     ) { }
 
-    public async loadFloorMap(buildingCode: string, floorId: number, floorLayout: ILoadFloorMapDTO): Promise<Result<IFloorDTO>> {
-        const buildingOrError = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingCode))
-        const floorOrError = await this.floorRepo.findById(floorId)
+    public async loadFloorMap(floorLayout: ILoadFloorMapDTO): Promise<Result<IFloorDTO>> {
+        const buildingOrError = await this.buildingRepo.findByBuidingCode(new BuildingCode(floorLayout.buildingCode))
+        const floorOrError = await this.floorRepo.findById(floorLayout.floorId)
 
         if (buildingOrError == null) {
             return Result.fail<IFloorDTO>('There is no building with that code')
