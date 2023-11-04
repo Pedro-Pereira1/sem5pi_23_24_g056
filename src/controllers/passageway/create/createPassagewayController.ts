@@ -21,14 +21,14 @@ export default class CreatePassagewayController implements ICreatePassagewayCont
             const PassagewayOrError = await this.service.createPassageway(req.body as ICreatePassagewayDTO) as Result<IPassagewayDTO>
 
             if (PassagewayOrError.isFailure) {
-                return res.status(402).send(PassagewayOrError.errorValue())
+                return res.status(400).send(PassagewayOrError.errorValue())
             }
 
             const PassagewayDTO = PassagewayOrError.getValue();
             return res.status(201).json(PassagewayDTO);
 
-        }catch (e){
-            return next(e);
+        }catch(error){
+            return next(error);
         }
     }
 }
