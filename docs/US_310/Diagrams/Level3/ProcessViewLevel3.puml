@@ -7,11 +7,11 @@ participant ":CreateRoomController" as Controller
 participant ":CreateRoomService" as Service
 participant ":Room" as Room
 participant ":RoomRepo" as Repo
-participant ":RoomSchema" as Schema
+participant ":RoomPersistence" as Schema
 participant ":RoomMap" as Map
 participant ":RoomDTO" as DTO
 participant ":FloorRepo" as FloorRepo
-participant ":FloorSchema" as FloorSchema
+participant ":FloorPersistence" as FloorPersistence
 participant ":Floor" as Floor
 
 ?o->Route: POST
@@ -39,6 +39,10 @@ deactivate Repo
 
 Service -> FloorRepo: floor = find(floor)
 activate FloorRepo
+FloorRepo -> FloorPersistence: find
+activate FloorPersistence
+FloorRepo <-- FloorPersistence
+deactivate FloorPersistence
 Service <-- FloorRepo
 deactivate FloorRepo
 
@@ -47,7 +51,7 @@ Service -> Floor: addRoom(room)
 Service -> FloorRepo: save(floor)
 activate FloorRepo
 
-FloorRepo-> FloorSchema: save
+FloorRepo-> FloorPersistence: save
 deactivate FloorRepo
 
 Service -> Map:toDto(room)
