@@ -7,14 +7,13 @@ participant ":EditElevatorController" as Controller
 participant ":EditElevatorService" as Service
 participant ":Elevator" as Elevator
 participant ":ElevatorRepo" as Repo
-participant ":ElevatorSchema" as Schema
-participant ":ElevatorPersistence" as Persistence
+participant ":ElevatorPersistence" as Schema
 participant ":ElevatorMap" as Map
 participant ":ElevatorDTO" as DTO
 participant ":Building" as Building
 participant ":BuildingRepo" as BuildingRepo
 participant ":FloorRepo" as FloorRepo
-participant ":FloorSchema" as FloorSchema
+participant ":FloorPersistence" as FloorPersistence
 participant ":Floor" as Floor
 
 
@@ -36,6 +35,10 @@ activate Service
 
 Service -> BuildingRepo: findByBuildingCode(buildingCode)
 activate BuildingRepo
+BuildingRepo -> BuildingPersistence: findOne(buildingCode)
+activate BuildingPersistence
+BuildingRepo <-- BuildingPersistence
+deactivate BuildingPersistence
 Service <-- BuildingRepo
 deactivate BuildingRepo
 
@@ -51,6 +54,10 @@ deactivate Repo
 
 Service -> FloorRepo: get all floors to remove/add elevator
 activate FloorRepo
+FloorRepo -> FloorPersistence: find
+activate FloorPersistence
+FloorRepo <-- FloorPersistence: find
+deactivate FloorPersistence
 Service <-- FloorRepo
 deactivate FloorRepo
 
@@ -58,7 +65,7 @@ Service -> Floor: remove/add elevator from floors
 Service -> FloorRepo: save(all floors)
 activate FloorRepo
 
-FloorRepo -> FloorSchema: save
+FloorRepo -> FloorPersistence: save
 deactivate FloorRepo
 
 Service -> Map:toDto(room)

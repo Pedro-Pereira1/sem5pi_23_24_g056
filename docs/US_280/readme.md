@@ -52,7 +52,7 @@ information of an elevator, such as brand, description, model, identification nu
 
 * Process View
 
-![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
 * Scenary View
 
@@ -66,7 +66,7 @@ information of an elevator, such as brand, description, model, identification nu
 
 * Process View
 
-![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
 
 * Physical View
 
@@ -88,7 +88,7 @@ information of an elevator, such as brand, description, model, identification nu
 
 * Process
 
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
 
 ### 4.2. Applied Patterns
 * Controller
