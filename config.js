@@ -97,6 +97,10 @@ export default {
       name: "editElevatorController",
       path: "../controllers/elevator/edit/editElevatorController"
     },
+    editPassageway: {
+      name: "editPassagewayController",
+      path: "../controllers/passageway/edit/editPassagewayController"
+    },
     createRobotType: {
       name: "createRobotTypeController",
       path: "../controllers/robotType/create/createRobotTypeController"
@@ -202,6 +206,10 @@ export default {
     editElevator: {
       name: "editElevatorService",
       path: "../services/elevator/edit/editElevatorService"
+    },
+    editPassageway: {
+      name: "editPassagewayService",
+      path: "../services/passageway/edit/editPassagewayService"
     },
     createRobotType: {
       name: "createRobotTypeService",
