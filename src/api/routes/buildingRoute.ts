@@ -55,6 +55,6 @@ export default (app: Router) => {
           buildingWidth: Joi.number().min(0)
         }),
       }),
-    (req, res, next) => ctrlEditBuilding.createBuilding(req, res, next))
+    (req, res, next) => ctrlEditBuilding.editBuilding(req, res, next))
 
 }

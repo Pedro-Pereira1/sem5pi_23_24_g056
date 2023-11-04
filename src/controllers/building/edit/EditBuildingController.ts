@@ -14,7 +14,7 @@ export default class EditBuildingController implements IEditBuildingontroller {
         @Inject(config.services.editBuilding.name) private editBuildingService: IEditBuildingService
     ){}
 
-    public async createBuilding(req: Request, res: Response, next: NextFunction) {
+    public async editBuilding(req: Request, res: Response, next: NextFunction) {
         try {
             const buildingOrError = await this.editBuildingService.editBuilding(req.body as IBuildingDTO)
 
