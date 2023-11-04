@@ -23,7 +23,7 @@ import IListAllFloorsService from '../../../src/services/IServices/floor/list/IL
 import { IFloorDTO } from '../../../src/dto/floor/IFloorDTO';
 
 
-describe.only('list buildings max min floors controller', function () {
+describe('list buildings max min floors controller', function () {
 	const sandbox = sinon.createSandbox();
     let buildingRepoMock;
     let floorRepoMock;
