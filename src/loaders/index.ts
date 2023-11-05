@@ -111,6 +111,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const listFloorsPassagewaysController = {
+    name: config.controllers.listFloorsPassageways.name,
+    path: config.controllers.listFloorsPassageways.path
+  }
+
   const editFloorController = {
     name: config.controllers.editFloor.name,
     path: config.controllers.editFloor.path
@@ -241,6 +246,11 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const listFloorsPassagewaysService = {
+    name: config.services.listFloorsPassageways.name,
+    path: config.services.listFloorsPassageways.path
+  }
+
   const editFloorService = {
     name: config.services.editFloor.name,
     path: config.services.editFloor.path
@@ -296,6 +306,7 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
+        listFloorsPassagewaysController,
       listElevatorsInBuildingController,
       editFloorController,
       editElevatorController,
@@ -326,6 +337,7 @@ export default async ({ expressApp }) => {
       listAllBuildingsService,
       editBuildingService,
       listAllFloorsService,
+      listFloorsPassagewaysService,
       listElevatorsInBuildingService,
       editFloorService,
       editElevatorService,
