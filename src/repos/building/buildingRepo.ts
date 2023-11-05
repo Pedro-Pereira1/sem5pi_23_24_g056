@@ -115,4 +115,22 @@ export default class BuildingRepo implements IBuildingRepo {
             return null;
     }
 
+    public async findByFloorId(floorId: number): Promise<Building> {
+        try {
+            const buildings = await this.findAll();
+
+            for (const element of buildings) {
+                for (const floor of element.floors) {
+                    if (Number(floor.id.toValue()) === floorId) {
+                        return element;
+                    }
+                }
+            }
+            return null;
+        } catch (error) {
+            console.error("Error in findByFloorId:", error);
+            throw error;
+        }
+    }
+
 }
