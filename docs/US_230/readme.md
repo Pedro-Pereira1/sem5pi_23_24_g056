@@ -20,7 +20,7 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 the system and load a map of a floor to the system and persist it, the map of the floor will be a simple text file
 which contains the layout of the floor as a series of characters
 
-An example of the text file
+An example of a possible map configuration
 
 |  7  |  6  |  6  |  6  |  6  |  7  |  6  |  6  |  2  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -60,47 +60,47 @@ where the values mean:
 
 * Logical:
 
-![Logical](./Diagrams/Level1/logicalView.svg)
+![Logical](./Diagrams/level1/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessView.svg)
+![Process](./Diagrams/level1/ProcessView.svg)
 
 * Scenery
 
-![Scenary](./Diagrams/Level1/sceneryView.svg)
+![Scenary](./Diagrams/level1/SceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](./Diagrams/Level2/logicalView.svg)
+![Logical](./Diagrams/level2/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level2/ProcessLevel2.svg)
+![Process](./Diagrams/level2/ProcessView.svg)
 
 * Physical
 
-![physical](./Diagrams/Level2/PhysicalView.svg)
+![physical](./Diagrams/level2/PhysicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level2/ImplementationView.svg)
+![Implementation](./Diagrams/level2/ImplementationView.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](./Diagrams/level3/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessView.svg)
+![Process](./Diagrams/level3/ProcessView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementationView.svg)
+![Implementation](./Diagrams/level3/ImplementationView.svg)
 
 ### 4.2. Applied Patterns
 
