@@ -12,6 +12,17 @@
 > **Q**: ... Poderia explicar as diferenças entre estas duas user stories, US350 e US360? <br>
 > **A**: ... o requisito 360 permite indicar que robots existem e de que tipo cada um é, por exemplo "Robot 'ABC32' do tipo A", "Robot 'Brian2' do tipo A" e "Robot 'Stew' do tipo B" <br>
 
+> **Q**: Os atributos do robot têm algum tipo de formatação/restrição?  <br>
+> **A**: código identificativo, obrigatório, alfanumerico, max 30 caracteres, único no sistema,
+nickname, obrigatório, obrigatório, alfanumerico, max 30 caracteres, único no sistema,
+tipo de robot, obrigatório,
+número de série, obrigatório, alfanumerico, max 50 caracteres, único para um dado tipo de robot,
+descrição, opcional, alfanumerico, max. 250 caracteres <br>
+
+> **Q**: Ao criar um novo robo, qual o estado dele por defeito, isto é, ativo ou inativo?
+Tendo em conta a US370 seria ativo por defeito certo? <br>
+> **A**: ao criar um robot ele fica no estado ativo <br>
+
 
 **Dependencies:**
 - **US 350 -** As a fleet manager, I want to add a new type of robot indicating its designation and what types of tasks it can perform from the predefined list of tasks.
