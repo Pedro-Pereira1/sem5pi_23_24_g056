@@ -16,16 +16,6 @@
 >**Question**: "Em relação às User Stories de edição, temos já uma ideia das informações que são opcionais, mas queremos ter a certeza daquilo que é editável ou não. Posto isto, poderia indicar que informações pretende editar nas US160, US200, US250 e US280?"<br>
 ><br> **Answer** : "... requisito 280 - editar elevador - todas as informações à exceção do edificio a que o piso se refere"
 
-
->**Question**: "Como tal, gostaria de saber que atributos deveria ter o elevador, para além de uma lista de pisos aos quais consegue aceder dentro do seu edifício. Algumas das ideias que me surgiram foram o piso em que estava localizado naquele momento, número de série, fabricante ou descrição."<br><br>
->**Answer**: "- edificio (obrigatório)<br>
-			- número identificativo (obrigatório, único no edificio)<br>
-			-lista de pisos do edificio servidos pelo elevador (obrigatório)<br>
-			- marca (opcional, alfanumerico, 50 caracteres)<br>
-			- modelo (opcional, mas obrigatório se marca for introduzido, alfanumerico, 50 caracteres)<br>
-			- número de série do fabricante (opcional, alfanumerico, 50 caracteres)<br>
-			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>		
-
 **Dependencies:**
 * This User Stories requires that there are buildings, floors and elevators created, so it has dependencies on US150, US190 and US270.
 
@@ -100,31 +90,325 @@ information of an elevator, such as brand, description, model, identification nu
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Verifies controller class behavior when editing a valid Elevator.*
 
+``` typescript
+	it('1. Controller valid edit (elevator exist on database)', async function () {
+        const serviceReturns = {
+            elevatorId: 1,
+            elevatorIdentificationNumber: 1,
+            elevatorBrand: "brand1",
+            elevatorDescription: "description changed",
+            elevatorModel: "a model",
+            elevatorSerialNumber: "111"
+        } as IElevatorDTO
+
+        const elevatorDTOJSONExpected = {
+            "elevatorId": 1,
+            "elevatorIdentificationNumber": 1,
+            "elevatorBrand": "brand1",
+            "elevatorDescription": "description changed",
+            "elevatorModel": "a model",
+            "elevatorSerialNumber": "111"
+        } 
+
+        const elevatorDTOJSON = {
+            "elevatorId": 1,
+            "elevatorIdentificationNumber": 1,
+            "elevatorBrand": "brand1",
+            "elevatorDescription": "a description",
+            "elevatorModel": "a model",
+            "elevatorSerialNumber": "111"
+        } 
+
+        const elevatorDTO2 = {
+            elevatorId: 1,
+            elevatorIdentificationNumber: 1,
+            elevatorBrand: "brand1",
+            elevatorDescription: "a description",
+            elevatorModel: "a model",
+            elevatorSerialNumber: "111"
+        } as IElevatorDTO
+
+        let req: Partial<Request> = {}
+        req.body = elevatorDTOJSON
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const editElevatorService = Container.get('editElevatorService')
+
+        sinon.stub(editElevatorService, 'editElevator')
+            .withArgs(elevatorDTO2)
+            .returns(new Promise((resolve, reject) => { resolve(Result.ok<IElevatorDTO>(serviceReturns)) }))
+
+
+        const editElevatorController = new EditElevatorController(editElevatorService as IEditElevatorService)
+
+        await editElevatorController.editElevator(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 201)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(elevatorDTOJSONExpected))
+    })
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
 
+**Test 2:** *Verifies controller class behavior in the case of editing an invalid Elevator.*
+
+``` typescript
+	it('2. Controller valid edit (elevator doesn\'t exist on database)', async function () {
+        const elevatorDTO2 = {
+            elevatorId: 1,
+            elevatorIdentificationNumber: 1,
+            elevatorBrand: "brand1",
+            elevatorDescription: "a description",
+            elevatorModel: "a model",
+            elevatorSerialNumber: "111"
+        } as IElevatorDTO
+
+        const elevatorDTOJSON = {
+            "elevatorId": 1,
+            "elevatorIdentificationNumber": 1,
+            "elevatorBrand": "brand1",
+            "elevatorDescription": "a description",
+            "elevatorModel": "a model",
+            "elevatorSerialNumber": "111"
+        } 
+
+        let req: Partial<Request> = {}
+        req.body = elevatorDTOJSON 
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const editElevatorService = Container.get('editElevatorService')
+
+        sinon.stub(editElevatorService, 'editElevator')
+            .withArgs(elevatorDTO2)
+            .returns(new Promise((resolve, reject) => { resolve(Result.fail<IElevatorDTO>('Elevator does not exist!')) }))
+
+
+        const editElevatorController = new EditElevatorController(editElevatorService as IEditElevatorService)
+
+        await editElevatorController.editElevator(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 400)
+        sinon.assert.calledOnce(res.send)
+    })
+```
+
+**Test 3:** *Verifies correct editing of a valid Elevator in service class.*
+
+``` typescript
+	it('3. Service valid edit (elevator exist on database)', async function () {
+        floorRepoMock.findById.resolves(floor.getValue())
+        
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode').returns(new Promise((resolve, reject) => {resolve(building.getValue())}))
+
+        const changes = {
+            elevatorIdentificationNumber: 1,
+            elevatorDescription: "changed description",
+            buildingCode: "A"
+        } as IEditElevatorDTO
+
+        const expected = {
+            elevatorId: 1,
+            elevatorIdentificationNumber: 1,
+            elevatorBrand: "brand1",
+            elevatorDescription: "changed description",
+            elevatorModel: "a model",
+            elevatorSerialNumber: "111"
+        } as IElevatorDTO
+
+        const editElevatorService = Container.get('editElevatorService') as IEditElevatorService
+
+        const actual = await editElevatorService.editElevator(changes)
+
+        sinon.assert.match(actual.getValue(), expected)
+    })
+```
+
+**Test 4:** *Verifies correct editing of a valid Elevator using controller and service classes together.*
+
+``` typescript
+	it('5. Controller + Service valid edit (elevator exist on database)', async function () { 
+        const changes = {
+            "elevatorIdentificationNumber": 1,
+            "elevatorDescription": "changed description",
+            "buildingCode": "A"
+        }
+
+        const expected = {
+            elevatorId: 1,
+            elevatorIdentificationNumber: 1,
+            elevatorBrand: "brand1",
+            elevatorDescription: "changed description",
+            elevatorModel: "a model",
+            elevatorSerialNumber: "111"
+        } as IElevatorDTO
+
+        let req: Partial<Request> = {}
+        req.body = changes 
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode').returns(new Promise((resolve, reject) => {resolve(building.getValue())}))
+
+        const editElevatorService = Container.get('editElevatorService') as IEditElevatorService
+
+        const editElevatorController = new EditElevatorController(editElevatorService as IEditElevatorService)
+
+        await editElevatorController.editElevator(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 201)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(expected))
+    })
+```
 ## 5. Implementation
+### Class EditElevatorService
+``` typescript
+	@Service()
+export default class EditElevatorService implements IEditElevatorService {
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+    constructor(
+        @Inject(config.repos.elevator.name) private elevatorRepo: IElevatorRepo,
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo,
+        @Inject(config.repos.floor.name) private floorRepo: IFloorRepo
+    ) { }
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    public async editElevator(elevatorDto: IEditElevatorDTO): Promise<Result<IElevatorDTO>> {
+        try{
+            const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
+            if (!building) return Result.fail<IElevatorDTO>('Building does not exist!')
+
+            let theElevator: Elevator = undefined
+            for (var floor of building.floors) {
+                for (var elevator of floor.props.floormap.props.elevators){
+                    if (elevator.props.elevatorIdentificationNumber.identificationNumber === elevatorDto.elevatorIdentificationNumber){
+                        theElevator = elevator
+                        break;
+                    }
+                }
+            }
+
+            if (theElevator === undefined) return Result.fail<IElevatorDTO>('Elevator does not exist!')
+
+            if (elevatorDto.elevatorBrand !== undefined){
+                if (elevatorDto.elevatorModel === undefined && theElevator.props.elevatorModel === null) return Result.fail<IElevatorDTO>('Brand was provided so Model is required!')
+
+                const brandOrError = ElevatorBrand.create(elevatorDto.elevatorBrand)
+
+                if (brandOrError.isFailure) return Result.fail<IElevatorDTO>(brandOrError.errorValue())
+
+                theElevator.props.elevatorBrand = brandOrError.getValue()
+                
+                if (elevatorDto.elevatorModel !== undefined) {
+                    const modelOrError = ElevatorModel.create(elevatorDto.elevatorModel)
+                    if (modelOrError.isFailure) return Result.fail<IElevatorDTO>(modelOrError.errorValue())
+                    
+                    theElevator.props.elevatorModel = modelOrError.getValue()
+                }
+            }
+
+            if (elevatorDto.elevatorDescription !== undefined) {
+                const descriptionOrError =  ElevatorDescription.create(elevatorDto.elevatorDescription)
+                if (descriptionOrError.isFailure) return Result.fail<IElevatorDTO>(descriptionOrError.errorValue())
+
+                theElevator.props.elevatorDescription =descriptionOrError.getValue()
+            }
+
+            if (elevatorDto.elevatorSerialNumber !== undefined) {
+                const serialNumberOrError = ElevatorSerialNumber.create(elevatorDto.elevatorSerialNumber)
+                if (serialNumberOrError.isFailure) return Result.fail<IElevatorDTO>(serialNumberOrError.errorValue())
+
+                theElevator.props.elevatorSerialNumber = serialNumberOrError.getValue()
+            }
+
+            await this.elevatorRepo.save(theElevator);
+
+            if (elevatorDto.floorsIdToRemove !== undefined) {
+                let floors: Floor[] = [];
+                for (var floorId of elevatorDto.floorsIdToRemove) {
+                    const floor = await this.floorRepo.findById(floorId)
+                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                    floors.push(floor)
+                }
+
+                const floorsOfElevator = await this.floorRepo.findByElevator(Number(theElevator.id.toValue()))
+                if (floorsOfElevator.length === 1) return Result.fail<IElevatorDTO>('Remove floor is not possible because elevator is only associated with one floor!')
+    
+                for (var floor of floors){
+                    floor.removeElevator(theElevator)
+                    await this.floorRepo.save(floor);
+                }
+            }
+
+            if (elevatorDto.floorsIdToAdd !== undefined) {
+                let floors: Floor[] = [];
+                for (var floorId of elevatorDto.floorsIdToAdd) {
+                    const floor = await this.floorRepo.findById(floorId)
+                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                    if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
+                    floors.push(floor)
+                }
+    
+                for (var floor of floors){
+                    floor.addElevators(theElevator)
+                    await this.floorRepo.save(floor);
+                }
+            }
+            
+            const elevatorDtoResult = ElevatorMap.toDto(theElevator) as IElevatorDTO
+
+            return Result.ok<IElevatorDTO>(elevatorDtoResult)
+
+        } catch(e) {
+            throw e
+        }
+    }
+}
+```
+
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+To use this US, you need to send an HTTP request.
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+Using this URI: localhost:4000/api/elevators/edit
 
+With the following JSON
+```
+{
+    "elevatorIdentificationNumber": 1,
+    "elevatorBrand": "a brand",
+    "elevatorDescription": "a description",
+    "elevatorModel": "a model",
+    "elevatorSerialNumber": "X1Z",
+    "buildingCode": "A",
+    "floorsIdToAdd": [4],
+    "floorsIdToRemove": [1]
+}
+```
+The paramaters "elevatorIdentificationNumber" and "buildingCode" are mandatory because they are using to identify the elevator to be edited. All the ohters are optional and do not need to be given.
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No observations.
