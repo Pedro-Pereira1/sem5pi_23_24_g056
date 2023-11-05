@@ -302,6 +302,16 @@ export default async ({ expressApp }) => {
     path: config.services.loadFloorMap.path
   }
 
+  const listAllRobotsByAvailableTask = {
+    name: config.services.listAllRobotsByAvailableTask.name,
+    path: config.services.listAllRobotsByAvailableTask.path
+  }
+
+  const listAllRobotsByDesignation = {
+    name: config.services.listRobotsByDesignation.name,
+    path: config.services.listRobotsByDesignation.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -326,7 +336,7 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
-        listFloorsPassagewaysController,
+      listFloorsPassagewaysController,
       listElevatorsInBuildingController,
       editFloorController,
       editElevatorController,
