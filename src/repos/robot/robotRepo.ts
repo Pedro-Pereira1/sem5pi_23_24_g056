@@ -24,7 +24,7 @@ export default class RobotRepo implements IRobotRepo {
   }
 
   public async save(robot: Robot): Promise<Robot> {
-    
+
     const query = { code: robot.id };
     const robotDocument = await this.robotSchema.findOne(query);
 
@@ -33,15 +33,15 @@ export default class RobotRepo implements IRobotRepo {
         const rawRobot: any = RobotMap.toPersistence(robot);
         const robotCreated = await this.robotSchema.create(rawRobot);
         return RobotMap.toDomain(robotCreated);
-        
+
       } else {
         //TO-D0: Update
 
-        
+
 
         await robotDocument.save();
         return robot;
-     }
+      }
     } catch (err) {
       throw err;
     }
@@ -59,17 +59,29 @@ export default class RobotRepo implements IRobotRepo {
 
   public async findBySerialNumberAndType(serialNumber: string, type: string): Promise<boolean> {
     const query = {
-        serialNumber: serialNumber,
-        type: type,
-      };
-      
-      const robotDocument = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
-       
-        if (robotDocument) {
-            return true
-        } else {
-            return false;
-        }
+      serialNumber: serialNumber,
+      type: type,
+    };
+
+    const robotDocument = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
+
+    if (robotDocument) {
+      return true
+    } else {
+      return false;
     }
+  }
+
+  public async findAll(): Promise<Robot[]> {
+    let robots: Robot[] = []
+
+    const cursor = this.robotSchema.find<Robot>({});
+
+    for await (let doc of cursor) {
+      robots.push(await RobotMap.toDomain(doc))
+    }
+
+    return robots
+  }
 
 }
