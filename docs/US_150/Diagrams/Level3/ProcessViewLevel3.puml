@@ -1,0 +1,55 @@
+@startuml
+
+autonumber
+
+participant ":BuildingRoute" as Route
+participant ":CreateBuildingController" as Controller
+participant ":CreateElevatorService" as Service
+participant ":Building" as Building
+participant ":BuildingRepo" as Repo
+participant ":BuildingPersistence" as Persistence
+participant ":BuildingMap" as Map
+participant ":BuildingDTO" as DTO
+
+
+?o->Route: POST
+activate Route
+
+Route -> Controller : createBuilding(req, res, next)
+activate Controller
+
+Controller -> Map : toDto(req.body)
+activate Map
+Controller <-- Map 
+deactivate Map
+
+
+Controller -> Service: createBuilding(buildingDto)
+activate Service
+
+Service -> Building: building = create()
+
+Service -> Repo: save(building)
+activate Repo
+
+Repo -> Persistence: save
+deactivate Repo
+
+
+
+Service -> Map:toDto(building)
+activate Map
+Map -> DTO: create
+deactivate Map
+
+Service --> Controller: inform success
+deactivate Service
+
+
+Controller --> Route: inform success
+deactivate Controller
+
+<--Route:
+
+
+@enduml
