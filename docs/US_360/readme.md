@@ -32,27 +32,66 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-### 3.2. System Sequence Diagram
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
-
 ## 4. Design
 
 ### 4.1. Realization
 
-Level 2:
+### Level 1
 
-![SequenceDiagramLevel2](Diagrams/SequenceDiagramLevel2.svg)
+* Logical:
 
-Level 3:
+![Logical](./Diagrams/Level1/LogicalView.svg)
 
+* Process
 
-![SequenceDiagramLevel3](Diagrams/SequenceDiagramLevel3.svg)
+![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
 
+* Scenary
 
+![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
 
-### 4.3. Applied Patterns
+### level 2
 
-### 4.4. Tests
+* Logical:
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process
+
+![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+
+* Physical
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+
+### 4.2. Applied Patterns
+
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 
@@ -65,9 +104,11 @@ public void ensureNullIsNotAllowed() {
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**createRobotService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+
+````
 
 ## 6. Integration/Demonstration
 
@@ -77,8 +118,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.

@@ -1,4 +1,5 @@
-# US 260 - As a Campus Manager, I want to list passageways between 2 buildings
+# US 260 - As a Campus Manager, I want to list passageways between 2 buildings.
+
 
 ## 1. Context
 
@@ -8,13 +9,14 @@
 
 ## 2. Requirements
 
-**US 260 -** As a Campus Manager, I want to list passageways between 2 buildings.
+**US 260 -** As a Campus Manager, I want to:
+
+* list passageways between 2 buildings.
 
 **Dependencies:**
+- **US150 -** As a Campus Manager, I want to create a building.
+- **US190 -** As a Campus Manager, I want to create building floor.
 - **US240 -** As a Campus Manager, I want to create a passageway between buildings.
-
-**Regarding this requirement we understand that:** <br>
-As a Campus Manager, an actor of the system, I will be able to access the system and list all passageways' information between 2 buildings.
 
 ## 3. Analysis
 * Campus Manager is a user role that manages the data of the routes and maps.
@@ -22,9 +24,16 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
 * Passageway allows movement between buildings. Both robisep robots and droneisep drones can use passages for navigation.
 
-## 4. Design
+Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the floors of a building with a passageway,describing the floor and description
+and also the building and floor where the passageway connects to.
+* Campus Manager is a user role that manages the data of the routes and maps.
+* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+* Passageway is a connection between two buildings.
+
 ### 3.1. Domain Model Excerpt
-![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
+
+![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
 ### Level 1
@@ -35,13 +44,13 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Process View
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
 
 * Scenary View
 
 ![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
 
-### Level 2
+### level 2
 
 * Logical View
 
@@ -49,7 +58,7 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Process View
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
 
 * Physical View
 
@@ -67,11 +76,11 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
 
 ### 4.2. Applied Patterns
 * Controller
@@ -80,7 +89,6 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 * Mapper
 * DTO
 * GRASP
-
 
 ### 4.3. Tests
 
@@ -95,9 +103,36 @@ public void ensureNullIsNotAllowed() {
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**listPassagewaysBetween2BuildingsService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+public async listPassagewaysBetween2BuildingsService(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
+        try{
+            const building1 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building1Code))
+            if (!building1) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
+            
+            const building2 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building2Code))
+            if (!building2) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
+            
+            let passagewaysList: IListPassagewaysBetween2BuildingsDTO[] = []
+            for (var floor of building1.floors) {
+                for (var passagewayId of floor.props.floormap.passagewaysId) {
+                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passagewayId))
+                    
+                    if (floorOrUndefined !== undefined){
+                        passagewaysList.push(PassagewayMap.toDtoList(await this.passagewayRepo.findById(passagewayId), Number(floor.floorNumber), Number(floorOrUndefined.floorNumber)))
+                    } 
+                }
+            }
+
+            if (passagewaysList.length === 0) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('No passageways found!')
+            
+            return Result.ok<IListPassagewaysBetween2BuildingsDTO[]>(passagewaysList)
+        } catch(e) {
+            throw e
+        }
+    }
+````
 
 ## 6. Integration/Demonstration
 
@@ -107,8 +142,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.
