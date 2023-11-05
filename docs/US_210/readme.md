@@ -114,13 +114,348 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.4. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
-
+**Test 1:** *Aims to verify the behavior of the controller in isolation. It creates a stubbed version of the service and checks if the controller correctly processes a request, in this case, listing all floors of a building.*
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it("ListAllFloorsController unit test using ListAllFloorsService stub", async function() {
+		// Arrange
+		let body = {};
+		let req: Partial<Request> = {};
+		req.body = body;
+		req.params = {
+            buildingId: "A"
+		  }
+		let res: Partial<Response> = {
+		  json: sinon.spy(),
+		  status: sinon.stub().returnsThis(),
+		  send: sinon.spy()
+		};
+		let next: Partial<NextFunction> = () => {};
+
+		let listAllFloorsServiceInstance = Container.get("listAllFloorsService");
+
+		// Stub the createBuilding method in the BuildingService
+		const buildingDTO = {
+			buildingName: "EdificioA",
+			buildingDescription: "uma descricao",
+			buildingCode: "A",
+			buildingLength: 2,
+			buildingWidth: 2
+		  } as IBuildingDTO
+
+		  const building = Building.create({
+			buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+			buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+			buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+			floors: [],
+		  }, buildingDTO.buildingCode).getValue()
+
+          const FloorDTO = {
+          floorId: 1,
+          floorNumber: 1,
+          floorDescription: "Joi.string().max(255)",
+          floorMap: {
+              map: [],
+              passageways: [],
+              rooms: [],
+              elevators: [],
+              passagewaysCoords: [],
+              elevatorsCoords: [],
+              roomCoords: []
+          }
+          } as IFloorDTO
+
+		  const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		  }, FloorDTO.floorId).getValue()
+
+		  building.addFloor(floor);
+
+
+		sinon.stub(listAllFloorsServiceInstance, "listAllFloors").returns(
+            Result.ok<IFloorDTO[]>([FloorDTO])
+        );
+
+
+		const ctrl = new ListAllFloorsController(listAllFloorsServiceInstance as IListAllFloorsService);
+
+		// Act
+		await ctrl.listAllFloors(<Request>req, <Response>res, <NextFunction>next);
+
+		// Assert
+		sinon.assert.calledOnce(res.json);
+		sinon.assert.calledWith(res.json, sinon.match([FloorDTO]));
+	});
+````
+
+**Test 2:** *Checks the end-to-end functionality of the controller and the service. It verifies that the controller correctly interacts with the service, retrieves floor data, and returns the expected results in the response.*
+```
+it("ListAllFloorsController + ListAllFloorsService integration test", async function() {
+		// Arrange
+		let body = {};
+		let req: Partial<Request> = {};
+		req.body = body;
+		req.params = {
+            buildingId: "A"
+		}
+		let res: Partial<Response> = {
+		  json: sinon.spy(),
+		  status: sinon.stub().returnsThis(),
+		  send: sinon.spy()
+		};
+		let next: Partial<NextFunction> = () => {};
+
+		// Stub repo methods
+		let listAllFloorsServiceInstance = Container.get("listAllFloorsService");
+
+		// Stub the createBuilding method in the BuildingService
+		const buildingDTO = {
+			buildingName: "EdificioA",
+			buildingDescription: "uma descricao",
+			buildingCode: "A",
+			buildingLength: 2,
+			buildingWidth: 2
+		  } as IBuildingDTO
+
+		  const building = Building.create({
+			buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+			buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+			buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+			floors: [],
+		  }, buildingDTO.buildingCode).getValue()
+
+          const FloorDTO = {
+          floorId: 1,
+          floorNumber: 1,
+          floorDescription: "Joi.string().max(255)",
+          floorMap: {
+              map: [],
+              passageways: [],
+              rooms: [],
+              elevators: [],
+              passagewaysCoords: [],
+              elevatorsCoords: [],
+              roomCoords: []
+          }
+          } as IFloorDTO
+
+		  const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+		building.addFloor(floor);
+
+        buildingRepoMock.findByBuidingCode.resolves(building);
+
+		const listAllFloorsServiceSpy = sinon.spy(listAllFloorsServiceInstance, "listAllFloors");
+
+		const ctrl = new ListAllFloorController(listAllFloorsServiceInstance as IListAllFloorsService);
+
+		// Act
+		await ctrl.listAllFloors(<Request>req, <Response>res, <NextFunction>next);
+
+		// Assert
+		sinon.assert.calledOnce(res.json);
+		sinon.assert.calledWith(res.json,sinon.match([{
+            floorDescription: "Joi.string().max(255)",
+            floorId: 1,
+            floorMap: {
+              elevators: [],
+              elevatorsCoords: [],
+              map: [[]],
+              passageways: [],
+              passagewaysCoords: [],
+              roomCoords: [],
+              rooms: []
+            },
+            floorNumber: 1
+          }]));
+		sinon.assert.calledOnce(listAllFloorsServiceSpy);
+	});
+````
+
+**Test 3:** *Checks how the controller handles the situation when the requested building is not found and ensures it responds with an appropriate error message.*
+```
+it("ListAllFloorsController + ListAllFloorsService integration test (Building Not Found)", async function() {
+		// Arrange
+		let body = {};
+		let req: Partial<Request> = {};
+		req.body = body;
+		req.params = {
+            buildingId: "C"
+		}
+		let res: Partial<Response> = {
+		  json: sinon.spy(),
+		  status: sinon.stub().returnsThis(),
+		  send: sinon.spy()
+		};
+		let next: Partial<NextFunction> = () => {};
+
+		// Stub repo methods
+		let listAllFloorsServiceInstance = Container.get("listAllFloorsService");
+
+		// Stub the createBuilding method in the BuildingService
+		const buildingDTO = {
+			buildingName: "EdificioA",
+			buildingDescription: "uma descricao",
+			buildingCode: "A",
+			buildingLength: 2,
+			buildingWidth: 2
+		  } as IBuildingDTO
+
+		  const building = Building.create({
+			buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+			buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+			buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+			floors: [],
+		  }, buildingDTO.buildingCode).getValue()
+
+          const FloorDTO = {
+          floorId: 1,
+          floorNumber: 1,
+          floorDescription: "Joi.string().max(255)",
+          floorMap: {
+              map: [],
+              passageways: [],
+              rooms: [],
+              elevators: [],
+              passagewaysCoords: [],
+              elevatorsCoords: [],
+              roomCoords: []
+          }
+          } as IFloorDTO
+
+		  const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+		building.addFloor(floor);
+
+        buildingRepoMock.findByBuidingCode.resolves(null);
+
+		const listAllFloorsServiceSpy = sinon.spy(listAllFloorsServiceInstance, "listAllFloors");
+
+		const ctrl = new ListAllFloorController(listAllFloorsServiceInstance as IListAllFloorsService);
+
+		// Act
+		await ctrl.listAllFloors(<Request>req, <Response>res, <NextFunction>next);
+
+		// Assert
+
+		sinon.assert.calledOnce(listAllFloorsServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Building C not found"));
+	});
+````
+
+**Test 4:** *Verifies that the controller handles the case where a building exists but does not have any floors and responds with an appropriate error message.*
+```
+it("ListAllFloorsController + ListAllFloorsService integration test (Building No Floors)", async function() {
+		// Arrange
+		let body = {};
+		let req: Partial<Request> = {};
+		req.body = body;
+		req.params = {
+            buildingId: "C"
+		}
+		let res: Partial<Response> = {
+		  json: sinon.spy(),
+		  status: sinon.stub().returnsThis(),
+		  send: sinon.spy()
+		};
+		let next: Partial<NextFunction> = () => {};
+
+		// Stub repo methods
+		let listAllFloorsServiceInstance = Container.get("listAllFloorsService");
+
+		// Stub the createBuilding method in the BuildingService
+		const buildingDTO = {
+			buildingName: "EdificioA",
+			buildingDescription: "uma descricao",
+			buildingCode: "A",
+			buildingLength: 2,
+			buildingWidth: 2
+		  } as IBuildingDTO
+
+		  const building = Building.create({
+			buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+			buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+			buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+			floors: [],
+		  }, buildingDTO.buildingCode).getValue()
+
+          const FloorDTO = {
+          floorId: 1,
+          floorNumber: 1,
+          floorDescription: "Joi.string().max(255)",
+          floorMap: {
+              map: [],
+              passageways: [],
+              rooms: [],
+              elevators: [],
+              passagewaysCoords: [],
+              elevatorsCoords: [],
+              roomCoords: []
+          }
+          } as IFloorDTO
+
+        buildingRepoMock.findByBuidingCode.resolves(building);
+
+		const listAllFloorsServiceSpy = sinon.spy(listAllFloorsServiceInstance, "listAllFloors");
+
+		const ctrl = new ListAllFloorController(listAllFloorsServiceInstance as IListAllFloorsService);
+
+		// Act
+		await ctrl.listAllFloors(<Request>req, <Response>res, <NextFunction>next);
+
+		// Assert
+
+		sinon.assert.calledOnce(listAllFloorsServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Building C has no floors"));
+	});
 ````
 
 ## 5. Implementation
