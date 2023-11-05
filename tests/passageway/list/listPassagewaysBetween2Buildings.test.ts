@@ -273,7 +273,7 @@ describe('List passageways between 2 buildings test', function () {
         sinon.assert.match(actual.getValue(), expected)
     })
 
-    it('4. Service with stub repo finds passageways', async function () {
+    it('4. Service with stub repo finds no passageways', async function () {
         const buildingRepo = Container.get('buildingRepo')
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
