@@ -60,47 +60,47 @@ where the values mean:
 
 * Logical:
 
-![Logical](docs/US_230/Diagrams/Level1/LogicalView.svg)
+![Logical](../US_230/Diagrams/Level1/LogicalView.svg)
 
 * Process
 
-![Process](docs/US_230/Diagrams/Level1/ProcessView.svg)
+![Process](../US_230/Diagrams/Level1/ProcessView.svg)
 
 * Scenery
 
-![Scenary](docs/US_230/Diagrams/Level1/SceneryView.svg)
+![Scenary](../US_230/Diagrams/Level1/SceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](docs/US_230/Diagrams/Level2/LogicalView.svg)
+![Logical](../US_230/Diagrams/Level2/LogicalView.svg)
 
 * Process
 
-![Process](docs/US_230/Diagrams/Level2/ProcessView.svg)
+![Process](../US_230/Diagrams/Level2/ProcessView.svg)
 
 * Physical
 
-![physical](docs/US_230/Diagrams/Level2/PhysicalView.svg)
+![physical](../US_230/Diagrams/Level2/PhysicalView.svg)
 
 * Implementation
 
-![Implementation](docs/US_230/Diagrams/Level2/ImplementationView.svg)
+![Implementation](../US_230/Diagrams/Level2/ImplementationView.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](docs/US_230/Diagrams/Level3/LogicalView.svg)
+![Logical](../US_230/Diagrams/Level3/LogicalView.svg)
 
 * Process
 
-![Process](docs/US_230/Diagrams/Level3/ProcessView.svg)
+![Process](../US_230/Diagrams/Level3/ProcessView.svg)
 
 * Implementation
 
-![Implementation](docs/US_230/Diagrams/Level3/ImplementationView.svg)
+![Implementation](../US_230/Diagrams/Level3/ImplementationView.svg)
 
 ### 4.2. Applied Patterns
 
