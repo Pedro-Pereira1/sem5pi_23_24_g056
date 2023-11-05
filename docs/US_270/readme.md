@@ -230,7 +230,7 @@ if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Re
 
 To use this US, you need to send and HTTP request with the following JSON:
 
-Using this URL: http://localhost:4000/api/elevators/create
+Using this URI: localhost:4000/api/elevators/create
 
 ```
 {

@@ -306,7 +306,7 @@ public async createPassageway(createPassagewayDTO: ICreatePassagewayDTO): Promis
 
 To use this US, you need to send and HTTP request with the following JSON:
 
-Using this URL: http://localhost:4000/api/passageways/createPassageway
+Using this URI: localhost:4000/api/passageways/createPassageway
 ```
 {
     "passagewayId": 1, //ID of the passageway

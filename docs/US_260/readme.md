@@ -19,6 +19,10 @@
 - **US240 -** As a Campus Manager, I want to create a passageway between buildings.
 
 ## 3. Analysis
+* Campus Manager is a user role that manages the data of the routes and maps.
+* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+* Passageway allows movement between buildings. Both robisep robots and droneisep drones can use passages for navigation.
 
 Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the floors of a building with a passageway,describing the floor and description
 and also the building and floor where the passageway connects to.
@@ -40,7 +44,7 @@ and also the building and floor where the passageway connects to.
 
 * Process View
 
-![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
 * Scenary View
 
@@ -54,7 +58,7 @@ and also the building and floor where the passageway connects to.
 
 * Process View
 
-![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
 
 * Physical View
 
@@ -72,11 +76,11 @@ and also the building and floor where the passageway connects to.
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
 
 ### 4.2. Applied Patterns
 * Controller
