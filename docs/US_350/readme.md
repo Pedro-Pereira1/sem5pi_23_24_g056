@@ -341,9 +341,60 @@ it("createRobotTypeController +createRobotTypeService integration test (RobotTyp
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+### CreateRobotTypeController
+```
+public async createRobotType(req: Request, res: Response, next: NextFunction) {
+        try {
+            const robotOrError = await this.service.createRobotType(req.body as ICreateRobotTypeDTO) as Result<IRobotTypeDTO>
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+            if (robotOrError.isFailure) {
+                return res.status(400).send(robotOrError.errorValue())
+            }
+
+            const robotTypeDTO = robotOrError.getValue();
+            return res.status(201).json(robotTypeDTO);
+
+        }catch (e){
+            return next(e);
+        }
+    }
+}
+````
+
+### CreateRobotTypeService
+```
+export default class createRobotTypeService implements ICreateRobotTypeService {
+
+    constructor(
+        @Inject(config.repos.robotType.name) private robotTypeRepo: IRobotTypeRepo
+    ) { }
+
+
+    public async createRobotType(robotTypeDTO: ICreateRobotTypeDTO): Promise<Result<IRobotTypeDTO>> {
+
+        try {
+            const robotTypeExists = await this.robotTypeRepo.findById(robotTypeDTO.robotTypeID)
+            if(robotTypeExists != null){
+                return Result.fail<IRobotTypeDTO>("RobotType already exists")
+            }
+
+            const robotTypeOrError = RobotType.create(robotTypeDTO,robotTypeDTO.robotTypeID)
+            if (robotTypeOrError.isFailure) {
+                return Result.fail<IRobotTypeDTO>(robotTypeOrError.errorValue())
+            }
+
+            const robotTypeResult = robotTypeOrError.getValue()
+            await this.robotTypeRepo.save(robotTypeResult);
+            const robotTypeDtoResult = RobotTypeMap.toDto(robotTypeResult) as IRobotTypeDTO
+
+            return Result.ok<IRobotTypeDTO>(robotTypeDtoResult)
+
+        } catch (e) {
+            throw e
+        }
+    }
+}
+````
 
 ## 6. Integration/Demonstration
 
