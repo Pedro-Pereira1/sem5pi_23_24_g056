@@ -1,0 +1,23 @@
+@startuml
+
+autonumber
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+
+?o-> Visualization: Starts the process to edit a building floor
+activate Visualization
+
+Visualization -> GI: PUT floor
+activate GI
+
+GI -> GI: editFloor(floor)
+
+GI --> Visualization: floor
+deactivate GI
+
+<-- Visualization: Informs operation success
+deactivate Visualization
+
+
+@enduml

@@ -4,34 +4,27 @@ autonumber
 
 participant ":FloorRoute" as Route
 participant ":FloorController" as Controller
-participant ":FloorDTO" as DTO
 participant ":FloorService" as Service
 participant ":FloorRepo" as Repo
 participant ":FloorMap" as Map
 participant ":Floor" as Floor
 
 participant ":FloorPersistence" as Persistence
-participant ":FloorDTOResult" as DTOResult
+participant ":FloorDTO" as DTO
 
 ?o->Route: PUT
 activate Route
 
-Route -> Controller: update()
+Route -> Controller: update(json,res,next)
 activate Controller
 
-Controller -> DTO: toDTO()
-activate DTO
-
-DTO --> Controller:
-deactivate DTO
-
-Controller -> Service: updateFloor()
+Controller -> Service: updateFloor(EditFloorDTO)
 activate Service
 Service -> Repo: findById()
 activate Repo
 deactivate Repo
 
-Service -> Floor: set()
+Service -> Floor: setAttr()
 activate Floor
 deactivate Floor
 
@@ -53,9 +46,9 @@ deactivate Repo
 
 Service -> Map: toDTO()
 activate Map
-Map -> DTOResult: update()
-activate DTOResult
-deactivate DTOResult
+Map -> DTO: create()
+activate DTO
+deactivate DTO
 deactivate Map
 
 Service --> Controller:
