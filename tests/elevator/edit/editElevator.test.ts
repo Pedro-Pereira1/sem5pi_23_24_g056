@@ -26,7 +26,7 @@ import { ElevatorSerialNumber } from '../../../src/domain/Elevator/ElevatorSeria
 import { ElevatorID } from '../../../src/domain/Elevator/ElevatorID';
 import IEditElevatorDTO from '../../../src/dto/elevator/IEditElevatorDTO'
 
-describe.only('Edit elevator test', function () {
+describe('Edit elevator test', function () {
     const original = {
         elevatorId: 1,
         elevatorIdentificationNumber: 1,
