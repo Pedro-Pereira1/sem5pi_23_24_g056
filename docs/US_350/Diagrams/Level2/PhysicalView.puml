@@ -10,7 +10,7 @@ node Server1{
 }
 
 node Server2{
-  component "<<MasterDataBuilding>>" as MDB{
+  component "<<MasterDataLogistics>>" as MDB{
   }
 }
 

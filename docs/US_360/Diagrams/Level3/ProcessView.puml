@@ -1,0 +1,74 @@
+@startuml
+
+autonumber
+
+participant ":RobotRoute" as Floor
+participant ":CreateRobotController" as Controller
+participant ":CreateRobotService" as Service
+participant ":Robot" as Class
+participant ":RobotRepo" as Repo
+participant ":RobotMapper" as Map
+participant ":RobotPersistence" as FloorPersistence
+participant ":RobotDTO" as DTO
+
+?o->Floor: POST
+activate Floor
+
+Floor -> Controller: createRobot(req, res, next)
+activate Controller
+
+
+
+Controller -> Service: createRobot(createFloorDTO)
+activate Service
+
+Service -> Class:create
+
+Service -> Repo: save
+activate Repo
+
+Repo -> FloorPersistence: findOne
+activate FloorPersistence
+deactivate FloorPersistence
+
+Repo -> Map: toPersistence
+activate Map
+deactivate Map
+
+
+Repo -> FloorPersistence: create
+activate FloorPersistence
+deactivate FloorPersistence
+
+Repo -> Map: toDomain
+activate Map
+deactivate Map
+
+
+Repo --> Service
+deactivate Repo
+
+Service -> Map: toDTO
+activate Map
+Map -> DTO: create
+activate DTO
+deactivate DTO
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+Controller -> DTO: getValue
+activate DTO
+deactivate DTO
+
+Controller -> Controller: res(201,json)
+
+Controller --> Floor: response
+deactivate Controller
+
+<--Floor: response
+deactivate Floor
+
+
+@enduml

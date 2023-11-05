@@ -1,0 +1,10 @@
+@startuml ProcessView
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manager" as CM
+
+CM -> System: sends floor map
+CM <-- System: Informs operation success
+
+@enduml

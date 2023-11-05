@@ -1,12 +1,12 @@
 @startuml
 
-() "UI Fleet Manager" as FM
+() "UI Campus Manager" as CM
 
 component RDG [
   <<component>>
   **RobDroneGo**
 ]
 
-FM -d- RDG
+CM -d- RDG
 
 @enduml

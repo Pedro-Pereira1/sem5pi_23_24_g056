@@ -1,4 +1,4 @@
-@startuml ProcessViewLevel3
+@startuml ProcessView
 'https://plantuml.com/sequence-diagram
 
 autonumber
@@ -9,7 +9,7 @@ participant Robot
 participant RobotMaper
 participant RobotDTO
 participant RobotRepo
-participant RobotSchema
+participant RobotPersistence
 
 ?o->RobotRoute : PATCH
 activate RobotRoute
@@ -23,10 +23,11 @@ activate InhibitRobotService
 InhibitRobotService -> RobotRepo : findById(id)
 activate RobotRepo
 
-RobotRepo -> RobotSchema : findOne(query)
-activate RobotSchema
+RobotRepo -> RobotPersistence : findOne(query)
+activate RobotPersistence
 
-RobotSchema --> RobotRepo
+RobotPersistence --> RobotRepo
+deactivate RobotPersistence
 
 RobotRepo -> RobotMaper : toDomain(rawRobot)
 activate RobotMaper
@@ -35,30 +36,35 @@ RobotMaper -> Robot : create
 activate Robot
 
 Robot --> RobotMaper
-
-RobotMaper --> RobotRepo
-
-RobotRepo --> InhibitRobotService
-
-
-InhibitRobotService -> Robot : inhibitRobot()
-
-InhibitRobotService -> RobotRepo : save(robot)
-
-RobotRepo -> RobotMaper : toPersistence()
 deactivate Robot
 
 RobotMaper --> RobotRepo
 deactivate RobotMaper
 
-RobotRepo -> RobotSchema : save(rawRobot)
+RobotRepo --> InhibitRobotService
+deactivate RobotRepo
 
-RobotSchema --> RobotRepo
-deactivate RobotSchema
+InhibitRobotService -> Robot : inhibitRobot()
+activate Robot
+deactivate Robot
+
+InhibitRobotService -> RobotRepo : save(robot)
+activate RobotRepo
+
+RobotRepo -> RobotMaper : toPersistence()
+activate RobotMaper
+
+RobotMaper --> RobotRepo
+deactivate RobotMaper
+
+RobotRepo -> RobotPersistence : save(rawRobot)
+activate RobotPersistence
+
+RobotPersistence --> RobotRepo
+deactivate RobotPersistence
 
 RobotRepo --> InhibitRobotService
 deactivate RobotRepo
-activate Robot
 
 InhibitRobotService -> RobotMaper : toDto()
 activate RobotMaper

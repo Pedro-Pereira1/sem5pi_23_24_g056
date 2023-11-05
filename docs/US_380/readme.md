@@ -9,7 +9,7 @@
 ## 2. Requirements
 
 **US 380 -** As a fleet manager, I want to consult all robots in the fleet.
-			
+
 **Dependencies:**
 - **US350 -** As a fleet manager, I want to add a new type of robot indicating its designation and what types of tasks it can perform from the predefined list of tasks.
 - **US360 -** As a fleet manager, I want to add a new robot to the fleet indicating its type, name, etc.
@@ -28,52 +28,45 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
+
 ## 4. Design
-### Level 1
 
-* Logical View
+### 4.1. Realization
 
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-* Process View
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-* Scenary View
+#### Level2
 
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+###### LogicalView:
 
-### Level 2
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-* Logical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-* Process View
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-* Physical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation View
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 * Controller

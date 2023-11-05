@@ -15,7 +15,7 @@
 **Client Clarifications**
 >**Question**: "...Que informacoes pretende, então, ver sobre esse elevador?"<br>
 ><br> **Answer** : "...pretende-se listar todas as informações do elevador."
-			
+
 
 **Dependencies:**
 * This User Stories requires that there are buildings, floors and elevators created, so it has dependencies on US150, US190 and US270.
@@ -23,62 +23,54 @@
 ## 3. Analysis
 
 Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the
-information of elevators of a building, such as brand, description, model, identification number, serial number and floors that it goes. 
+information of elevators of a building, such as brand, description, model, identification number, serial number and floors that it goes.
 * Campus Manager is a user role that manages the data of the routes and maps.
 * Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
 * Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
 * Elevator is a transport device for moving between different floors of a building.
 
 ### 3.1. Domain Model Excerpt
+![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
-### Level 1
 
-* Logical View
+### 4.1. Realization
 
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-* Process View
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-* Scenary View
+#### Level2
 
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+###### LogicalView:
 
-### level 2
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-* Logical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-* Process View
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-* Physical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation View
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 * Controller
