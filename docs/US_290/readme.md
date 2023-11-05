@@ -90,31 +90,220 @@ information of elevators of a building, such as brand, description, model, ident
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Verifies that controller class returns the right response to a valid get request.*
 
+``` typescript
+	it('1. Controller with stub service returns 2 elevators', async function () {
+        const elevatorResult1 = {
+            elevatorId: elevator1.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator1.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator1.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator1.getValue().elevatorDescription.description,
+            elevatorModel: elevator1.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator1.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+
+        const elevatorResult2 = {
+            elevatorId: elevator2.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator2.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator2.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator2.getValue().elevatorDescription.description,
+            elevatorModel: elevator2.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator2.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+
+        const result = [elevatorResult1, elevatorResult2]
+
+        let req: Partial<Request> = {}
+        req.params = {buildingCode: building.getValue().code.toString()}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listElevatorsInBuildingService = Container.get('listElevatorsInBuildingService')
+
+        sinon.stub(listElevatorsInBuildingService, 'listElevatorsInBuilding').returns(new Promise((resolve, reject) => { resolve(Result.ok<IListElevatorsInBuildingDTO[]>(result)) }))
+
+        const listElevatorsInBuildingController = new ListElevatorsInBuildingController(listElevatorsInBuildingService as IListElevatorsInBuildingService)
+
+        await listElevatorsInBuildingController.listElevatorsInBuilding(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+
+**Test 2:** *Verifies that controller class returns the right response when there are no elevators in the system.*
+
+``` typescript
+	it('2. Controller with stub service returns no elevators', async function () {
+        let req: Partial<Request> = {}
+        req.params = {buildingCode: building.getValue().code.toString()}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listElevatorsInBuildingService = Container.get('listElevatorsInBuildingService')
+
+        sinon.stub(listElevatorsInBuildingService, 'listElevatorsInBuilding').returns(new Promise((resolve, reject) => { resolve(Result.fail<IListElevatorsInBuildingDTO[]>('No elevators found!')) }))
+
+        const listElevatorsInBuildingController = new ListElevatorsInBuildingController(listElevatorsInBuildingService as IListElevatorsInBuildingService)
+
+        await listElevatorsInBuildingController.listElevatorsInBuilding(<Request>req, <Response>res, <NextFunction>next)
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 400)
+        sinon.assert.calledOnce(res.send)
+    })
+```
+
+**Test 3:** *Verifies that service class returns the right list when there are elevators in the system.*
+
+``` typescript
+	it('3. Service with stub repo lists 2 elevators', async function () {
+        const elevatorResult1 = {
+            elevatorId: elevator1.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator1.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator1.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator1.getValue().elevatorDescription.description,
+            elevatorModel: elevator1.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator1.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+
+        const elevatorResult2 = {
+            elevatorId: elevator2.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator2.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator2.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator2.getValue().elevatorDescription.description,
+            elevatorModel: elevator2.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator2.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+        
+        const expected = [elevatorResult1, elevatorResult2]
+
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode').returns(new Promise((resolve, reject) => {resolve(building.getValue())}))
+
+        const listElevatorsInBuildingService = Container.get('listElevatorsInBuildingService') as IListElevatorsInBuildingService
+
+        const actual = await listElevatorsInBuildingService.listElevatorsInBuilding(building.getValue().code.toString())
+
+        sinon.assert.match(actual.getValue(), expected)
+    })
+```
+
+**Test 4:** *Verifies that controller and service classes return the right list when there are elevators in the system.*
+
+``` typescript
+	it('5. Controller + Service with stub repo return 2 elevators', async function () {
+        const elevatorResult1 = {
+            elevatorId: elevator1.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator1.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator1.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator1.getValue().elevatorDescription.description,
+            elevatorModel: elevator1.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator1.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+
+        const elevatorResult2 = {
+            elevatorId: elevator2.getValue().id.toValue(),
+            elevatorIdentificationNumber: elevator2.getValue().elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator2.getValue().elevatorBrand.brand,
+            elevatorDescription: elevator2.getValue().elevatorDescription.description,
+            elevatorModel: elevator2.getValue().elevatorModel.model,
+            elevatorSerialNumber: elevator2.getValue().elevatorSerialNumber.serialNumber,
+            floorsNumber: [1]
+        } as IListElevatorsInBuildingDTO
+
+        const result = [elevatorResult1, elevatorResult2]
+
+        let req: Partial<Request> = {}
+        req.params = {buildingCode: building.getValue().code.toString()}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode').returns(new Promise((resolve, reject) => {resolve(building.getValue())}))
+
+        const listElevatorsInBuildingService = Container.get('listElevatorsInBuildingService') as IListElevatorsInBuildingService
+
+        const listElevatorsInBuildingController = new ListElevatorsInBuildingController(listElevatorsInBuildingService as IListElevatorsInBuildingService)
+
+        await listElevatorsInBuildingController.listElevatorsInBuilding(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
+```
 
 ## 5. Implementation
+### Class ListElevatorsInBuildingService
+``` typescript
+@Service()
+export default class ListElevatorsInBuildingService implements IListElevatorsInBuildingService {
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+    constructor(
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo,
+    ) { }
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    public async listElevatorsInBuilding(buildingCode: string): Promise<Result<IListElevatorsInBuildingDTO[]>> {
+        try{
+            const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingCode))
+            if (building === null) return Result.fail<IListElevatorsInBuildingDTO[]>('Building does not exist!')
+
+            let elevatorsList: IListElevatorsInBuildingDTO[] = []
+            for (var floor of building.floors) {
+                for (var anElevator of floor.props.floormap.props.elevators){
+                    const elevatorDto = ElevatorMap.toDtoList(anElevator, [floor.props.floorNumber.number])
+
+                    const elevatorOrUndefined = elevatorsList.find((elevator) => elevator.elevatorId === elevatorDto.elevatorId)
+                    if (elevatorOrUndefined === undefined){
+                        elevatorsList.push(elevatorDto)
+                    } else {
+                        elevatorOrUndefined.floorsNumber.push(elevatorDto.floorsNumber.at(0))
+                    }
+                }
+            }
+
+            if (elevatorsList.length === 0) return Result.fail<IListElevatorsInBuildingDTO[]>('No elevators found!')
+
+            return Result.ok<IListElevatorsInBuildingDTO[]>(elevatorsList)
+
+        } catch(e) {
+            throw e
+        }
+    }
+}
+```
 
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/elevators/listInBuilding/:buildingCode
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+The paramaters ":buildingCode" is mandatory and corresponds to the building in which the elevators are.
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No observations.
