@@ -33,40 +33,40 @@ export class Robot extends AggregateRoot<RobotProps> {
   }
 
   inhibit() {
-    this.operationStatus.inhibit
+    this.props.operationStatus = OperationStatus.create({status: false}).getValue()
   }
 
-    public static create(robotDTO: ICreateRobotDTO,robotType: RobotType, code: string): Result<Robot> {
-      const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
-      if(nicknameOrError.isFailure){
-        return Result.fail<Robot>(nicknameOrError.errorValue())
-      }
+  public static create(robotDTO: ICreateRobotDTO, robotType: RobotType, code: string): Result<Robot> {
+    const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
+    if (nicknameOrError.isFailure) {
+      return Result.fail<Robot>(nicknameOrError.errorValue())
+    }
 
-      const operationStatusOrError = OperationStatus.create()
-      if(operationStatusOrError.isFailure){
-        return Result.fail<Robot>(operationStatusOrError.errorValue())
-      }
+    const operationStatusOrError = OperationStatus.create({status: true})
+    if (operationStatusOrError.isFailure) {
+      return Result.fail<Robot>(operationStatusOrError.errorValue())
+    }
 
-      const serialNumberOrError = SerialNumber.create({ serialNumber: robotDTO.serialNumber })
-      if(serialNumberOrError.isFailure){
-        return Result.fail<Robot>(serialNumberOrError.errorValue())
-      }
+    const serialNumberOrError = SerialNumber.create({ serialNumber: robotDTO.serialNumber })
+    if (serialNumberOrError.isFailure) {
+      return Result.fail<Robot>(serialNumberOrError.errorValue())
+    }
 
-      let descriptionOrError
-      if(robotDTO.description != undefined){
-        descriptionOrError = RobotDescription.create({ description: robotDTO.description })
-        if(descriptionOrError.isFailure){
-            return Result.fail<Robot>(descriptionOrError.errorValue())
-        }
-      }else{
-        descriptionOrError = RobotDescription.create({ description: "" })
+    let descriptionOrError
+    if (robotDTO.description != undefined) {
+      descriptionOrError = RobotDescription.create({ description: robotDTO.description })
+      if (descriptionOrError.isFailure) {
+        return Result.fail<Robot>(descriptionOrError.errorValue())
       }
+    } else {
+      descriptionOrError = RobotDescription.create({ description: "" })
+    }
 
-      const nickname = nicknameOrError.getValue()
-      const operationStatus = operationStatusOrError.getValue()
-      const serialNumber = serialNumberOrError.getValue()
-      const type = robotType
-      const description = descriptionOrError.getValue()
+    const nickname = nicknameOrError.getValue()
+    const operationStatus = operationStatusOrError.getValue()
+    const serialNumber = serialNumberOrError.getValue()
+    const type = robotType
+    const description = descriptionOrError.getValue()
 
     const robot = new Robot(new Code(code),
       {
