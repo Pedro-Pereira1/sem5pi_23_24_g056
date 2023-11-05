@@ -73,9 +73,13 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 ###### ProcessView:
 ![ProcessView](Diagrams/Level3/ProcessView.svg)
 
-
-
 ### 4.3. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
 
 ### 4.4. Tests
 
