@@ -164,9 +164,18 @@ public async createRoom(roomDto: ICreateRoomDTO): Promise<Result<IRoomDTO>> {
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+To use this US, you need to send and HTTP request with the following JSON:
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+Using this URI: localhost:4000/api/rooms/createRoom
+
+````
+{
+"roomName": "A101",
+"roomDescription": "uma sala",
+"roomCategory": "Laboratory",
+"floorId": "1"
+}
+````
 
 ## 7. Observations
 
