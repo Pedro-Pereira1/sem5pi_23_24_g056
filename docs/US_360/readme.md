@@ -566,12 +566,86 @@ it("createRobotController +createRobotService integration test (Robot of this ty
 
 ## 5. Implementation
 
-**createRobotService:**
-
+#### CreateRobotController
 ```
+export default class createRobotController implements ICreateRobotController {
 
+    constructor(
+        @Inject(config.services.createRobot.name) private service: ICreateRobotService
+    )
+    {}
+
+    public async createRobot(req: Request, res: Response, next: NextFunction) {
+        try {
+            const robotOrError = await this.service.createRobot(req.body as ICreateRobotDTO) as Result<IRobotDTO>
+
+            if (robotOrError.isFailure) {
+                return res.status(400).send(robotOrError.errorValue())
+            }
+
+            const robotDTO = robotOrError.getValue();
+            return res.status(201).json(robotDTO);
+
+        }catch (e){
+            return next(e);
+        }
+    }
+}
 ````
 
+#### CreateRobotService
+```
+export default class createRobotService implements ICreateRobotService {
+
+    constructor(
+        @Inject(config.repos.robot.name) private robotRepo: IRobotRepo,
+        @Inject(config.repos.robotType.name) private robotTypeRepo: IRobotTypeRepo
+    ) { }
+
+
+    public async createRobot(robotDTO: ICreateRobotDTO): Promise<Result<IRobotDTO>> {
+
+        try {
+
+            const robotExists = await this.robotRepo.findById(robotDTO.code)
+            if(robotExists != null){
+                return Result.fail<IRobotDTO>("Robot already exists")
+            }
+
+            const typeOrError = await this.robotTypeRepo.findById(robotDTO.type)
+            if(typeOrError == null){
+                return Result.fail<IRobotDTO>("Robot Type not found")
+            }
+
+            const robotDuplicatedNickname = await this.robotRepo.findByNickname(robotDTO.nickname)
+            if(robotDuplicatedNickname != null){
+                return Result.fail<IRobotDTO>("Robot with this nickname already exists")
+            }
+
+            const robotOfType = await this.robotRepo.findBySerialNumberAndType(robotDTO.serialNumber,robotDTO.type)
+            if(robotOfType){
+                return Result.fail<IRobotDTO>("Robot of this type and serial number already exists")
+            }
+
+            const robotOrError = Robot.create(robotDTO,typeOrError,robotDTO.code)
+            if (robotOrError.isFailure) {
+                return Result.fail<IRobotDTO>(robotOrError.errorValue())
+            }
+
+            const robotResult = robotOrError.getValue()
+
+            await this.robotRepo.save(robotResult);
+
+            const robotDtoResult = RobotMap.toDto(robotResult) as IRobotDTO
+
+            return Result.ok<IRobotDTO>(robotDtoResult)
+
+        } catch (e) {
+            throw e
+        }
+    }
+}
+````
 ## 6. Integration/Demonstration
 
 *In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
