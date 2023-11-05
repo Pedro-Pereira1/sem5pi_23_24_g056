@@ -120,6 +120,14 @@ export default {
     listAllRobots: {
       name: "listAllRobotsController",
       path: "../controllers/robot/list/listAllRobotsController"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskController",
+      path: "../controllers/robot/list/ListAllRobotsByAvailableTasksController"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationController",
+      path: "../controllers/robot/list/ListRobotsByDesignationController"
     }
   },
 
@@ -242,6 +250,14 @@ export default {
     listAllRobots: {
       name: "listAllRobotsService",
       path: "../services/robot/list/listAllRobotsService"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskService",
+      path: "../services/robot/list/ListAllRobotsByAvailableTasksService"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationService",
+      path: "../services/robot/list/ListRobotsByDesignationService"
     }
   },
 };
