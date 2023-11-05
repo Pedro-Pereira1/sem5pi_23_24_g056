@@ -460,9 +460,73 @@ it("ListAllFloorsController + ListAllFloorsService integration test (Building No
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+### ListAllFloorsController
+```
+export default class ListAllFloorsController implements IListAllFloorsController {
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    constructor(
+        @Inject(config.services.listAllFloors.name) private listAllFloorsService: IListAllFloorsService
+    )
+    {}
+
+    public async listAllFloors(req: Request, res: Response, next: NextFunction) {
+        try {
+            const buildingId = req.params.buildingId.toString();
+
+            const floorsOrError = await this.listAllFloorsService.listAllFloors(buildingId)
+
+            if(floorsOrError.isFailure) {
+                return res.status(400).send(floorsOrError.errorValue())
+            }
+
+            return res.status(200).json(floorsOrError.getValue())
+        } catch(err) {
+            throw err
+        }
+    }
+
+
+}
+````
+
+### ListAllFloorsService
+```
+export default class listAllFloorsService implements IListAllFloorsService {
+
+    constructor(
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+    )
+    {}
+
+
+
+
+    public async listAllFloors(buildingId: string): Promise<Result<IFloorDTO[]>> {
+
+
+        const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingId))
+        if(buildingResult === null) {
+           return Result.fail<IFloorDTO[]>(`Building ${buildingId} not found`)
+        }
+
+
+        const floorsResult = buildingResult.floors
+
+        if(floorsResult.length === 0) {
+            return Result.fail<IFloorDTO[]>(`Building ${buildingId} has no floors`)
+        }
+
+        let resolve: IFloorDTO[] = []
+
+        floorsResult.forEach(b => {
+            resolve.push(FloorMaper.toDto(b))
+        })
+
+        return Result.ok<IFloorDTO[]>(resolve)
+    }
+
+}
+````
 
 ## 6. Integration/Demonstration
 
