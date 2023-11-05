@@ -21,7 +21,7 @@ export default class LoadFloorController implements ILoadFloorMapController {
             return res.status(400).send(floorDto.errorValue())
         }
 
-        return res.status(201).send(floorDto.getValue())
+        return res.status(201).json(floorDto.getValue())
     }
 
 
