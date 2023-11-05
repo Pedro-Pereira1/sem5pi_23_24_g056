@@ -1,12 +1,11 @@
-@startuml processLevel2
+@startuml
 'https://plantuml.com/sequence-diagram
 
 autonumber
-actor "Fleet Manger" as CM
 participant Vizualization
 participant MasterDataBuilding
 
-CM -> Vizualization : disableRobot
+?o-> Vizualization : disableRobot
 activate Vizualization
 
 Vizualization -> MasterDataBuilding : disableRobot
@@ -15,7 +14,7 @@ activate MasterDataBuilding
 MasterDataBuilding --> Vizualization
 deactivate MasterDataBuilding
 
-Vizualization --> CM
+<-- Vizualization
 deactivate Vizualization
 
 @enduml
