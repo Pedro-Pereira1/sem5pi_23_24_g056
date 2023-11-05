@@ -84,53 +84,200 @@ and also the building and floor where the passageway connects to.
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Verifies that controller class returns the right response to a valid get request.*
+
+``` typescript
+    it('1. Controller with stub service returns passageway', async function () {
+        const passagewayResult1 = {
+            passagewayId: 1,
+            floorNumberBuilding1: 1,
+            floorNumberBuilding2: 1
+        } as IListPassagewaysBetween2BuildingsDTO
+
+        const result = [passagewayResult1]
+
+        let req: Partial<Request> = {}
+        req.params = {
+            building1Code: building.getValue().code.toString(),
+            building2Code: building2.getValue().code.toString()
+        }
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listPassagewaysBetween2BuildingsService = Container.get('listPassagewaysBetween2BuildingsService')
+
+        sinon.stub(listPassagewaysBetween2BuildingsService, 'listPassagewaysBetween2Buildings').returns(new Promise((resolve, reject) => { resolve(Result.ok<IListPassagewaysBetween2BuildingsDTO[]>(result)) }))
+
+        const listPassagewaysBetween2BuildingsController = new ListPassagewaysBetween2BuildingsController (listPassagewaysBetween2BuildingsService as IListPassagewaysBetween2BuildingsService)
+
+        await listPassagewaysBetween2BuildingsController.listPassagewaysBetween2Buildings(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
+```
+
+**Test 2:** *Verifies that controller class returns the right response when there are no passageways in the system.*
+
+``` typescript
+it('2. Controller with stub service returns no passageway', async function () {
+        let req: Partial<Request> = {}
+        req.params = {
+            building1Code: building.getValue().code.toString(),
+            building2Code: building2.getValue().code.toString()
+        }
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listPassagewaysBetween2BuildingsService = Container.get('listPassagewaysBetween2BuildingsService')
+
+        sinon.stub(listPassagewaysBetween2BuildingsService, 'listPassagewaysBetween2Buildings').returns(new Promise((resolve, reject) => { resolve(Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('No passageways found!')) }))
+
+        const listPassagewaysBetween2BuildingsController = new ListPassagewaysBetween2BuildingsController (listPassagewaysBetween2BuildingsService as IListPassagewaysBetween2BuildingsService)
+
+        await listPassagewaysBetween2BuildingsController.listPassagewaysBetween2Buildings(<Request>req, <Response>res, <NextFunction>next)
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 400)
+        sinon.assert.calledOnce(res.send)
+    })
+```
+
+**Test 3:** *Verifies that service class returns the right list when there are passageways in the system.*
+
+``` typescript
+    it('3. Service with stub repo lists passageway', async function () {
+        const passagewayResult = {
+            passagewayId: 1,
+            floorNumberBuilding1: 1,
+            floorNumberBuilding2: 1
+        } as IListPassagewaysBetween2BuildingsDTO
+        
+        const expected = [passagewayResult]
+
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode')
+            .onFirstCall()
+            .returns(new Promise((resolve, reject) => { resolve(building.getValue()) }))
+            .onSecondCall()
+            .returns(new Promise((resolve, reject) => { resolve(building2.getValue()) }))
+            
+        const listPassagewaysBetween2BuildingsService = Container.get('listPassagewaysBetween2BuildingsService') as IListPassagewaysBetween2BuildingsService
+
+        const actual = await listPassagewaysBetween2BuildingsService.listPassagewaysBetween2Buildings(building.getValue().code.toString(), building2.getValue().code.toString())
+
+        sinon.assert.match(actual.getValue(), expected)
+    })
 
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+
+**Test 3:** *Verifies that controller and service classes return the right list when there are passageways in the system.*
+
+``` typescript
+    it('5. Controller + Service with stub repo returns passageway', async function () {
+        const passagewayResult1 = {
+            passagewayId: 1,
+            floorNumberBuilding1: 1,
+            floorNumberBuilding2: 1
+        } as IListPassagewaysBetween2BuildingsDTO
+    
+
+        const result = [passagewayResult1]
+
+        let req: Partial<Request> = {}
+        req.params = {
+            building1Code: building.getValue().code.toString(),
+            building2Code: building2.getValue().code.toString()
+        }
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const buildingRepo = Container.get('buildingRepo')
+        sinon.stub(buildingRepo, 'findByBuidingCode')
+            .onFirstCall()
+            .returns(new Promise((resolve, reject) => { resolve(building.getValue()) }))
+            .onSecondCall()
+            .returns(new Promise((resolve, reject) => { resolve(building2.getValue()) }))
+
+        const listPassagewaysBetween2BuildingsService = Container.get('listPassagewaysBetween2BuildingsService') as IListPassagewaysBetween2BuildingsService
+
+        const listPassagewaysBetween2BuildingsController = new ListPassagewaysBetween2BuildingsController (listPassagewaysBetween2BuildingsService as IListPassagewaysBetween2BuildingsService)
+
+        await listPassagewaysBetween2BuildingsController.listPassagewaysBetween2Buildings(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
+
+```
 
 ## 5. Implementation
 
 **listPassagewaysBetween2BuildingsService:**
 
-```
-public async listPassagewaysBetween2BuildingsService(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
+``` typescript
+@Service()
+export default class ListPassagewaysBetween2BuildingsService implements IListPassagewaysBetween2BuildingsService {
+
+    constructor(
+        @Inject(config.repos.passageway.name) private passagewayRepo: IPassagewayRepo,
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+    ) { }
+
+    public async listPassagewaysBetween2Buildings(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
         try{
             const building1 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building1Code))
             if (!building1) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
-
+            
             const building2 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building2Code))
             if (!building2) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
-
+            
             let passagewaysList: IListPassagewaysBetween2BuildingsDTO[] = []
             for (var floor of building1.floors) {
-                for (var passagewayId of floor.props.floormap.passagewaysId) {
-                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passagewayId))
-
+                for (var passageway of floor.props.floormap.props.passageways) {
+                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passageway.id.toValue()))
+                    
                     if (floorOrUndefined !== undefined){
-                        passagewaysList.push(PassagewayMap.toDtoList(await this.passagewayRepo.findById(passagewayId), Number(floor.floorNumber), Number(floorOrUndefined.floorNumber)))
-                    }
+                        passagewaysList.push(PassagewayMap.toDtoList(passageway, floor.floorNumber.number, floorOrUndefined.floorNumber.number))
+                    } 
                 }
             }
 
             if (passagewaysList.length === 0) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('No passageways found!')
-
+            
             return Result.ok<IListPassagewaysBetween2BuildingsDTO[]>(passagewaysList)
         } catch(e) {
             throw e
         }
     }
-````
+}
+```
 
 ## 6. Integration/Demonstration
 
 To use this US, you need to send and HTTP request with the following URI:
 
-localhost:4000/api/passageways/list/building1/A/building2/C
+localhost:4000/api/passageways/list/building1/:building1Code/building2/:building1Code
+
+The paramaters ":building1Code" and ":building2Code" are mandatory and corresponds to the buildings which the passageways connect.
 
 ## 7. Observations
 
