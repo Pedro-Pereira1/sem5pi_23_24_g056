@@ -18,7 +18,7 @@ import { IRobotDTO } from '../../../src/dto/robot/IRobotDTO';
 import ICreateRobotService from '../../../src/services/IServices/robot/create/ICreateRobotService';
 import createRobotController from '../../../src/controllers/robot/create/createRobotController';
 
-describe("Create robot Type", function () {
+describe("Create robot", function () {
     const sandbox = sinon.createSandbox();
     let robotTypeRepoMock;
     let robotRepoMock;
