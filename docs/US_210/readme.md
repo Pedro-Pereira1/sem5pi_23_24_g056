@@ -59,18 +59,49 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-### 3.2. System Sequence Diagram
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
+### 3.1. Domain Model Excerpt
+![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
+
 
 ## 4. Design
 
 ### 4.1. Realization
 
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/ProcessView.svg)
+
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
+
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
+
 #### Level2
-![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
+
+###### LogicalView:
+
+![LogicalView](Diagrams/Level2/ProcessView.svg)
+
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
+
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
+
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
 #### Level3
-![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
+###### LogicalView:
+![LogicalView](Diagrams/Level3/ProcessView.svg)
+
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
+
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
+
 
 
 ### 4.3. Applied Patterns

@@ -1,0 +1,19 @@
+@startuml
+
+autonumber
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+?o-> Visualization: tarts the process to list all floors of a building
+activate Visualization
+
+Visualization -> GI: GET floorsByBuilding
+activate GI
+GI --> Visualization: floors(JSON)
+deactivate GI
+
+<-- Visualization: Shows all floors of intended building
+deactivate Visualization
+
+
+@enduml
