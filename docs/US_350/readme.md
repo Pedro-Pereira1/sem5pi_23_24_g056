@@ -12,6 +12,15 @@
 > **Q**: Que tipo de tarefas um robot pode realizar? <br>
 > **A**: De momento apenas existem dois tipos de tarefas conhecidas que o sistema deve suportar: vigilância e entrega de objectos <br>
 
+> **Q**: Pretende alguma regra de negócio para o limite de caracteres para o tipo, marca e modelo? <br>
+> **A**: tipo de robot: obrigatório, alfanum+ericos, maximo 25 caracteres
+marca: obrigatório, maximo 50 caracteres
+modelo: obrigatório, máximo 100 caracteres <br>
+
+> **Q**: Poderia explicar as diferenças entre estas duas user stories, US350 e US360? <br>
+> **A**: o requisito 350 permite definir que tipos de robots existem. por exemplo "Tipo A: Robot marca X modelo Y com capacidade de executar tarefas de vigilância" e "Tipo B: Robot marca W modelo Z com capacidade de executar tarefas de vigilância e pickeup&delivery" <br>
+
+
 
 **Dependencies:**
 There are no Dependencies associated with this US.
@@ -397,15 +406,18 @@ export default class createRobotTypeService implements ICreateRobotTypeService {
 ````
 
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/robotTypes/createRobotType
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+With the following JSON
+```
+{
+    "robotTypeID": "k4",
+    "robotBrand": "Joi.string().max(0).required()",
+    "robotModel": " Joi.string().max(100).required()",
+    "availableTasks": ["Floor surveillance","Object transport"]
+}
+````
 
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
