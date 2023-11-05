@@ -9,7 +9,22 @@
 
 **US 270 -** As a Campus Manager, I want to create an elevator in a building.
 
-- **FRE0X - XXX XXX:** yyyyyyyyy.
+**Client Clarifications**
+>**Question**: "Como tal, gostaria de saber que atributos deveria ter o elevador, para além de uma lista de pisos aos quais consegue aceder dentro do seu edifício. Algumas das ideias que me surgiram foram o piso em que estava localizado naquele momento, número de série, fabricante ou descrição."<br><br>
+>**Answer**: "- edificio (obrigatório)<br>
+			- número identificativo (obrigatório, único no edificio)<br>
+			-lista de pisos do edificio servidos pelo elevador (obrigatório)<br>
+			- marca (opcional, alfanumerico, 50 caracteres)<br>
+			- modelo (opcional, mas obrigatório se marca for introduzido, alfanumerico, 50 caracteres)<br>
+			- número de série do fabricante (opcional, alfanumerico, 50 caracteres)<br>
+			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>		
+
+>**Question**: "Relativamente à funcionalidade de criar elevador, no seguimento da sua resposta em (https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=25298#p32051), gostaríamos que clarificasse quais das propriedades que indicou serem alfanuméricas podem conter espaços; por exemplo, nós acharíamos que seria sensato a descrição poder conter espaços."<br>
+"Adicionalmente, gostaria de saber se o identificador numérico que referiu deve ser fornecido ao sistema ou gerado automaticamente pelo mesmo, dado que este deve ser único dentro de cada edifício."<br><br>
+>**Answer**: "
+bom dia,
+todos os atributos alfanumercos podme conter espaços à exceção do número de série
+o número indeitifcativo do elevador deve ser gerado sequencialmente pelo sistema tendo em conta o edifico, por exemplo, existirá o elevador 1 do edificio B e o elevador 1 do edificio A"<br>		
 
 **Dependencies:**
 - **US150 -** As a Campus Manager, I want to create a building.
@@ -35,7 +50,7 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Process View
 
-![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
 * Scenary View
 
@@ -49,7 +64,7 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Process View
 
-![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
 
 * Physical View
 
@@ -67,11 +82,11 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
 
 ### 4.2. Applied Patterns
 * Controller

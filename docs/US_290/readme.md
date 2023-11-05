@@ -42,7 +42,7 @@ information of elevators of a building, such as brand, description, model, ident
 
 * Process View
 
-![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
 * Scenary View
 
@@ -56,7 +56,7 @@ information of elevators of a building, such as brand, description, model, ident
 
 * Process View
 
-![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
 
 * Physical View
 
@@ -74,11 +74,11 @@ information of elevators of a building, such as brand, description, model, ident
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
 
 ### 4.2. Applied Patterns
 * Controller

@@ -6,12 +6,11 @@ participant ":ElevatorRoute" as Route
 participant ":EditElevatorController" as Controller
 participant ":EditElevatorService" as Service
 participant ":ElevatorRepo" as Repo
-participant ":ElevatorSchema" as Schema
+participant ":ElevatorPersistence" as Persistence
 participant ":ElevatorMap" as Map
 participant ":ElevatorDTO" as DTO
-
 participant ":BuildingRepo" as BuildingRepo
-participant ":BuildingSchema" as BuildingSchema
+participant ":BuildingPersistence" as BuildingPersistence
 
 
 
@@ -26,10 +25,10 @@ activate Service
 
 Service -> BuildingRepo: findByBuildingCode(buildingCode)
 activate BuildingRepo
-BuildingRepo -> BuildingSchema: findOne(buildingCode)
-activate BuildingSchema
-BuildingRepo <-- BuildingSchema
-deactivate BuildingSchema
+BuildingRepo -> BuildingPersistence: findOne(buildingCode)
+activate BuildingPersistence
+BuildingRepo <-- BuildingPersistence
+deactivate BuildingPersistence
 Service <-- BuildingRepo
 deactivate BuildingRepo
 
@@ -38,7 +37,7 @@ deactivate BuildingRepo
 
 Service -> Repo: get elevators which have the same id as the ones stored in building
 activate Repo
-Repo -> Schema: get elevators
+Repo -> Persistence: get elevators
 deactivate Repo
 
 Service -> Map:toDto(elevators)

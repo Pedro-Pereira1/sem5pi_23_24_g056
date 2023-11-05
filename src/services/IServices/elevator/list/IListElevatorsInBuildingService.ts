@@ -1,6 +1,6 @@
 import { Result } from "../../../../core/logic/Result";
-import IElevatorDTO from "../../../../dto/elevator/IElevatorDTO";
+import IListElevatorsInBuildingDTO from "../../../../dto/elevator/IListElevatorsInBuildingDTO";
 
 export default interface IListElevatorsInBuildingService {
-    listElevatorsInBuilding(buildingCode: string): Promise<Result<IElevatorDTO[]>>
+    listElevatorsInBuilding(buildingCode: string): Promise<Result<IListElevatorsInBuildingDTO[]>>
 }
