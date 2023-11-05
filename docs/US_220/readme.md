@@ -92,13 +92,324 @@ and also the building and floor where the passageway connects to.
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Tests the controller using a stub service to list floors with passageways*
 
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it("ListFloorsPassagewaysController unit test using ListFloorsPassagewaysService stub", async function() {
+
+        let body = {};
+        let req: Partial<Request> = {};
+        req.body = body;
+        req.params = {
+            buildingCode: "A"
+        }
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        let listFloorsPassagewaysServiceInstance = Container.get("listFloorsPassagewaysService");
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const building2DTO = {
+            buildingName: "EdificioB",
+            buildingDescription: "uma descricao",
+            buildingCode: "B",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building2 = Building.create({
+            buildingName: new BuildingName({ value: building2DTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: building2DTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: building2DTO.buildingLength, width: building2DTO.buildingWidth }),
+            floors: [],
+        }, building2DTO.buildingCode).getValue()
+
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+                "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, FloorDTO.floorId).getValue()
+
+        const Floor2DTO = {
+            floorId: 2,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor2 = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: Floor2DTO.floorNumber}),
+                "floorDescription": new FloorDescription({ value: Floor2DTO.floorDescription }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, Floor2DTO.floorId).getValue()
+
+        const createPassagewayDTO = {
+            passagewayId: 1,
+            building1Id: "A",
+            floor1Id: 1,
+            building2Id: "B",
+            floor2Id: 2,
+        } as ICreatePassagewayDTO
+
+        const passageway = Passageway.create(
+            {
+                passagewayId: createPassagewayDTO.passagewayId,
+                building1Id: createPassagewayDTO.building1Id,
+                floor1Id: createPassagewayDTO.floor1Id,
+                building2Id: createPassagewayDTO.building2Id,
+                floor2Id: createPassagewayDTO.floor2Id,
+            }).getValue()
+
+        building.addFloor(floor);
+        building2.addFloor(floor2);
+        floor.addPassageway(passageway);
+        floor2.addPassageway(passageway)
+
+        sinon.stub(listFloorsPassagewaysServiceInstance, "listFloorsPassageways").returns(
+            Result.ok<IFloorDTO[]>([FloorDTO])
+        );
+
+
+        const ctrl = new ListFloorsPassagewaysController(listFloorsPassagewaysServiceInstance as IListFloorsPassagewaysService);
+
+        // Act
+        await ctrl.listFloorsPassageways(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match([FloorDTO]));
+    });
+````
+
+**Test 2:** *Tests the service using a stub repo to list floors with passageways*
+
+```
+it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration test", async function() {
+        // Arrange
+        let body = {};
+        let req: Partial<Request> = {};
+        req.body = body;
+        req.params = {
+            buildingCode: "A"
+        }
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        let listFloorsPassagewaysServiceInstance = Container.get("listFloorsPassagewaysService");
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const building2DTO = {
+            buildingName: "EdificioB",
+            buildingDescription: "uma descricao",
+            buildingCode: "B",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building2 = Building.create({
+            buildingName: new BuildingName({ value: building2DTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: building2DTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: building2DTO.buildingLength, width: building2DTO.buildingWidth }),
+            floors: [],
+        }, building2DTO.buildingCode).getValue()
+
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+                "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, FloorDTO.floorId).getValue()
+
+        const Floor2DTO = {
+            floorId: 2,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor2 = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: Floor2DTO.floorNumber}),
+                "floorDescription": new FloorDescription({ value: Floor2DTO.floorDescription }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, Floor2DTO.floorId).getValue()
+
+        const createPassagewayDTO = {
+            passagewayId: 1,
+            building1Id: "A",
+            floor1Id: 1,
+            building2Id: "B",
+            floor2Id: 2,
+        } as ICreatePassagewayDTO
+
+        const passageway = Passageway.create(
+            {
+                passagewayId: createPassagewayDTO.passagewayId,
+                building1Id: createPassagewayDTO.building1Id,
+                floor1Id: createPassagewayDTO.floor1Id,
+                building2Id: createPassagewayDTO.building2Id,
+                floor2Id: createPassagewayDTO.floor2Id,
+            }).getValue()
+
+        building.addFloor(floor);
+        building2.addFloor(floor2);
+        floor.addPassageway(passageway);
+        floor2.addPassageway(passageway)
+
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        buildingRepoMock.findByFloor.resolves(building);
+        floorRepoMock.findByPassageway.resolves([building2]);
+        floorRepoMock.findByPassageway.resolves([floor, floor2]);
+
+
+        const listFloorsPassagewaysServiceSpy = sinon.spy(listFloorsPassagewaysServiceInstance, "listFloorsPassageways");
+
+        const ctrl = new ListFloorsPassagewaysController(listFloorsPassagewaysServiceInstance as IListFloorsPassagewaysService);
+
+        await ctrl.listFloorsPassageways(<Request>req, <Response>res, <NextFunction>next);
+
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json,sinon.match([{
+            floorNumber: 1,
+            floorId: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                passageways: [
+                    1
+                ],
+            },
+            floorConnected: [
+                "2",
+                "A"
+            ]
+        }]));
+        sinon.assert.calledOnce(listFloorsPassagewaysServiceSpy);
+    });
 ````
 
 ## 5. Implementation
