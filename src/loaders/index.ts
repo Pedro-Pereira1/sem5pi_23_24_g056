@@ -156,6 +156,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.loadFloorMap.path
   }
 
+  const inhibitRobotController = {
+    name: config.controllers.inhibitRobot.name,
+    path: config.controllers.inhibitRobot.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -302,6 +307,11 @@ export default async ({ expressApp }) => {
     path: config.services.loadFloorMap.path
   }
 
+  const inhibitRobotService = {
+    name: config.services.inhibitRobot.name,
+    path: config.services.inhibitRobot.path
+  }
+
   const listAllRobotsByAvailableTask = {
     name: config.services.listAllRobotsByAvailableTask.name,
     path: config.services.listAllRobotsByAvailableTask.path
@@ -345,6 +355,7 @@ export default async ({ expressApp }) => {
       createRobotController,
       loadFlorMapController,
       listAllRobotsController,
+      inhibitRobotController,
       ListPassagewaysBetween2BuildingsController
     ],
     repos: [
@@ -378,6 +389,7 @@ export default async ({ expressApp }) => {
       createRobotService,
       loadFlorMapService,
       listAllRobotsService,
+      inhibitRobotService,
       listPassagewaysBetween2BuildingsService
     ]
   });
