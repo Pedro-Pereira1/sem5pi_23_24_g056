@@ -21,7 +21,7 @@ import ListFloorsPassagewaysController from "../../../src/controllers/floor/list
 import listFloorsPassagewaysService from "../../../src/services/floor/list/listFloorsPassagewaysService";
 import IListFloorsPassagewaysService from "../../../src/services/IServices/floor/list/IListFloorsPassagewaysService";
 
-describe.only('list floors with passageways to other buildings', function () {
+describe('list floors with passageways to other buildings', function () {
     const sandbox = sinon.createSandbox();
     let buildingRepoMock;
     let floorRepoMock;
