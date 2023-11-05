@@ -2,55 +2,61 @@
 
 autonumber
 
-participant ":ElevatorRoute" as Route
-participant ":EditElevatorController" as Controller
-participant ":EditElevatorService" as Service
-participant ":ElevatorRepo" as Repo
-participant ":ElevatorSchema" as Schema
-participant ":ElevatorMap" as Map
-participant ":ElevatorDTO" as DTO
-
-participant ":BuildingRepo" as BuildingRepo
+participant ":FloorRoute" as Route
+participant ":ListFloorsPassagewaysController" as Controller
+participant ":ListFloorsPassagewaysService" as Service
+participant ":BuildingRepo" as Repo
 participant ":BuildingSchema" as BuildingSchema
+participant ":FloorMap" as Map
+participant ":IListFloorPassagewaysDTO" as DTO
 
+participant ":FloorRepo" as FloorRepo
+
+participant ":FloorSchema" as Schema
 
 
 ?o->Route: GET
 activate Route
 
-Route -> Controller: listElevatorsInBuilding(req, res, next)
+Route -> Controller: listFloorsPassageways(req, res, next)
 activate Controller
 
-Controller -> Service: listElevatorsInBuilding(buildingCode)
+Controller -> Service: listFloorsPassageways(buildingCode)
 activate Service
 
-Service -> BuildingRepo: findByBuildingCode(buildingCode)
-activate BuildingRepo
-BuildingRepo -> BuildingSchema: findOne(buildingCode)
-activate BuildingSchema
-BuildingRepo <-- BuildingSchema
-deactivate BuildingSchema
-Service <-- BuildingRepo
-deactivate BuildingRepo
-
-
-
-
-Service -> Repo: get elevators which have the same id as the ones stored in building
+Service -> Repo: findByBuildingCode(buildingCode)
 activate Repo
-Repo -> Schema: get elevators
+Repo -> BuildingSchema: findOne(buildingCode)
+activate BuildingSchema
+Repo <-- BuildingSchema
+deactivate BuildingSchema
+Service <-- Repo
 deactivate Repo
 
-Service -> Map:toDto(elevators)
+
+
+
+Service -> FloorRepo: get floors in which the passageway connects
+activate FloorRepo
+FloorRepo -> Schema: find(passagewayId)
+activate Schema
+FloorRepo <-- Schema
+deactivate Schema
+Service <-- FloorRepo
+deactivate FloorRepo
+
+
+
+Service -> Map:toDtoList(floor, floorsConnected)
 activate Map
 
 Map -> DTO: create
 deactivate Map
 
-Service --> Controller: elevators list
+Service --> Controller: floors list
 deactivate Service
 
-Controller --> Route: elevators list
+Controller --> Route: floors list
 deactivate Controller
 <--Route:
 
