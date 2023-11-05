@@ -164,6 +164,18 @@ public async editPassageway(passagewayDTO:IEditPassagewayDTO): Promise<Result<IP
 
 ## 6. Integration/Demonstration
 
+To use this US, you need to send and HTTP request with the following JSON:
+
+Using this URI: localhost:4000/api/passageways/editPassageway
+
+````
+{
+            "passagewayId": 8,
+            "floor1Id": 2,
+            "floor2Id": 3
+}
+````
+
 ## 7. Observations
 
 No additional observations.
