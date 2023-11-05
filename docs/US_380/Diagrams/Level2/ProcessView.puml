@@ -5,18 +5,16 @@ autonumber
 participant Visualization
 participant "MasterDataLogistics" as GI
 
-?o-> Visualization: Types the data
+?o-> Visualization: List all robots in fleet
 activate Visualization
 
-Visualization -> GI: POST robot
+Visualization -> GI: GET robots
 activate GI
 
-GI -> GI: createRobot(robot)
-
-GI --> Visualization: robot
+GI --> Visualization: List of robots
 deactivate GI
 
-<-- Visualization: Informs operation success
+<-- Visualization: List of robots
 deactivate Visualization
 
 

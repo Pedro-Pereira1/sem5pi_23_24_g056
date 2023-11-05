@@ -77,31 +77,209 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 * GRASP
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Verifies that controller class returns the right response to a valid get request.*
+
+``` typescript
+    it('1. Controller with stub service returns robots', async function () {
+        const robot1Result = {
+            code: robot.getValue().id.toString(),
+            nickname: robot.getValue().props.nickname.nickname,
+            type: robot.getValue().props.type.id.toString(),
+            serialNumber: robot.getValue().props.serialNumber.serialNumber,
+            description: robot.getValue().props.description.description,
+            operationStatus: robot.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const robot2Result = {
+            code: robot2.getValue().id.toString(),
+            nickname: robot2.getValue().props.nickname.nickname,
+            type: robot2.getValue().props.type.id.toString(),
+            serialNumber: robot2.getValue().props.serialNumber.serialNumber,
+            description: robot2.getValue().props.description.description,
+            operationStatus: robot2.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const result = [robot1Result, robot2Result]
+
+        let req: Partial<Request> = {}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listAllRobotsService = Container.get('listAllRobotsService')
+
+        sinon.stub(listAllRobotsService, 'listAllRobots').returns(new Promise((resolve, reject) => { resolve(Result.ok<IRobotDTO[]>(result)) }))
+
+        const listAllRobotsController = new ListAllRobotsController(listAllRobotsService as IListAllRobotsService)
+
+        await listAllRobotsController.listAllRobots(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
+```
+
+**Test 2:** *Verifies that controller class returns the right response when there are no robots in the system.*
+
+``` typescript
+	it('2. Controller with stub service returns no robots', async function () {
+        let req: Partial<Request> = {}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const listAllRobotsService = Container.get('listAllRobotsService')
+
+        sinon.stub(listAllRobotsService, 'listAllRobots').returns(new Promise((resolve, reject) => { resolve(Result.fail<IRobotDTO[]>('No Robots found!')) }))
+
+        const listAllRobotsController = new ListAllRobotsController(listAllRobotsService as IListAllRobotsService)
+
+        await listAllRobotsController.listAllRobots(<Request>req, <Response>res, <NextFunction>next)
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 400)
+        sinon.assert.calledOnce(res.send)
+    })
+```
+
+**Test 3:** *Verifies that service class returns the right list when there are robots in the system.*
+
+``` typescript
+	it('3. Service with stub repo lists robots', async function () {
+        const robot1Result = {
+            code: robot.getValue().id.toString(),
+            nickname: robot.getValue().props.nickname.nickname,
+            type: robot.getValue().props.type.id.toString(),
+            serialNumber: robot.getValue().props.serialNumber.serialNumber,
+            description: robot.getValue().props.description.description,
+            operationStatus: robot.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const robot2Result = {
+            code: robot2.getValue().id.toString(),
+            nickname: robot2.getValue().props.nickname.nickname,
+            type: robot2.getValue().props.type.id.toString(),
+            serialNumber: robot2.getValue().props.serialNumber.serialNumber,
+            description: robot2.getValue().props.description.description,
+            operationStatus: robot2.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const expected = [robot1Result, robot2Result]
+
+        const returnRepo = [robot.getValue(), robot2.getValue()]
+
+        const robotRepo = Container.get('robotRepo')
+        sinon.stub(robotRepo, 'findAll').returns(new Promise((resolve, reject) => {resolve(returnRepo)}))
+
+        const listAllRobotsService = Container.get('listAllRobotsService') as IListAllRobotsService
+
+        const actual = await listAllRobotsService.listAllRobots()
+
+        sinon.assert.match(actual.getValue(), expected)
+    })
 
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
-````
+
+**Test 4:** *Verifies that controller and service classes return the right list when there are robots in the system.*
+
+``` typescript
+    it('5. Controller + Service with stub repo returns robots', async function () {
+        const robot1Result = {
+            code: robot.getValue().id.toString(),
+            nickname: robot.getValue().props.nickname.nickname,
+            type: robot.getValue().props.type.id.toString(),
+            serialNumber: robot.getValue().props.serialNumber.serialNumber,
+            description: robot.getValue().props.description.description,
+            operationStatus: robot.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const robot2Result = {
+            code: robot2.getValue().id.toString(),
+            nickname: robot2.getValue().props.nickname.nickname,
+            type: robot2.getValue().props.type.id.toString(),
+            serialNumber: robot2.getValue().props.serialNumber.serialNumber,
+            description: robot2.getValue().props.description.description,
+            operationStatus: robot2.getValue().props.operationStatus.status
+        } as IRobotDTO
+
+        const result = [robot1Result, robot2Result]
+
+
+        let req: Partial<Request> = {}
+
+        let res: Partial<Response> = {
+            status: sinon.stub().returnsThis(),
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        const returnRepo = [robot.getValue(), robot2.getValue()]
+
+        const robotRepo = Container.get('robotRepo')
+        sinon.stub(robotRepo, 'findAll').returns(new Promise((resolve, reject) => {resolve(returnRepo)}))
+
+        const listAllRobotsService = Container.get('listAllRobotsService') as IListAllRobotsService
+
+        const listAllRobotsController = new ListAllRobotsController(listAllRobotsService as IListAllRobotsService)
+
+        await listAllRobotsController.listAllRobots(<Request>req, <Response>res, <NextFunction>next)
+
+
+        sinon.assert.calledOnce(res.status)
+        sinon.assert.calledWith(res.status, 200)
+        sinon.assert.calledOnce(res.json)
+        sinon.assert.calledWith(res.json, sinon.match(result))
+    })
+
+```
 
 ## 5. Implementation
+### Class ListAllRobotsService
+``` typescript
+    @Service()
+export default class ListAllRobotsService implements IListAllRobotsService {
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+    constructor(
+        @Inject(config.repos.robot.name) private robotRepo: IRobotRepo
+    ) { }
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    public async listAllRobots(): Promise<Result<IRobotDTO[]>> {
+        try{
+            const robotsList = await this.robotRepo.findAll()
+            
+            if (robotsList.length === 0) return Result.fail<IRobotDTO[]>('No Robots found!')
+
+            let resolve: IRobotDTO[] = []
+            
+            robotsList.forEach(robot => {
+                resolve.push(RobotMap.toDto(robot))
+            })
+
+            return Result.ok<IRobotDTO[]>(resolve)
+
+        } catch(e) {
+            throw e
+        }
+    }
+}
+
+```
 
 ## 6. Integration/Demonstration
+To use this US, you need to send and HTTP request with the following URI:
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+localhost:4000/api/robots/listAll
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No observations.
