@@ -1,4 +1,4 @@
-@startuml processLevel3
+@startuml processView3
 'https://plantuml.com/sequence-diagram
 
 autonumber
@@ -9,51 +9,67 @@ participant BuildingMap
 participant Building
 participant BuildingDto
 participant BuildingRepo
-database buildingDatabase
+participant buildingPersistence
 
-EditBuildintRoute -> EditBuildingController : editBuilding
+EditBuildintRoute -> EditBuildingController : editBuilding()
 activate EditBuildintRoute
 activate EditBuildingController
 
-EditBuildingController -> EditBuildingService : editBuilding
+EditBuildingController -> EditBuildingService : editBuilding()
 activate EditBuildingService
 
-EditBuildingService -> BuildingMap : toDomain
+EditBuildingService -> BuildingRepo : findByBuildingCode()
+activate BuildingRepo
+
+BuildingRepo -> buildingPersistence : findOne()
+activate buildingPersistence
+
+buildingPersistence --> BuildingRepo
+deactivate buildingPersistence
+
+BuildingRepo -> BuildingMap : toDomain()
 activate BuildingMap
 
 BuildingMap -> Building : create
 activate Building
+deactivate Building
 
-Building --> BuildingMap
+BuildingMap --> BuildingRepo
+deactivate BuildingMap
 
-BuildingMap --> EditBuildingService
+BuildingRepo --> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> Building : edit
+activate Building
+deactivate Building
 
 EditBuildingService -> BuildingRepo : save
 activate BuildingRepo
 
 BuildingRepo -> BuildingMap : toPersistence
+activate BuildingMap
 
 BuildingMap --> BuildingRepo
+deactivate BuildingMap
 
-BuildingRepo -> buildingDatabase : save
+BuildingRepo -> buildingPersistence : save
+activate buildingPersistence
+deactivate buildingPersistence
 
 BuildingRepo --> EditBuildingService
 deactivate BuildingRepo
 
 EditBuildingService -> BuildingMap : toDto
-deactivate Building
+activate BuildingMap
 
 BuildingMap -> BuildingDto : create
-activate BuildingDto
-
-BuildingDto --> BuildingMap
 
 BuildingMap --> EditBuildingService
 deactivate BuildingMap
 
 EditBuildingService --> EditBuildingController
 deactivate EditBuildingService
-deactivate BuildingDto
 
 EditBuildingController --> EditBuildintRoute
 deactivate EditBuildingController
