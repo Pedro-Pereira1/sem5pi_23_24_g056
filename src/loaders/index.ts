@@ -111,6 +111,16 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const ListPassagewaysBetween2BuildingsController = {
+    name: config.controllers.listPassagewaysBetween2Buildings.name,
+    path: config.controllers.listPassagewaysBetween2Buildings.path
+  }
+
+  const listAllRobotsController = {
+    name: config.controllers.listAllRobots.name,
+    path: config.controllers.listAllRobots.path
+  }
+
   const editFloorController = {
     name: config.controllers.editFloor.name,
     path: config.controllers.editFloor.path
@@ -236,6 +246,16 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const listPassagewaysBetween2BuildingsService = {
+    name: config.services.listPassagewaysBetween2Buildings.name,
+    path: config.services.listPassagewaysBetween2Buildings.path
+  }
+
+  const listAllRobotsService = {
+    name: config.services.listAllRobots.name,
+    path: config.services.listAllRobots.path
+  }
+
   const editFloorService = {
     name: config.services.editFloor.name,
     path: config.services.editFloor.path
@@ -291,7 +311,9 @@ export default async ({ expressApp }) => {
       editElevatorController,
       createRobotTypeController,
       createRobotController,
-      loadFlorMapController
+      loadFlorMapController,
+      listAllRobotsController,
+      ListPassagewaysBetween2BuildingsController
     ],
     repos: [
       roleRepo,
@@ -320,7 +342,9 @@ export default async ({ expressApp }) => {
       editElevatorService,
       createRobotTypeService,
       createRobotService,
-      loadFlorMapService
+      loadFlorMapService,
+      listAllRobotsService,
+      listPassagewaysBetween2BuildingsService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
