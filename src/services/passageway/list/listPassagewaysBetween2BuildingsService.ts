@@ -21,7 +21,7 @@ export default class ListPassagewaysBetween2BuildingsService implements IListPas
         @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
     ) { }
 
-    public async listPassagewaysBetween2BuildingsService(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
+    public async listPassagewaysBetween2Buildings(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
         try{
             const building1 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building1Code))
             if (!building1) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')

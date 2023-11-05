@@ -16,7 +16,7 @@ export default class ListPassagewaysBetween2BuildingsController implements IList
         try {
             const building1Code = String(req.params.building1Code);
             const building2Code = String(req.params.building2Code);
-            const passageways = await this.listPassagewaysBetween2BuildingsService.listPassagewaysBetween2BuildingsService(building1Code, building2Code)
+            const passageways = await this.listPassagewaysBetween2BuildingsService.listPassagewaysBetween2Buildings(building1Code, building2Code)
 
             if(passageways.isFailure) {
                 return res.status(400).send(passageways.errorValue())
