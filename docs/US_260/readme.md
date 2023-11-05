@@ -182,7 +182,7 @@ it('2. Controller with stub service returns no passageway', async function () {
 
 ```
 
-**Test 3:** *Verifies that controller and service classes return the right list when there are passageways in the system.*
+**Test 4:** *Verifies that controller and service classes return the right list when there are passageways in the system.*
 
 ``` typescript
     it('5. Controller + Service with stub repo returns passageway', async function () {
