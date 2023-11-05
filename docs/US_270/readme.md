@@ -150,6 +150,550 @@ it('Create elevator test, elevator description over word limit (250+ words)', as
         assert.equal(result.error,'Elevator description must be shorter than 250 words')
     })
 ````
+**Test 3:** *This test is for creating a valid elevator and checking if it succeeds.*
+```
+it('Create elevator test, valid elevator', async function () {
+        const elevatorDto = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const elevator = Elevator.create({
+            elevatorIdentificationNumber: new ElevatorIdentificationNumber({ identificationNumber: elevatorDto.elevatorIdentificationNumber }),
+            elevatorBrand: new ElevatorBrand({ brand: elevatorDto.elevatorBrand }),
+            elevatorDescription: new ElevatorDescription({ description: elevatorDto.elevatorDescription }),
+            elevatorModel: new ElevatorModel({ model: elevatorDto.elevatorModel }),
+            elevatorSerialNumber: new ElevatorSerialNumber({ serialNumber: elevatorDto.elevatorSerialNumber })
+        }, new ElevatorID(elevatorDto.elevatorId))
+
+        assert.equal(elevator.isSuccess, true)
+    })
+````
+
+**Test 4:** *Tests the controller's functionality while stubbing the createElevatorService and ensuring the correct response is sent.*
+```
+it('Controller unit test with stub service, valid elevator', async function () {
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445'
+        }
+
+        let expected = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445'
+        }
+
+        let req: Partial<Request> = {}
+        req.body = body
+
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        let createElevatorService = Container.get('createElevatorService')
+
+        sinon.stub(createElevatorService, 'createElevator').returns(Result.ok<IElevatorDTO>({
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO))
+
+        const createElevatorController = new CreateElevatorController(createElevatorService as ICreateElevatorService)
+
+        await createElevatorController.createElevator(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.json)
+        sinon.match(expected)
+    })
+````
+
+**Test 5:** *Integration test that simulates creating an elevator, checks if the service is called, and verifies the response.*
+```
+it("createElevatorController +createElevatorService integration test", async function() {
+        // Arrange
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445',
+            "buildingCode": "A",
+            "floorIds": [1]
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const elevatorDTO = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+              "floorNumber": new FloorNumber({number: 1}),
+              "floorDescription": new FloorDescription({ value: 'Test floor' }),
+              "floormap": new FloorMap(
+                {
+                  map: [[]],
+                  passageways: [],
+                  rooms: [],
+                  elevators: [],
+                  passagewaysCoords: [],
+                  elevatorsCoords: [],
+                  roomsCoords: [],
+                }
+              )
+          }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        elevatorRepoMock.findById.resolves(null);
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        floorRepoMock.findById.resolves(floor);
+
+        let createElevatorServiceInstance = Container.get("createElevatorService");
+        const createElevatorServiceSpy = sinon.spy(createElevatorServiceInstance, "createElevator");
+
+        const ctrl = new CreateElevatorController(createElevatorServiceInstance as ICreateElevatorService);
+
+        // Act
+        await ctrl.createElevator(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createElevatorServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            elevatorBrand: "Apple",
+            elevatorDescription: "This is an elevator",
+            elevatorId: 20,
+            elevatorIdentificationNumber: 1,
+            elevatorModel: "Ieli",
+            elevatorSerialNumber: "445"
+          }));
+    });
+````
+
+**Test 6:** *Checks how the controller handles a scenario where an elevator with the same ID already exists.*
+```
+it("createElevatorController +createElevatorService integration test (An Elevator with this Id already exists!)", async function() {
+        // Arrange
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445',
+            "buildingCode": "A",
+            "floorIds": [1]
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const elevatorDTO = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+              "floorNumber": new FloorNumber({number: 1}),
+              "floorDescription": new FloorDescription({ value: 'Test floor' }),
+              "floormap": new FloorMap(
+                {
+                  map: [[]],
+                  passageways: [],
+                  rooms: [],
+                  elevators: [],
+                  passagewaysCoords: [],
+                  elevatorsCoords: [],
+                  roomsCoords: [],
+                }
+              )
+          }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        elevatorRepoMock.findById.resolves(Elevator.create({
+            elevatorIdentificationNumber: new ElevatorIdentificationNumber({ identificationNumber: 1 }),
+            elevatorBrand: new ElevatorBrand({ brand: 'Apple' }),
+            elevatorDescription: new ElevatorDescription({ description: 'This is an elevator' }),
+            elevatorModel: new ElevatorModel({ model: 'Ieli' }),
+            elevatorSerialNumber: new ElevatorSerialNumber({ serialNumber: '445' })
+            }, new ElevatorID(20)).getValue());
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        floorRepoMock.findById.resolves(floor);
+
+        let createElevatorServiceInstance = Container.get("createElevatorService");
+        const createElevatorServiceSpy = sinon.spy(createElevatorServiceInstance, "createElevator");
+
+        const ctrl = new CreateElevatorController(createElevatorServiceInstance as ICreateElevatorService);
+
+        // Act
+        await ctrl.createElevator(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createElevatorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("An Elevator with this Id already exists!"));
+
+    });
+````
+
+**Test 7:** *Simulates an elevator creation when the building specified doesn't exist.*
+```
+it("createElevatorController +createElevatorService integration test (Building does not exist!)", async function() {
+        // Arrange
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445',
+            "buildingCode": "A",
+            "floorIds": [1]
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const elevatorDTO = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+              "floorNumber": new FloorNumber({number: 1}),
+              "floorDescription": new FloorDescription({ value: 'Test floor' }),
+              "floormap": new FloorMap(
+                {
+                  map: [[]],
+                  passageways: [],
+                  rooms: [],
+                  elevators: [],
+                  passagewaysCoords: [],
+                  elevatorsCoords: [],
+                  roomsCoords: [],
+                }
+              )
+          }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        elevatorRepoMock.findById.resolves(null);
+        buildingRepoMock.findByBuidingCode.resolves(null);
+        floorRepoMock.findById.resolves(floor);
+
+        let createElevatorServiceInstance = Container.get("createElevatorService");
+        const createElevatorServiceSpy = sinon.spy(createElevatorServiceInstance, "createElevator");
+
+        const ctrl = new CreateElevatorController(createElevatorServiceInstance as ICreateElevatorService);
+
+        // Act
+        await ctrl.createElevator(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createElevatorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Building does not exist!"));
+
+    });
+````
+
+**Test 8:** *simulates an elevator creation for a non-existing floor..*
+```
+it("createElevatorController +createElevatorService integration test (Floor does not exist!)", async function() {
+        // Arrange
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445',
+            "buildingCode": "A",
+            "floorIds": [1]
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const elevatorDTO = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+              "floorNumber": new FloorNumber({number: 1}),
+              "floorDescription": new FloorDescription({ value: 'Test floor' }),
+              "floormap": new FloorMap(
+                {
+                  map: [[]],
+                  passageways: [],
+                  rooms: [],
+                  elevators: [],
+                  passagewaysCoords: [],
+                  elevatorsCoords: [],
+                  roomsCoords: [],
+                }
+              )
+          }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        elevatorRepoMock.findById.resolves(null);
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        floorRepoMock.findById.resolves(null);
+
+        let createElevatorServiceInstance = Container.get("createElevatorService");
+        const createElevatorServiceSpy = sinon.spy(createElevatorServiceInstance, "createElevator");
+
+        const ctrl = new CreateElevatorController(createElevatorServiceInstance as ICreateElevatorService);
+
+        // Act
+        await ctrl.createElevator(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createElevatorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Floor does not exist!"));
+
+    });
+````
+
+**Test 9:** *Tests the case where elevator creation is attempted without specifying a model when the brand is provided.*
+```
+it("createElevatorController +createElevatorService integration test ('Brand was provided so Model is also required!')", async function() {
+        // Arrange
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorSerialNumber": '445',
+            "buildingCode": "A",
+            "floorIds": [1]
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const elevatorDTO = {
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+              "floorNumber": new FloorNumber({number: 1}),
+              "floorDescription": new FloorDescription({ value: 'Test floor' }),
+              "floormap": new FloorMap(
+                {
+                  map: [[]],
+                  passageways: [],
+                  rooms: [],
+                  elevators: [],
+                  passagewaysCoords: [],
+                  elevatorsCoords: [],
+                  roomsCoords: [],
+                }
+              )
+          }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        elevatorRepoMock.findById.resolves(null);
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        floorRepoMock.findById.resolves(floor);
+
+        let createElevatorServiceInstance = Container.get("createElevatorService");
+        const createElevatorServiceSpy = sinon.spy(createElevatorServiceInstance, "createElevator");
+
+        const ctrl = new CreateElevatorController(createElevatorServiceInstance as ICreateElevatorService);
+
+        // Act
+        await ctrl.createElevator(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createElevatorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Brand was provided so Model is also required!"));
+
+    });
+````
 
 ## 5. Implementation
 
