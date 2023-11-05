@@ -8,14 +8,14 @@ import IListElevatorsInBuildingService from "../../../services/IServices/elevato
 export default class ListElevatorsInBuildingController implements IListElevatorsInBuildingController {
 
     constructor(
-        @Inject(config.services.listElevatorsInBuilding.name) private listElevatorsInBuilding: IListElevatorsInBuildingService
+        @Inject(config.services.listElevatorsInBuilding.name) private listElevatorsInBuildingService: IListElevatorsInBuildingService
     )
     {}
 
-    public async listElevatorsInBuildingFloors(req: Request, res: Response, next: NextFunction) {
+    public async listElevatorsInBuilding(req: Request, res: Response, next: NextFunction) {
         try {
             const buildingCode = String(req.params.buildingCode);
-            const elevators = await this.listElevatorsInBuilding.listElevatorsInBuilding(buildingCode)
+            const elevators = await this.listElevatorsInBuildingService.listElevatorsInBuilding(buildingCode)
 
             if(elevators.isFailure) {
                 return res.status(400).send(elevators.errorValue())
