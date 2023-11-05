@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="105px" preserveAspectRatio="none" style="width:366px;height:105px;background:#FFFFFF;" version="1.1" viewBox="0 0 366 105" width="366px" zoomAndPan="magnify"><defs/><g><!--MD5=[1478444cbd0d707d5292787239839939]
+cluster RobDroneGo--><g id="cluster_RobDroneGo"><path d="M180.5,6 L272.5,6 A3.75,3.75 0 0 1 275,8.5 L282,29.6094 L356.5,29.6094 A2.5,2.5 0 0 1 359,32.1094 L359,91.5 A2.5,2.5 0 0 1 356.5,94 L180.5,94 A2.5,2.5 0 0 1 178,91.5 L178,8.5 A2.5,2.5 0 0 1 180.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="178" x2="282" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="182" y="22.5332">RobDroneGo</text></g><g id="elem_UC2"><ellipse cx="268.481" cy="59.7962" fill="#F1F1F1" rx="74.481" ry="17.2962" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="215.481" y="64.3128">List all buildings</text></g><!--MD5=[99f3cfe8ce18ee9cb444babb539f6fb5]
+entity CM--><g id="elem_CM"><ellipse cx="70" cy="37" fill="#F1F1F1" rx="16" ry="16" style="stroke:#181818;stroke-width:1.5;"/><path d="M70,57 C74,57 77,57 81,53 C89,53 97,61 97,69 L97,73 C97,77 93,81 89,81 L51,81 C47,81 43,77 43,73 L43,69 C43,61 51,53 59,53 C63,57 66,57 70,57 " fill="#F1F1F1" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="6" y="97.0332">UI Campus Manager</text></g><!--MD5=[5725362fb9128b29e7275e925cbddfee]
+link CM to UC2--><g id="link_CM_UC2"><path d="M134.26,60 C151.59,60 170.59,60 188.68,60 " fill="none" id="CM-to-UC2" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="193.75,60,184.75,56,188.75,60,184.75,64,193.75,60" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[75af59099dfaa94b4f0d4c7c6f521d4e]
+@startuml scenaryLevel1
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Campus Manager" as CM
+
+package  RobDroneGo  {
+  usecase "List all buildings" as UC2
+}
+CM - -> UC2
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
