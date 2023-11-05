@@ -31,15 +31,15 @@ registered in the system regarless of number of floors, elevators, passageways a
 
 * Logical:
 
-![Logical](./Diagrams/Level1/LogicalView.svg)
+![Logical](./Diagrams/level1/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessView.svg)
+![Process](./Diagrams/level1/ProcessView.svg)
 
 * Scenary
 
-![Scenery](./Diagrams/Level1/SceneryView.svg)
+![Scenery](./Diagrams/level1/SceneryView.svg)
 
 ### level 2
 
@@ -63,15 +63,15 @@ registered in the system regarless of number of floors, elevators, passageways a
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](./Diagrams/level3/logicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionView.svg)
+![Implementation](./Diagrams/level3/ImplementaionView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessView.svg)
+![Process](./Diagrams/level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 
