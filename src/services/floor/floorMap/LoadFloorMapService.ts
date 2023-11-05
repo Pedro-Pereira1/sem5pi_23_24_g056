@@ -31,6 +31,11 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             return Result.fail<IFloorDTO>('There is no floor with that ID')
         }
 
+        if(!buildingOrError.floorsNumber.includes(Number(floorOrError.id.toValue()))) {
+            return Result.fail<IFloorDTO>('The floor doesn\'t belong to the building')
+        }
+        
+
         let map: number[][] = floorLayout.map
 
         if (map.length > buildingOrError.size.length) {
@@ -134,6 +139,8 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
 
         floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
 
-        return Result.ok<IFloorDTO>(FloorMaper.toDto(await this.floorRepo.save(floorOrError)))
+        await this.floorRepo.save(floorOrError)
+
+        return Result.ok<IFloorDTO>(FloorMaper.toDto(floorOrError))
     }
 }
