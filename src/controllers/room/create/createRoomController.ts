@@ -20,7 +20,7 @@ export default class CreateRoomController implements ICreateRoomController {
             const roomOrError = await this.service.createRoom(req.body as ICreateRoomDTO) as Result<IRoomDTO>
 
             if (roomOrError.isFailure) {
-                return res.status(402).send(roomOrError.errorValue())
+                return res.status(400).send(roomOrError.errorValue())
             }
 
             const roomDTO = roomOrError.getValue();

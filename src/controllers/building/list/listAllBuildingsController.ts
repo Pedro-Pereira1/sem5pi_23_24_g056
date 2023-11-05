@@ -18,7 +18,7 @@ export default class ListAllBuildingsController implements IListAllBuildingsCont
             const buildings = await this.listAllBuildingsService.listAllBuildings()
 
             if(buildings.isFailure) {
-                return res.status(404).send()
+                return res.status(400).send()
             }
 
             return res.status(200).json(buildings.getValue())

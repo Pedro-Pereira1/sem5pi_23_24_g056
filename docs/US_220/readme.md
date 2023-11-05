@@ -40,33 +40,33 @@ and also the building and floor where the passageway connects to.
 
 * Logical View
 
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
+![Logical](./Diagrams/Level1/LogicalView.svg)
 
 * Process View
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+![Process](./Diagrams/Level1/ProcessView.svg)
 
 * Scenary View
 
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+![Scenary](./Diagrams/Level1/ScenaryView.svg)
 
 ### level 2
 
 * Logical View
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+![Logical](./Diagrams/Level2/LogicalView.svg)
 
 * Process View
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+![Process](./Diagrams/Level2/ProcessView.svg)
 
 * Physical View
 
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+![physical](./Diagrams/Level2/PhysicalView.svg)
 
 * Implementation View
 
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+![Implementation](./Diagrams/Level2/ImplementationView.svg)
 
 ### Level 3
 
@@ -76,11 +76,11 @@ and also the building and floor where the passageway connects to.
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementaionView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+![Process](./Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 * Controller
