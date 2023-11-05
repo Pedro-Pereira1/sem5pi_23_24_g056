@@ -18,7 +18,7 @@ import EditPassagewayController from "../../../src/controllers/passageway/edit/e
 import {Passageway} from "../../../src/domain/Passageway/Passageway";
 import {ICreatePassagewayDTO} from "../../../src/dto/passageway/ICreatePassagewayDTO";
 
-describe.only('edit Passageways', function () {
+describe('edit Passageways', function () {
     const sandbox = sinon.createSandbox();
     let buildingRepoMock;
     let floorRepoMock;
