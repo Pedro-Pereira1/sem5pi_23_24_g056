@@ -21,6 +21,7 @@ import { Floor } from '../../../src/domain/Floor/Floor';
 
 
 describe.only('Passageway tests', function () {
+    let passagewayRepoMock
 
     beforeEach(function () {
         Container.reset()
@@ -42,9 +43,16 @@ describe.only('Passageway tests', function () {
         let passagewaySchema = require('../../../src/persistence/schemas/passageway/passagewaySchema').default
         Container.set('passagewaySchema', passagewaySchema)
 
+        passagewayRepoMock = {
+            findById: sinon.stub(),
+            save: sinon.stub()
+        }
+
+        Container.set('passagewayRepo', passagewayRepoMock)
+
         let passagewayRepoClass = require('../../../src/repos/floor/floorRepo').default
         let passagewayRepoInstance = Container.get(passagewayRepoClass)
-        Container.set('passagewayRepo', passagewayRepoInstance)
+        Container.set('passagewayRepo', passagewayRepoMock)
 
         let createPassagewayServiceClass = require('../../../src/services/passageway/create/createPassagewayService').default
         let createPassagewayServiceInstance = Container.get(createPassagewayServiceClass)
@@ -200,16 +208,11 @@ describe.only('Passageway tests', function () {
         building1.addFloor(floor1)
         building2.addFloor(floor2)
 
-        let passagewayMock = {
-            findById: sinon.stub()
-        }
-
-        Container.set('passagewayRepo', passagewayMock)
-
         const floorRepo = Container.get('floorRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        passagewayMock.findById.resolves(null)
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
@@ -223,6 +226,8 @@ describe.only('Passageway tests', function () {
             .returns(floor1)
             .onSecondCall()
             .returns(floor2)
+
+        sinon.stub(floorRepo, 'save').returns(null)
 
         const createPassagewayService = Container.get('createPassagewayService') as ICreatePassagewayService
 
@@ -240,13 +245,8 @@ describe.only('Passageway tests', function () {
             floor2Id: 6,
         } as ICreatePassagewayDTO
 
-        const passagewayRepo = Container.get('passagewayRepo')
-        const floorRepo = Container.get('floorRepo')
-        const buildingRepo = Container.get('buildingRepo')
-
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(new Passageway({}, new PassagewayID(5)))
-        }))
+        passagewayRepoMock.findById.resolves(new Passageway({}, new PassagewayID(5)))
+        passagewayRepoMock.save.resolves(null)
 
         const createPassagewayService = Container.get('createPassagewayService') as ICreatePassagewayService
 
@@ -267,9 +267,8 @@ describe.only('Passageway tests', function () {
         const passagewayRepo = Container.get('passagewayRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(null)
-        }))
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode').onFirstCall().returns(new Promise((resolve, reject) => {
             resolve(null)
@@ -309,9 +308,8 @@ describe.only('Passageway tests', function () {
         const passagewayRepo = Container.get('passagewayRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(null)
-        }))
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
@@ -353,9 +351,8 @@ describe.only('Passageway tests', function () {
         const passagewayRepo = Container.get('passagewayRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(null)
-        }))
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
@@ -431,13 +428,11 @@ describe.only('Passageway tests', function () {
 
         building1.addFloor(floor1)
 
-        const passagewayRepo = Container.get('passagewayRepo')
         const floorRepo = Container.get('floorRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(null)
-        }))
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
@@ -533,13 +528,11 @@ describe.only('Passageway tests', function () {
         building1.addFloor(floor1)
         building2.addFloor(floor2)
 
-        const passagewayRepo = Container.get('passagewayRepo')
         const floorRepo = Container.get('floorRepo')
         const buildingRepo = Container.get('buildingRepo')
 
-        sinon.stub(passagewayRepo, 'findById').returns(new Promise((resolve, reject) => {
-            resolve(null)
-        }))
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
 
         sinon.stub(buildingRepo, 'findByBuidingCode')
             .onFirstCall()
@@ -561,9 +554,9 @@ describe.only('Passageway tests', function () {
     it('10. Controller + service with stub repo create valid passageway', async function () {
         const createPassagewayJSON = {
             "passagewayId": 1,
-            "building1Id": 10,
+            "building1Id": "A",
             "floor1Id": 5,
-            "building2Id": 11,
+            "building2Id": "B",
             "floor2Id": 6,
         }
 
@@ -571,10 +564,74 @@ describe.only('Passageway tests', function () {
             passagewayId: 1
         } as IPassagewayDTO
 
-        const createPassagewayService = Container.get('createPassagewayService')
-        sinon.stub(createPassagewayService, 'createPassageway').returns(new Promise((resolve, reject) => {
-            resolve(Result.ok<IPassagewayDTO>(passagewayDto))
-        }))
+        const building1DTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building1Result = Building.create({
+            buildingName: new BuildingName({ value: building1DTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: building1DTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: building1DTO.buildingLength, width: building1DTO.buildingWidth }),
+            floors: [],
+        }, building1DTO.buildingCode)
+
+        const building1 = building1Result.getValue()
+
+        const building2DTO = {
+            buildingName: "EdificioB",
+            buildingDescription: "uma descricao",
+            buildingCode: "B",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building2Result = Building.create({
+            buildingName: new BuildingName({ value: building2DTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: building2DTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: building2DTO.buildingLength, width: building2DTO.buildingWidth }),
+            floors: []
+        }, building2DTO.buildingCode)
+
+        const building2 = building2Result.getValue()
+
+        const floorProps1 = {
+            floorDescription: new FloorDescription({ value: 'Test floor' }),
+            floorNumber: new FloorNumber({ number: 1 }),
+            floormap: new FloorMap({
+                map: [[]],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                elevatorsCoords: [],
+                roomsCoords: [],
+                passagewaysCoords: [],
+            }),
+        };
+        const floor1Id = 5;
+        const floor1 = Floor.create(floorProps1, floor1Id).getValue();
+
+        const floorProps2 = {
+            floorDescription: new FloorDescription({ value: 'Test floor' }),
+            floorNumber: new FloorNumber({ number: 1 }),
+            floormap: new FloorMap({
+                map: [[]],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                elevatorsCoords: [],
+                roomsCoords: [],
+                passagewaysCoords: [],
+            }),
+        };
+        const floor2Id = 6;
+        const floor2 = Floor.create(floorProps2, floor2Id).getValue();
+
+        building1.addFloor(floor1)
+        building2.addFloor(floor2)
 
         let req: Partial<Request> = {}
         req.body = createPassagewayJSON
@@ -586,6 +643,28 @@ describe.only('Passageway tests', function () {
 
         let next: Partial<NextFunction> = () => { }
 
+        const floorRepo = Container.get('floorRepo')
+        const buildingRepo = Container.get('buildingRepo')
+
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
+
+        sinon.stub(buildingRepo, 'findByBuidingCode')
+            .onFirstCall()
+            .returns(new Promise((resolve, reject) => { resolve(building1) }))
+            .onSecondCall()
+            .returns(new Promise((resolve, reject) => { resolve(building2) }))
+
+
+        sinon.stub(floorRepo, 'findById')
+            .onFirstCall()
+            .returns(floor1)
+            .onSecondCall()
+            .returns(floor2)
+
+        sinon.stub(floorRepo, 'save').returns(null)
+
+        const createPassagewayService = Container.get('createPassagewayService') as ICreatePassagewayService
         const createPassagewayController = new CreatePassagewayController(createPassagewayService as ICreatePassagewayService)
 
         await createPassagewayController.createPassageway(<Request>req, <Response>res, <NextFunction>next)
@@ -600,16 +679,66 @@ describe.only('Passageway tests', function () {
     it('11. Controller + service with stub repo create invalid passageway', async function () {
         const createPassagewayJSON = {
             "passagewayId": 1,
-            "building1Id": 10,
+            "building1Id": "A",
             "floor1Id": 5,
-            "building2Id": 11,
-            "floor2Id": 6,
+            "building2Id": "A",
+            "floor2Id": 5,
         }
 
-        const createPassagewayService = Container.get('createPassagewayService')
-        sinon.stub(createPassagewayService, 'createPassageway').returns(new Promise((resolve, reject) => {
-            resolve(Result.fail<IPassagewayDTO>('Passageway already exists.'))
-        }))
+        const passagewayDto = {
+            passagewayId: 1
+        } as IPassagewayDTO
+
+        const building1DTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building1Result = Building.create({
+            buildingName: new BuildingName({ value: building1DTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: building1DTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: building1DTO.buildingLength, width: building1DTO.buildingWidth }),
+            floors: [],
+        }, building1DTO.buildingCode)
+
+        const building1 = building1Result.getValue()
+
+        const floorProps1 = {
+            floorDescription: new FloorDescription({ value: 'Test floor' }),
+            floorNumber: new FloorNumber({ number: 1 }),
+            floormap: new FloorMap({
+                map: [[]],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                elevatorsCoords: [],
+                roomsCoords: [],
+                passagewaysCoords: [],
+            }),
+        };
+        const floor1Id = 5;
+        const floor1 = Floor.create(floorProps1, floor1Id).getValue();
+
+        const floorProps2 = {
+            floorDescription: new FloorDescription({ value: 'Test floor' }),
+            floorNumber: new FloorNumber({ number: 1 }),
+            floormap: new FloorMap({
+                map: [[]],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                elevatorsCoords: [],
+                roomsCoords: [],
+                passagewaysCoords: [],
+            }),
+        };
+        const floor2Id = 6;
+        const floor2 = Floor.create(floorProps2, floor2Id).getValue();
+
+        building1.addFloor(floor1)
 
         let req: Partial<Request> = {}
         req.body = createPassagewayJSON
@@ -621,6 +750,28 @@ describe.only('Passageway tests', function () {
 
         let next: Partial<NextFunction> = () => { }
 
+        const floorRepo = Container.get('floorRepo')
+        const buildingRepo = Container.get('buildingRepo')
+
+        passagewayRepoMock.findById.resolves(null)
+        passagewayRepoMock.save.resolves(null)
+
+        sinon.stub(buildingRepo, 'findByBuidingCode')
+            .onFirstCall()
+            .returns(new Promise((resolve, reject) => { resolve(building1) }))
+            .onSecondCall()
+            .returns(new Promise((resolve, reject) => { resolve(building1) }))
+
+
+        sinon.stub(floorRepo, 'findById')
+            .onFirstCall()
+            .returns(floor1)
+            .onSecondCall()
+            .returns(floor2)
+
+        sinon.stub(floorRepo, 'save').returns(null)
+
+        const createPassagewayService = Container.get('createPassagewayService') as ICreatePassagewayService
         const createPassagewayController = new CreatePassagewayController(createPassagewayService as ICreatePassagewayService)
 
         await createPassagewayController.createPassageway(<Request>req, <Response>res, <NextFunction>next)
