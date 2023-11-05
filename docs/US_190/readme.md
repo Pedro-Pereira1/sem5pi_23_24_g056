@@ -65,19 +65,44 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-### 3.2. System Sequence Diagram
-
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
-
 ## 4. Design
 
 ### 4.1. Realization
 
-Level 2:
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-![SequenceDiagram](Diagrams/SequenceDiagramLevel2.svg)
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-Level 3:
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
+
+#### Level2
+
+###### LogicalView:
+
+![LogicalView](Diagrams/Level2/LogicalView.svg)
+
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
+
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
+
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
+
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
+
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
+
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 In order to resolve this US we will make use of the folliwing classes:
 
@@ -92,10 +117,6 @@ In order to resolve this US we will make use of the folliwing classes:
 9. BuildingRepo
 
 We will make also use of CreateFloorRoute file, inside this file we will put our route for any post request regarding the floor creation
-
-![SequenceDiagram](Diagrams/SequenceDiagramLevel3.svg)
-
-
 
 ### 4.3. Applied Patterns
 
