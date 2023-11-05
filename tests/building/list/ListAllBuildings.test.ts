@@ -90,7 +90,7 @@ describe('List All buildings test', function () {
         await listAllBuildingsController.listAllBuildings(<Request>req, <Response>res, <NextFunction>next)
 
         sinon.assert.calledOnce(res.status)
-        sinon.assert.calledWith(res.status, 404)
+        sinon.assert.calledWith(res.status, 400)
         sinon.assert.calledOnce(res.send)
     })
 
@@ -229,7 +229,7 @@ describe('List All buildings test', function () {
         await listAllBuildingsController.listAllBuildings(<Request>req, <Response>res, <NextFunction>next)
 
         sinon.assert.calledOnce(res.status)
-        sinon.assert.calledWith(res.status, 404)
+        sinon.assert.calledWith(res.status, 400)
         sinon.assert.calledOnce(res.send)
     })
 
