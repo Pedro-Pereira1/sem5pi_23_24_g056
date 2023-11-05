@@ -6,7 +6,7 @@ skinparam actorStyle awesome
 actor "UI Campus Manager" as CM
 
 package  RobDroneGo  {
-  usecase "Create Floor" as UC2
+  usecase "List Building wit Max and Min of Floors" as UC2
 }
 CM --> UC2
 @enduml
