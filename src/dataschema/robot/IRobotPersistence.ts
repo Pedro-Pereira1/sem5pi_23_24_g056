@@ -5,4 +5,5 @@ export default interface IRobotPersistence {
     type: string
     serialNumber: string
     description: string
+    operationStatus: boolean
 }

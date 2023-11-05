@@ -9,6 +9,7 @@ import { ElevatorDescription } from "../../domain/Elevator/ElevatorDescription"
 import { ElevatorModel } from "../../domain/Elevator/ElevatorModel"
 import { ElevatorSerialNumber } from "../../domain/Elevator/ElevatorSerialNumber"
 import { ElevatorID } from "../../domain/Elevator/ElevatorID"
+import IListElevatorsInBuildingDTO from "../../dto/elevator/IListElevatorsInBuildingDTO"
 
 export default class ElevatorMap extends Mapper<Elevator> {
 
@@ -21,6 +22,18 @@ export default class ElevatorMap extends Mapper<Elevator> {
             elevatorModel: elevator.props.elevatorModel.model,
             elevatorSerialNumber: elevator.props.elevatorSerialNumber.serialNumber
         } as IElevatorDTO
+    }
+
+    public static toDtoList(elevator: Elevator, floorsNumber: number[]): IListElevatorsInBuildingDTO {
+        return {
+            elevatorId: elevator.id.toValue(),
+            elevatorIdentificationNumber: elevator.props.elevatorIdentificationNumber.identificationNumber,
+            elevatorBrand: elevator.props.elevatorBrand.brand,
+            elevatorDescription: elevator.props.elevatorDescription.description,
+            elevatorModel: elevator.props.elevatorModel.model,
+            elevatorSerialNumber: elevator.props.elevatorSerialNumber.serialNumber,
+            floorsNumber: floorsNumber
+        } as IListElevatorsInBuildingDTO
     }
 
     public static toDomain(elevatorDto: any | Model<IElevatorPersistence & Document>): Elevator {

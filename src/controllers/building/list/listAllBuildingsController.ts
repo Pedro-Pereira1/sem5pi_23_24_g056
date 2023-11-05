@@ -21,7 +21,7 @@ export default class ListAllBuildingsController implements IListAllBuildingsCont
                 return res.status(404).send()
             }
 
-            return res.json(buildings.getValue()).status(200)
+            return res.status(200).json(buildings.getValue())
         } catch(err) {
             throw err
         }

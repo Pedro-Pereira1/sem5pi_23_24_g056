@@ -23,17 +23,7 @@ export class RobotTypeMap extends Mapper<RobotType> {
 
     public static async toDomain(robotTypeDTO: any | Model<IRobotTypePersistence & Document>): Promise<RobotType> {
 
-        const brandOrError = RobotBrand.create({ description: robotTypeDTO.robotBrand })
-        const modelOrError = RobotModel.create({ description: robotTypeDTO.robotModel })
-        const availableTasksOrError = AvailableTask.createList(robotTypeDTO.availableTasks)
-        
-        const RobotTypeOrError = RobotType.create(
-            {
-                robotBrand: brandOrError.getValue(),
-                robotModel: modelOrError.getValue() ,
-                availableTasks: availableTasksOrError.getValue()
-            }, robotTypeDTO.robotTypeID)
-
+        const RobotTypeOrError = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID)
 
         return RobotTypeOrError.isSuccess ? RobotTypeOrError.getValue() : null
     }

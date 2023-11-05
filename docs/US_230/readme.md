@@ -20,6 +20,34 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 the system and load a map of a floor to the system and persist it, the map of the floor will be a simple text file
 which contains the layout of the floor as a series of characters
 
+An example of the text file
+
+| Map layout | North wall | West wall | Door | Elevator | Passageway |
+|:----------:|:----------:|:---------:|:----:|:--------:|:----------:|
+|     0      |     No     |    No     |  No  |    No    |     No     |
+|     1      |     No     |    Yes    |  No  |    No    |     No     |
+|     2      |    Yes     |    No     |  No  |    No    |     No     |
+|     3      |    Yes     |    Yes    |  No  |    No    |     No     |
+|     4      |     No     |    No     | Yes  |    No    |     No     |
+|     5      |     No     |    No     |  No  |   yes    |     No     |
+|     6      |     No     |    No     |  No  |    No    |    Yes     |
+
+3, 2, 2, 2, 2, 3, 2, 2, 1
+
+1, 0, 0, 0, 0, 1, 0, 0, 1
+
+2, 2, 2, 0, 2, 2, 0, 2, 0
+
+0, 0, 0, 0, 0, 0, 0, 0, 0
+
+3, 2, 2, 2, 2, 2, 0, 0, 1
+
+1, 0, 0, 0, 0, 0, 1, 0, 0
+
+1, 0, 0, 0, 0, 0, 1, 0, 0
+
+2, 2, 2, 2, 2, 2, 2, 2, 0
+
 ## 4. Design
 
 ### 4.1. Realization
@@ -64,7 +92,7 @@ which contains the layout of the floor as a series of characters
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessLevel3.svg)
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
 
 * Implementation
 

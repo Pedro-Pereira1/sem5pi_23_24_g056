@@ -1,42 +1,96 @@
-# US 1001
+# US 220 - As a Campus Manager, I want to list the floors of a building with a passageway
 
-*This is an example template*
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* This task comes in context of Sprint A.
+* First time that this task is developed.
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 220 -** As a Campus Manager, I want to:
 
-*Example*
+* list floors of a building with a passageway.
 
-**US G002** As {Ator} I Want...
+**Client Clarifications**
+> **Q**: ... seria expectável incluir informação relativa a onde a(s) passagem(ns) de cada piso vão ter; ou o pretendido é simplesmente ser possível saber quais dos pisos de um dado edifício possuem passagens para outros?
+<br>
+> **A**: ... esta listagem deve mostrar a informação sobre o piso (edificio, piso, descrição) e a que outros edificios/pisos tem passagem.
 
-- G002.1. Blá Blá Blá ...
-
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+**Dependencies:**
+- **US150 -** As a Campus Manager, I want to create a building.
+- **US190 -** As a Campus Manager, I want to create building floor.
+- **US240 -** As a Campus Manager, I want to create a passageway between buildings.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the floors of a building with a passageway,describing the floor and description
+and also the building and floor where the passageway connects to.
+* Campus Manager is a user role that manages the data of the routes and maps.
+* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+
+### 3.1. Domain Model Excerpt
+
+![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
+### Level 1
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
+* Logical View
 
-### 4.1. Realization
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.2. Class Diagram
+* Process View
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
 
-### 4.3. Applied Patterns
+* Scenary View
 
-### 4.4. Tests
+![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+
+### level 2
+
+* Logical View
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process View
+
+![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+
+* Physical View
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation View
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+
+### 4.2. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 
@@ -49,9 +103,48 @@ public void ensureNullIsNotAllowed() {
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**listFloorsPassagewayService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+public async listFloorsPassageways(buildingCode: string): Promise<Result<IListFloorPassagewaysDTO[]>> {
+
+
+        const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingCode))
+        if (buildingResult === null) {
+            return Result.fail<IListFloorPassagewaysDTO[]>(`Building ${buildingCode} not found`)
+        }
+
+        const floorsResult = buildingResult.floors
+
+        if (floorsResult.length === 0) {
+            return Result.fail<IListFloorPassagewaysDTO[]>(`Building ${buildingCode} has no floors`)
+        }
+
+        let resolve: IListFloorPassagewaysDTO[] = []
+
+        for (var floor of floorsResult) {
+            if (floor.map.passagewaysId.length > 0) {
+                const floorsConnected: string[] = [];
+                for (var passagewayId of floor.map.passagewaysId) {
+                    const currentFloors = await this.floorRepo.findByPassageway(passagewayId)
+
+                    for (var floor1 of currentFloors) {
+                        if (floor1.floorId.toValue() !== floor.floorId.toValue()) {
+                            floorsConnected.push(floor1.floorId.toString())
+                            const building = await this.buildingRepo.findByFloor(Number(floor1.floorId.toValue()))
+                            if (building !== null) {
+                                floorsConnected.push(building.code.toString())
+                            }
+                        }
+                    }
+                }
+                resolve.push(FloorMaper.toDtoList(floor, floorsConnected))
+            }
+        }
+
+        return Result.ok<IListFloorPassagewaysDTO[]>(resolve)
+    }
+````
 
 ## 6. Integration/Demonstration
 
@@ -61,8 +154,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.

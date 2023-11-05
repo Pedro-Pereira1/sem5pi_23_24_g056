@@ -1,0 +1,65 @@
+@startuml
+
+autonumber
+
+participant ":FloorRoute" as Route
+participant ":ListFloorsPassagewaysController" as Controller
+participant ":ListFloorsPassagewaysService" as Service
+participant ":BuildingRepo" as Repo
+participant ":BuildingSchema" as BuildingSchema
+participant ":FloorMap" as Map
+participant ":IListFloorPassagewaysDTO" as DTO
+
+participant ":FloorRepo" as FloorRepo
+
+participant ":FloorSchema" as Schema
+
+
+?o->Route: GET
+activate Route
+
+Route -> Controller: listFloorsPassageways(req, res, next)
+activate Controller
+
+Controller -> Service: listFloorsPassageways(buildingCode)
+activate Service
+
+Service -> Repo: findByBuildingCode(buildingCode)
+activate Repo
+Repo -> BuildingSchema: findOne(buildingCode)
+activate BuildingSchema
+Repo <-- BuildingSchema
+deactivate BuildingSchema
+Service <-- Repo
+deactivate Repo
+
+
+
+
+Service -> FloorRepo: get floors in which the passageway connects
+activate FloorRepo
+FloorRepo -> Schema: find(passagewayId)
+activate Schema
+FloorRepo <-- Schema
+deactivate Schema
+Service <-- FloorRepo
+deactivate FloorRepo
+
+
+
+Service -> Map:toDtoList(floor, floorsConnected)
+activate Map
+
+Map -> DTO: create
+deactivate Map
+
+Service --> Controller: floors list
+deactivate Service
+
+Controller --> Route: floors list
+deactivate Controller
+<--Route:
+
+
+
+@enduml

@@ -77,9 +77,25 @@ export default {
       name: "listAllFloorsController",
       path: "../controllers/floor/list/listAllFloorsController"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysController",
+      path: "../controllers/floor/list/listFloorsPassagewaysController"
+    },
+    listElevatorsInBuilding: {
+      name: "listElevatorsInBuildingController",
+      path: "../controllers/elevator/list/listElevatorsInBuildingController"
+    },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsController",
+      path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
+    },
     editBuilding: {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
+    },
+    loadFloorMap: {
+      name: "loadFloorMapController",
+      path: "../controllers/floor/floorMap/LoadFloorMapController"
     },
     editFloor: {
       name: "editFloorController",
@@ -88,6 +104,10 @@ export default {
     editElevator: {
       name: "editElevatorController",
       path: "../controllers/elevator/edit/editElevatorController"
+    },
+    editPassageway: {
+      name: "editPassagewayController",
+      path: "../controllers/passageway/edit/editPassagewayController"
     },
     createRobotType: {
       name: "createRobotTypeController",
@@ -101,6 +121,18 @@ export default {
       name: "inhibitRobotController",
       path: "../controllers/robot/inhibit/inhibitRobotController"
     },
+    listAllRobots: {
+      name: "listAllRobotsController",
+      path: "../controllers/robot/list/listAllRobotsController"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskController",
+      path: "../controllers/robot/list/ListAllRobotsByAvailableTasksController"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationController",
+      path: "../controllers/robot/list/ListRobotsByDesignationController"
+    }
   },
 
   repos: {
@@ -179,9 +211,25 @@ export default {
       name: "listAllFloors",
       path: "../services/floor/list/listAllFloorsService"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysService",
+      path: "../services/floor/list/listFloorsPassagewaysService"
+    },
+    listElevatorsInBuilding: {
+      name: "listElevatorsInBuildingService",
+      path: "../services/elevator/list/listElevatorsInBuildingService"
+    },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsService",
+      path: "../services/passageway/list/listPassagewaysBetween2BuildingsService"
+    },
     editBuilding: {
       name: "editBuildingService",
       path: "../services/building/edit/EditBuildingService"
+    },
+    loadFloorMap: {
+      name: "loadFloorMapService",
+      path: "../services/floor/floorMap/LoadFloorMapService"
     },
     editFloor: {
       name: "editFloorService",
@@ -190,6 +238,10 @@ export default {
     editElevator: {
       name: "editElevatorService",
       path: "../services/elevator/edit/editElevatorService"
+    },
+    editPassageway: {
+      name: "editPassagewayService",
+      path: "../services/passageway/edit/editPassagewayService"
     },
     createRobotType: {
       name: "createRobotTypeService",
@@ -203,5 +255,17 @@ export default {
       name: "inhibitRobotService",
       path: "../services/robot/inhibit/inhibitRobotService"
     },
+    listAllRobots: {
+      name: "listAllRobotsService",
+      path: "../services/robot/list/listAllRobotsService"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskService",
+      path: "../services/robot/list/ListAllRobotsByAvailableTasksService"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationService",
+      path: "../services/robot/list/ListRobotsByDesignationService"
+    }
   },
 };

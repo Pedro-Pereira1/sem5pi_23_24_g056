@@ -6,6 +6,7 @@ import { Container } from 'typedi';
 import config from "../../../config";
 import ICreateElevatorController from '../../controllers/IControllers/elevator/create/ICreateElevatorController';
 import IEditElevatorController from '../../controllers/IControllers/elevator/edit/IEditElevatorController';
+import IListElevatorsInBuildingController from '../../controllers/IControllers/elevator/list/IListElevatorsInBuildingController';
 
 const route = Router();
 
@@ -14,8 +15,9 @@ export default (app: Router) => {
 
     const ctrl = Container.get(config.controllers.createElevator.name) as ICreateElevatorController
     const ctrlEdit = Container.get(config.controllers.editElevator.name) as IEditElevatorController
+    const ctrlList = Container.get(config.controllers.listElevatorsInBuilding.name) as IListElevatorsInBuildingController
     
-    route.post('/createElevator', 
+    route.post('/create', 
     celebrate({
         body: Joi.object({
             elevatorId: Joi.number().required().min(1),
@@ -29,7 +31,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createElevator(req, res, next));
 
-    route.put('/editElevator', 
+    route.put('/edit', 
     celebrate({
         body: Joi.object({
             elevatorIdentificationNumber: Joi.number().required().min(1),
@@ -43,4 +45,10 @@ export default (app: Router) => {
         }),
     }),
     (req, res, next) => ctrlEdit.editElevator(req, res, next));
+
+    route.get('/listInBuilding/:buildingCode', 
+        (req, res, next) => {ctrlList.listElevatorsInBuildingFloors(req, res, next);
+            req.params.buildingCode;
+        }
+    );
 }

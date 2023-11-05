@@ -1,0 +1,12 @@
+@startuml
+
+() "UI Fleet Manager" as FM
+
+component RDG [
+  <<component>>
+  **RobDroneGo**
+]
+
+FM -d- RDG
+
+@enduml

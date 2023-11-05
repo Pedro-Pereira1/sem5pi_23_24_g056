@@ -29,10 +29,10 @@ export default class CreateElevatorService implements ICreateElevatorService {
 
     public async createElevator(elevatorDto: ICreateElevatorDTO): Promise<Result<IElevatorDTO>> {
         try{
-            if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) throw new Error("An Elevator with this Id already exists!")
+            if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Result.fail<IElevatorDTO>('An Elevator with this Id already exists!')
 
             const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
-            if (!building) throw new Error("Building does not exist!")
+            if (!building) return Result.fail<IElevatorDTO>('Building does not exist!')
 
            let maxIdNum = 1
 
@@ -48,11 +48,12 @@ export default class CreateElevatorService implements ICreateElevatorService {
             let floors: Floor[] = [];
             for (var floorId of elevatorDto.floorIds) {
                 const floor = await this.floorRepo.findById(floorId)
-                if (floor === null) throw new Error("Floor does not exist!")
+                if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
                 floors.push(floor)
             }
             
-            if (elevatorDto.elevatorBrand !== undefined && elevatorDto.elevatorModel === undefined) throw new Error("Brand was provided so Model is also required!")
+            if (elevatorDto.elevatorBrand !== undefined && elevatorDto.elevatorModel === undefined) return Result.fail<IElevatorDTO>('Brand was provided so Model is also required!')
             
             const elevatorOrError = await Elevator.create(
                 {

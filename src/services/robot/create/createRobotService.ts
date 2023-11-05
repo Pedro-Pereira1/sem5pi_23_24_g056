@@ -25,77 +25,40 @@ export default class createRobotService implements ICreateRobotService {
 
 
     public async createRobot(robotDTO: ICreateRobotDTO): Promise<Result<IRobotDTO>> {
-        
+
         try {
-            
+
             const robotExists = await this.robotRepo.findById(robotDTO.code)
-            
             if(robotExists != null){
                 return Result.fail<IRobotDTO>("Robot already exists")
-            }
-            
-            const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
-            if(nicknameOrError.isFailure){
-                return Result.fail<IRobotDTO>(nicknameOrError.errorValue())
-            }
-            
-            const operationStatusOrError = OperationStatus.create()
-            if(operationStatusOrError.isFailure){
-                return Result.fail<IRobotDTO>(operationStatusOrError.errorValue())
-            }
-            
-            const serialNumberOrError = SerialNumber.create({ serialNumber: robotDTO.serialNumber })
-            if(serialNumberOrError.isFailure){
-                return Result.fail<IRobotDTO>(serialNumberOrError.errorValue())
             }
 
             const typeOrError = await this.robotTypeRepo.findById(robotDTO.type)
             if(typeOrError == null){
                 return Result.fail<IRobotDTO>("Robot Type not found")
-            }           
-            
-            const robotBySerialNumberAndTypeOrError = await this.robotRepo.findBySerialNumberAndType(robotDTO.serialNumber, robotDTO.type)
-            
-            if(robotBySerialNumberAndTypeOrError){
-                return Result.fail<IRobotDTO>("Robot with this serial number already exists")
             }
-            
-            let descriptionOrError 
-            if(robotDTO.description != undefined){
-                descriptionOrError = RobotDescription.create({ description: robotDTO.description })
-                if(descriptionOrError.isFailure){    
-                    return Result.fail<IRobotDTO>(descriptionOrError.errorValue())
-                }
-            }else{
-                descriptionOrError = RobotDescription.create({ description: "" })
-            }
-            
-           
-            const nickname = nicknameOrError.getValue()
-            const operationStatus = operationStatusOrError.getValue()
-            const serialNumber = serialNumberOrError.getValue()
-            const type = typeOrError
-            const description = descriptionOrError.getValue()
-            
-            const robotOrError = Robot.create(
-                {
-                    nickname: nickname,
-                    operationStatus: operationStatus,
-                    serialNumber: serialNumber,
-                    type: type,
-                    description: description
-                }, robotDTO.code)
 
+            const robotDuplicatedNickname = await this.robotRepo.findByNickname(robotDTO.nickname)
+            if(robotDuplicatedNickname != null){
+                return Result.fail<IRobotDTO>("Robot with this nickname already exists")
+            }
+
+            const robotOfType = await this.robotRepo.findBySerialNumberAndType(robotDTO.serialNumber,robotDTO.type)
+            if(robotOfType){
+                return Result.fail<IRobotDTO>("Robot of this type and serial number already exists")
+            }
+
+            const robotOrError = Robot.create(robotDTO,typeOrError,robotDTO.code)
             if (robotOrError.isFailure) {
                 return Result.fail<IRobotDTO>(robotOrError.errorValue())
             }
-            
+
             const robotResult = robotOrError.getValue()
-            
+
             await this.robotRepo.save(robotResult);
-        
-            const robotDtoResult = RobotMap.toDto(robotResult) as IRobotDTO
             
+            const robotDtoResult = RobotMap.toDto(robotResult) as IRobotDTO
+
             return Result.ok<IRobotDTO>(robotDtoResult)
 
         } catch (e) {

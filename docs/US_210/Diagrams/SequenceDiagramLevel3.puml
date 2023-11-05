@@ -2,23 +2,23 @@
 
 autonumber
 
-participant ":Floor" as Floor
-participant ":ListFloorController" as Controller
-participant ":FloorService" as Service
+participant ":FloorRoute" as Floor
+participant ":ListAllFloorsController" as Controller
+participant ":ListAllFloorsService" as Service
 participant ":BuildingRepo" as Repo
-participant ":BuildingMap" as Map
+participant ":FloorMapper" as Map
 participant ":FloorDTO" as DTO
 
 ?o->Floor: GET
 activate Floor
 
-Floor -> Controller: getFloorsByBuilding(building)
+Floor -> Controller: listAllFloors(req, res, next)
 activate Controller
 
-Controller -> Service: getFloorsByBuilding(building)
+Controller -> Service: listAllFloorsService.listAllFloors(buildingId)
 activate Service
 
-Service -> Repo: getFloorsByBuilding(building)
+Service -> Repo: findByBuildingCode(buildingId)
 activate Repo
 
 

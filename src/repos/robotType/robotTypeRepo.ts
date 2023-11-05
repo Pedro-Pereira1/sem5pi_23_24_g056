@@ -5,6 +5,7 @@ import IRobotTypePersistence from "../../dataschema/robotType/IRobotTypePersiste
 import { RobotType } from "../../domain/RobotType/RobotType";
 import IRobotTypeRepo from "../../services/IRepos/robotType/IRobotTypeRepo";
 import { RobotTypeMap } from "../../mappers/robotType/RobotTypeMap";
+import { RobotBrand } from "../../domain/RobotType/RobotBrand";
 
 @Service()
 export default class RobotTypeRepo implements IRobotTypeRepo {
@@ -24,7 +25,7 @@ export default class RobotTypeRepo implements IRobotTypeRepo {
   }
 
   public async save(robotType: RobotType): Promise<RobotType> {
-    
+
     const query = { robotTypeID: robotType.id.toString() };
 
     const robotTypeDocument = await this.robotTypeSchema.findOne(query);
@@ -34,11 +35,20 @@ export default class RobotTypeRepo implements IRobotTypeRepo {
         const rawRobotType: any = RobotTypeMap.toPersistence(robotType);
         const robotTypeCreated = await this.robotTypeSchema.create(rawRobotType);
         return RobotTypeMap.toDomain(robotTypeCreated);
-        
-      } else {
-        //TO-D0: Update
 
-        
+      } else {
+        if(robotType.props.robotBrand !== undefined){
+          robotTypeDocument.robotBrand = robotType.props.robotBrand.props.description;
+        }
+
+        if(robotType.props.robotModel !== undefined){
+          robotTypeDocument.robotModel = robotType.props.robotModel.props.description;
+        }
+
+        if(robotType.props.availableTasks !== undefined){
+          robotTypeDocument.availableTasks = robotType.props.availableTasks.map(task => task.props.Type);
+        }
+
 
         await robotTypeDocument.save();
         return robotType;

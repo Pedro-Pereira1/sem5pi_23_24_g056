@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Fleet Manager" as CM
+
+CM -> System: Adds a new robot to the fleet
+CM <-- System: Informs operation success
+
+
+@enduml

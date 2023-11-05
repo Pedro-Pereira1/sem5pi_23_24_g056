@@ -1,7 +1,7 @@
 import { Result } from "../../../../core/logic/Result";
-import { IFloorDTO } from "../../../../dto/floor/IFloorDTO";
+import { ICreatePassagewayDTO } from "../../../../dto/passageway/ICreatePassagewayDTO";
 import { IPassagewayDTO } from "../../../../dto/passageway/IPassagewayDTO";
 
 export default interface ICreatePassagewayService {
-    createPassageway(PassagewayDTO: IPassagewayDTO): Promise<Result<IPassagewayDTO>>
+    createPassageway(PassagewayDTO: ICreatePassagewayDTO): Promise<Result<IPassagewayDTO>>
 }

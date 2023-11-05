@@ -1,88 +1,92 @@
-@startuml SequenceDiagramLevel3
-'https://plantuml.com/use-case-diagram
+@startuml
 
+autonumber
 
-actor "Campus Manager" as CM
-participant CreateFloorRoute
-participant CreateFloorController
-participant CreateFloorService
-participant Floor
-participant Building
-participant BuildingMap
-participant FloorMap
-participant FloorDto
-participant FloorRepo
-participant BuildingRepo
-database buildingDatabase
-database floorDatabase
+participant ":FloorRoute" as Floor
+participant ":CreateFloorController" as Controller
+participant ":CreateFloorService" as Service
+participant ":Floor" as Class
+participant ":FloorRepo" as Repo
+participant ":FloorMapper" as Map
+participant ":FloorPersistence" as FloorPersistence
+participant ":Building" as Building
+participant ":BuildingRepo" as BuildingRepo
+participant ":BuildingPersistence" as BuildingPersistence
+participant ":FloorDTO" as DTO
 
-CM -> CreateFloorRoute : data JSON
-activate CreateFloorRoute
-
-CreateFloorRoute -> CreateFloorController : createFloor(floorJSON, buildingCode)
-activate CreateFloorController
-
-CreateFloorController -> CreateFloorService : createFloor(floorDto, buildingCode)
-activate CreateFloorService
-activate BuildingRepo
-activate FloorRepo
-
-CreateFloorService -> BuildingRepo : findByCode(buildingCode)
-
-BuildingRepo -> buildingDatabase : findByCode(buildingCode)
-
-BuildingRepo -> BuildingMap : toDomain(building)
-activate BuildingMap
-
-BuildingMap -> Building : create(building)
-activate Building
-
-BuildingRepo --> CreateFloorService
-
-CreateFloorService -> Floor : create(floorDto)
+?o->Floor: POST
 activate Floor
 
-CreateFloorService -> Building : addFloor(floor)
+Floor -> Controller: createFloor(req, res, next)
+activate Controller
 
-CreateFloorService -> FloorRepo : save(floor)
 
-FloorRepo -> FloorMap : toPersistence(floor)
-activate FloorMap
 
-FloorRepo -> floorDatabase : save(floorPersistence)
+Controller -> Service: createFloor(createFloorDTO)
+activate Service
 
-FloorRepo -> FloorMap : toDomain(floorPersistence)
+Service -> Class:create
 
-FloorRepo --> CreateFloorService
+Service -> Repo: save
+activate Repo
 
-CreateFloorService -> BuildingRepo : save(building)
+Repo -> FloorPersistence: findOne
+activate FloorPersistence
+deactivate FloorPersistence
 
-BuildingRepo -> BuildingMap : toPersistence(building)
+Repo -> Map: toPersistence
+activate Map
+deactivate Map
 
-BuildingRepo -> buildingDatabase : save(building)
 
-BuildingRepo -> BuildingMap : toDomain(building)
-deactivate BuildingMap
+Repo -> FloorPersistence: create
+activate FloorPersistence
+deactivate FloorPersistence
 
-BuildingRepo --> CreateFloorService
+Repo -> Map: toDomain
+activate Map
+deactivate Map
 
-CreateFloorService -> FloorMap : toDto(floor)
-deactivate FloorMap
 
-deactivate Building
-deactivate Floor
+Repo --> Service
+deactivate Repo
+
+Service -> Building: addFloor
+
+Service -> BuildingRepo: save
+activate BuildingRepo
+BuildingRepo -> BuildingPersistence: findOne
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo -> BuildingPersistence: save
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo --> Service
 deactivate BuildingRepo
-deactivate FloorRepo
 
-CreateFloorService -> CreateFloorController 
-deactivate CreateFloorService
+Service -> Map: toDTO
+activate Map
+Map -> DTO: create
+activate DTO
+deactivate DTO
+deactivate Map
 
-CreateFloorController -> CreateFloorRoute
+Service --> Controller:
+deactivate Service
 
-deactivate CreateFloorController
+Controller -> DTO: getValue
+activate DTO
+deactivate DTO
 
-CreateFloorRoute -> CM
+Controller -> Controller: res(201,json)
 
-deactivate CreateFloorRoute
+Controller --> Floor: response
+deactivate Controller
+
+<--Floor: response
+deactivate Floor
+
 
 @enduml

@@ -1,5 +1,3 @@
-import { FloorMap } from "../../domain/Floor/FloorMap"
-
 export default interface IFloorPersistence {
     floorNumber: number
     floorId: number
@@ -8,6 +6,9 @@ export default interface IFloorPersistence {
         map: number[][],
         passageways: number[],
         rooms: string[],
-        elevators: number[]
+        elevators: number[],
+        passagewaysCoords: number[][],
+        elevatorsCoords: number[][],
+        roomCoords: number[][]
     }
 }

@@ -2,15 +2,14 @@
 
 ## 1. Context
 
+* This task comes in context of Sprint A.
 * First time that this task is developed.
-* This task is relative to system user Campus Manager .
+* This task is relative to system user Fleet Manager.
 
 ## 2. Requirements
 
 **US 380 -** As a fleet manager, I want to consult all robots in the fleet.
-
-- **FRE0X - XXX XXX:** yyyyyyyyy.
-
+			
 **Dependencies:**
 - **US350 -** As a fleet manager, I want to add a new type of robot indicating its designation and what types of tasks it can perform from the predefined list of tasks.
 - **US360 -** As a fleet manager, I want to add a new robot to the fleet indicating its type, name, etc.
@@ -29,22 +28,61 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
-### 3.2. System Sequence Diagram
-![SystemSequenceDiagram](Diagrams/SystemSequenceDiagram.svg)
-
 ## 4. Design
+### Level 1
 
-### 4.1. Realization
+* Logical View
 
-![SequenceDiagram](Diagrams/SequenceDiagram.svg)
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.2. Class Diagram
+* Process View
 
-![ClassDiagram](Diagrams/ClassDiagram.svg)
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
-### 4.3. Applied Patterns
+* Scenary View
 
-### 4.4. Tests
+![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+
+### Level 2
+
+* Logical View
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process View
+
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+
+* Physical View
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation View
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+
+### 4.2. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 

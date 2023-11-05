@@ -1,42 +1,94 @@
-# US 1001
-
-*This is an example template*
+# US 290 - As a Campus Manager, I want to list elevators in building
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* This task comes in context of Sprint A.
+* First time that this task is developed.
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 290 -** As a Campus Manager, I want to:
 
-*Example*
+* list elevators in a building.
 
-**US G002** As {Ator} I Want...
+**Client Clarifications**
+>**Question**: "...Que informacoes pretende, então, ver sobre esse elevador?"<br>
+><br> **Answer** : "...pretende-se listar todas as informações do elevador."
+			
 
-- G002.1. Blá Blá Blá ...
-
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+**Dependencies:**
+* This User Stories requires that there are buildings, floors and elevators created, so it has dependencies on US150, US190 and US270.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the
+information of elevators of a building, such as brand, description, model, identification number, serial number and floors that it goes. 
+* Campus Manager is a user role that manages the data of the routes and maps.
+* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+* Elevator is a transport device for moving between different floors of a building.
+
+### 3.1. Domain Model Excerpt
+
+![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
+### Level 1
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
+* Logical View
 
-### 4.1. Realization
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.2. Class Diagram
+* Process View
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
 
-### 4.3. Applied Patterns
+* Scenary View
 
-### 4.4. Tests
+![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+
+### level 2
+
+* Logical View
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process View
+
+![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+
+* Physical View
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation View
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+
+### 4.2. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 

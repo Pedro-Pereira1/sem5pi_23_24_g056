@@ -25,6 +25,10 @@ const robotSchema = new mongoose.Schema(
         description: {
             type: String,
             required: false
+        },
+        operationStatus: {
+            type: Boolean,
+            required: false
         }
         
     },
