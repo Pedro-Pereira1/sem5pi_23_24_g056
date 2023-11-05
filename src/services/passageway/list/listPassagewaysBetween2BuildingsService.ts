@@ -18,7 +18,6 @@ export default class ListPassagewaysBetween2BuildingsService implements IListPas
 
     constructor(
         @Inject(config.repos.passageway.name) private passagewayRepo: IPassagewayRepo,
-        @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
         @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
     ) { }
 
@@ -32,11 +31,11 @@ export default class ListPassagewaysBetween2BuildingsService implements IListPas
             
             let passagewaysList: IListPassagewaysBetween2BuildingsDTO[] = []
             for (var floor of building1.floors) {
-                for (var passagewayId of floor.props.floormap.passagewaysId) {
-                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passagewayId))
+                for (var passageway of floor.props.floormap.props.passageways) {
+                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passageway.id.toValue()))
                     
                     if (floorOrUndefined !== undefined){
-                        passagewaysList.push(PassagewayMap.toDtoList(await this.passagewayRepo.findById(passagewayId), Number(floor.floorNumber), Number(floorOrUndefined.floorNumber)))
+                        passagewaysList.push(PassagewayMap.toDtoList(passageway, floor.floorNumber.number, floorOrUndefined.floorNumber.number))
                     } 
                 }
             }
