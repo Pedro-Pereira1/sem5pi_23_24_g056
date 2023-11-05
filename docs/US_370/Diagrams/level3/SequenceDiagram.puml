@@ -1,0 +1,81 @@
+@startuml ProcessViewLevel3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant RobotRoute
+participant InhibitRobotController
+participant InhibitRobotService
+participant Robot
+participant RobotMaper
+participant RobotDTO
+participant RobotRepo
+participant RobotSchema
+
+?o->RobotRoute : PATCH
+activate RobotRoute
+
+RobotRoute -> InhibitRobotController : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotController
+
+InhibitRobotController -> InhibitRobotService : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotService
+
+InhibitRobotService -> RobotRepo : findById(id)
+activate RobotRepo
+
+RobotRepo -> RobotSchema : findOne(query)
+activate RobotSchema
+
+RobotSchema --> RobotRepo
+
+RobotRepo -> RobotMaper : toDomain(rawRobot)
+activate RobotMaper
+
+RobotMaper -> Robot : create
+activate Robot
+
+Robot --> RobotMaper
+
+RobotMaper --> RobotRepo
+
+RobotRepo --> InhibitRobotService
+
+
+InhibitRobotService -> Robot : inhibitRobot()
+
+InhibitRobotService -> RobotRepo : save(robot)
+
+RobotRepo -> RobotMaper : toPersistence()
+deactivate Robot
+
+RobotMaper --> RobotRepo
+deactivate RobotMaper
+
+RobotRepo -> RobotSchema : save(rawRobot)
+
+RobotSchema --> RobotRepo
+deactivate RobotSchema
+
+RobotRepo --> InhibitRobotService
+deactivate RobotRepo
+activate Robot
+
+InhibitRobotService -> RobotMaper : toDto()
+activate RobotMaper
+
+RobotMaper -> RobotDTO : create
+deactivate Robot
+
+RobotMaper --> InhibitRobotService
+deactivate RobotMaper
+
+InhibitRobotService --> InhibitRobotController 
+deactivate InhibitRobotService
+
+InhibitRobotController --> RobotRoute
+deactivate InhibitRobotController
+
+<-- RobotRoute
+deactivate RobotRoute
+
+@enduml

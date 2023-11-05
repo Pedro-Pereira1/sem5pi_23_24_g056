@@ -117,6 +117,10 @@ export default {
       name: "createRobotController",
       path: "../controllers/robot/create/createRobotController"
     },
+    inhibitRobot: {
+      name: "inhibitRobotController",
+      path: "../controllers/robot/inhibit/inhibitRobotController"
+    },
     listAllRobots: {
       name: "listAllRobotsController",
       path: "../controllers/robot/list/listAllRobotsController"
@@ -246,6 +250,10 @@ export default {
     createRobot: {
       name: "createRobotService",
       path: "../services/robot/create/createRobotService"
+    },
+    inhibitRobot: {
+      name: "inhibitRobotService",
+      path: "../services/robot/inhibit/inhibitRobotService"
     },
     listAllRobots: {
       name: "listAllRobotsService",
