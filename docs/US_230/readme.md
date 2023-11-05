@@ -68,13 +68,13 @@ where the values mean:
 
 * Scenery
 
-![Scenary](./Diagrams/level1/sceneryView.svg)
+![Scenary](./Diagrams/level1/SceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](./Diagrams/level2/logicalView.svg)
+![Logical](./Diagrams/level2/LogicalView.svg)
 
 * Process
 
@@ -92,7 +92,7 @@ where the values mean:
 
 * Logical:
 
-![Logical](./Diagrams/level3/logicalView.svg)
+![Logical](./Diagrams/level3/LogicalView.svg)
 
 * Process
 
