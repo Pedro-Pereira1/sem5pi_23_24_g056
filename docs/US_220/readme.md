@@ -148,9 +148,9 @@ public async listFloorsPassageways(buildingCode: string): Promise<Result<IListFl
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+To use this US, you need to send and HTTP request with the following URI:
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+localhost:4000/api/floors/listFloorsPassageways/D
 
 ## 7. Observations
 
