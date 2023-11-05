@@ -5,7 +5,6 @@
 rectangle #EDB182{
 class Passageway  << Root >> << Entity >>
 class PassagewayId  << (v,orange) ValueObject >> << unique >>
-class PassagewayCoordinates << (v,#A4C2E5) ValueObject >>
 }
 '========================================================
 rectangle #D499B9{
@@ -16,7 +15,6 @@ class FloorMap  << Entity >>
 '========================================================
 
 Passageway "1"-d->"1" PassagewayId
-Passageway "1"->"1" PassagewayCoordinates
 
 Floor "1"-d->"1" FloorMap
 

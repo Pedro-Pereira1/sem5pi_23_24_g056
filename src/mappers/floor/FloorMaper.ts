@@ -16,6 +16,7 @@ import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
 import DoubleCoords from "../../domain/Floor/DoubleCoords";
 import SingleCoords from "../../domain/Floor/SingleCoords";
+import {IListFloorPassagewaysDTO} from "../../dto/floor/IListFloorPassagewaysDTO";
 
 export class FloorMaper extends Mapper<Floor> {
 
@@ -34,6 +35,18 @@ export class FloorMaper extends Mapper<Floor> {
                 roomCoords:floor.map.roomsCoords
             }
         } as IFloorDTO
+    }
+
+    public static toDtoList(floor: Floor,floorConnected: string[]): IListFloorPassagewaysDTO {
+        return {
+            floorId: floor.id.toValue(),
+            floorNumber: floor.floorNumber.number,
+            floorDescription: floor.description.description,
+            floorMap: {
+                passageways: floor.map.passagewaysId
+            },
+            floorConnected: floorConnected
+        } as IListFloorPassagewaysDTO
     }
 
     public static async toDomain(floorDTO: any | Model<IFloorPersistence & Document>): Promise<Floor> {

@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Campus Manager" as CM
+
+
+activate System
+CM -> System: List passageways between 2 buildings
+CM <-- System: List of passageways
+deactivate System
+
+@enduml

@@ -4,6 +4,7 @@ import { Robot } from "../../domain/Robot/Robot";
 import IRobotRepo from "../../services/IRepos/robot/IRobotRepo";
 import IRobotPersistence from "../../dataschema/robot/IRobotPersistence";
 import { RobotMap } from "../../mappers/robot/RobotMap";
+import { AvailableTask } from "../../domain/RobotType/AvailableTask";
 
 
 @Service()
@@ -12,7 +13,6 @@ export default class RobotRepo implements IRobotRepo {
   constructor(
     @Inject('robotSchema') private robotSchema: Model<IRobotPersistence & Document>
   ) { }
-
   async exists(robot: Robot): Promise<boolean> {
     const query = { code: robot.id.toString() };
     const robotRecord = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
@@ -35,23 +35,23 @@ export default class RobotRepo implements IRobotRepo {
         return RobotMap.toDomain(robotCreated);
 
       } else {
-        if(robot.props.nickname !== undefined){
+        if (robot.props.nickname !== undefined) {
           robotDocument.nickname = robot.props.nickname.props.nickname;
         }
 
-        if(robot.props.operationStatus !== undefined){
+        if (robot.props.operationStatus !== undefined) {
           robotDocument.operationStatus = robot.props.operationStatus.props.status;
         }
 
-        if(robot.props.serialNumber !== undefined){
+        if (robot.props.serialNumber !== undefined) {
           robotDocument.serialNumber = robot.props.serialNumber.props.serialNumber;
         }
 
-        if(robot.props.type !== undefined){
+        if (robot.props.type !== undefined) {
           robotDocument.type = robot.props.type.id.toString();
         }
 
-        if(robot.props.description !== undefined){
+        if (robot.props.description !== undefined) {
           robotDocument.description = robot.props.description.props.description;
         }
 
@@ -59,7 +59,7 @@ export default class RobotRepo implements IRobotRepo {
 
         await robotDocument.save();
         return robot;
-     }
+      }
     } catch (err) {
       throw err;
     }
@@ -87,16 +87,43 @@ export default class RobotRepo implements IRobotRepo {
 
   public async findBySerialNumberAndType(serialNumber: string, type: string): Promise<boolean> {
     const query = {
-        serialNumber: serialNumber,
-        type: type,
-      };
+      serialNumber: serialNumber,
+      type: type,
+    };
 
-      const robotRecord = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
-        if (robotRecord != null) {
-            return true
-        } else {
-            return false;
-        }
+    const robotRecord = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
+    if (robotRecord != null) {
+      return true
+    } else {
+      return false;
     }
+  }
+
+  public async findAll(): Promise<Robot[]> {
+    let robots: Robot[] = []
+
+    const cursor = this.robotSchema.find<Robot>({});
+
+    for await (let doc of cursor) {
+      robots.push(await RobotMap.toDomain(doc))
+    }
+
+    return robots
+  }
+
+  public async findByAvailableTask(tasks: AvailableTask[]): Promise<Robot[]> {
+    const robots: Robot[] = await this.findAll()
+    let result: Robot[] = []
+
+    for (const robot of robots) {
+      for (const task of tasks) {
+        if (robot.props.type.props.availableTasks.includes(task)) {
+            result.push(robot)
+        }
+      }
+    }
+
+    return result
+  }
 
 }

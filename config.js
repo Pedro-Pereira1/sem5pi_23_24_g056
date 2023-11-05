@@ -77,9 +77,17 @@ export default {
       name: "listAllFloorsController",
       path: "../controllers/floor/list/listAllFloorsController"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysController",
+      path: "../controllers/floor/list/listFloorsPassagewaysController"
+    },
     listElevatorsInBuilding: {
       name: "listElevatorsInBuildingController",
       path: "../controllers/elevator/list/listElevatorsInBuildingController"
+    },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsController",
+      path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
     },
     editBuilding: {
       name: "editBuildingController",
@@ -109,6 +117,18 @@ export default {
       name: "createRobotController",
       path: "../controllers/robot/create/createRobotController"
     },
+    listAllRobots: {
+      name: "listAllRobotsController",
+      path: "../controllers/robot/list/listAllRobotsController"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskController",
+      path: "../controllers/robot/list/ListAllRobotsByAvailableTasksController"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationController",
+      path: "../controllers/robot/list/ListRobotsByDesignationController"
+    }
   },
 
   repos: {
@@ -187,9 +207,17 @@ export default {
       name: "listAllFloors",
       path: "../services/floor/list/listAllFloorsService"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysService",
+      path: "../services/floor/list/listFloorsPassagewaysService"
+    },
     listElevatorsInBuilding: {
       name: "listElevatorsInBuildingService",
       path: "../services/elevator/list/listElevatorsInBuildingService"
+    },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsService",
+      path: "../services/passageway/list/listPassagewaysBetween2BuildingsService"
     },
     editBuilding: {
       name: "editBuildingService",
@@ -219,5 +247,17 @@ export default {
       name: "createRobotService",
       path: "../services/robot/create/createRobotService"
     },
+    listAllRobots: {
+      name: "listAllRobotsService",
+      path: "../services/robot/list/listAllRobotsService"
+    },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskService",
+      path: "../services/robot/list/ListAllRobotsByAvailableTasksService"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationService",
+      path: "../services/robot/list/ListRobotsByDesignationService"
+    }
   },
 };

@@ -1,0 +1,77 @@
+@startuml
+
+autonumber
+
+participant ":PassagewayRoute" as Route
+participant ":EditPassagewayController" as Controller
+participant ":EditPassagewayService" as Service
+participant ":PassagewayRepo" as Repo
+participant ":PassagewayMap" as Map
+participant ":ElevatorDTO" as DTO
+participant ":Building" as Building
+participant ":FloorRepo" as FloorRepo
+participant ":FloorSchema" as Schema
+participant ":Floor" as Floor
+
+
+?o->Route: PUT
+activate Route
+
+Route -> Controller: editPassageway(req, res, next)
+activate Controller
+
+
+
+Controller -> Service: editPassageway(passagewayDTO)
+activate Service
+
+Service -> Repo: findById(passagewayId)
+activate Repo
+Service <-- Repo
+deactivate Repo
+
+Service -> FloorRepo: findFloorPassageway(passagewayId)
+activate FloorRepo
+FloorRepo -> Schema: find(passagewayId)
+activate Schema
+FloorRepo <-- Schema
+deactivate Schema
+Service <-- FloorRepo
+deactivate FloorRepo
+
+Service -> FloorRepo: findById(floorId)
+activate FloorRepo
+Service <-- FloorRepo
+deactivate FloorRepo
+
+Service -> FloorRepo: findById(floorId)
+activate FloorRepo
+Service <-- FloorRepo
+deactivate FloorRepo
+
+Service -> Floor: removes old passageways in floor map when they are no longer in use
+
+Service -> Floor: adds new passageways in floor map when they have been changed
+
+Service -> FloorRepo: save(all floors)
+activate FloorRepo
+
+FloorRepo -> Schema: save
+deactivate FloorRepo
+
+Service -> Map:toDto(passageway)
+activate Map
+
+Map -> DTO: create
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+Controller --> Route: inform success
+deactivate Controller
+<--Route:
+
+
+
+@enduml

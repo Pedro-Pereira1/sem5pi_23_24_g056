@@ -111,6 +111,21 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const listFloorsPassagewaysController = {
+    name: config.controllers.listFloorsPassageways.name,
+    path: config.controllers.listFloorsPassageways.path
+  }
+
+  const ListPassagewaysBetween2BuildingsController = {
+    name: config.controllers.listPassagewaysBetween2Buildings.name,
+    path: config.controllers.listPassagewaysBetween2Buildings.path
+  }
+
+  const listAllRobotsController = {
+    name: config.controllers.listAllRobots.name,
+    path: config.controllers.listAllRobots.path
+  }
+
   const editFloorController = {
     name: config.controllers.editFloor.name,
     path: config.controllers.editFloor.path
@@ -241,6 +256,21 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const listFloorsPassagewaysService = {
+    name: config.services.listFloorsPassageways.name,
+    path: config.services.listFloorsPassageways.path
+  }
+
+  const listPassagewaysBetween2BuildingsService = {
+    name: config.services.listPassagewaysBetween2Buildings.name,
+    path: config.services.listPassagewaysBetween2Buildings.path
+  }
+
+  const listAllRobotsService = {
+    name: config.services.listAllRobots.name,
+    path: config.services.listAllRobots.path
+  }
+
   const editFloorService = {
     name: config.services.editFloor.name,
     path: config.services.editFloor.path
@@ -272,6 +302,16 @@ export default async ({ expressApp }) => {
     path: config.services.loadFloorMap.path
   }
 
+  const listAllRobotsByAvailableTask = {
+    name: config.services.listAllRobotsByAvailableTask.name,
+    path: config.services.listAllRobotsByAvailableTask.path
+  }
+
+  const listAllRobotsByDesignation = {
+    name: config.services.listRobotsByDesignation.name,
+    path: config.services.listRobotsByDesignation.path
+  }
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -296,13 +336,16 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
+      listFloorsPassagewaysController,
       listElevatorsInBuildingController,
       editFloorController,
       editElevatorController,
       editPassagewayController,
       createRobotTypeController,
       createRobotController,
-      loadFlorMapController
+      loadFlorMapController,
+      listAllRobotsController,
+      ListPassagewaysBetween2BuildingsController
     ],
     repos: [
       roleRepo,
@@ -326,13 +369,16 @@ export default async ({ expressApp }) => {
       listAllBuildingsService,
       editBuildingService,
       listAllFloorsService,
+      listFloorsPassagewaysService,
       listElevatorsInBuildingService,
       editFloorService,
       editElevatorService,
       editPassagewayService,
       createRobotTypeService,
       createRobotService,
-      loadFlorMapService
+      loadFlorMapService,
+      listAllRobotsService,
+      listPassagewaysBetween2BuildingsService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
