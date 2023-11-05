@@ -84,13 +84,484 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
-
+**Test 1:** *Ensures that the Robot.create method can correctly create a Robot instance when provided with valid data. The test validates the properties and values of the created instance.*
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it('should create a new Robot instance with valid input', function () {
+        // Arrange
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+
+        // Act
+        const result = Robot.create(robotDTO, robotType, robotDTO.code);
+
+        // Assert
+        assert.ok(result.isSuccess);
+        assert.ok(result.getValue() instanceof Robot);
+        assert.strictEqual(result.getValue().id.toString(), robotDTO.code);
+        assert.strictEqual(result.getValue().props.nickname.nickname, robotDTO.nickname);
+        assert.strictEqual(result.getValue().props.type.id.toString(), robotDTO.type);
+        assert.strictEqual(result.getValue().props.serialNumber.serialNumber, robotDTO.serialNumber);
+        assert.strictEqual(result.getValue().props.description.description, robotDTO.description);
+        assert.strictEqual(result.getValue().props.operationStatus.status, true);
+    });
+````
+
+**Test 2:** *Validates that the Robot.create method correctly identifies and rejects invalid input for the nickname property.*
+```
+it('should fail to create a new Robot instance with invalid input (Nickname)', function () {
+         // Arrange
+         const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": 'a'.repeat(31),
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+
+        // Act
+        const result = Robot.create(robotDTO, robotType, robotDTO.code);
+
+        // Assert
+        assert.ok(result.isFailure);
+    });
+````
+
+**Test 3:** *Ensures that the Robot.create method accurately detects and rejects invalid input for the serialNumber property.*
+```
+it('should fail to create a new Robot instance with invalid input (SerialNumber)', function () {
+        // Arrange
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+           "robotTypeID": "k4",
+           "robotBrand": "Joi.string().max(0).required()",
+           "robotModel": " Joi.string().max(100).required()",
+           "availableTasks": ["Floor surveillance","Object transport"]
+       };
+       const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+       const robotDTO: ICreateRobotDTO = {
+           "code":"code1",
+           "nickname": "marsupial",
+           "type": "k4",
+           "serialNumber": 'a'.repeat(51),
+           "description": "Joi.string().max(250)"
+       };
+
+
+       // Act
+       const result = Robot.create(robotDTO, robotType, robotDTO.code);
+
+       // Assert
+       assert.ok(result.isFailure);
+   });
+````
+
+**Test 4:** *Verifies that the Robot.create method handles invalid description input correctly and returns an error as expected.*
+```
+it('should fail to create a new Robot instance with invalid input (Description)', function () {
+    // Arrange
+    const robotTypeDTO: ICreateRobotTypeDTO = {
+       "robotTypeID": "k4",
+       "robotBrand": "Joi.string().max(0).required()",
+       "robotModel": " Joi.string().max(100).required()",
+       "availableTasks": ["Floor surveillance","Object transport"]
+    };
+    const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+    const robotDTO: ICreateRobotDTO = {
+       "code":"code1",
+       "nickname": "marsupial",
+       "type": "k4",
+       "serialNumber": "maxC",
+       "description": 'a'.repeat(251)
+    };
+
+
+    // Act
+    const result = Robot.create(robotDTO, robotType, robotDTO.code);
+
+    // Assert
+    assert.ok(result.isFailure);
+    });
+````
+
+**Test 5:** *Test focuses on the controller in isolation by stubbing the service. It checks if the controller processes a request to create a robot with valid input data and returns the expected result.*
+```
+it('createRobotController unit test using createRobotService stub', async function () {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {};
+          req.body = body;
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        const robotDTO: IRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)",
+            "operationStatus": true
+         };
+
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        sinon.stub(createRobotServiceInstance, "createRobot").returns(Promise.resolve(Result.ok<IRobotDTO>(robotDTO)));
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            "code": "code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)",
+            "operationStatus": true
+        }));
+
+    });
+````
+
+**Test 6:** *Tests the end-to-end functionality of the controller and the service, ensuring that the controller correctly interacts with the service and returns the expected result.*
+```
+it("createRobotController +createRobotService integration test", async function() {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+        robotRepoMock.findById.resolves(null);
+        robotTypeRepoMock.findById.resolves(robotType);
+        robotRepoMock.findByNickname.resolves(null);
+        robotRepoMock.findBySerialNumberAndType.resolves(false);
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        const createRobotServiceSpy = sinon.spy(createRobotServiceInstance, "createRobot");
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            "code": "code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)",
+            "operationStatus": true
+        }));
+        sinon.assert.calledOnce(createRobotServiceSpy);
+    });
+````
+
+**Test 7:** *Test checks how the controller handles the situation when a robot with the same code already exists and ensures it responds with an appropriate error message.*
+```
+it("createRobotController +createRobotService integration test (Robot already exists)", async function() {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+        robotRepoMock.findById.resolves(robotDTO);
+        robotTypeRepoMock.findById.resolves(robotType);
+        robotRepoMock.findByNickname.resolves(null);
+        robotRepoMock.findBySerialNumberAndType.resolves(false);
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        const createRobotServiceSpy = sinon.spy(createRobotServiceInstance, "createRobot");
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createRobotServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Robot already exists"));
+    });
+````
+
+**Test 8:** *Test validates how the controller handles the case when the specified robot type is not found and ensures it responds with an appropriate error message.*
+```
+it("createRobotController +createRobotService integration test (Robot Type not found)", async function() {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+        robotRepoMock.findById.resolves(null);
+        robotTypeRepoMock.findById.resolves(null);
+        robotRepoMock.findByNickname.resolves(null);
+        robotRepoMock.findBySerialNumberAndType.resolves(false);
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        const createRobotServiceSpy = sinon.spy(createRobotServiceInstance, "createRobot");
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createRobotServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Robot Type not found"));
+    });
+````
+
+**Test 9:** *Tests how the controller handles the situation when a robot with the same nickname already exists and ensures it responds with an appropriate error message.*
+```
+ it("createRobotController +createRobotService integration test (Robot with this nickname already exists)", async function() {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+        robotRepoMock.findById.resolves(null);
+        robotTypeRepoMock.findById.resolves(robotType);
+        robotRepoMock.findByNickname.resolves(robotDTO);
+        robotRepoMock.findBySerialNumberAndType.resolves(false);
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        const createRobotServiceSpy = sinon.spy(createRobotServiceInstance, "createRobot");
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createRobotServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Robot with this nickname already exists"));
+    });
+````
+
+**Test 10:** *Test checks how the controller handles the case when a robot of the same type and serial number already exists and ensures it responds with an appropriate error message.*
+```
+it("createRobotController +createRobotService integration test (Robot of this type and serial number already exists)", async function() {
+        // Arrange
+        let body = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+         };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const robotTypeDTO: ICreateRobotTypeDTO = {
+            "robotTypeID": "k4",
+            "robotBrand": "Joi.string().max(0).required()",
+            "robotModel": " Joi.string().max(100).required()",
+            "availableTasks": ["Floor surveillance","Object transport"]
+        };
+        const robotType = RobotType.create(robotTypeDTO, robotTypeDTO.robotTypeID).getValue();
+
+        const robotDTO: ICreateRobotDTO = {
+            "code":"code1",
+            "nickname": "marsupial",
+            "type": "k4",
+            "serialNumber": "maxC",
+            "description": "Joi.string().max(250)"
+        };
+
+        robotRepoMock.findById.resolves(null);
+        robotTypeRepoMock.findById.resolves(robotType);
+        robotRepoMock.findByNickname.resolves(null);
+        robotRepoMock.findBySerialNumberAndType.resolves(true);
+
+        let createRobotServiceInstance = Container.get("createRobotService");
+        const createRobotServiceSpy = sinon.spy(createRobotServiceInstance, "createRobot");
+
+        const ctrl = new createRobotController(createRobotServiceInstance as ICreateRobotService);
+
+        // Act
+        await ctrl.createRobot(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createRobotServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Robot of this type and serial number already exists"));
+    });
 ````
 
 ## 5. Implementation
