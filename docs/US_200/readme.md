@@ -99,6 +99,12 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 
 ### 4.3. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
 
 ### 4.4. Tests
 
