@@ -11,14 +11,10 @@ import FloorNumber from "../../../src/domain/Floor/FloorNumber";
 import {FloorDescription} from "../../../src/domain/Floor/FloorDescription";
 import {FloorMap} from "../../../src/domain/Floor/FloorMap";
 import {Result} from "../../../src/core/logic/Result";
-import ListAllFloorsController from "../../../src/controllers/floor/list/listAllFloorsController";
-import IListAllFloorsService from "../../../src/services/IServices/floor/list/IListAllFloorsService";
-import ListAllFloorController from "../../../src/controllers/floor/list/listAllFloorsController";
 import * as sinon from 'sinon';
 import {ICreatePassagewayDTO} from "../../../src/dto/passageway/ICreatePassagewayDTO";
 import {Passageway} from "../../../src/domain/Passageway/Passageway";
 import ListFloorsPassagewaysController from "../../../src/controllers/floor/list/listFloorsPassagewaysController";
-import listFloorsPassagewaysService from "../../../src/services/floor/list/listFloorsPassagewaysService";
 import IListFloorsPassagewaysService from "../../../src/services/IServices/floor/list/IListFloorsPassagewaysService";
 
 describe('list floors with passageways to other buildings', function () {
