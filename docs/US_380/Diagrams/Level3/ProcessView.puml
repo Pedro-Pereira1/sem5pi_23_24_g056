@@ -1,0 +1,51 @@
+@startuml
+
+autonumber
+
+participant ":RobotRoute" as Route
+participant ":ListAllRobotsController" as Controller
+participant ":ListAllRobotsService" as Service
+participant ":RobotRepo" as Repo
+participant ":RobotMapper" as Map
+participant ":RobotPersistence" as RoutePersistence
+participant ":RobotDTO" as DTO
+
+?o->Route: GET
+activate Route
+
+Route -> Controller: listAllRobots(req, res, next)
+activate Controller
+
+Controller -> Service: listAllRobots()
+activate Service
+
+Service -> Repo: robots = findAll
+activate Repo
+
+Repo -> RoutePersistence: find all
+activate RoutePersistence
+Repo <-- RoutePersistence
+deactivate RoutePersistence
+
+Repo --> Service
+deactivate Repo
+
+Service -> Map: toDTO(robots)
+activate Map
+Map -> DTO: create
+activate DTO
+deactivate DTO
+deactivate Map
+
+Service --> Controller: list of robots
+deactivate Service
+
+
+Controller --> Route: list of robots
+deactivate Controller
+
+<--Route: list of robots
+deactivate Route
+
+
+@enduml

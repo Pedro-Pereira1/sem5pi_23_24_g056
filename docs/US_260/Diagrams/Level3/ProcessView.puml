@@ -3,12 +3,11 @@
 autonumber
 
 participant ":FloorRoute" as Route
-participant ":ListFloorsPassagewaysController" as Controller
-participant ":ListFloorsPassagewaysService" as Service
-participant ":BuildingRepo" as Repo
+participant ":ListPassagewaysBetween2BuildingsController" as Controller
+participant ":ListPassagewaysBetween2BuildingsService" as Service
+participant ":BuildingRepo" as BuildingRepo
 participant ":BuildingSchema" as BuildingSchema
-participant ":FloorMap" as Map
-participant ":IListFloorPassagewaysDTO" as DTO
+participant ":IListPassagewaysBetween2BuildingsDTO" as DTO
 
 participant ":FloorRepo" as FloorRepo
 
@@ -18,45 +17,49 @@ participant ":FloorSchema" as Schema
 ?o->Route: GET
 activate Route
 
-Route -> Controller: listFloorsPassageways(req, res, next)
+Route -> Controller: listPassagewaysBetween2BuildingsService(req, res, next)
 activate Controller
 
-Controller -> Service: listFloorsPassageways(buildingCode)
+Controller -> Service: listPassagewaysBetween2BuildingsService(buildingCode)
 activate Service
 
-Service -> Repo: findByBuildingCode(buildingCode)
-activate Repo
-Repo -> BuildingSchema: findOne(buildingCode)
+Service -> BuildingRepo: findByBuildingCode(building1Code)
+activate BuildingRepo
+BuildingRepo -> BuildingSchema: findOne(building1Code)
 activate BuildingSchema
-Repo <-- BuildingSchema
+BuildingRepo <-- BuildingSchema
 deactivate BuildingSchema
-Service <-- Repo
-deactivate Repo
+Service <-- BuildingRepo
+deactivate BuildingRepo
+
+Service -> BuildingRepo: findByBuildingCode(building2Code)
+activate BuildingRepo
+BuildingRepo -> BuildingSchema: findOne(building2Code)
+activate BuildingSchema
+BuildingRepo <-- BuildingSchema
+deactivate BuildingSchema
+Service <-- BuildingRepo
+deactivate BuildingRepo
 
 
 
 
-Service -> FloorRepo: get floors in which the passageway connects
-activate FloorRepo
-FloorRepo -> Schema: find(passagewayId)
-activate Schema
-FloorRepo <-- Schema
-deactivate Schema
-Service <-- FloorRepo
-deactivate FloorRepo
+Service -> Building: get all passageways of building1
+
+Service -> Building: passagewaysList = select from the previous step the passageways that have the same id in building2 and the floor to which it connects
 
 
 
-Service -> Map:toDtoList(floor, floorsConnected)
+Service -> Map:toDtoList(passagewaysList)
 activate Map
 
 Map -> DTO: create
 deactivate Map
 
-Service --> Controller: floors list
+Service --> Controller: passageways list
 deactivate Service
 
-Controller --> Route: floors list
+Controller --> Route: passageways list
 deactivate Controller
 <--Route:
 

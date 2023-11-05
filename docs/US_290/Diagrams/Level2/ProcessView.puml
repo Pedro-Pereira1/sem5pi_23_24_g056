@@ -1,11 +1,11 @@
 @startuml
 
 autonumber
-actor "Campus Manager" as CM
+
 participant Visualization
 participant "MasterDataBuilding" as GI
 
-CM -> Visualization: Edit elevator
+?o-> Visualization: Edit elevator
 activate Visualization
 
 Visualization -> GI: GET listInBuilding
@@ -13,7 +13,7 @@ activate GI
 GI --> Visualization: List of elevators
 deactivate GI
 
-CM <-- Visualization: List of elevators
+<-- Visualization: List of elevators
 deactivate Visualization
 
 
