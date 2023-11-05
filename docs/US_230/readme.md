@@ -20,7 +20,7 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 the system and load a map of a floor to the system and persist it, the map of the floor will be a simple text file
 which contains the layout of the floor as a series of characters
 
-An example of the text file
+An example of a possible map configuration
 
 |  7  |  6  |  6  |  6  |  6  |  7  |  6  |  6  |  2  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -78,7 +78,7 @@ where the values mean:
 
 * Process
 
-![Process](./Diagrams/Level2/ProcessLevel2.svg)
+![Process](./Diagrams/Level2/ProcessView.svg)
 
 * Physical
 
