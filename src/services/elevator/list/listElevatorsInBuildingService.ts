@@ -12,7 +12,6 @@ import IListElevatorsInBuildingDTO from "../../../dto/elevator/IListElevatorsInB
 export default class ListElevatorsInBuildingService implements IListElevatorsInBuildingService {
 
     constructor(
-        @Inject(config.repos.elevator.name) private elevatorRepo: IElevatorRepo,
         @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo,
     ) { }
 
@@ -23,8 +22,8 @@ export default class ListElevatorsInBuildingService implements IListElevatorsInB
 
             let elevatorsList: IListElevatorsInBuildingDTO[] = []
             for (var floor of building.floors) {
-                for (var elevatorId of floor.props.floormap.elevatorsId){
-                    const elevatorDto = ElevatorMap.toDtoList(await this.elevatorRepo.findById(elevatorId), [Number(floor.props.floorNumber)])
+                for (var anElevator of floor.props.floormap.props.elevators){
+                    const elevatorDto = ElevatorMap.toDtoList(anElevator, [floor.props.floorNumber.number])
 
                     const elevatorOrUndefined = elevatorsList.find((elevator) => elevator.elevatorId === elevatorDto.elevatorId)
                     if (elevatorOrUndefined === undefined){

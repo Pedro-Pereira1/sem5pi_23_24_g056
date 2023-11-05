@@ -2,71 +2,113 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-participant UploadFloorMapRoute
-participant UploadFloorMapController
-participant UploadFloorMapService
+participant LoadFloorMapRoute
+participant LoadFloorMapController
+participant LoadFloorMapService
 participant Floor
 participant FloorMaper
+participant FloorDTO
 participant FloorRepo
-participant FloorSchema
+participant FloorPersistence
+participant Building
+participant BuildingMaper
+participant BuildingRepo
+participant BuildingPersistence
 
-?o->UploadFloorMapRoute : patch /uploadFloorMap
-activate UploadFloorMapRoute
+?o->LoadFloorMapRoute : patch /uploadFloorMap
+activate LoadFloorMapRoute
 
-UploadFloorMapRoute -> UploadFloorMapController : uploadFloorMap(mapDto)
-activate UploadFloorMapController
+LoadFloorMapRoute -> LoadFloorMapController : uploadFloorMap(mapDto)
+activate LoadFloorMapController
 
-UploadFloorMapController -> UploadFloorMapService : uploadFloorMap(mapDto)
-activate UploadFloorMapService
+LoadFloorMapController -> LoadFloorMapService : uploadFloorMap(mapDto)
+activate LoadFloorMapService
 
-UploadFloorMapService -> FloorRepo : findById(floorId)
+LoadFloorMapService -> BuildingRepo : findByBuildingCode()
+activate BuildingRepo
+
+BuildingRepo -> BuildingPersistence : find()
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo -> BuildingMaper : toDomain()
+activate BuildingMaper
+
+BuildingMaper -> Building : create
+activate Building
+
+Building --> BuildingMaper
+deactivate Building
+
+BuildingMaper --> BuildingRepo
+deactivate BuildingMaper
+
+BuildingRepo --> LoadFloorMapService
+
+deactivate BuildingRepo
+
+
+
+
+LoadFloorMapService -> FloorRepo : findById(floorId)
 activate FloorRepo
 
-FloorRepo -> FloorSchema : find()
-activate FloorSchema
+FloorRepo -> FloorPersistence : find()
+activate FloorPersistence
+FloorPersistence --> FloorRepo
+deactivate FloorPersistence
 
-FloorRepo -> FloorMaper : toDomain(floorRaw)
+FloorRepo -> FloorMaper : toDomain()
 activate FloorMaper
 
-FloorMaper -> Floor : create()
+FloorMaper -> Floor : create
 activate Floor
 
 Floor --> FloorMaper
-
-FloorMaper --> FloorRepo : 
-
-FloorRepo --> UploadFloorMapService
-
-UploadFloorMapService -> Floor : addFloorMap(floorMap)
-
-
-UploadFloorMapService -> FloorRepo : save(floor)
-
-FloorRepo -> FloorMaper : toPersistence(floor)
+deactivate Floor
 
 FloorMaper --> FloorRepo 
 deactivate FloorMaper
 
-FloorRepo -> FloorSchema : save(floor)
-deactivate FloorSchema
-
-FloorRepo --> UploadFloorMapService
+FloorRepo --> LoadFloorMapService
 deactivate FloorRepo
 
-UploadFloorMapService -> FloorMaper : toDto(floor)
-activate FloorMaper
+LoadFloorMapService -> Floor : loadFloorMapAndupdate()
+activate Floor
+
 deactivate Floor
 
-FloorMaper --> UploadFloorMapService
+LoadFloorMapService -> FloorRepo : save()
+activate FloorRepo
+
+FloorRepo -> FloorMaper : toPersistence()
+activate FloorMaper
+
+FloorMaper --> FloorRepo
 deactivate FloorMaper
 
-UploadFloorMapService --> UploadFloorMapController
-deactivate UploadFloorMapService
+FloorRepo -> FloorPersistence : save()
+activate FloorPersistence
+deactivate FloorPersistence
 
-UploadFloorMapController --> UploadFloorMapRoute
-deactivate UploadFloorMapController
+FloorRepo --> LoadFloorMapService
+deactivate FloorRepo
 
-<-- UploadFloorMapRoute
-deactivate UploadFloorMapRoute
+LoadFloorMapService -> FloorMaper : toDto()
+activate FloorMaper
+
+FloorMaper -> FloorDTO : create
+
+FloorMaper --> LoadFloorMapService
+deactivate FloorMaper
+
+LoadFloorMapService --> LoadFloorMapController
+deactivate LoadFloorMapService
+
+LoadFloorMapController --> LoadFloorMapRoute
+deactivate LoadFloorMapController
+
+<-- LoadFloorMapRoute
+deactivate LoadFloorMapRoute
 
 @enduml

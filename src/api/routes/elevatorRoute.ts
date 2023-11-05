@@ -47,7 +47,7 @@ export default (app: Router) => {
     (req, res, next) => ctrlEdit.editElevator(req, res, next));
 
     route.get('/listInBuilding/:buildingCode', 
-        (req, res, next) => {ctrlList.listElevatorsInBuildingFloors(req, res, next);
+        (req, res, next) => {ctrlList.listElevatorsInBuilding(req, res, next);
             req.params.buildingCode;
         }
     );

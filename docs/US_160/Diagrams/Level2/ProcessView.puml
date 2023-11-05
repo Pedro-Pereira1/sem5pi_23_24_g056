@@ -1,0 +1,20 @@
+@startuml processLevel1
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant Vizualization
+participant MasterDataBuilding
+
+?o->Vizualization : new building data
+activate Vizualization
+
+Vizualization -> MasterDataBuilding : editBuilding
+activate MasterDataBuilding
+
+MasterDataBuilding --> Vizualization
+deactivate MasterDataBuilding
+
+<-Vizualization
+deactivate Vizualization
+
+@enduml

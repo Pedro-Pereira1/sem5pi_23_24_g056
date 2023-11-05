@@ -1,101 +1,87 @@
-# US 220 - As a Campus Manager, I want to list the floors of a building with a passageway
+import {Container} from "typedi";
+import {NextFunction, Request, Response} from "express";
+import {IBuildingDTO} from "../../../src/dto/building/IBuildingDTO";
+import {Building} from "../../../src/domain/Building/Building";
+import {BuildingName} from "../../../src/domain/Building/BuildingName";
+import {BuildingDescription} from "../../../src/domain/Building/BuildingDescription";
+import {BuildingSize} from "../../../src/domain/Building/BuildingSize";
+import {IFloorDTO} from "../../../src/dto/floor/IFloorDTO";
+import {Floor} from "../../../src/domain/Floor/Floor";
+import FloorNumber from "../../../src/domain/Floor/FloorNumber";
+import {FloorDescription} from "../../../src/domain/Floor/FloorDescription";
+import {FloorMap} from "../../../src/domain/Floor/FloorMap";
+import {Result} from "../../../src/core/logic/Result";
+import * as sinon from 'sinon';
+import {ICreatePassagewayDTO} from "../../../src/dto/passageway/ICreatePassagewayDTO";
+import {Passageway} from "../../../src/domain/Passageway/Passageway";
+import ListFloorsPassagewaysController from "../../../src/controllers/floor/list/listFloorsPassagewaysController";
+import IListFloorsPassagewaysService from "../../../src/services/IServices/floor/list/IListFloorsPassagewaysService";
+
+describe('list floors with passageways to other buildings', function () {
+    const sandbox = sinon.createSandbox();
+    let buildingRepoMock;
+    let floorRepoMock;
+    let passagewayRepoMock;
 
 
-## 1. Context
+    beforeEach(function () {
+        Container.reset();
 
-* This task comes in context of Sprint A.
-* First time that this task is developed.
-* This task is relative to system user Campus Manager.
+        buildingRepoMock = {
+            findByBuidingCode: sinon.stub(),
+            findAll: sinon.stub(),
+            save: sinon.stub(),
+            exists: sinon.stub(),
+            findBuildingsMaxMinFloors: sinon.stub(),
+            findByFloor: sinon.stub(),
+        };
 
-## 2. Requirements
+        Container.set("buildingRepo", buildingRepoMock);
 
-**US 220 -** As a Campus Manager, I want to:
+        floorRepoMock = {
+            exists: sinon.stub(),
+            save: sinon.stub(),
+            findById: sinon.stub(),
+            findByPassageway: sinon.stub(),
+        };
+        Container.set("floorRepo", floorRepoMock);
 
-* list floors of a building with a passageway.
+        passagewayRepoMock = {
+            exists: sinon.stub(),
+            save: sinon.stub(),
+            findById: sinon.stub(),
+        }
+        Container.set("passagewayRepo", passagewayRepoMock);
 
-**Client Clarifications**
-> **Q**: ... seria expectável incluir informação relativa a onde a(s) passagem(ns) de cada piso vão ter; ou o pretendido é simplesmente ser possível saber quais dos pisos de um dado edifício possuem passagens para outros?
-<br>
-> **A**: ... esta listagem deve mostrar a informação sobre o piso (edificio, piso, descrição) e a que outros edificios/pisos tem passagem.
+        let buildingSchemaInstance = require('../../../src/persistence/schemas/building/buildingSchema').default
+        Container.set('buildingSchema', buildingSchemaInstance)
 
-**Dependencies:**
-- **US150 -** As a Campus Manager, I want to create a building.
-- **US190 -** As a Campus Manager, I want to create building floor.
-- **US240 -** As a Campus Manager, I want to create a passageway between buildings.
+        let createBuildingServiceClass = require('../../../src/services/building/create/createBuildingService').default
+        let createBuildingServiceInstance = Container.get(createBuildingServiceClass)
+        Container.set('createBuildingService', createBuildingServiceInstance)
 
-## 3. Analysis
+        let floorSchemaInstance = require('../../../src/persistence/schemas/floor/floorSchema').default
+        Container.set('floorSchema', floorSchemaInstance)
 
-Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the floors of a building with a passageway,describing the floor and description
-and also the building and floor where the passageway connects to.
-* Campus Manager is a user role that manages the data of the routes and maps.
-* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
-* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+        let createFloorServiceClass = require('../../../src/services/floor/create/createFloorService').default
+        let createFloorServiceInstance = Container.get(createFloorServiceClass)
+        Container.set('createFloorService', createFloorServiceInstance)
 
-### 3.1. Domain Model Excerpt
+        let listBuildingsWithMinAndMaxFloorsServiceClass = require('../../../src/services/building/list/listBuildingsMaxMinFloorsService').default
+        let listBuildingsWithMinAndMaxFloorsServiceInstance = Container.get(listBuildingsWithMinAndMaxFloorsServiceClass)
+        Container.set('listBuildingsMaxMinFloorsService', listBuildingsWithMinAndMaxFloorsServiceInstance)
 
-![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
+        let listFloorsPassagewaysServiceClass = require('../../../src/services/floor/list/listFloorsPassagewaysService').default
+        let listFloorsPassagewaysServiceInstance = Container.get(listFloorsPassagewaysServiceClass)
+        Container.set('listFloorsPassagewaysService', listFloorsPassagewaysServiceInstance)
+    });
 
-## 4. Design
-### Level 1
+    afterEach(function () {
+        sandbox.restore();
+        sinon.restore();
+    });
 
-* Logical View
-
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
-
-* Process View
-
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
-
-* Scenary View
-
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
-
-### level 2
-
-* Logical View
-
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
-
-* Process View
-
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
-
-* Physical View
-
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation View
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
-
-### 4.2. Applied Patterns
-* Controller
-* Service
-* Repository
-* Mapper
-* DTO
-* GRASP
-
-### 4.3. Tests
-
-**Test 1:** *Tests the controller using a stub service to list floors with passageways*
-
-```
-it("ListFloorsPassagewaysController unit test using ListFloorsPassagewaysService stub", async function() {
+    it("ListFloorsPassagewaysController unit test using ListFloorsPassagewaysService stub", async function() {
 
         let body = {};
         let req: Partial<Request> = {};
@@ -242,12 +228,8 @@ it("ListFloorsPassagewaysController unit test using ListFloorsPassagewaysService
         sinon.assert.calledOnce(res.json);
         sinon.assert.calledWith(res.json, sinon.match([FloorDTO]));
     });
-````
 
-**Test 2:** *Tests the service using a stub repo to list floors with passageways*
-
-```
-it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration test", async function() {
+    it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration test", async function() {
         // Arrange
         let body = {};
         let req: Partial<Request> = {};
@@ -410,59 +392,134 @@ it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration t
         }]));
         sinon.assert.calledOnce(listFloorsPassagewaysServiceSpy);
     });
-````
 
-## 5. Implementation
+    it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration test (Building Not Found)", async function() {
 
-**listFloorsPassagewayService:**
-
-```
-public async listFloorsPassageways(buildingCode: string): Promise<Result<IListFloorPassagewaysDTO[]>> {
-
-
-        const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingCode))
-        if (buildingResult === null) {
-            return Result.fail<IListFloorPassagewaysDTO[]>(`Building ${buildingCode} not found`)
+        let body = {};
+        let req: Partial<Request> = {};
+        req.body = body;
+        req.params = {
+            buildingCode: "C"
         }
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
 
-        const floorsResult = buildingResult.floors
+        let listFloorsPassagewaysServiceInstance = Container.get("listFloorsPassagewaysService");
 
-        if (floorsResult.length === 0) {
-            return Result.fail<IListFloorPassagewaysDTO[]>(`Building ${buildingCode} has no floors`)
-        }
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
 
-        let resolve: IListFloorPassagewaysDTO[] = []
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
 
-        for (var floor of floorsResult) {
-            if (floor.map.passagewaysId.length > 0) {
-                const floorsConnected: string[] = [];
-                for (var passagewayId of floor.map.passagewaysId) {
-                    const currentFloors = await this.floorRepo.findByPassageway(passagewayId)
-
-                    for (var floor1 of currentFloors) {
-                        if (floor1.floorId.toValue() !== floor.floorId.toValue()) {
-                            floorsConnected.push(floor1.floorId.toString())
-                            const building = await this.buildingRepo.findByFloor(Number(floor1.floorId.toValue()))
-                            if (building !== null) {
-                                floorsConnected.push(building.code.toString())
-                            }
-                        }
-                    }
-                }
-                resolve.push(FloorMaper.toDtoList(floor, floorsConnected))
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
             }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+                "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, FloorDTO.floorId).getValue()
+
+        buildingRepoMock.findByBuidingCode.resolves(null);
+        buildingRepoMock.findByFloor.resolves(building);
+
+
+        const listFloorsPassagewaysServiceSpy = sinon.spy(listFloorsPassagewaysServiceInstance, "listFloorsPassageways");
+
+        const ctrl = new ListFloorsPassagewaysController(listFloorsPassagewaysServiceInstance as IListFloorsPassagewaysService);
+
+        await ctrl.listFloorsPassageways(<Request>req, <Response>res, <NextFunction>next);
+
+        sinon.assert.calledOnce(listFloorsPassagewaysServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Building C not found"));
+    });
+
+    it("ListFloorsPassagewaysController + ListFloorsPassagewaysService integration test (Building No Floors)", async function() {
+        let body = {};
+        let req: Partial<Request> = {};
+        req.body = body;
+        req.params = {
+            buildingCode: "A"
         }
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
 
-        return Result.ok<IListFloorPassagewaysDTO[]>(resolve)
-    }
-````
+        // Stub repo methods
+        let listFloorsPassagewaysServiceInstance = Container.get("listFloorsPassagewaysService");
 
-## 6. Integration/Demonstration
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
 
-To use this US, you need to send and HTTP request with the following URI:
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
 
-localhost:4000/api/floors/listFloorsPassageways/D
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        buildingRepoMock.findByFloor.resolves(null);
 
-## 7. Observations
+        const listFloorsPassagewaysServiceSpy = sinon.spy(listFloorsPassagewaysServiceInstance, "listFloorsPassageways");
 
-No additional observations.
+        const ctrl = new ListFloorsPassagewaysController(listFloorsPassagewaysServiceInstance as IListFloorsPassagewaysService);
+
+        await ctrl.listFloorsPassageways(<Request>req, <Response>res, <NextFunction>next);
+
+        sinon.assert.calledOnce(listFloorsPassagewaysServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Building A has no floors"));
+    });
+
+});

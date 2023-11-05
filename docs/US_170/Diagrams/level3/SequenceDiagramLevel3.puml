@@ -1,0 +1,49 @@
+@startuml SequenceDiagramLevel3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant BuildingRoute
+participant ListAllBuildingController
+participant ListAllBuildingService
+participant BuildingRepo
+participant BuildingMap
+participant BuildingDto
+participant buildingPersistence
+
+?o->BuildingRoute : GET /listAllBuildings
+
+activate BuildingRoute
+
+BuildingRoute -> ListAllBuildingController : listBuildings()
+activate ListAllBuildingController
+
+ListAllBuildingController -> ListAllBuildingService : listBuildings()
+activate ListAllBuildingService
+
+ListAllBuildingService -> BuildingRepo : findAll()
+activate BuildingRepo
+
+BuildingRepo -> buildingPersistence : find()
+
+BuildingRepo -> BuildingMap : toDto(buildingList)
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+
+BuildingRepo --> ListAllBuildingService
+deactivate BuildingMap
+deactivate BuildingRepo
+
+ListAllBuildingService --> ListAllBuildingController
+deactivate ListAllBuildingService
+
+ListAllBuildingController --> BuildingRoute
+
+deactivate ListAllBuildingController
+
+
+<--BuildingRoute
+deactivate BuildingRoute
+
+
+@enduml
