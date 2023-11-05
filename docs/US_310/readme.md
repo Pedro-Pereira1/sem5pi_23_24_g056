@@ -125,9 +125,42 @@ public void ensureNullIsNotAllowed() {
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**createRoomService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+public async createRoom(roomDto: ICreateRoomDTO): Promise<Result<IRoomDTO>> {
+        try{
+            if(await this.roomRepo.findById(roomDto.roomName) !== null) return Result.fail<IRoomDTO>('A Room with this Name already exists!')
+
+            const floor = await this.floorRepo.findById(roomDto.floorId)
+            if (floor === null) return Result.fail<IRoomDTO>('Floor does not exist!')
+
+            const roomOrError = await Room.create(
+                {
+                   roomDescription: RoomDescription.create(roomDto.roomDescription).getValue(),
+                   roomCategory: RoomCategory.create(roomDto.roomCategory).getValue()
+                }, RoomName.create(roomDto.roomName).getValue())
+                
+            if (roomOrError.isFailure) {
+                return Result.fail<IRoomDTO>(roomOrError.errorValue())
+            }
+            
+            const roomResult = roomOrError.getValue();
+            await this.roomRepo.save(roomResult);
+                        
+            floor.addRoom(roomResult)
+
+            await this.floorRepo.save(floor);
+
+            const roomDtoResult = RoomMap.toDto(roomResult) as IRoomDTO
+
+            return Result.ok<IRoomDTO>(roomDtoResult)
+
+        } catch(e) {
+            throw e
+        }
+    }
+````
 
 ## 6. Integration/Demonstration
 
@@ -137,8 +170,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.
