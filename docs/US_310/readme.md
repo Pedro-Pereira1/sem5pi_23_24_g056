@@ -107,13 +107,146 @@ essa informação é necessária para o sistema como indicado no RFP. pode ser r
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Tests the controller using a stub service to create a valid room*
 
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it('Controller unit test with stub service, valid room', async function () {
+        let body = {
+            "roomName": "A101",
+            "roomDescription": "This is a room",
+            "roomCategory": "Other",
+            "floorId": 1
+        }
+
+        let expected = {
+            "roomName": "A101",
+            "roomDescription": "This is a room",
+            "roomCategory": "Other",
+            "floorId": 1
+        }
+
+        let req: Partial<Request> = {}
+        req.body = body
+
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        let createRoomService = Container.get('createRoomService')
+
+        sinon.stub(createRoomService, 'createRoom').returns(Result.ok<IRoomDTO>({
+            roomName: "A101",
+            roomDescription: "This is a room",
+            roomCategory: "Other"
+        } as IRoomDTO))
+
+        const createRoomController = new CreateRoomController(createRoomService as ICreateRoomService)
+
+        await createRoomController.createRoom(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.json)
+        sinon.match(expected)
+    })
+````
+
+**Test 2:** *Tests the room description over the max allowed word limit*
+
+```
+it('Create room test, room description over word limit (250+ words)', async function () {
+        const roomDescription: string = 'A'.repeat(251);
+        const result: Result<RoomDescription> = RoomDescription.create(roomDescription);
+
+        assert.equal(result.isFailure,true)
+        assert.equal(result.error,'Description must be less than 250 characters!')
+    })
+````
+
+**Test 3:** *Tests the service using a stub repo to create rooms*
+```
+it("createRoomController +createRoomService integration test", async function() {
+        let body = {
+            "roomName": "A101",
+            "roomDescription": "This is a room",
+            "roomCategory": "Other",
+            "floorId": 1
+        }
+        let req: Partial<Request> = {
+            body: body
+        };
+        let res: Partial<Response> = {
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        const roomDTO = {
+            roomName: "A101",
+            roomDescription: "This is a room",
+            roomCategory: "Other"
+        } as IRoomDTO
+
+        const buildingDTO = {
+            buildingCode: "bgdA1",
+            buildingName: "buildingTest",
+            buildingDescription: "this is a building",
+            buildingLength: 10,
+            buildingWidth: 10,
+            buildingFloors: []
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        const floor = Floor.create(
+            {
+                "floorNumber": new FloorNumber({number: 1}),
+                "floorDescription": new FloorDescription({ value: 'Test floor' }),
+                "floormap": new FloorMap(
+                    {
+                        map: [[]],
+                        passageways: [],
+                        rooms: [],
+                        elevators: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    }
+                )
+            }, 1 ).getValue();
+
+        building.addFloor(floor)
+
+
+        roomRepoMock.findById.resolves(null);
+        buildingRepoMock.findByBuidingCode.resolves(building);
+        floorRepoMock.findById.resolves(floor);
+
+        let createRoomServiceInstance = Container.get("createRoomService");
+        const createRoomServiceSpy = sinon.spy(createRoomServiceInstance, "createRoom");
+
+        const ctrl = new CreateRoomController(createRoomServiceInstance as ICreateRoomService);
+
+        // Act
+        await ctrl.createRoom(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(createRoomServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            roomName: "A101",
+            roomDescription: "This is a room",
+            roomCategory: "Other"
+        }));
+    });
 ````
 
 ## 5. Implementation
