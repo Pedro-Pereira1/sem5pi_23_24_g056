@@ -32,55 +32,46 @@ As a Fleet Manager, an actor of the system, I will be able to access the system 
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
+
 ## 4. Design
 
 ### 4.1. Realization
 
-### Level 1
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-* Logical:
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-![Logical](./Diagrams/Level1/LogicalView.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-* Process
+#### Level2
 
-![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
+###### LogicalView:
 
-* Scenary
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-### level 2
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-* Logical:
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-* Process
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
-* Physical
-
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
 
 ### 4.2. Applied Patterns
 
