@@ -22,10 +22,10 @@ export default class CreateRoomService implements ICreateRoomService {
 
     public async createRoom(roomDto: ICreateRoomDTO): Promise<Result<IRoomDTO>> {
         try{
-            if(await this.roomRepo.findById(roomDto.roomName) !== null) throw new Error("A Room with this Name already exists!")
+            if(await this.roomRepo.findById(roomDto.roomName) !== null) return Result.fail<IRoomDTO>('A Room with this Name already exists!')
 
             const floor = await this.floorRepo.findById(roomDto.floorId)
-            if (floor === null) throw new Error("Floor does not exist!")
+            if (floor === null) return Result.fail<IRoomDTO>('Floor does not exist!')
 
             const roomOrError = await Room.create(
                 {
