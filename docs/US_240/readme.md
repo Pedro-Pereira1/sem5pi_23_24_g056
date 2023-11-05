@@ -304,6 +304,19 @@ public async createPassageway(createPassagewayDTO: ICreatePassagewayDTO): Promis
 
 ## 6. Integration/Demonstration
 
+To use this US, you need to send and HTTP request with the following JSON:
+
+Using this URL: http://localhost:4000/api/passageways/createPassageway
+```
+{
+    "passagewayId": 1, //ID of the passageway
+    "building1Id": 10, //ID of the first building
+    "floor1Id": 5,     //ID of the first floor
+    "building2Id": 11,  //ID of the second building
+    "floor2Id": 6,      //ID of the second floor
+}
+```
+
 ## 7. Observations
 
 No additional observations.
