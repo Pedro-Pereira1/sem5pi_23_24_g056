@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="852px" preserveAspectRatio="none" style="width:1094px;height:852px;background:#FFFFFF;" version="1.1" viewBox="0 0 1094 852" width="1094px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="728.0859" style="stroke:#181818;stroke-width:1.0;" width="10" x="81" y="69.9609"/><rect fill="#FFFFFF" height="667.3828" style="stroke:#181818;stroke-width:1.0;" width="10" x="285" y="100.3125"/><rect fill="#FFFFFF" height="606.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="489" y="130.6641"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="612" y="282.4219"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="612" y="403.8281"/><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="252.0703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="494.5313"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="646.2891"/><rect fill="#FFFFFF" height="212.4609" style="stroke:#181818;stroke-width:1.0;" width="10" x="885" y="161.0156"/><rect fill="#FFFFFF" height="151.7578" style="stroke:#181818;stroke-width:1.0;" width="10" x="885" y="464.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="1020" y="191.3672"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="1020" y="555.2344"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="86" x2="86" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="289.5" x2="289.5" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="494" x2="494" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="617" x2="617" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="699" x2="699" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="796" x2="796" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="890" x2="890" y1="37.6094" y2="816.0469"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1025" x2="1025" y1="37.6094" y2="816.0469"/><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="41" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="48" y="26.5332">RobotRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="41" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="48" y="836.5801">RobotRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="151" x="214.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="221.5" y="26.5332">InhibitRobotController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="151" x="214.5" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137" x="221.5" y="836.5801">InhibitRobotController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="426" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="433" y="26.5332">InhibitRobotService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="136" x="426" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="433" y="836.5801">InhibitRobotService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="52" x="591" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="598" y="26.5332">Robot</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="52" x="591" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="598" y="836.5801">Robot</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="653" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="660" y="26.5332">RobotMaper</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="653" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="660" y="836.5801">RobotMaper</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="755" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="762" y="26.5332">RobotDTO</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="82" x="755" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="762" y="836.5801">RobotDTO</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="847" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="854" y="26.5332">RobotRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="847" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="854" y="836.5801">RobotRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="126" x="962" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="969" y="26.5332">RobotPersistence</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="126" x="962" y="815.0469"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="969" y="836.5801">RobotPersistence</text><rect fill="#FFFFFF" height="728.0859" style="stroke:#181818;stroke-width:1.0;" width="10" x="81" y="69.9609"/><rect fill="#FFFFFF" height="667.3828" style="stroke:#181818;stroke-width:1.0;" width="10" x="285" y="100.3125"/><rect fill="#FFFFFF" height="606.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="489" y="130.6641"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="612" y="282.4219"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="612" y="403.8281"/><rect fill="#FFFFFF" height="91.0547" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="252.0703"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="494.5313"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="694" y="646.2891"/><rect fill="#FFFFFF" height="212.4609" style="stroke:#181818;stroke-width:1.0;" width="10" x="885" y="161.0156"/><rect fill="#FFFFFF" height="151.7578" style="stroke:#181818;stroke-width:1.0;" width="10" x="885" y="464.1797"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="1020" y="191.3672"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="1020" y="555.2344"/><ellipse cx="4.5" cy="69.2109" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1.5;"/><polygon fill="#181818" points="69,65.9609,79,69.9609,69,73.9609,73,69.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="9" x2="75" y1="69.9609" y2="69.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="12" y="65.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="23" y="65.1045">PATCH</text><polygon fill="#181818" points="273,96.3125,283,100.3125,273,104.3125,277,100.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="91" x2="279" y1="100.3125" y2="100.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="98" y="95.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="164" x="109" y="95.4561">inhibitRobot(inhibitRobotDto)</text><polygon fill="#181818" points="477,126.6641,487,130.6641,477,134.6641,481,130.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="295" x2="483" y1="130.6641" y2="130.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="302" y="125.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="164" x="313" y="125.8076">inhibitRobot(inhibitRobotDto)</text><polygon fill="#181818" points="873,157.0156,883,161.0156,873,165.0156,877,161.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="499" x2="879" y1="161.0156" y2="161.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="506" y="156.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="64" x="517" y="156.1592">findById(id)</text><polygon fill="#181818" points="1008,187.3672,1018,191.3672,1008,195.3672,1012,191.3672" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="895" x2="1014" y1="191.3672" y2="191.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="902" y="186.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="913" y="186.5107">findOne(query)</text><polygon fill="#181818" points="906,217.7188,896,221.7188,906,225.7188,902,221.7188" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="900" x2="1024" y1="221.7188" y2="221.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="912" y="216.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="923" y="216.8623"> </text><polygon fill="#181818" points="715,248.0703,705,252.0703,715,256.0703,711,252.0703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="709" x2="884" y1="252.0703" y2="252.0703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="721" y="247.2139">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117" x="732" y="247.2139">toDomain(rawRobot)</text><polygon fill="#181818" points="633,278.4219,623,282.4219,633,286.4219,629,282.4219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="627" x2="693" y1="282.4219" y2="282.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="639" y="277.5654">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="650" y="277.5654">create</text><polygon fill="#181818" points="682,308.7734,692,312.7734,682,316.7734,686,312.7734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="617" x2="688" y1="312.7734" y2="312.7734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="624" y="307.917">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="635" y="307.917"> </text><polygon fill="#181818" points="873,339.125,883,343.125,873,347.125,877,343.125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="699" x2="879" y1="343.125" y2="343.125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="706" y="338.2686">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="724" y="338.2686"> </text><polygon fill="#181818" points="510,369.4766,500,373.4766,510,377.4766,506,373.4766" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="504" x2="889" y1="373.4766" y2="373.4766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="516" y="368.6201">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="534" y="368.6201"> </text><polygon fill="#181818" points="600,399.8281,610,403.8281,600,407.8281,604,403.8281" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="499" x2="606" y1="403.8281" y2="403.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="506" y="398.9717">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="524" y="398.9717">inhibitRobot()</text><polygon fill="#181818" points="873,460.1797,883,464.1797,873,468.1797,877,464.1797" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="499" x2="879" y1="464.1797" y2="464.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="506" y="459.3232">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="524" y="459.3232">save(robot)</text><polygon fill="#181818" points="715,490.5313,705,494.5313,715,498.5313,711,494.5313" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="709" x2="884" y1="494.5313" y2="494.5313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="721" y="489.6748">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="88" x="739" y="489.6748">toPersistence()</text><polygon fill="#181818" points="873,520.8828,883,524.8828,873,528.8828,877,524.8828" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="699" x2="879" y1="524.8828" y2="524.8828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="706" y="520.0264">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="724" y="520.0264"> </text><polygon fill="#181818" points="1008,551.2344,1018,555.2344,1008,559.2344,1012,555.2344" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="895" x2="1014" y1="555.2344" y2="555.2344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="902" y="550.3779">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="88" x="920" y="550.3779">save(rawRobot)</text><polygon fill="#181818" points="906,581.5859,896,585.5859,906,589.5859,902,585.5859" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="900" x2="1024" y1="585.5859" y2="585.5859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="912" y="580.7295">17</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="930" y="580.7295"> </text><polygon fill="#181818" points="510,611.9375,500,615.9375,510,619.9375,506,615.9375" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="504" x2="889" y1="615.9375" y2="615.9375"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="516" y="611.0811">18</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="534" y="611.0811"> </text><polygon fill="#181818" points="682,642.2891,692,646.2891,682,650.2891,686,646.2891" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="499" x2="688" y1="646.2891" y2="646.2891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="506" y="641.4326">19</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="39" x="524" y="641.4326">toDto()</text><polygon fill="#181818" points="784,672.6406,794,676.6406,784,680.6406,788,676.6406" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="704" x2="790" y1="676.6406" y2="676.6406"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="711" y="671.7842">20</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="729" y="671.7842">create</text><polygon fill="#181818" points="510,702.9922,500,706.9922,510,710.9922,506,706.9922" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="504" x2="698" y1="706.9922" y2="706.9922"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="516" y="702.1357">21</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="534" y="702.1357"> </text><polygon fill="#181818" points="306,733.3438,296,737.3438,306,741.3438,302,737.3438" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="300" x2="493" y1="737.3438" y2="737.3438"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="312" y="732.4873">22</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="330" y="732.4873"> </text><polygon fill="#181818" points="102,763.6953,92,767.6953,102,771.6953,98,767.6953" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="96" x2="289" y1="767.6953" y2="767.6953"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="108" y="762.8389">23</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="126" y="762.8389"> </text><polygon fill="#181818" points="11,794.0469,1,798.0469,11,802.0469,7,798.0469" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="5" x2="85" y1="798.0469" y2="798.0469"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="17" y="793.1904">24</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="35" y="793.1904"> </text><!--MD5=[bf990fbade0624aa641c5573bb99f82e]
+@startuml ProcessView
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant RobotRoute
+participant InhibitRobotController
+participant InhibitRobotService
+participant Robot
+participant RobotMaper
+participant RobotDTO
+participant RobotRepo
+participant RobotPersistence
+
+?o->RobotRoute : PATCH
+activate RobotRoute
+
+RobotRoute -> InhibitRobotController : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotController
+
+InhibitRobotController -> InhibitRobotService : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotService
+
+InhibitRobotService -> RobotRepo : findById(id)
+activate RobotRepo
+
+RobotRepo -> RobotPersistence : findOne(query)
+activate RobotPersistence
+
+RobotPersistence - -> RobotRepo
+deactivate RobotPersistence
+
+RobotRepo -> RobotMaper : toDomain(rawRobot)
+activate RobotMaper
+
+RobotMaper -> Robot : create
+activate Robot
+
+Robot - -> RobotMaper
+deactivate Robot
+
+RobotMaper - -> RobotRepo
+deactivate RobotMaper
+
+RobotRepo - -> InhibitRobotService
+deactivate RobotRepo
+
+InhibitRobotService -> Robot : inhibitRobot()
+activate Robot
+deactivate Robot
+
+InhibitRobotService -> RobotRepo : save(robot)
+activate RobotRepo
+
+RobotRepo -> RobotMaper : toPersistence()
+activate RobotMaper
+
+RobotMaper - -> RobotRepo
+deactivate RobotMaper
+
+RobotRepo -> RobotPersistence : save(rawRobot)
+activate RobotPersistence
+
+RobotPersistence - -> RobotRepo
+deactivate RobotPersistence
+
+RobotRepo - -> InhibitRobotService
+deactivate RobotRepo
+
+InhibitRobotService -> RobotMaper : toDto()
+activate RobotMaper
+
+RobotMaper -> RobotDTO : create
+deactivate Robot
+
+RobotMaper - -> InhibitRobotService
+deactivate RobotMaper
+
+InhibitRobotService - -> InhibitRobotController 
+deactivate InhibitRobotService
+
+InhibitRobotController - -> RobotRoute
+deactivate InhibitRobotController
+
+<- - RobotRoute
+deactivate RobotRoute
+
+@enduml
+
+@startuml ProcessView
+
+autonumber
+participant RobotRoute
+participant InhibitRobotController
+participant InhibitRobotService
+participant Robot
+participant RobotMaper
+participant RobotDTO
+participant RobotRepo
+participant RobotPersistence
+
+?o->RobotRoute : PATCH
+activate RobotRoute
+
+RobotRoute -> InhibitRobotController : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotController
+
+InhibitRobotController -> InhibitRobotService : inhibitRobot(inhibitRobotDto)
+activate InhibitRobotService
+
+InhibitRobotService -> RobotRepo : findById(id)
+activate RobotRepo
+
+RobotRepo -> RobotPersistence : findOne(query)
+activate RobotPersistence
+
+RobotPersistence - -> RobotRepo
+deactivate RobotPersistence
+
+RobotRepo -> RobotMaper : toDomain(rawRobot)
+activate RobotMaper
+
+RobotMaper -> Robot : create
+activate Robot
+
+Robot - -> RobotMaper
+deactivate Robot
+
+RobotMaper - -> RobotRepo
+deactivate RobotMaper
+
+RobotRepo - -> InhibitRobotService
+deactivate RobotRepo
+
+InhibitRobotService -> Robot : inhibitRobot()
+activate Robot
+deactivate Robot
+
+InhibitRobotService -> RobotRepo : save(robot)
+activate RobotRepo
+
+RobotRepo -> RobotMaper : toPersistence()
+activate RobotMaper
+
+RobotMaper - -> RobotRepo
+deactivate RobotMaper
+
+RobotRepo -> RobotPersistence : save(rawRobot)
+activate RobotPersistence
+
+RobotPersistence - -> RobotRepo
+deactivate RobotPersistence
+
+RobotRepo - -> InhibitRobotService
+deactivate RobotRepo
+
+InhibitRobotService -> RobotMaper : toDto()
+activate RobotMaper
+
+RobotMaper -> RobotDTO : create
+deactivate Robot
+
+RobotMaper - -> InhibitRobotService
+deactivate RobotMaper
+
+InhibitRobotService - -> InhibitRobotController 
+deactivate InhibitRobotService
+
+InhibitRobotController - -> RobotRoute
+deactivate InhibitRobotController
+
+<- - RobotRoute
+deactivate RobotRoute
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
