@@ -60,7 +60,7 @@ where the values mean:
 
 * Logical:
 
-![Logical](./Diagrams/level1/logicalView.svg)
+![Logical](./Diagrams/level1/LogicalView.svg)
 
 * Process
 
