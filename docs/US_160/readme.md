@@ -32,15 +32,15 @@ buildings and change any information execpt the building code.
 
 * Logical:
 
-![Logical](./Diagrams/Level1/LogicalView.svg)
+![Logical](./Diagrams/level1/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessView.svg)
+![Process](./Diagrams/level1/ProcessView.svg)
 
 * Scenary
 
-![Scenary](./Diagrams/Level1/SceneryView.svg)
+![Scenary](./Diagrams/level1/SceneryView.svg)
 
 ### level 2
 
