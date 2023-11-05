@@ -17,10 +17,10 @@ export default class ListAllRobotsService implements IListAllRobotsService {
         try{
             const robotsList = await this.robotRepo.findAll()
             
-            if (robotsList.length === 0) return Result.fail<IRobotDTO[]>("No Robots found!")
+            if (robotsList.length === 0) return Result.fail<IRobotDTO[]>('No Robots found!')
 
             let resolve: IRobotDTO[] = []
-
+            
             robotsList.forEach(robot => {
                 resolve.push(RobotMap.toDto(robot))
             })
