@@ -3,5 +3,5 @@ import { Robot } from "../../../../domain/Robot/Robot";
 import { IRobotDTO } from "../../../../dto/robot/IRobotDTO";
 
 export default interface IListRobotsByDesignationService {
-    listRobotsByDesignation(nickname: string): Promise<Result<IRobotDTO[]>>
+    listRobotsByDesignation(nickname: string): Promise<Result<IRobotDTO>>
 }
