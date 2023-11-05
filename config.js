@@ -81,6 +81,10 @@ export default {
       name: "listElevatorsInBuildingController",
       path: "../controllers/elevator/list/listElevatorsInBuildingController"
     },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsController",
+      path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
+    },
     editBuilding: {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
@@ -105,6 +109,10 @@ export default {
       name: "createRobotController",
       path: "../controllers/robot/create/createRobotController"
     },
+    listAllRobots: {
+      name: "listAllRobotsController",
+      path: "../controllers/robot/list/listAllRobotsController"
+    }
   },
 
   repos: {
@@ -187,6 +195,10 @@ export default {
       name: "listElevatorsInBuildingService",
       path: "../services/elevator/list/listElevatorsInBuildingService"
     },
+    listPassagewaysBetween2Buildings: {
+      name: "listPassagewaysBetween2BuildingsService",
+      path: "../services/passageway/list/listPassagewaysBetween2BuildingsService"
+    },
     editBuilding: {
       name: "editBuildingService",
       path: "../services/building/edit/EditBuildingService"
@@ -211,5 +223,9 @@ export default {
       name: "createRobotService",
       path: "../services/robot/create/createRobotService"
     },
+    listAllRobots: {
+      name: "listAllRobotsService",
+      path: "../services/robot/list/listAllRobotsService"
+    }
   },
 };
