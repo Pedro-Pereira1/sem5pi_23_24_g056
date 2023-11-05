@@ -1,0 +1,24 @@
+@startuml
+
+autonumber
+
+participant Visualization
+participant "MasterDataLogistics" as GI
+
+?o-> Visualization: Starts the process to add a new type of robot
+activate Visualization
+
+
+Visualization -> GI:POST robotType
+activate GI
+
+GI -> GI: createRobotType(robotType)
+
+GI --> Visualization: robotType
+deactivate GI
+
+<-- Visualization: Informs operation success
+deactivate Visualization
+
+
+@enduml

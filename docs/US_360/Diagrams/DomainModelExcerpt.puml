@@ -20,7 +20,7 @@ class AvailableTask  << (v,#A4C2E5) ValueObject >>
 class RobotModel  << (v,#A4C2E5) ValueObject >>
 class RobotBrand  << (v,#A4C2E5) ValueObject >>
 class RobotTypeId << (v,orange) ValueObject >> << unique >>
-
+class RobotTypeDescription  << (v,#A4C2E5) ValueObject >>
 }
 
 Robot <|-u- MobileRobot
@@ -35,4 +35,6 @@ RobotType "*"-->"1" RobotModel
 RobotType "*"-->"1" RobotBrand
 RobotType "*"-->"*" AvailableTask
 RobotType "1"-->"1" RobotTypeId
+RobotType "*"-->"1" RobotTypeDescription
+
 @enduml

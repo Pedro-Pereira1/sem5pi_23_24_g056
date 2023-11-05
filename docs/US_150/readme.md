@@ -17,17 +17,17 @@
 Por exemplo: Criar o edifício A apenas, sem nenhum piso, e só depois na US 190 criar-mos os respetivos pisos do edifício A.
 Ou é necessário sempre que criarmos um edifício especificar os pisos que o mesmo tem?
 Por exemplo: Criar o edifício A, com os pisos A1, A2, A3 com as dimensões da grelha para cada um dos pisos."<br><br>
->**Answer**: "...são dois requisitos independentes. 150 apenas define o edificio. posteriormente o utilizador invocará o caso de uso correspondete ao requisito 190 para criar cada piso desse edificio"<br>		
+>**Answer**: "...são dois requisitos independentes. 150 apenas define o edificio. posteriormente o utilizador invocará o caso de uso correspondete ao requisito 190 para criar cada piso desse edificio"<br>
 
 >**Question**: "O nome do edifício tem limitações como, por exemplo, tem de ter uma letra e números? E para além do nome do edifício, que mais informação deve ser guardada sobre o edifício."<br><br>
 >**Answer**: "o código do edificio é obrigatório, no máximo 5 caracteres, letras e digitos, podendo conter espaços no meio
-o nome do edificio é opcional, no máximo 50 caracteres alfanuméricos"<br>	
+o nome do edificio é opcional, no máximo 50 caracteres alfanuméricos"<br>
 
 >**Question**: "Em relação à breve descrição, existe alguma regra em particular?"<br><br>
->**Answer**: "é opcional, com o máximo de 255 caracteres"<br>	
+>**Answer**: "é opcional, com o máximo de 255 caracteres"<br>
 
 >**Question**: "Será possível esclarecer como funcionarão estas user stories? Com a 230 (Carregar mapa do piso) o nosso entendimento foi que as células seriam carregadas já com a criação de salas e pisos, e assim sendo não faria sentido as outras duas user stories, onde é pedido para criar um piso de um edifício e uma sala. Não entendemos o que é pretendido  com as us's 190 e 310."<br><br>
->**Answer**: "o requisito 150 Criar edificio permite criar um edificio, exemplo, edificio "B", com um nome opcional e com uma breve descrição (ex., "departamento de engenharia informática") indicando a dimensão máxima de cada piso em termos de células (ex., 10 x 10)"<br>	
+>**Answer**: "o requisito 150 Criar edificio permite criar um edificio, exemplo, edificio "B", com um nome opcional e com uma breve descrição (ex., "departamento de engenharia informática") indicando a dimensão máxima de cada piso em termos de células (ex., 10 x 10)"<br>
 
 
 
@@ -41,52 +41,45 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 ### 3.1. Domain Model Excerpt
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
+
 ## 4. Design
-### Level 1
 
-* Logical View
+### 4.1. Realization
 
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-* Process View
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-* Scenary View
+#### Level2
 
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+###### LogicalView:
 
-### Level 2
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-* Logical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-* Process View
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-* Physical View
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation View
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 * Controller
@@ -157,7 +150,7 @@ it('Service unit test with stub repo, invalid building', async function () {
             buildingWidth: 2,
             buildingFloors: []
         } as IBuildingDTO
-        
+
         let buildingRepo = Container.get('buildingRepo')
         sinon.stub(buildingRepo, 'findByBuidingCode').returns(new Promise((resolve, reject) => { resolve(null) }))
 
