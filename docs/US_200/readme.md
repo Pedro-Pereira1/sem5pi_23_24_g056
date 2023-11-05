@@ -752,10 +752,87 @@ it("editFloorController + editFloorService integration test (Invalid Floor)", as
 ````
 
 ## 5. Implementation
+#### EditFloorController
+```
+export default class EditFloorController implements IEditFloorController {
+	constructor(
+		@Inject(config.services.editFloor.name) private service: IEditFloorService
+	)
+    {}
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+	public async editFloor(req: Request, res: Response, next: NextFunction) {
+		try {
+			const floorOrError = await this.service.editFloor(req.body as IEditFloorDTO) as Result<IFloorDTO>
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+			if (floorOrError.isFailure) {
+				return res.status(400).send(floorOrError.error);
+			}
+			const FloorDTO = floorOrError.getValue();
+			return res.status(200).json(FloorDTO);
+		} catch (e) {
+			return next(e);
+		}
+	}
+}
+
+````
+
+#### EditFloorService
+```
+export default class EditFloorService implements IEditFloorService {
+
+    constructor(
+        @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
+		@Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+    ) { }
+
+
+    public async editFloor(floorDTO: IEditFloorDTO): Promise<Result<IFloorDTO>> {
+        try {
+
+			const floor = await this.floorRepo.findById(floorDTO.floorId);
+
+			if (floor === null) {
+				return Result.fail<IFloorDTO>('Floor dont exists on system!!');
+			} else {
+
+
+				const building = await this.buildingRepo.findByFloorId(floorDTO.floorId)
+            	for (let i = 0; i < building.floors.length; i++) {
+					const floor = await this.floorRepo.findById(building.floorsNumber[i])
+                	if (floor.floorNumber.props.number == floorDTO.floorNumber) {
+                    	return Result.fail<IFloorDTO>("Floor number already exists")
+                	}
+           		}
+
+                if (floorDTO.floorDescription !== undefined) {
+					const floorDescription = new FloorDescription({ value: floorDTO.floorDescription });
+					floor.props.floorDescription = floorDescription;
+				}
+
+				if (floorDTO.floorNumber !== undefined) {
+					const floorNumber = new FloorNumber({ number: floorDTO.floorNumber });
+					floor.props.floorNumber = floorNumber;
+				}
+
+
+				await this.floorRepo.save(floor);
+
+
+				const floorDTOResult = FloorMaper.toDto(floor) as IFloorDTO;
+
+				return Result.ok<IFloorDTO>(floorDTOResult);
+			}
+		} catch (e) {
+			throw e;
+		}
+    }
+
+
+}
+````
+
+
 
 ## 6. Integration/Demonstration
 
