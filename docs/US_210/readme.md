@@ -529,15 +529,10 @@ export default class listAllFloorsService implements IListAllFloorsService {
 ````
 
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/floors/listAllFloors/${BuildingCode}
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+${BuildingCode} is the id of intended Building. Ex: "A"
 
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
