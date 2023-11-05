@@ -173,7 +173,7 @@ describe('List all robots test', function () {
         sinon.assert.match(actual.isFailure, true)
     })
 
-    it('5. Controller + Service with stub repo returns 2 elevators', async function () {
+    it('5. Controller + Service with stub repo returns robots', async function () {
         const robot1Result = {
             code: robot.getValue().id.toString(),
             nickname: robot.getValue().props.nickname.nickname,
@@ -222,7 +222,7 @@ describe('List all robots test', function () {
         sinon.assert.calledWith(res.json, sinon.match(result))
     })
 
-    it('6. Controller + Service with stub repo no elevators', async function () {
+    it('6. Controller + Service with stub repo no robots', async function () {
         let req: Partial<Request> = {}
         let res: Partial<Response> = {
             status: sinon.stub().returnsThis(),
