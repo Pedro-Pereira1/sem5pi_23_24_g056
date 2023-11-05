@@ -1,42 +1,92 @@
-# US 1001
+# US 260 - As a Campus Manager, I want to list passageways between 2 buildings.
 
-*This is an example template*
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+* This task comes in context of Sprint A.
+* First time that this task is developed.
+* This task is relative to system user Campus Manager.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies).*
+**US 260 -** As a Campus Manager, I want to:
 
-*Example*
+* list passageways between 2 buildings.
 
-**US G002** As {Ator} I Want...
-
-- G002.1. Blá Blá Blá ...
-
-- G002.2. Blá Blá Blá ...
-
-*Regarding this requirement we understand that it relates to...*
+**Dependencies:**
+- **US150 -** As a Campus Manager, I want to create a building.
+- **US190 -** As a Campus Manager, I want to create building floor.
+- **US240 -** As a Campus Manager, I want to create a passageway between buildings.
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+Regarding this requirement we understand that: As a Campus Manager, an actor of the system, I will be able to list the floors of a building with a passageway,describing the floor and description
+and also the building and floor where the passageway connects to.
+* Campus Manager is a user role that manages the data of the routes and maps.
+* Building is a structure within the campus that houses various rooms and facilities. It can be navigated by the robisep robots using corridors and elevators.
+* Floor is a level within a building. Each floor can contain multiple rooms and is accessible by elevators and stairs (though robisep robots cannot use stairs).
+* Passageway is a connection between two buildings.
+
+### 3.1. Domain Model Excerpt
+
+![DomainModelExcerpt](./Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
+### Level 1
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
+* Logical View
 
-### 4.1. Realization
+![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
 
-### 4.2. Class Diagram
+* Process View
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+![Process](./Diagrams/Level1/SystemSequenceDiagram.svg)
 
-### 4.3. Applied Patterns
+* Scenary View
 
-### 4.4. Tests
+![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+
+### level 2
+
+* Logical View
+
+![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+
+* Process View
+
+![Process](./Diagrams/Level2/SequenceDiagramLevel2.svg)
+
+* Physical View
+
+![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+
+* Implementation View
+
+![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+
+### Level 3
+
+* Logical:
+
+![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+
+* Implementation
+
+![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+
+* Process
+
+![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+
+### 4.2. Applied Patterns
+* Controller
+* Service
+* Repository
+* Mapper
+* DTO
+* GRASP
+
+### 4.3. Tests
 
 **Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
 
@@ -49,9 +99,36 @@ public void ensureNullIsNotAllowed() {
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**listPassagewaysBetween2BuildingsService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+public async listPassagewaysBetween2BuildingsService(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
+        try{
+            const building1 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building1Code))
+            if (!building1) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
+            
+            const building2 = await this.buildingRepo.findByBuidingCode(new BuildingCode(building2Code))
+            if (!building2) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('Building does not exist!')
+            
+            let passagewaysList: IListPassagewaysBetween2BuildingsDTO[] = []
+            for (var floor of building1.floors) {
+                for (var passagewayId of floor.props.floormap.passagewaysId) {
+                    const floorOrUndefined = building2.floors.find((floor) => floor.map.passagewaysId.find((aPassagewayId) => aPassagewayId === passagewayId))
+                    
+                    if (floorOrUndefined !== undefined){
+                        passagewaysList.push(PassagewayMap.toDtoList(await this.passagewayRepo.findById(passagewayId), Number(floor.floorNumber), Number(floorOrUndefined.floorNumber)))
+                    } 
+                }
+            }
+
+            if (passagewaysList.length === 0) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('No passageways found!')
+            
+            return Result.ok<IListPassagewaysBetween2BuildingsDTO[]>(passagewaysList)
+        } catch(e) {
+            throw e
+        }
+    }
+````
 
 ## 6. Integration/Demonstration
 
@@ -61,8 +138,4 @@ public void ensureNullIsNotAllowed() {
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.
