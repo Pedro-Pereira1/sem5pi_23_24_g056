@@ -64,7 +64,7 @@ buildings and change any information execpt the building code.
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](./Diagrams/Level3/LogicalView.svg)
 
 * Implementation
 
