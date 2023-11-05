@@ -20,7 +20,7 @@ import { FloorMap } from '../../../src/domain/Floor/FloorMap';
 import { Floor } from '../../../src/domain/Floor/Floor';
 
 
-describe.only('Passageway tests', function () {
+describe('Passageway tests', function () {
     let passagewayRepoMock
 
     beforeEach(function () {
