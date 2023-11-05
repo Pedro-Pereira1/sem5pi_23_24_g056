@@ -60,47 +60,47 @@ where the values mean:
 
 * Logical:
 
-![Logical](./Diagrams/Level1/logicalView.svg)
+![Logical](./Diagrams/level1/logicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessView.svg)
+![Process](./Diagrams/level1/ProcessView.svg)
 
 * Scenery
 
-![Scenary](./Diagrams/Level1/sceneryView.svg)
+![Scenary](./Diagrams/level1/sceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](./Diagrams/Level2/logicalView.svg)
+![Logical](./Diagrams/level2/logicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level2/ProcessView.svg)
+![Process](./Diagrams/level2/ProcessView.svg)
 
 * Physical
 
-![physical](./Diagrams/Level2/PhysicalView.svg)
+![physical](./Diagrams/level2/PhysicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level2/ImplementationView.svg)
+![Implementation](./Diagrams/level2/ImplementationView.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](./Diagrams/level3/logicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessView.svg)
+![Process](./Diagrams/level3/ProcessView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementationView.svg)
+![Implementation](./Diagrams/level3/ImplementationView.svg)
 
 ### 4.2. Applied Patterns
 
