@@ -1,25 +1,21 @@
 @startuml
 
 autonumber
-actor "Campus Manager" as CM
-participant Visualização
+
+participant Visualization
 participant "MasterDataBuilding" as GI
 
-CM -> Visualização: Starts the process to  list buildings with min and max floors.
-activate Visualização
-Visualização --> CM: Request max and min of floors
-deactivate Visualização
+?o-> Visualization: Starts the process to  list buildings with min and max floors.
+activate Visualization
 
-CM -> Visualização: Types the data
-activate Visualização
 
-Visualização -> GI: GET buildingsByMaxAndMinFloors
+Visualization -> GI: GET buildingsByMaxAndMinFloors
 activate GI
-GI --> Visualização: building(JSON)
+GI --> Visualization: building(JSON)
 deactivate GI
 
-CM <-- Visualização: Shows buildings list
-deactivate Visualização
+<-- Visualization: Shows buildings list
+deactivate Visualization
 
 
 @enduml
