@@ -32,8 +32,7 @@ export default class EditElevatorService implements IEditElevatorService {
 
             let theElevator: Elevator = undefined
             for (var floor of building.floors) {
-                for (var elevatorId of floor.props.floormap.elevatorsId){
-                    const elevator = await this.elevatorRepo.findById(elevatorId)
+                for (var elevator of floor.props.floormap.props.elevators){
                     if (elevator.props.elevatorIdentificationNumber.identificationNumber === elevatorDto.elevatorIdentificationNumber){
                         theElevator = elevator
                         break;
