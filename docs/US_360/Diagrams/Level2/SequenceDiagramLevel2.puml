@@ -5,11 +5,6 @@ actor "Fleet Manager" as CM
 participant Visualização
 participant "MasterDataLogistics" as GI
 
-CM -> Visualização: Starts the process to add a new robot to the fleet
-activate Visualização
-Visualização --> CM: Request data (type, serialNumber, Nickname, Code
-deactivate Visualização
-
 CM -> Visualização: Types the data
 activate Visualização
 
