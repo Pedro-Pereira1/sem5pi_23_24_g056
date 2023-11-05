@@ -233,7 +233,7 @@ describe('List elevators in building test', function () {
         sinon.assert.calledWith(res.json, sinon.match(result))
     })
 
-   it('2. Controller with stub service returns no elevators', async function () {
+    it('2. Controller with stub service returns no elevators', async function () {
         let req: Partial<Request> = {}
         req.params = {buildingCode: building.getValue().code.toString()}
 
@@ -300,7 +300,7 @@ describe('List elevators in building test', function () {
         sinon.assert.match(actual.isFailure, true)
     })
 
-    it('5. Controller + Service with stub repo 2 buildings', async function () {
+    it('5. Controller + Service with stub repo returns 2 elevators', async function () {
         const elevatorResult1 = {
             elevatorId: elevator1.getValue().id.toValue(),
             elevatorIdentificationNumber: elevator1.getValue().elevatorIdentificationNumber.identificationNumber,
@@ -348,7 +348,7 @@ describe('List elevators in building test', function () {
         sinon.assert.calledWith(res.json, sinon.match(result))
     })
 
-    it('6. Controller + Service with stub repo no buildings', async function () {
+    it('6. Controller + Service with stub repo no elevators', async function () {
         let req: Partial<Request> = {}
         req.params = {buildingCode: building2.getValue().code.toString()}
         let res: Partial<Response> = {
