@@ -1,12 +1,11 @@
 @startuml
 
 autonumber
-actor "Campus Manager" as CM
 participant Visualização
 participant "MasterDataBuilding" as GI
 
 
-CM -> Visualização: Create elevator
+?o-> Visualização: Create elevator
 activate Visualização
 
 Visualização -> GI: POST elevator
@@ -16,7 +15,7 @@ activate GI
 GI --> Visualização: elevator
 deactivate GI
 
-CM <-- Visualização: Informs operation success
+<-- Visualização: Informs operation success
 deactivate Visualização
 
 
