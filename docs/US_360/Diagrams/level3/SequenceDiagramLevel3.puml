@@ -1,0 +1,62 @@
+@startuml SequenceDiagramLevel3
+'https://plantuml.com/use-case-diagram
+
+
+actor "Fleet Manager" as FM
+participant Robot
+participant Nickname
+participant CreateNewRobot
+participant Building
+participant BuildingMap
+participant RobotRepo
+database robotDatabase
+
+FM -> Robot : data JSON
+activate Robot
+
+Robot -> Nickname : createFloor(floorJSON, buildingCode)
+activate Nickname
+
+Nickname -> CreateNewRobot : createFloor(floorDto, buildingCode)
+activate CreateNewRobot
+activate RobotRepo
+
+CreateNewRobot -> RobotRepo : findByCode(buildingCode)
+
+RobotRepo -> robotDatabase : findByCode(buildingCode)
+
+RobotRepo -> BuildingMap : toDomain(building)
+activate BuildingMap
+
+BuildingMap -> Building : create(building)
+activate Building
+
+RobotRepo --> CreateNewRobot
+
+CreateNewRobot -> Building : addFloor(floor)
+
+CreateNewRobot -> RobotRepo : save(building)
+
+RobotRepo -> BuildingMap : toPersistence(building)
+
+RobotRepo -> robotDatabase : save(building)
+
+RobotRepo -> BuildingMap : toDomain(building)
+deactivate BuildingMap
+
+RobotRepo --> CreateNewRobot
+
+deactivate Building
+
+CreateNewRobot -> Nickname 
+deactivate CreateNewRobot
+
+Nickname -> Robot
+
+deactivate Nickname
+
+Robot -> FM
+
+deactivate Robot
+
+@enduml
