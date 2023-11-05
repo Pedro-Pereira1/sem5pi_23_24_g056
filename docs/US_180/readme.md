@@ -372,20 +372,96 @@ it("BuildingController + BuildingService integration test (max < min)", async fu
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+### ListBuildingsMaxMinFloorsController
+```
+export default class ListBuildingsMaxMinFloorsController implements IListBuildingsMaxMinFloorsController {
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    constructor(
+        @Inject(config.services.listBuildingsMaxMinFloors.name) private listBuildingsMaxMinFloorsService: IListBuildingsMaxMinFloorsService
+    )
+    {}
 
+    public async listBuildingsMaxMinFloors(req: Request, res: Response, next: NextFunction) {
+        try{
+            const max = Number(req.params.max);
+            const min = Number(req.params.min);
+
+            const buildingsOrError = await this.listBuildingsMaxMinFloorsService.listBuildingsMaxMinFloors(max,min)
+
+            if(buildingsOrError.isFailure){
+                return res.status(400).send(buildingsOrError.errorValue())
+            }
+
+            res.status(200).json(buildingsOrError.getValue());
+        }catch(error){
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+}
+````
+
+#### ListBuildingsMaxMinFloorsService
+```
+@Service()
+export default class listBuildingsMaxMinFloorsService implements IListBuildingsMaxMinFloorsService {
+
+    constructor(
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+    )
+    {}
+
+    public async listBuildingsMaxMinFloors(max: number, min: number): Promise<Result<IBuildingDTO[]>> {
+        if(max < min) return Result.fail<IBuildingDTO[]>("max < min")
+
+        let values: IBuildingDTO[]  = [];
+
+        const buildings = await this.buildingRepo.findBuildingsMaxMinFloors(max,min)
+
+
+        if(buildings.length === 0) {
+            return Result.fail<IBuildingDTO[]>("No buildings found")
+        }
+
+        buildings.forEach((element) => {
+            values.push(BuildingMap.toDto(element))
+        })
+
+        return Result.ok<IBuildingDTO[]>(values)
+    }
+
+}
+````
+
+#### BuildingRepo - findBuildingsMaxMinFloors
+```
+public async findBuildingsMaxMinFloors(max: number, min: number): Promise<Building[]> {
+        try {
+            const buildings = await this.findAll();
+            const filteredBuildings: Building[] = [];
+
+
+
+            for (const element of buildings) {
+                if (element.floors.length >= min && element.floors.length <= max) {
+                    filteredBuildings.push(element);
+                }
+            }
+            return filteredBuildings;
+        } catch (error) {
+            console.error("Error in findBuildingsMaxMinFloors:", error);
+            throw error;
+        }
+    }
+````
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/buildings/listBuildingsMaxMinFloors/${max}/${min}
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+${max} is the maximum number of floors. Ex: 10
+${min} is the minimum number if floors. Ex: 5
+
+${max} should be biggest than ${min}
+
 
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
