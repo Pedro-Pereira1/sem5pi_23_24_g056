@@ -121,6 +121,14 @@ export default {
       name: "listAllRobotsController",
       path: "../controllers/robot/list/listAllRobotsController"
     },
+    listAllRobotsByAvailableTask: {
+      name: "listAllRobotsByAvailableTaskController",
+      path: "../controllers/robot/list/ListAllRobotsByAvailableTasksController"
+    },
+    listRobotsByDesignation: {
+      name: "listRobotsByDesignationController",
+      path: "../controllers/robot/list/ListRobotsByDesignationController"
+    }
   },
 
   repos: {
@@ -244,11 +252,11 @@ export default {
       path: "../services/robot/list/listAllRobotsService"
     },
     listAllRobotsByAvailableTask: {
-      name: "listAllRobotsByAvailableTask",
+      name: "listAllRobotsByAvailableTaskService",
       path: "../services/robot/list/ListAllRobotsByAvailableTasksService"
     },
     listRobotsByDesignation: {
-      name: "listRobotsByDesignation",
+      name: "listRobotsByDesignationService",
       path: "../services/robot/list/ListRobotsByDesignationService"
     }
   },
