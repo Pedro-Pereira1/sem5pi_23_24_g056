@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "Fleet Manager" as FM
+
+
+activate System
+FM -> System: Consult all robots in fleet
+FM <-- System: List of robots
+deactivate System
+
+@enduml

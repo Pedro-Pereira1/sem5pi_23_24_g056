@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="106px" preserveAspectRatio="none" style="width:358px;height:106px;background:#FFFFFF;" version="1.1" viewBox="0 0 358 106" width="358px" zoomAndPan="magnify"><defs/><g><!--MD5=[1478444cbd0d707d5292787239839939]
+cluster RobDroneGo--><g id="cluster_RobDroneGo"><path d="M160.5,6 L252.5,6 A3.75,3.75 0 0 1 255,8.5 L262,29.6094 L348.5,29.6094 A2.5,2.5 0 0 1 351,32.1094 L351,93.5 A2.5,2.5 0 0 1 348.5,96 L160.5,96 A2.5,2.5 0 0 1 158,93.5 L158,8.5 A2.5,2.5 0 0 1 160.5,6 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="158" x2="262" y1="29.6094" y2="29.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="162" y="22.5332">RobDroneGo</text></g><g id="elem_UC18"><ellipse cx="254.6887" cy="61.0377" fill="#F1F1F1" rx="80.6887" ry="18.5377" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="196.0015" y="64.9661">Consult All Robots</text></g><!--MD5=[a89ee74bb4979dbed373b93afc1c36e4]
+entity FM--><g id="elem_FM"><ellipse cx="60" cy="38" fill="#F1F1F1" rx="16" ry="16" style="stroke:#181818;stroke-width:1.5;"/><path d="M60,58 C64,58 67,58 71,54 C79,54 87,62 87,70 L87,74 C87,78 83,82 79,82 L41,82 C37,82 33,78 33,74 L33,70 C33,62 41,54 49,54 C53,58 56,58 60,58 " fill="#F1F1F1" style="stroke:#181818;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="6" y="98.0332">UI Fleet Manager</text></g><!--MD5=[1bd1887c584c9336e9527dad2a977629]
+link FM to UC18--><g id="link_FM_UC18"><path d="M114.11,61 C131,61 150.12,61 168.66,61 " fill="none" id="FM-to-UC18" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="173.88,61,164.88,57,168.88,61,164.88,65,173.88,61" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[437f389faad5be32e43a8abde8d874ac]
+@startuml
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Fleet Manager" as FM
+
+
+package  RobDroneGo  {
+  
+  usecase "Consult All Robots" as UC18
+  
+}
+
+FM - -> UC18
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>
