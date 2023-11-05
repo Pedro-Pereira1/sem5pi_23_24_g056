@@ -11,10 +11,6 @@ export class RoomName extends UniqueEntityID {
     super(name);
   }
 
-  get name(): string {
-    return this.name
-  }
-
   public static create (name: string): Result<RoomName> {
     const guardResult = Guard.againstNullOrUndefined(name, 'roomName');
     if (!guardResult.succeeded) {
