@@ -1,0 +1,23 @@
+@startuml
+
+autonumber
+
+participant Visualization
+participant "MasterDataLogistics" as GI
+
+?o-> Visualization: Types the data
+activate Visualization
+
+Visualization -> GI: POST robot
+activate GI
+
+GI -> GI: createRobot(robot)
+
+GI --> Visualization: robot
+deactivate GI
+
+<-- Visualization: Informs operation success
+deactivate Visualization
+
+
+@enduml
