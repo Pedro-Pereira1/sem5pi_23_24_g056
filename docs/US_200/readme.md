@@ -835,11 +835,18 @@ export default class EditFloorService implements IEditFloorService {
 
 
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/floors/editFloor
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
-
+With the following JSON
+```
+{
+    "floorId": 3,
+    "floorNumber":  10,
+    "floorDescription": "Joi.string().max(254)"
+}
+````
 ## 7. Observations
 
 *This section should be used to include any content that does not fit any of the previous sections.*
