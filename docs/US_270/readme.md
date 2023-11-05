@@ -99,31 +99,151 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.3. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
+**Test 1:** *Tests the controller using a stub service to create a valid elevator*
 
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it('Controller unit test with stub service, valid elevator', async function () {
+        let body = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445'
+        }
+
+        let expected = {
+            "elevatorId": 20,
+            "elevatorBrand": "Apple",
+            "elevatorIdentificationNumber": 35,
+            "elevatorDescription": 'This is an elevator',
+            "elevatorModel": 'Ieli',
+            "elevatorSerialNumber": '445'
+        }
+
+        let req: Partial<Request> = {}
+        req.body = body
+
+        let res: Partial<Response> = {
+            json: sinon.spy()
+        }
+
+        let next: Partial<NextFunction> = () => { }
+
+        let createElevatorService = Container.get('createElevatorService')
+        sinon.stub(createElevatorService, 'createElevator').returns(Result.ok<IElevatorDTO>({
+            elevatorId: 20,
+            elevatorBrand: 'Apple',
+            elevatorIdentificationNumber: 35,
+            elevatorDescription: 'This is an elevator',
+            elevatorModel: 'Ieli',
+            elevatorSerialNumber: '445'
+        } as IElevatorDTO))
+
+        const createElevatorController = new CreateElevatorController(createElevatorService as ICreateElevatorService)
+
+        await createElevatorController.createElevator(<Request>req, <Response>res, <NextFunction>next)
+
+        sinon.assert.calledOnce(res.json)
+        sinon.match(expected)
+    })
+````
+
+**Test 2:** *Tests the elevator description over the max allowed word limit*
+
+```
+it('Create elevator test, elevator description over word limit (250+ words)', async function () {
+        const elevatorDescription: string = 'A'.repeat(251);
+        const result: Result<ElevatorDescription> = ElevatorDescription.create(elevatorDescription);
+
+        assert.equal(result.isFailure,true)
+        assert.equal(result.error,'Elevator description must be shorter than 250 words')
+    })
 ````
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+**createElevatorService:**
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+```
+public async createElevator(elevatorDto: ICreateElevatorDTO): Promise<Result<IElevatorDTO>> {
+try{
+if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Result.fail<IElevatorDTO>('An Elevator with this Id already exists!')
+
+            const building = await this.buildingRepo.findByBuidingCode(new BuildingCode(elevatorDto.buildingCode))
+            if (!building) return Result.fail<IElevatorDTO>('Building does not exist!')
+
+           let maxIdNum = 1
+
+            for (var floor of building.floors) {
+                for (var elevatorId of floor.props.floormap.elevatorsId){
+                    const elevator = await this.elevatorRepo.findById(elevatorId)
+                    if (maxIdNum <= elevator.props.elevatorIdentificationNumber.identificationNumber){
+                        maxIdNum = elevator.props.elevatorIdentificationNumber.identificationNumber + 1
+                    }
+                }
+            }
+
+            let floors: Floor[] = [];
+            for (var floorId of elevatorDto.floorIds) {
+                const floor = await this.floorRepo.findById(floorId)
+                if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
+                floors.push(floor)
+            }
+            
+            if (elevatorDto.elevatorBrand !== undefined && elevatorDto.elevatorModel === undefined) return Result.fail<IElevatorDTO>('Brand was provided so Model is also required!')
+            
+            const elevatorOrError = await Elevator.create(
+                {
+                    elevatorIdentificationNumber: ElevatorIdentificationNumber.create(maxIdNum).getValue(),
+                    elevatorBrand: ElevatorBrand.create(elevatorDto.elevatorBrand).getValue(),
+                    elevatorDescription: ElevatorDescription.create(elevatorDto.elevatorDescription).getValue(),
+                    elevatorModel: ElevatorModel.create(elevatorDto.elevatorModel).getValue(),
+                    elevatorSerialNumber: ElevatorSerialNumber.create(elevatorDto.elevatorSerialNumber).getValue()
+                }, ElevatorID.create(elevatorDto.elevatorId).getValue())
+                
+            
+            if (elevatorOrError.isFailure) {
+                return Result.fail<IElevatorDTO>(elevatorOrError.errorValue())
+            }
+            
+            const elevatorResult = elevatorOrError.getValue();
+            await this.elevatorRepo.save(elevatorResult);
+
+            for (var floor of floors){
+                floor.addElevators(elevatorResult)
+                await this.floorRepo.save(floor);
+            }
+            
+            const ElevatorDtoResult = ElevatorMap.toDto(elevatorResult) as IElevatorDTO
+
+            return Result.ok<IElevatorDTO>(ElevatorDtoResult)
+
+        } catch(e) {
+            throw e
+        }
+    }
+````
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+To use this US, you need to send and HTTP request with the following JSON:
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+Using this URL: http://localhost:4000/api/elevators/create
+
+```
+{
+    "elevatorId": 5,
+    "elevatorBrand": "Apple",
+    "elevatorDescription": "um elevador",
+    "elevatorModel": "iPhone",
+    "elevatorSerialNumber": "string",
+    "buildingCode": "A",
+    "floorIds": [1]
+}
+```
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+No additional observations.
