@@ -32,15 +32,15 @@ buildings and change any information execpt the building code.
 
 * Logical:
 
-![Logical](./Diagrams/level1/LogicalView.svg)
+![Logical](docs/US_160/Diagrams/Level1/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/level1/ProcessView.svg)
+![Process](docs/US_160/Diagrams/Level1/ProcessView.svg)
 
 * Scenary
 
-![Scenary](./Diagrams/level1/SceneryView.svg)
+![Scenary](docs/US_160/Diagrams/Level1/SceneryView.svg)
 
 ### level 2
 
@@ -104,7 +104,7 @@ There are some tests that were implemented
             "buildingLength": 2,
             "buildingWidth": 2,
             "buildingFloors": []
-        } 
+        }
 
         const buildingDTOJSON = {
             "buildingName": "EdificioB",
@@ -113,7 +113,7 @@ There are some tests that were implemented
             "buildingLength": 2,
             "buildingWidth": 2,
             "buildingFloors": []
-        } 
+        }
 
         const buildingDTO2 = {
             buildingName: "EdificioB",
@@ -170,10 +170,10 @@ There are some tests that were implemented
             "buildingLength": 2,
             "buildingWidth": 2,
             "buildingFloors": []
-        } 
+        }
 
         let req: Partial<Request> = {}
-        req.body = buildingDTOJSON 
+        req.body = buildingDTOJSON
 
         let res: Partial<Response> = {
             status: sinon.stub().returnsThis(),
@@ -199,7 +199,7 @@ There are some tests that were implemented
 ```
 
 ```typescript
-    it('5. Controller + Service valid edit (building exist on database)', async function () { 
+    it('5. Controller + Service valid edit (building exist on database)', async function () {
         const original = {
             buildingName: "EdificioA",
             buildingDescription: "uma descricao",
@@ -223,10 +223,10 @@ There are some tests that were implemented
             "buildingLength": 2,
             "buildingWidth": 2,
             "buildingFloors": []
-        } 
+        }
 
         let req: Partial<Request> = {}
-        req.body = after 
+        req.body = after
 
         let res: Partial<Response> = {
             status: sinon.stub().returnsThis(),
@@ -253,7 +253,7 @@ There are some tests that were implemented
 ```
 
 ```typescript
-    it('6. Controller + Service invalid edit (building doesn\'t exist on database)', async function () { 
+    it('6. Controller + Service invalid edit (building doesn\'t exist on database)', async function () {
         const after = {
             "buildingName": "EdificioB",
             "buildingDescription": "uma descricao",
@@ -261,7 +261,7 @@ There are some tests that were implemented
             "buildingLength": 2,
             "buildingWidth": 2,
             "buildingFloors": []
-        } 
+        }
 
         let req: Partial<Request> = {}
         req.body = after
@@ -353,4 +353,4 @@ If the edit was succesfull you will get to see the new information about the bui
     "buildingWidth": 10
 }
 
-``` 
+```
