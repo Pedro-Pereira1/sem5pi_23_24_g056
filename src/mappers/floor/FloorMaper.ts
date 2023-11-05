@@ -10,7 +10,7 @@ import { Passageway } from "../../domain/Passageway/Passageway";
 import { Room } from "../../domain/Room/Room";
 import { FloorDescription } from "../../domain/Floor/FloorDescription";
 import { FloorMap } from "../../domain/Floor/FloorMap";
-import FloorNumber from "../../domain/Floor/FloorId";
+import FloorNumber from "../../domain/Floor/FloorNumber";
 import IElevatorRepo from "../../services/IRepos/elevator/IElevatorRepo";
 import IRoomRepo from "../../services/IRepos/room/IRoomRepo";
 import IPassagewayRepo from "../../services/IRepos/passageway/IPassagewayRepo";
@@ -95,7 +95,7 @@ export class FloorMaper extends Mapper<Floor> {
 
         const FloorOrError = Floor.create(
             {
-                floorNumber: floorNumber,
+                floorNumber: new FloorNumber({ number: floorNumber }),
                 floorDescription: new FloorDescription({ value: description }),
                 floormap: new FloorMap({
                     map: map,
