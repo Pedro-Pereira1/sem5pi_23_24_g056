@@ -108,13 +108,647 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 
 ### 4.4. Tests
 
-**Test 1:** *Verifies that it is not possible to create an instance of the Example class with null values.*
-
+**Test 1:** *Checks the behavior of the controller in isolation by stubbing the service, ensuring it correctly processes a valid request and responds with the expected result.*
 ```
-@Test(expected = IllegalArgumentException.class)
-public void ensureNullIsNotAllowed() {
-	Example instance = new Example(null, null);
-}
+it('editFloorController unit test using editFloorService stub', async function () {
+        // Arrange
+        let body = {
+            "floorId": 1,
+            "floorNumber":  2,
+            "floorDescription": "Joi.string().max(254)"
+        };
+        let req: Partial<Request> = {};
+          req.body = body;
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 2,
+            floorDescription: "Joi.string().max(254)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IEditFloorDTO
+
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        sinon.stub(editFloorServiceInstance, "editFloor").returns(Result.ok<IEditFloorDTO>(FloorDTO));
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            floorId: 1,
+            floorNumber: 2,
+            floorDescription: "Joi.string().max(254)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+            }));
+
+    });
+````
+
+**Test 2:** *Verifies that the controller correctly interacts with the service and updates the floor with the provided information, returning the expected result.*
+```
+it("editFloorController + editFloorService integration test (All values)", async function() {
+        // Arrange
+        let body = {
+            "floorId": 1,
+            "floorNumber":  2,
+            "floorDescription": "Joi.string().max(254)"
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+          } as IBuildingDTO
+
+          const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+          }, buildingDTO.buildingCode).getValue()
+
+          building.addFloor(floor)
+
+
+
+        floorRepoMock.findById.resolves(floor);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            floorDescription: "Joi.string().max(254)",
+            floorId: 1,
+            floorMap: {
+              elevators: [],
+              elevatorsCoords: [],
+              map: [[]],
+              passageways: [],
+              passagewaysCoords: [],
+              roomCoords: [],
+              rooms: []
+            },
+            floorNumber: 2
+          }));
+    });
+````
+
+**Test 3:** *Ensures that the controller can handle partial updates and successfully modifies the floor's number while keeping other values intact.*
+```
+it("editFloorController + editFloorService integration test (Only Number)", async function() {
+         // Arrange
+         let body = {
+            "floorId": 1,
+            "floorNumber":  2
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+          } as IBuildingDTO
+
+          const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+          }, buildingDTO.buildingCode).getValue()
+
+          building.addFloor(floor)
+
+
+        floorRepoMock.findById.resolves(floor);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            floorDescription: "Joi.string().max(255)",
+            floorId: 1,
+            floorMap: {
+              elevators: [],
+              elevatorsCoords: [],
+              map: [[]],
+              passageways: [],
+              passagewaysCoords: [],
+              roomCoords: [],
+              rooms: []
+            },
+            floorNumber: 2
+          }));
+    });
+````
+
+**Test 4:** *Checks if the controller can handle partial updates by changing the floor description and keeping other values unchanged.*
+```
+it("editFloorController + editFloorService integration test (Only Description)", async function() {
+        // Arrange
+        let body = {
+            "floorId": 1,
+            "floorDescription": "Joi.string().max(254)"
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+          } as IBuildingDTO
+
+          const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+          }, buildingDTO.buildingCode).getValue()
+
+          building.addFloor(floor)
+
+
+        floorRepoMock.findById.resolves(floor);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            floorDescription: "Joi.string().max(254)",
+            floorId: 1,
+            floorMap: {
+              elevators: [],
+              elevatorsCoords: [],
+              map: [[]],
+              passageways: [],
+              passagewaysCoords: [],
+              roomCoords: [],
+              rooms: []
+            },
+            floorNumber: 1
+          }));
+    });
+````
+
+**Test 5:** *Ensures that the controller responds appropriately when no changes are requested and returns the existing floor details.*
+```
+it("editFloorController + editFloorService integration test (Nothing)", async function() {
+        // Arrange
+        let body = {
+            "floorId": 1
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+          } as IBuildingDTO
+
+          const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+          }, buildingDTO.buildingCode).getValue()
+
+          building.addFloor(floor)
+
+
+        floorRepoMock.findById.resolves(floor);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.json);
+        sinon.assert.calledWith(res.json, sinon.match({
+            floorDescription: "Joi.string().max(255)",
+            floorId: 1,
+            floorMap: {
+              elevators: [],
+              elevatorsCoords: [],
+              map: [[]],
+              passageways: [],
+              passagewaysCoords: [],
+              roomCoords: [],
+              rooms: []
+            },
+            floorNumber: 1
+          }));
+    });
+````
+
+**Test 6:** *Checks if the controller handles the case where the requested floor does not exist and responds with an error message.*
+```
+it("editFloorController + editFloorService integration test (Invalid Floor)", async function() {
+        // Arrange
+        let body = {
+            "floorId": 2,
+            "floorNumber":  2,
+            "floorDescription": "Joi.string().max(254)"
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 1,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+          } as IBuildingDTO
+
+          const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+          }, buildingDTO.buildingCode).getValue()
+
+          building.addFloor(floor)
+
+
+        floorRepoMock.findById.resolves(null);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Floor dont exists on system!!"));
+    });
+````
+
+**Test 7:** *Verifies that the controller correctly detects and responds to a duplicate floor number by returning an error message.*
+```
+it("editFloorController + editFloorService integration test (Invalid Floor)", async function() {
+        // Arrange
+        let body = {
+            "floorId": 1,
+            "floorNumber":  2,
+            "floorDescription": "Joi.string().max(254)"
+        };
+        let req: Partial<Request> = {
+          body: body
+        };
+        let res: Partial<Response> = {
+          json: sinon.spy(),
+          status: sinon.stub().returnsThis(),
+          send: sinon.spy()
+        };
+        let next: Partial<NextFunction> = () => {};
+
+        // Stub repo methods
+        const FloorDTO = {
+            floorId: 1,
+            floorNumber: 2,
+            floorDescription: "Joi.string().max(255)",
+            floorMap: {
+                map: [],
+                passageways: [],
+                rooms: [],
+                elevators: [],
+                passagewaysCoords: [],
+                elevatorsCoords: [],
+                roomCoords: []
+            }
+        } as IFloorDTO
+
+        const floor = Floor.create(
+			{
+			  "floorNumber": new FloorNumber({number: FloorDTO.floorNumber}),
+			  "floorDescription": new FloorDescription({ value: FloorDTO.floorDescription }),
+			  "floormap": new FloorMap(
+				{
+				  map: [[]],
+				  passageways: [],
+				  rooms: [],
+				  elevators: [],
+				  passagewaysCoords: [],
+				  elevatorsCoords: [],
+				  roomsCoords: [],
+				}
+			  )
+		}, FloorDTO.floorId).getValue()
+
+        const buildingDTO = {
+            buildingName: "EdificioA",
+            buildingDescription: "uma descricao",
+            buildingCode: "A",
+            buildingLength: 2,
+            buildingWidth: 2
+        } as IBuildingDTO
+
+        const building = Building.create({
+            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
+            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
+            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
+            floors: [],
+        }, buildingDTO.buildingCode).getValue()
+
+        building.addFloor(floor)
+        building.floorsNumber.push(1)
+
+        floorRepoMock.findById.resolves(floor);
+        buildingRepoMock.findByFloorId.resolves(building);
+
+        let editFloorServiceInstance = Container.get("editFloorService");
+        const editFloorServiceSpy = sinon.spy(editFloorServiceInstance, "editFloor");
+
+        const ctrl = new editFloorController(editFloorServiceInstance as IEditFloorService);
+
+        // Act
+        await ctrl.editFloor(<Request>req, <Response>res, <NextFunction>next);
+
+        // Assert
+        sinon.assert.calledOnce(editFloorServiceSpy);
+        sinon.assert.calledOnce(res.status);
+        sinon.assert.calledWith(res.status,400);
+        sinon.assert.calledOnce(res.send);
+        sinon.assert.calledWith(res.send, sinon.match("Floor number already exists"));
+    });
 ````
 
 ## 5. Implementation
