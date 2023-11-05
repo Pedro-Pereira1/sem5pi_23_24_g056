@@ -20,7 +20,7 @@ Regarding this requirement we understand that as a Campus Manager, an actor of t
 the system and load a map of a floor to the system and persist it, the map of the floor will be a simple text file
 which contains the layout of the floor as a series of characters
 
-An example of the text file
+An example of a possible map configuration
 
 |  7  |  6  |  6  |  6  |  6  |  7  |  6  |  6  |  2  |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -60,47 +60,47 @@ where the values mean:
 
 * Logical:
 
-![Logical](./Diagrams/Level1/logicalView.svg)
+![Logical](docs/US_230/Diagrams/Level1/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessView.svg)
+![Process](docs/US_230/Diagrams/Level1/ProcessView.svg)
 
 * Scenery
 
-![Scenary](./Diagrams/Level1/sceneryView.svg)
+![Scenary](docs/US_230/Diagrams/Level1/SceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](./Diagrams/Level2/logicalView.svg)
+![Logical](docs/US_230/Diagrams/Level2/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level2/ProcessLevel2.svg)
+![Process](docs/US_230/Diagrams/Level2/ProcessView.svg)
 
 * Physical
 
-![physical](./Diagrams/Level2/PhysicalView.svg)
+![physical](docs/US_230/Diagrams/Level2/PhysicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level2/ImplementationView.svg)
+![Implementation](docs/US_230/Diagrams/Level2/ImplementationView.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](docs/US_230/Diagrams/Level3/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessView.svg)
+![Process](docs/US_230/Diagrams/Level3/ProcessView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementationView.svg)
+![Implementation](docs/US_230/Diagrams/Level3/ImplementationView.svg)
 
 ### 4.2. Applied Patterns
 
@@ -249,7 +249,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         if(!buildingOrError.floorsNumber.includes(Number(floorOrError.id.toValue()))) {
             return Result.fail<IFloorDTO>('The floor doesn\'t belong to the building')
         }
-        
+
 
         let map: number[][] = floorLayout.map
 
@@ -389,7 +389,7 @@ then we need to send the floor layout in the following format:
 }
 ```
 
-once you send the leayout of the floor if there was no errors while trying to load the map you should receive a 
+once you send the leayout of the floor if there was no errors while trying to load the map you should receive a
 a Dto of the floor containing the new map and coordinates of every object
 
 ## 7. Observations

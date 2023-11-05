@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="791px" preserveAspectRatio="none" style="width:964px;height:791px;background:#FFFFFF;" version="1.1" viewBox="0 0 964 791" width="964px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="666.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="69.9609"/><rect fill="#FFFFFF" height="666.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="207" y="69.9609"/><rect fill="#FFFFFF" height="605.9766" style="stroke:#181818;stroke-width:1.0;" width="10" x="359.5" y="100.3125"/><rect fill="#FFFFFF" height="90.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="221.7188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="463.8281"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="615.2344"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="570" y="252.0703"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="570" y="373.125"/><rect fill="#FFFFFF" height="212.1094" style="stroke:#181818;stroke-width:1.0;" width="10" x="757" y="130.6641"/><rect fill="#FFFFFF" height="151.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="757" y="433.4766"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="884.5" y="161.0156"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="884.5" y="524.5313"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="66" x2="66" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="212" x2="212" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="364" x2="364" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="487" x2="487" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="575" x2="575" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="660" x2="660" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="762" x2="762" y1="37.6094" y2="754.6406"/><line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="889" x2="889" y1="37.6094" y2="754.6406"/><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="12" y="26.5332">EditBuildintRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122" x="5" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="12" y="775.1738">EditBuildintRoute</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="137" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="144" y="26.5332">EditBuildingController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="150" x="137" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="144" y="775.1738">EditBuildingController</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="135" x="297" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="304" y="26.5332">EditBuildingService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="135" x="297" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121" x="304" y="775.1738">EditBuildingService</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="442" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="449" y="26.5332">BuildingMap</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91" x="442" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="449" y="775.1738">BuildingMap</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="543" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="550" y="26.5332">Building</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="64" x="543" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="550" y="775.1738">Building</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="617" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="624" y="26.5332">BuildingDto</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="86" x="617" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="624" y="775.1738">BuildingDto</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="98" x="713" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="720" y="26.5332">BuildingRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="98" x="713" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="720" y="775.1738">BuildingRepo</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="137" x="821" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="828" y="26.5332">buildingPersistence</text><rect fill="#E2E2F0" height="31.6094" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="137" x="821" y="753.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="828" y="775.1738">buildingPersistence</text><rect fill="#FFFFFF" height="666.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="61" y="69.9609"/><rect fill="#FFFFFF" height="666.6797" style="stroke:#181818;stroke-width:1.0;" width="10" x="207" y="69.9609"/><rect fill="#FFFFFF" height="605.9766" style="stroke:#181818;stroke-width:1.0;" width="10" x="359.5" y="100.3125"/><rect fill="#FFFFFF" height="90.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="221.7188"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="463.8281"/><rect fill="#FFFFFF" height="60.7031" style="stroke:#181818;stroke-width:1.0;" width="10" x="482.5" y="615.2344"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="570" y="252.0703"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="570" y="373.125"/><rect fill="#FFFFFF" height="212.1094" style="stroke:#181818;stroke-width:1.0;" width="10" x="757" y="130.6641"/><rect fill="#FFFFFF" height="151.4063" style="stroke:#181818;stroke-width:1.0;" width="10" x="757" y="433.4766"/><rect fill="#FFFFFF" height="30.3516" style="stroke:#181818;stroke-width:1.0;" width="10" x="884.5" y="161.0156"/><rect fill="#FFFFFF" height="30" style="stroke:#181818;stroke-width:1.0;" width="10" x="884.5" y="524.5313"/><polygon fill="#181818" points="195,65.9609,205,69.9609,195,73.9609,199,69.9609" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="71" x2="201" y1="69.9609" y2="69.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="78" y="65.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="89" y="65.1045">editBuilding()</text><polygon fill="#181818" points="347.5,96.3125,357.5,100.3125,347.5,104.3125,351.5,100.3125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="217" x2="353.5" y1="100.3125" y2="100.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="224" y="95.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="235" y="95.4561">editBuilding()</text><polygon fill="#181818" points="745,126.6641,755,130.6641,745,134.6641,749,130.6641" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="369.5" x2="751" y1="130.6641" y2="130.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="376.5" y="125.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="387.5" y="125.8076">findByBuildingCode()</text><polygon fill="#181818" points="872.5,157.0156,882.5,161.0156,872.5,165.0156,876.5,161.0156" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="767" x2="878.5" y1="161.0156" y2="161.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="774" y="156.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="785" y="156.1592">findOne()</text><polygon fill="#181818" points="778,187.3672,768,191.3672,778,195.3672,774,191.3672" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="772" x2="888.5" y1="191.3672" y2="191.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="784" y="186.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="795" y="186.5107"> </text><polygon fill="#181818" points="503.5,217.7188,493.5,221.7188,503.5,225.7188,499.5,221.7188" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="497.5" x2="756" y1="221.7188" y2="221.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="509.5" y="216.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="520.5" y="216.8623">toDomain()</text><polygon fill="#181818" points="558,248.0703,568,252.0703,558,256.0703,562,252.0703" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="492.5" x2="564" y1="252.0703" y2="252.0703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="499.5" y="247.2139">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="510.5" y="247.2139">create</text><polygon fill="#181818" points="745,308.4219,755,312.4219,745,316.4219,749,312.4219" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="487.5" x2="751" y1="312.4219" y2="312.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="494.5" y="307.5654">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="505.5" y="307.5654"> </text><polygon fill="#181818" points="380.5,338.7734,370.5,342.7734,380.5,346.7734,376.5,342.7734" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="374.5" x2="761" y1="342.7734" y2="342.7734"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="386.5" y="337.917">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="397.5" y="337.917"> </text><polygon fill="#181818" points="558,369.125,568,373.125,558,377.125,562,373.125" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="369.5" x2="564" y1="373.125" y2="373.125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="376.5" y="368.2686">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="394.5" y="368.2686">edit</text><polygon fill="#181818" points="745,429.4766,755,433.4766,745,437.4766,749,433.4766" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="369.5" x2="751" y1="433.4766" y2="433.4766"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="376.5" y="428.6201">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="26" x="394.5" y="428.6201">save</text><polygon fill="#181818" points="503.5,459.8281,493.5,463.8281,503.5,467.8281,499.5,463.8281" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="497.5" x2="756" y1="463.8281" y2="463.8281"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="509.5" y="458.9717">12</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="527.5" y="458.9717">toPersistence</text><polygon fill="#181818" points="745,490.1797,755,494.1797,745,498.1797,749,494.1797" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="487.5" x2="751" y1="494.1797" y2="494.1797"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="494.5" y="489.3232">13</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="512.5" y="489.3232"> </text><polygon fill="#181818" points="872.5,520.5313,882.5,524.5313,872.5,528.5313,876.5,524.5313" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="767" x2="878.5" y1="524.5313" y2="524.5313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="774" y="519.6748">14</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="26" x="792" y="519.6748">save</text><polygon fill="#181818" points="380.5,580.8828,370.5,584.8828,380.5,588.8828,376.5,584.8828" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="374.5" x2="761" y1="584.8828" y2="584.8828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="386.5" y="580.0264">15</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="404.5" y="580.0264"> </text><polygon fill="#181818" points="470.5,611.2344,480.5,615.2344,470.5,619.2344,474.5,615.2344" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="369.5" x2="476.5" y1="615.2344" y2="615.2344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="376.5" y="610.3779">16</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="31" x="394.5" y="610.3779">toDto</text><polygon fill="#181818" points="648,641.5859,658,645.5859,648,649.5859,652,645.5859" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="492.5" x2="654" y1="645.5859" y2="645.5859"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="499.5" y="640.7295">17</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="517.5" y="640.7295">create</text><polygon fill="#181818" points="380.5,671.9375,370.5,675.9375,380.5,679.9375,376.5,675.9375" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="374.5" x2="486.5" y1="675.9375" y2="675.9375"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="386.5" y="671.0811">18</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="404.5" y="671.0811"> </text><polygon fill="#181818" points="228,702.2891,218,706.2891,228,710.2891,224,706.2891" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="222" x2="363.5" y1="706.2891" y2="706.2891"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="234" y="701.4326">19</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="252" y="701.4326"> </text><polygon fill="#181818" points="77,732.6406,67,736.6406,77,740.6406,73,736.6406" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="71" x2="211" y1="736.6406" y2="736.6406"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="83" y="731.7842">20</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="4" x="101" y="731.7842"> </text><!--MD5=[8d0fbf093234235cfcba0f0dc05edebb]
+@startuml processView3
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant EditBuildintRoute
+participant EditBuildingController
+participant EditBuildingService
+participant BuildingMap
+participant Building
+participant BuildingDto
+participant BuildingRepo
+participant buildingPersistence
+
+EditBuildintRoute -> EditBuildingController : editBuilding()
+activate EditBuildintRoute
+activate EditBuildingController
+
+EditBuildingController -> EditBuildingService : editBuilding()
+activate EditBuildingService
+
+EditBuildingService -> BuildingRepo : findByBuildingCode()
+activate BuildingRepo
+
+BuildingRepo -> buildingPersistence : findOne()
+activate buildingPersistence
+
+buildingPersistence - -> BuildingRepo
+deactivate buildingPersistence
+
+BuildingRepo -> BuildingMap : toDomain()
+activate BuildingMap
+
+BuildingMap -> Building : create
+activate Building
+deactivate Building
+
+BuildingMap - -> BuildingRepo
+deactivate BuildingMap
+
+BuildingRepo - -> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> Building : edit
+activate Building
+deactivate Building
+
+EditBuildingService -> BuildingRepo : save
+activate BuildingRepo
+
+BuildingRepo -> BuildingMap : toPersistence
+activate BuildingMap
+
+BuildingMap - -> BuildingRepo
+deactivate BuildingMap
+
+BuildingRepo -> buildingPersistence : save
+activate buildingPersistence
+deactivate buildingPersistence
+
+BuildingRepo - -> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> BuildingMap : toDto
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+
+BuildingMap - -> EditBuildingService
+deactivate BuildingMap
+
+EditBuildingService - -> EditBuildingController
+deactivate EditBuildingService
+
+EditBuildingController - -> EditBuildintRoute
+deactivate EditBuildingController
+
+deactivate EditBuildintRoute
+
+@enduml
+
+@startuml processView3
+
+autonumber
+participant EditBuildintRoute
+participant EditBuildingController
+participant EditBuildingService
+participant BuildingMap
+participant Building
+participant BuildingDto
+participant BuildingRepo
+participant buildingPersistence
+
+EditBuildintRoute -> EditBuildingController : editBuilding()
+activate EditBuildintRoute
+activate EditBuildingController
+
+EditBuildingController -> EditBuildingService : editBuilding()
+activate EditBuildingService
+
+EditBuildingService -> BuildingRepo : findByBuildingCode()
+activate BuildingRepo
+
+BuildingRepo -> buildingPersistence : findOne()
+activate buildingPersistence
+
+buildingPersistence - -> BuildingRepo
+deactivate buildingPersistence
+
+BuildingRepo -> BuildingMap : toDomain()
+activate BuildingMap
+
+BuildingMap -> Building : create
+activate Building
+deactivate Building
+
+BuildingMap - -> BuildingRepo
+deactivate BuildingMap
+
+BuildingRepo - -> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> Building : edit
+activate Building
+deactivate Building
+
+EditBuildingService -> BuildingRepo : save
+activate BuildingRepo
+
+BuildingRepo -> BuildingMap : toPersistence
+activate BuildingMap
+
+BuildingMap - -> BuildingRepo
+deactivate BuildingMap
+
+BuildingRepo -> buildingPersistence : save
+activate buildingPersistence
+deactivate buildingPersistence
+
+BuildingRepo - -> EditBuildingService
+deactivate BuildingRepo
+
+EditBuildingService -> BuildingMap : toDto
+activate BuildingMap
+
+BuildingMap -> BuildingDto : create
+
+BuildingMap - -> EditBuildingService
+deactivate BuildingMap
+
+EditBuildingService - -> EditBuildingController
+deactivate EditBuildingService
+
+EditBuildingController - -> EditBuildintRoute
+deactivate EditBuildingController
+
+deactivate EditBuildintRoute
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

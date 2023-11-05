@@ -2,20 +2,19 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-actor "Campus Manger" as CM
 participant Vizualization
 participant MasterDataBuilding
 
-CM -> Vizualization : editPassageway
+?o->Vizualization : new building data
 activate Vizualization
 
-Vizualization -> MasterDataBuilding : editPassageway
+Vizualization -> MasterDataBuilding : editBuilding
 activate MasterDataBuilding
 
 MasterDataBuilding --> Vizualization
 deactivate MasterDataBuilding
 
-Vizualization --> CM
+<-Vizualization
 deactivate Vizualization
 
 @enduml
