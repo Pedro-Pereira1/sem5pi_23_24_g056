@@ -647,10 +647,20 @@ export default class createRobotService implements ICreateRobotService {
 }
 ````
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/robots/createRobot
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+With the following JSON
+```
+{
+    "code":"code1",
+    "nickname": "marsupial",
+    "type": "k4",
+    "serialNumber": "maxC",
+    "description": "Joi.string().max(250)"
+}
+````
 
 ## 7. Observations
 
