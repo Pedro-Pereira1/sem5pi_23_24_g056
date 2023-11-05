@@ -18,7 +18,7 @@ export default class InhibitRobotService implements IInhibitRobotService {
     public async inhibitRobot(inhibitRobotDto: IInhibitRobotDTO): Promise<Result<IRobotDTO>> {
         const robotOrError = await this.robotRepo.findById(inhibitRobotDto.id)
 
-        if (robotOrError !== null) {
+        if (robotOrError === null) {
             return Result.fail<IRobotDTO>('There is no robot with such ID')
         }
 

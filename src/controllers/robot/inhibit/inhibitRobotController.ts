@@ -19,7 +19,7 @@ export default class InhibitRobotController implements IInhibitRobotController {
             return res.status(400).send(robotDto.errorValue())
         }
 
-        return res.status(201).send(robotDto.getValue())
+        return res.status(201).json(robotDto.getValue())
     }
 
 }
