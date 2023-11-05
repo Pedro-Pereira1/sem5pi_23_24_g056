@@ -126,12 +126,15 @@ describe("Create elevator", function () {
         req.body = body
 
         let res: Partial<Response> = {
-            json: sinon.spy()
+            json: sinon.spy(),
+            status: sinon.stub().returnsThis(),
+            send: sinon.spy()
         }
 
         let next: Partial<NextFunction> = () => { }
 
         let createElevatorService = Container.get('createElevatorService')
+
         sinon.stub(createElevatorService, 'createElevator').returns(Result.ok<IElevatorDTO>({
             elevatorId: 20,
             elevatorBrand: 'Apple',
@@ -188,100 +191,6 @@ describe("Create elevator", function () {
         }, buildingDTO.buildingCode)
 
         buildingRepoMock.findByBuidingCode.resolves(building.getValue())
-
-
-
-
-
-
-
-/*
-        const buildingDTO = {
-            buildingName: "EdificioA",
-            buildingDescription: "uma descricao",
-            buildingCode: "cod1",
-            buildingLength: 3,
-            buildingWidth: 3,
-            buildingFloors: []
-        } as IBuildingDTO
-
-        const buildingResult = Building.create({
-            buildingName: new BuildingName({ value: buildingDTO.buildingName }),
-            buildingDescription: new BuildingDescription({ value: buildingDTO.buildingDescription }),
-            buildingSize: new BuildingSize({ length: buildingDTO.buildingLength, width: buildingDTO.buildingWidth }),
-            floors: [],
-        }, buildingDTO.buildingCode)
-
-        const building = buildingResult.getValue()
-
-        const floorDTO = {
-            floorId: 1,
-            floorNumber: 2,
-            floorDescription: "its a floor",
-            floorMap: {}
-        } as IFloorDTO
-
-        const floorResult = Floor.create({
-            floorDescription: new FloorDescription({value: floorDTO.floorDescription}),
-            floorNumber: new FloorNumber({number: floorDTO.floorNumber}),
-            floormap: new FloorMap({map: [],
-                passageways: [],
-                elevators: [],
-                rooms: [],
-                passagewaysCoords: [],
-                elevatorsCoords: [],
-                roomsCoords: [],}),
-        }, floorDTO.floorId)
-
-        const floor = floorResult.getValue()
-
-        const elevatorDto = {
-            elevatorId: 20,
-            elevatorBrand: 'Apple',
-            elevatorDescription: 'This is an elevator',
-            elevatorModel: 'Ieli',
-            elevatorSerialNumber: '445'
-        } as ICreateElevatorDTO
-
-        const elevatorResult = Elevator.create({
-            elevatorIdentificationNumber: new ElevatorIdentificationNumber({ identificationNumber: 2 }),
-            elevatorBrand: new ElevatorBrand({ brand: elevatorDto.elevatorBrand }),
-            elevatorDescription: new ElevatorDescription({ description: elevatorDto.elevatorDescription }),
-            elevatorModel: new ElevatorModel({ model: elevatorDto.elevatorModel }),
-            elevatorSerialNumber: new ElevatorSerialNumber({ serialNumber: elevatorDto.elevatorSerialNumber })
-        }, new ElevatorID(elevatorDto.elevatorId))
-
-        const elevator = elevatorResult.getValue()
-
-        const elevatorRepoInstance = Container.get('elevatorRepo')
-        const elevatorRepoMock = sinon.mock(elevatorRepoInstance, "save")
-        elevatorRepoMock.expects("save")
-            .once()
-            .withArgs(elevator)
-            .returns(new Promise<Elevator>((resolve, reject) => { resolve(elevator) }))
-
-        const buildingRepoInstance = Container.get('buildingRepo')
-        const buildingRepoMock = sinon.mock(buildingRepoInstance, "save")
-        buildingRepoMock.expects("save")
-            .once()
-            .withArgs(building)
-            .returns(new Promise<Building>((resolve, reject) => { resolve(building) }))
-
-        const floorRepoInstance = Container.get('floorRepo')
-        const floorRepoMock = sinon.mock(floorRepoInstance, "save")
-        floorRepoMock.expects("save")
-            .once()
-            .withArgs(floor)
-            .returns(new Promise<Floor>((resolve, reject) => { resolve(floor) }))
-
-        const createElevatorService = new CreateElevatorService(elevatorRepoMock as IElevatorRepo, buildingRepoMock as IBuildingRepo, floorRepoMock as IFloorRepo)
-
-        const actual = await createElevatorService.createElevator(elevatorDto)
-
-        elevatorRepoMock.verify()
-        assert.equal(elevatorDto, actual.getValue())
-
- */
     })
 
     it('Service unit test with stud repo, invalid elevator', async function () {
