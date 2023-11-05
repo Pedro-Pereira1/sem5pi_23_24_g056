@@ -19,7 +19,7 @@ import ListPassagewaysBetween2BuildingsController from '../../../src/controllers
 import IListPassagewaysBetween2BuildingsService from '../../../src/services/IServices/passageway/list/IListPassagewaysBetween2BuildingsService';
 
 
-describe.only('List passageways between 2 buildings test', function () {
+describe('List passageways between 2 buildings test', function () {
     // Create Passageway
     const createPassagewayDTO = {
         passagewayId: 1,
