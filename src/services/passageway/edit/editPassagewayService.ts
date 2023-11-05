@@ -21,7 +21,9 @@ export default class EditPassagewayService implements IEditPassagewayService {
         try{
             const passageway = await this.passagewayRepo.findById(passagewayDTO.passagewayId)
 
-            if (passageway === undefined) throw new Error("Passageway does not exist!")
+            if (passageway === null) {
+                return Result.fail<IPassagewayDTO>("Passageway does not exist!")
+            }
 
             const currentFloors : Floor[] = await this.floorRepo.findByPassageway(Number(passageway.id.toValue()))
 
@@ -31,6 +33,9 @@ export default class EditPassagewayService implements IEditPassagewayService {
             let isFloor1 = false
             let isFloor2 = false
 
+            if (floor1 === null || floor2 === null) {
+                return Result.fail<IPassagewayDTO>("Floor does not exist!")
+            }
 
             for(var floor of currentFloors){
                 if(floor.floorId.toValue() !== floor1.floorId.toValue() && floor.floorId.toValue() !== floor2.floorId.toValue()) {
