@@ -11,7 +11,7 @@ import { IRobotDTO } from "../../../src/dto/robot/IRobotDTO";
 import { Result } from "../../../src/core/logic/Result";
 import IInhibitRobotDTO from "../../../src/dto/robot/IInhibitRobotDTO";
 
-describe.only('Inhibit robot test', function () {
+describe('Inhibit robot test', function () {
 
     beforeEach(function () {
         Container.reset()
