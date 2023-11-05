@@ -1,0 +1,108 @@
+@startuml
+
+autonumber
+
+participant ":PassagewayRoute" as Floor
+participant ":CreatePassagewayController" as Controller
+participant ":CreatePassagewayService" as Service
+participant ":Passageway" as Class
+participant ":PassagewayRepo" as Repo
+participant ":PassagewayMapper" as Map
+participant ":PassagewayPersistence" as FloorPersistence
+participant ":Floor" as Building
+participant ":FloorRepo" as BuildingRepo
+participant ":FloorPersistence" as BuildingPersistence
+participant ":PassagewayDTO" as DTO
+
+?o->Floor: POST
+activate Floor
+
+Floor -> Controller: createPassageway(req, res, next)
+activate Controller
+
+
+
+Controller -> Service: createPassageway(createFloorDTO)
+activate Service
+
+Service -> Class:create
+
+Service -> Repo: save
+activate Repo
+
+Repo -> FloorPersistence: findOne
+activate FloorPersistence
+deactivate FloorPersistence
+
+Repo -> Map: toPersistence
+activate Map
+deactivate Map
+
+
+Repo -> FloorPersistence: create
+activate FloorPersistence
+deactivate FloorPersistence
+
+Repo -> Map: toDomain
+activate Map
+deactivate Map
+
+
+Repo --> Service
+deactivate Repo
+
+Service -> Building: addPassageway
+
+Service -> BuildingRepo: save
+activate BuildingRepo
+BuildingRepo -> BuildingPersistence: findOne
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo -> BuildingPersistence: save
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo --> Service
+deactivate BuildingRepo
+
+Service -> Building: addPassageway
+
+Service -> BuildingRepo: save
+activate BuildingRepo
+BuildingRepo -> BuildingPersistence: findOne
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo -> BuildingPersistence: save
+activate BuildingPersistence
+deactivate BuildingPersistence
+
+BuildingRepo --> Service
+deactivate BuildingRepo
+
+
+Service -> Map: toDTO
+activate Map
+Map -> DTO: create
+activate DTO
+deactivate DTO
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+Controller -> DTO: getValue
+activate DTO
+deactivate DTO
+
+Controller -> Controller: res(201,json)
+
+Controller --> Floor: response
+deactivate Controller
+
+<--Floor: response
+deactivate Floor
+
+
+@enduml
