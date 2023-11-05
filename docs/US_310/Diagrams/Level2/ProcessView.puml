@@ -1,19 +1,19 @@
 @startuml
 
 autonumber
-actor "Campus Manager" as CM
+
 participant Visualization
 participant "MasterDataBuilding" as GI
 
-CM -> Visualization: Create new room
+?o-> Visualization: Create new room
 activate Visualization
 
 Visualization -> GI: POST createRoom
 activate GI
-GI --> Visualization: room(JSON)
+GI --> Visualization: room
 deactivate GI
 
-CM <-- Visualization: Inform Success
+<-- Visualization: Inform Success
 deactivate Visualization
 
 
