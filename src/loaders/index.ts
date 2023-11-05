@@ -111,6 +111,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.listAllFloors.path
   }
 
+  const listFloorsPassagewaysController = {
+    name: config.controllers.listFloorsPassageways.name,
+    path: config.controllers.listFloorsPassageways.path
+  }
+
   const ListPassagewaysBetween2BuildingsController = {
     name: config.controllers.listPassagewaysBetween2Buildings.name,
     path: config.controllers.listPassagewaysBetween2Buildings.path
@@ -129,6 +134,11 @@ export default async ({ expressApp }) => {
   const editElevatorController = {
     name: config.controllers.editElevator.name,
     path: config.controllers.editElevator.path
+  }
+
+  const editPassagewayController = {
+    name: config.controllers.editPassageway.name,
+    path: config.controllers.editPassageway.path
   }
 
   const createRobotTypeController = {
@@ -246,6 +256,11 @@ export default async ({ expressApp }) => {
     path: config.services.listAllFloors.path
   }
 
+  const listFloorsPassagewaysService = {
+    name: config.services.listFloorsPassageways.name,
+    path: config.services.listFloorsPassageways.path
+  }
+
   const listPassagewaysBetween2BuildingsService = {
     name: config.services.listPassagewaysBetween2Buildings.name,
     path: config.services.listPassagewaysBetween2Buildings.path
@@ -264,6 +279,11 @@ export default async ({ expressApp }) => {
   const editElevatorService = {
     name: config.services.editElevator.name,
     path: config.services.editElevator.path
+  }
+
+  const editPassagewayService = {
+    name: config.services.editPassageway.name,
+    path: config.services.editPassageway.path
   }
 
   const createRobotTypeService = {
@@ -306,9 +326,11 @@ export default async ({ expressApp }) => {
       listBuildingsMaxMinFloorsController,
       editBuildingController,
       listAllFloorsController,
+        listFloorsPassagewaysController,
       listElevatorsInBuildingController,
       editFloorController,
       editElevatorController,
+      editPassagewayController,
       createRobotTypeController,
       createRobotController,
       loadFlorMapController,
@@ -337,9 +359,11 @@ export default async ({ expressApp }) => {
       listAllBuildingsService,
       editBuildingService,
       listAllFloorsService,
+      listFloorsPassagewaysService,
       listElevatorsInBuildingService,
       editFloorService,
       editElevatorService,
+      editPassagewayService,
       createRobotTypeService,
       createRobotService,
       loadFlorMapService,

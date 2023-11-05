@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+skinparam actorStyle awesome
+
+actor "UI Campus Manager" as CM
+
+
+package  RobDroneGo  {
+  
+    usecase "List Floors with Passageways to other Buildings" as UC12
+  
+}
+
+CM --> UC12
+
+@enduml

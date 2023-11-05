@@ -33,11 +33,29 @@ export default class RobotRepo implements IRobotRepo {
         const rawRobot: any = RobotMap.toPersistence(robot);
         const robotCreated = await this.robotSchema.create(rawRobot);
         return RobotMap.toDomain(robotCreated);
-
+        
       } else {
-        //TO-D0: Update
+        if(robot.props.nickname !== undefined){
+          robotDocument.nickname = robot.props.nickname.props.nickname;
+        }
 
+        if(robot.props.operationStatus !== undefined){
+          robotDocument.operationStatus = robot.props.operationStatus.props.status;
+        }
 
+        if(robot.props.serialNumber !== undefined){
+          robotDocument.serialNumber = robot.props.serialNumber.props.serialNumber;
+        }
+
+        if(robot.props.type !== undefined){
+          robotDocument.type = robot.props.type.id.toString();
+        }
+
+        if(robot.props.description !== undefined){
+          robotDocument.description = robot.props.description.props.description;
+        }
+
+        
 
         await robotDocument.save();
         return robot;
@@ -57,19 +75,28 @@ export default class RobotRepo implements IRobotRepo {
       return null;
   }
 
+  public async findByNickname(nickname: string): Promise<Robot> {
+    const query = { nickname: nickname };
+    const robotRecord = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
+    if (robotRecord != null) {
+      return RobotMap.toDomain(robotRecord);
+    }
+    else
+      return null;
+  }
+
   public async findBySerialNumberAndType(serialNumber: string, type: string): Promise<boolean> {
     const query = {
       serialNumber: serialNumber,
       type: type,
     };
 
-    const robotDocument = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
-
-    if (robotDocument) {
-      return true
-    } else {
-      return false;
-    }
+    const robotRecord = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
+      if (robotRecord != null) {
+          return true
+      } else {
+          return false;
+      }
   }
 
   public async findAll(): Promise<Robot[]> {

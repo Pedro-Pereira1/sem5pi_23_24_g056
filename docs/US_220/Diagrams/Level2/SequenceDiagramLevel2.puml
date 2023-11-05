@@ -1,0 +1,20 @@
+@startuml
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+CM -> Visualization: List Floors with Passageways to other Buildings
+activate Visualization
+
+Visualization -> GI: GET listInBuilding
+activate GI
+GI --> Visualization: List of floors
+deactivate GI
+
+CM <-- Visualization: List of floors
+deactivate Visualization
+
+
+@enduml

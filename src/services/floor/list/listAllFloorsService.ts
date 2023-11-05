@@ -24,19 +24,25 @@ export default class listAllFloorsService implements IListAllFloorsService {
 
     public async listAllFloors(buildingId: string): Promise<Result<IFloorDTO[]>> {
 
+
         const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingId))
+        if(buildingResult === null) {
+           return Result.fail<IFloorDTO[]>(`Building ${buildingId} not found`)
+        }
+
+
         const floorsResult = buildingResult.floors
 
         if(floorsResult.length === 0) {
-            return Result.fail<IFloorDTO[]>(null)
+            return Result.fail<IFloorDTO[]>(`Building ${buildingId} has no floors`)
         }
-        
+
         let resolve: IFloorDTO[] = []
 
         floorsResult.forEach(b => {
             resolve.push(FloorMaper.toDto(b))
         })
-        
+
         return Result.ok<IFloorDTO[]>(resolve)
     }
 

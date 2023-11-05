@@ -77,6 +77,10 @@ export default {
       name: "listAllFloorsController",
       path: "../controllers/floor/list/listAllFloorsController"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysController",
+      path: "../controllers/floor/list/listFloorsPassagewaysController"
+    },
     listElevatorsInBuilding: {
       name: "listElevatorsInBuildingController",
       path: "../controllers/elevator/list/listElevatorsInBuildingController"
@@ -100,6 +104,10 @@ export default {
     editElevator: {
       name: "editElevatorController",
       path: "../controllers/elevator/edit/editElevatorController"
+    },
+    editPassageway: {
+      name: "editPassagewayController",
+      path: "../controllers/passageway/edit/editPassagewayController"
     },
     createRobotType: {
       name: "createRobotTypeController",
@@ -191,6 +199,10 @@ export default {
       name: "listAllFloors",
       path: "../services/floor/list/listAllFloorsService"
     },
+    listFloorsPassageways: {
+      name: "listFloorsPassagewaysService",
+      path: "../services/floor/list/listFloorsPassagewaysService"
+    },
     listElevatorsInBuilding: {
       name: "listElevatorsInBuildingService",
       path: "../services/elevator/list/listElevatorsInBuildingService"
@@ -214,6 +226,10 @@ export default {
     editElevator: {
       name: "editElevatorService",
       path: "../services/elevator/edit/editElevatorService"
+    },
+    editPassageway: {
+      name: "editPassagewayService",
+      path: "../services/passageway/edit/editPassagewayService"
     },
     createRobotType: {
       name: "createRobotTypeService",

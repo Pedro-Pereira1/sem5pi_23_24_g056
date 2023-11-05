@@ -9,6 +9,7 @@ import { BuildingSize } from "../../../domain/Building/BuildingSize";
 import { BuildingDescription } from "../../../domain/Building/BuildingDescription";
 import { Result } from "../../../core/logic/Result";
 import { BuildingMap } from "../../../mappers/building/BuildingMap";
+import BuildingCode from "../../../domain/Building/BuildingCode";
 
 @Service()
 export default class EditBuildingService implements IEditBuildingService {
@@ -20,29 +21,28 @@ export default class EditBuildingService implements IEditBuildingService {
 
     public async editBuilding(buildingDto: IBuildingDTO): Promise<Result<IBuildingDTO>> {
         try {
-            const buildingOrError = Building.create(
-                {
-                    buildingName: new BuildingName({ value: buildingDto.buildingName }),
-                    buildingDescription: new BuildingDescription({ value: buildingDto.buildingDescription }),
-                    buildingSize: new BuildingSize({ length: buildingDto.buildingLength, width: buildingDto.buildingWidth }),
-                    floors: [],
-                }, buildingDto.buildingCode
-            )
+            const buildingOrError = await this.buildingRepo.findByBuidingCode(new BuildingCode(buildingDto.buildingCode))
 
-
-            if (buildingOrError.isFailure) {
-                return Result.fail<IBuildingDTO>(buildingOrError.errorValue())
+            if (buildingOrError === null) {
+                return Result.fail<IBuildingDTO>('There is no building with that code')
             }
 
-            const buildingResult = buildingOrError.getValue()
-
-            if (!this.buildingRepo.exists(buildingResult)) {
-                return Result.fail<IBuildingDTO>('Building doesn\'t exist')
+            if (buildingDto.buildingName !== undefined || buildingDto.buildingName !== null) {
+                buildingOrError.changeName(buildingDto.buildingName)
             }
 
-            await this.buildingRepo.save(buildingResult);
+            if (buildingDto.buildingDescription !== undefined || buildingDto.buildingDescription !== null) {
+                buildingOrError.changeDescription(buildingDto.buildingDescription)
+            }
 
-            const buildingDtoResult = BuildingMap.toDto(buildingResult) as IBuildingDTO
+            if (buildingDto.buildingLength !== undefined || buildingDto.buildingLength !== null &&
+                buildingDto.buildingWidth !== undefined || buildingDto.buildingWidth !== null) {
+                buildingOrError.changeSize(buildingDto.buildingLength, buildingDto.buildingWidth)
+            }
+
+            await this.buildingRepo.save(buildingOrError);
+
+            const buildingDtoResult = BuildingMap.toDto(buildingOrError)
             return Result.ok<IBuildingDTO>(buildingDtoResult)
 
         } catch (err) {
