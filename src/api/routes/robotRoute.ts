@@ -28,13 +28,14 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createRobot(req, res, next) );
 
-  route.patch('inhibitRobot',
+  route.patch('/inhibitRobot',
     celebrate({
       body: Joi.object({
         robotId: Joi.string().required()
       })
     }),
     (req, res, next) => inhibitRobotController.inhibitRobot(req, res, next))
-    route.get('/listAll', (req, res, next) => {ctrlList.listAllRobots(req, res, next)} );
+
+  route.get('/listAll', (req, res, next) => { ctrlList.listAllRobots(req, res, next) });
 
 };
