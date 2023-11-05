@@ -41,43 +41,43 @@
 
 * Process
 
-![Process](./Diagrams/Level1/ProcessLevel1.svg)
+![Process](./Diagrams/Level1/ProcessView.svg)
 
 * Scenary
 
-![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
+![Scenary](./Diagrams/Level1/SceneryView.svg)
 
 ### level 2
 
 * Logical:
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+![Logical](./Diagrams/Level2/LogicalView.svg)
 
 * Process
 
-![Process](./Diagrams/Level2/ProcessLevel2.svg)
+![Process](./Diagrams/Level2/ProcessView.svg)
 
 * Physical
 
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
+![physical](./Diagrams/Level2/PhysicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
+![Implementation](./Diagrams/Level2/ImplementationView.svg)
 
 ### Level 3
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
+![Logical](./Diagrams/Level3/logicalView.svg)
 
 * Implementation
 
-![Implementation](./Diagrams/Level3/ImplementaionViewLevel3.svg)
+![Implementation](./Diagrams/Level3/ImplementaionView.svg)
 
 * Process
 
-![Process](./Diagrams/Level3/ProcessLevel3.svg)
+![Process](./Diagrams/Level3/ProcessView.svg)
 
 ### 4.3. Applied Patterns
 
