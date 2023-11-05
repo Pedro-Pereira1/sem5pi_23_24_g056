@@ -1,0 +1,20 @@
+@startuml
+
+autonumber
+actor "Campus Manager" as CM
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+CM -> Visualization: List passageways between 2 buildings
+activate Visualization
+
+Visualization -> GI: GET listInBuilding
+activate GI
+GI --> Visualization: List of passageways
+deactivate GI
+
+CM <-- Visualization: List of passageways
+deactivate Visualization
+
+
+@enduml
