@@ -23,7 +23,7 @@
 
 ## 3. Analysis
 
-Regarding this requirement we understand that as a Campus Manager, an actor of the system, 
+Regarding this requirement we understand that as a Campus Manager, an actor of the system,
 I will be able to access the system and create a passageway choosing the 2 buildings in the Campus area.
 A passageway is defined by its ID and the 2 buildings that it connects.
 
@@ -35,51 +35,40 @@ A passageway is defined by its ID and the 2 buildings that it connects.
 
 ### 4.1. Realization
 
-### Level 1
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-* Logical:
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-![Logical](./Diagrams/Level1/LogicalView.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-* Process
+#### Level2
 
-![Process](./Diagrams/Level1/ProcessLevel1.svg)
+###### LogicalView:
 
-* Scenary
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-![Scenary](./Diagrams/Level1/scenaryLevel1.svg)
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-### level 2
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-* Logical:
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-* Process
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-![Process](./Diagrams/Level2/ProcessLevel2.svg)
-
-* Physical
-
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/SequenceDiagramLevel3.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 
@@ -135,7 +124,7 @@ it('1. Controller with stub service create valid passageway', async function () 
 ````
 
 **Test 2:** *Tests the service using a stub repo to create a valid passageway*
-    
+
 ```
 it('3. Service with stub repo create valid passageway', async function () {
         const createPassagewayDTO = {
@@ -260,32 +249,32 @@ public async createPassageway(createPassagewayDTO: ICreatePassagewayDTO): Promis
 
             let building1Result = await this.buildingRepo.findByBuidingCode(new BuildingCode(createPassagewayDTO.building1Id.toString()))
             if(building1Result == null) return Result.fail<IPassagewayDTO>("Building dont exists.");
-            
+
             let building2Result = await this.buildingRepo.findByBuidingCode(new BuildingCode(createPassagewayDTO.building2Id.toString()))
             if(building2Result == null) return Result.fail<IPassagewayDTO>("Building dont exists.");
 
             if(building1Result.code.toString() === building2Result.code.toString()){
                 return Result.fail<IPassagewayDTO>("Buildings are the same.");
             }
-            
+
             if (!(building1Result.floorsNumber.includes(createPassagewayDTO.floor1Id) && building2Result.floorsNumber.includes(createPassagewayDTO.floor2Id))) {
                 return Result.fail<IPassagewayDTO>("Building dont have this floors.");
             }
-            
+
             const PassagewayOrError = await Passageway.create(createPassagewayDTO);
 
             if (PassagewayOrError.isFailure) {
                 return Result.fail<IPassagewayDTO>(PassagewayOrError.errorValue())
             }
-            
+
             const passagewayResult = PassagewayOrError.getValue()
 
             const floor1Result = await this.floorRepo.findById(createPassagewayDTO.floor1Id);
             floor1Result.addPassageway(passagewayResult);
-            
+
             const floor2Result = await this.floorRepo.findById(createPassagewayDTO.floor2Id);
             floor2Result.addPassageway(passagewayResult);
-         
+
 
             await this.passagewayRepo.save(passagewayResult);
 

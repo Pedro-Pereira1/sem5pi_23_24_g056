@@ -1,0 +1,23 @@
+@startuml
+
+autonumber
+
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+?o-> Visualization: Starts the process to create a building floor
+activate Visualization
+
+Visualization -> GI: POST floor
+activate GI
+
+GI -> GI: createFloor(floor)
+
+GI --> Visualization: floor
+deactivate GI
+
+<-- Visualization: Informs operation success
+deactivate Visualization
+
+
+@enduml

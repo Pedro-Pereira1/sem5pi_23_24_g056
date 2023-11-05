@@ -1,0 +1,64 @@
+@startuml
+
+autonumber
+
+participant ":FloorRoute" as Route
+participant ":FloorController" as Controller
+participant ":FloorService" as Service
+participant ":FloorRepo" as Repo
+participant ":FloorMap" as Map
+participant ":Floor" as Floor
+
+participant ":FloorPersistence" as Persistence
+participant ":FloorDTO" as DTO
+
+?o->Route: PUT
+activate Route
+
+Route -> Controller: update(json,res,next)
+activate Controller
+
+Controller -> Service: updateFloor(EditFloorDTO)
+activate Service
+Service -> Repo: findById()
+activate Repo
+deactivate Repo
+
+Service -> Floor: setAttr()
+activate Floor
+deactivate Floor
+
+Service -> Repo: save()
+activate Repo
+
+Repo -> Map: toPersistence()
+activate Map
+deactivate Map
+
+Repo -> Persistence: save()
+activate Persistence
+deactivate Persistence
+
+
+
+Repo --> Service:
+deactivate Repo
+
+Service -> Map: toDTO()
+activate Map
+Map -> DTO: create()
+activate DTO
+deactivate DTO
+deactivate Map
+
+Service --> Controller:
+deactivate Service
+
+Controller --> Route:
+deactivate Controller
+
+<--Route:
+deactivate Route
+
+
+@enduml

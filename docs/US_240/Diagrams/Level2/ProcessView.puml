@@ -1,0 +1,23 @@
+@startuml processLevel1
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Vizualization
+participant MasterDataBuilding
+
+?o->Vizualization : createPassageway
+activate Vizualization
+
+Vizualization -> MasterDataBuilding : POST passageway
+activate MasterDataBuilding
+
+MasterDataBuilding -> MasterDataBuilding: createPassageway
+
+MasterDataBuilding --> Vizualization: passageway
+deactivate MasterDataBuilding
+
+<--Vizualization: Informs operation success
+deactivate Vizualization
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+autonumber
+
+participant Visualization
+participant "MasterDataBuilding" as GI
+
+?o-> Visualization: Starts the process to  list buildings with min and max floors.
+activate Visualization
+
+
+Visualization -> GI: GET buildingsByMaxAndMinFloors
+activate GI
+GI --> Visualization: building(JSON)
+deactivate GI
+
+<-- Visualization: Shows buildings list
+deactivate Visualization
+
+
+@enduml

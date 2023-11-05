@@ -17,14 +17,14 @@
 			- marca (opcional, alfanumerico, 50 caracteres)<br>
 			- modelo (opcional, mas obrigatório se marca for introduzido, alfanumerico, 50 caracteres)<br>
 			- número de série do fabricante (opcional, alfanumerico, 50 caracteres)<br>
-			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>		
+			- breve descrição (opcional, alfanumerico, 250 caracteres)"<br>
 
 >**Question**: "Relativamente à funcionalidade de criar elevador, no seguimento da sua resposta em (https://moodle.isep.ipp.pt/mod/forum/discuss.php?d=25298#p32051), gostaríamos que clarificasse quais das propriedades que indicou serem alfanuméricas podem conter espaços; por exemplo, nós acharíamos que seria sensato a descrição poder conter espaços."<br>
 "Adicionalmente, gostaria de saber se o identificador numérico que referiu deve ser fornecido ao sistema ou gerado automaticamente pelo mesmo, dado que este deve ser único dentro de cada edifício."<br><br>
 >**Answer**: "
 bom dia,
 todos os atributos alfanumercos podme conter espaços à exceção do número de série
-o número indeitifcativo do elevador deve ser gerado sequencialmente pelo sistema tendo em conta o edifico, por exemplo, existirá o elevador 1 do edificio B e o elevador 1 do edificio A"<br>		
+o número indeitifcativo do elevador deve ser gerado sequencialmente pelo sistema tendo em conta o edifico, por exemplo, existirá o elevador 1 do edificio B e o elevador 1 do edificio A"<br>
 
 **Dependencies:**
 - **US150 -** As a Campus Manager, I want to create a building.
@@ -42,51 +42,41 @@ As a Campus Manager, an actor of the system, I will be able to access the system
 ![DomainModelExcerpt](Diagrams/DomainModelExcerpt.svg)
 
 ## 4. Design
-### Level 1
 
-* Logical View
+### Level1
+###### LogicalView:
+![LogicalView](Diagrams/Level1/LogicalView.svg)
 
-![Logical](./Diagrams/Level1/LogicalViewLevel1.svg)
+###### SceneryView:
+![SceneryView](Diagrams/Level1/SceneryView.svg)
 
-* Process View
+###### ProcessView:
+![ProcessView](Diagrams/Level1/ProcessView.svg)
 
-![Process](./Diagrams/Level1/ProcessViewLevel1.svg)
+#### Level2
 
-* Scenary View
+###### LogicalView:
 
-![Scenary](./Diagrams/Level1/ScenaryViewLevel1.svg)
+![LogicalView](Diagrams/Level2/LogicalView.svg)
 
-### Level 2
+###### ImplementationView:
+![ImplementationView](Diagrams/Level2/ImplementationView.svg)
 
-* Logical View
+###### PhysicalView:
+![PhysicalView](Diagrams/Level2/PhysicalView.svg)
 
-![Logical](./Diagrams/Level2/LogicalViewLevel2.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level2/ProcessView.svg)
 
-* Process View
+#### Level3
+###### LogicalView:
+![LogicalView](Diagrams/Level3/LogicalView.svg)
 
-![Process](./Diagrams/Level2/ProcessViewLevel2.svg)
+###### ImplementationView:
+![ImplementationView](Diagrams/Level3/ImplementationView.svg)
 
-* Physical View
-
-![physical](./Diagrams/Level2/PhysicalViewLevel2.svg)
-
-* Implementation View
-
-![Implementation](./Diagrams/Level2/ImplementationViewLevel2.svg)
-
-### Level 3
-
-* Logical:
-
-![Logical](./Diagrams/Level3/logicalViewMasterDataBuilding.svg)
-
-* Implementation
-
-![Implementation](./Diagrams/Level3/ImplementationViewLevel3.svg)
-
-* Process
-
-![Process](./Diagrams/Level3/ProcessViewLevel3.svg)
+###### ProcessView:
+![ProcessView](Diagrams/Level3/ProcessView.svg)
 
 ### 4.2. Applied Patterns
 * Controller
@@ -191,9 +181,9 @@ if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Re
                 if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
                 floors.push(floor)
             }
-            
+
             if (elevatorDto.elevatorBrand !== undefined && elevatorDto.elevatorModel === undefined) return Result.fail<IElevatorDTO>('Brand was provided so Model is also required!')
-            
+
             const elevatorOrError = await Elevator.create(
                 {
                     elevatorIdentificationNumber: ElevatorIdentificationNumber.create(maxIdNum).getValue(),
@@ -202,12 +192,12 @@ if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Re
                     elevatorModel: ElevatorModel.create(elevatorDto.elevatorModel).getValue(),
                     elevatorSerialNumber: ElevatorSerialNumber.create(elevatorDto.elevatorSerialNumber).getValue()
                 }, ElevatorID.create(elevatorDto.elevatorId).getValue())
-                
-            
+
+
             if (elevatorOrError.isFailure) {
                 return Result.fail<IElevatorDTO>(elevatorOrError.errorValue())
             }
-            
+
             const elevatorResult = elevatorOrError.getValue();
             await this.elevatorRepo.save(elevatorResult);
 
@@ -215,7 +205,7 @@ if (await this.elevatorRepo.findById(elevatorDto.elevatorId) !== null) return Re
                 floor.addElevators(elevatorResult)
                 await this.floorRepo.save(floor);
             }
-            
+
             const ElevatorDtoResult = ElevatorMap.toDto(elevatorResult) as IElevatorDTO
 
             return Result.ok<IElevatorDTO>(ElevatorDtoResult)
