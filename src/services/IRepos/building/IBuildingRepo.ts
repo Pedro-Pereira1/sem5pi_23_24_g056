@@ -8,4 +8,5 @@ export default interface IBuildingRepo extends Repo<Building> {
     findByBuidingCode(buildingCode: BuildingCode): Promise<Building>
     findAll(): Promise<Building[]>
     findBuildingsMaxMinFloors(max:number, min:number): Promise<Building[]>
+    findByFloorId(floorId: number): Promise<Building>
 }
