@@ -505,20 +505,198 @@ it("BuildingController + BuildingService integration test (Floor Already exist)"
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+### CreateFloorController
+```
+export default class CreateFloorController implements ICreateFloorController {
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+    constructor(
+        @Inject(config.services.createFloor.name) private service: ICreateFloorService
+    )
+    {}
+
+    public async createFloor(req: Request, res: Response, next: NextFunction) {
+        try {
+            const FloorOrError = await this.service.createFloor(req.body as ICreateFloorDTO) as Result<IFloorDTO>
+
+            if (FloorOrError.isFailure) {
+                return res.status(400).send(FloorOrError.errorValue())
+            }
+
+            const FloorDTO = FloorOrError.getValue();
+            return res.status(201).json(FloorDTO);
+
+        }catch (e){
+            return next(e);
+        }
+    }
+}
+````
+
+### CreateFloorService
+```
+export default class CreateFloorService implements ICreateFloorService {
+
+    constructor(
+        @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+    ) { }
+
+    public async createFloor(createFloorDTO: ICreateFloorDTO): Promise<Result<IFloorDTO>> {
+
+        try {
+            const buildingResult = await this.buildingRepo.findByBuidingCode(new BuildingCode(createFloorDTO.buildingCode))
+            if (buildingResult == null) {
+                return Result.fail<IFloorDTO>("Building not found")
+            }
+
+            const floor = await this.floorRepo.findById(createFloorDTO.floorId)
+            if(floor != null){
+                return Result.fail<IFloorDTO>("Floor already exists")
+            }
+
+            const floors = buildingResult.floors
+            for (let i = 0; i < floors.length; i++) {
+                if (floors[i].floorNumber.number == createFloorDTO.floorNumber) {
+                    return Result.fail<IFloorDTO>("Floor number already exists")
+                }
+            }
+
+            const FloorOrError = await Floor.create(
+                {
+                    floorDescription: new FloorDescription({ value: createFloorDTO.floorDescription }),
+                    floorNumber: new FloorNumber({number: createFloorDTO.floorNumber}),
+                    floormap: new FloorMap({
+                        map: [],
+                        passageways: [],
+                        elevators: [],
+                        rooms: [],
+                        passagewaysCoords: [],
+                        elevatorsCoords: [],
+                        roomsCoords: [],
+                    })
+                }, createFloorDTO.floorId)
+
+
+            if (FloorOrError.isFailure) {
+                return Result.fail<IFloorDTO>(FloorOrError.errorValue())
+            }
+
+
+            const floorResult = FloorOrError.getValue()
+
+
+            buildingResult.addFloor(floorResult);
+
+            await this.floorRepo.save(floorResult);
+            await this.buildingRepo.save(buildingResult);
+
+            const floorDtoResult = FloorMaper.toDto(floorResult) as IFloorDTO
+            return Result.ok<IFloorDTO>(floorDtoResult)
+
+        } catch (e) {
+            throw e
+        }
+    }
+}
+````
+
+### Floor
+```
+interface FloorProps {
+  floorDescription: FloorDescription
+  floorNumber: FloorNumber
+  floormap: FloorMap
+}
+
+export class Floor extends AggregateRoot<FloorProps> {
+
+  private constructor(props: FloorProps, floorNumber: FloorId) {
+    super(props, floorNumber);
+  }
+
+  get floorId(): FloorId {
+    return this.id
+  }
+
+  get floorNumber(): FloorNumber {
+    return this.props.floorNumber
+  }
+
+  get description(): FloorDescription {
+    return this.props.floorDescription
+  }
+
+  get map(): FloorMap {
+    return this.props.floormap
+  }
+
+  loadFloorMapAndUpdate(layout: number[][], passageways: DoubleCoords[], elevators: SingleCoords[], rooms: DoubleCoords[]) {
+    this.map.loadFloorMap(layout)
+    this.map.updateFloorObjectsCoordinates(passageways, elevators, rooms)
+  }
+
+  public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
+
+    if (floorId < 0 || floorProp.floorDescription.description.length > 250) {
+      return Result.fail<Floor>('Invalid floor')
+    }
+
+    const floor = new Floor({
+      floorDescription: floorProp.floorDescription,
+      floorNumber: floorProp.floorNumber,
+      floormap: new FloorMap({
+        map: floorProp.floormap.props.map,
+        passageways: floorProp.floormap.props.passageways,
+        rooms: floorProp.floormap.props.rooms,
+        elevators: floorProp.floormap.props.elevators,
+        passagewaysCoords: floorProp.floormap.props.passagewaysCoords,
+        elevatorsCoords: floorProp.floormap.props.elevatorsCoords,
+        roomsCoords: floorProp.floormap.props.roomsCoords
+      })
+    }, new FloorId(floorId))
+
+    return Result.ok<Floor>(floor)
+  }
+
+
+  addPassageway(passageway: Passageway) {
+    this.map.addPassageway(passageway)
+  }
+
+  removePassageway(passageway: Passageway) {
+    this.map.removePassageway(passageway)
+  }
+
+  addElevators(elevator: Elevator) {
+    if (this.props.floormap.props.elevators.includes(elevator)) throw new Error("Floor with Number" + this.props.floorNumber + "already has this elevator!")
+    this.map.addElevators(elevator)
+  }
+
+  removeElevator(elevator: Elevator) {
+    this.map.removeElevator(elevator)
+  }
+
+  addRoom(room: Room) {
+    this.map.addRoom(room)
+  }
+
+}
+````
 
 ## 6. Integration/Demonstration
+To use this US, you need to send an HTTP request.
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Using this URI: localhost:4000/api/floors/createFloor
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+With the following JSON
+```
+{
+    "floorId": 1,
+    "floorNumber":  1,
+    "floorDescription": "Joi.string().max(255)",
+    "buildingCode": "A"
+}
+````
+
 
 ## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
