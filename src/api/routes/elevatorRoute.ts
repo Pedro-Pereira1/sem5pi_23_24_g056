@@ -7,6 +7,7 @@ import config from "../../../config";
 import ICreateElevatorController from '../../controllers/IControllers/elevator/create/ICreateElevatorController';
 import IEditElevatorController from '../../controllers/IControllers/elevator/edit/IEditElevatorController';
 import IListElevatorsInBuildingController from '../../controllers/IControllers/elevator/list/IListElevatorsInBuildingController';
+import IDeleteElevatorController from "../../controllers/IControllers/elevator/delete/IDeleteElevatorController";
 
 const route = Router();
 
@@ -16,6 +17,7 @@ export default (app: Router) => {
     const ctrl = Container.get(config.controllers.createElevator.name) as ICreateElevatorController
     const ctrlEdit = Container.get(config.controllers.editElevator.name) as IEditElevatorController
     const ctrlList = Container.get(config.controllers.listElevatorsInBuilding.name) as IListElevatorsInBuildingController
+    const ctrlDelete = Container.get(config.controllers.deleteElevator.name) as IDeleteElevatorController
     
     route.post('/create', 
     celebrate({
@@ -51,4 +53,13 @@ export default (app: Router) => {
             req.params.buildingCode;
         }
     );
+
+    route.delete('/delete',
+    celebrate({
+        body: Joi.object({
+            elevatorIdentificationNumber: Joi.number().required().min(1),
+            buildingCode: Joi.string().required()
+        }),
+    }),
+    (req, res, next) => ctrlDelete.deleteElevator(req, res, next));
 }
