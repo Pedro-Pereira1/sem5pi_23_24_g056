@@ -61,12 +61,12 @@ export default {
       name: "createElevatorController",
       path: "../controllers/elevator/create/createElevatorController"
     },
-    createRoom:{
-      name:"createRoomController",
+    createRoom: {
+      name: "createRoomController",
       path: "../controllers/room/create/createRoomController"
     },
-    deleteRoom:{
-      name:"deleteRoomController",
+    deleteRoom: {
+      name: "deleteRoomController",
       path: "../controllers/room/delete/deleteRoomController"
     },
     listAllBuildigns: {
@@ -150,8 +150,12 @@ export default {
       path: "../controllers/robotType/robotTypeController"
     },
     deleteElevator: {
-        name: "deleteElevatorController",
-        path: "../controllers/elevator/delete/deleteElevatorController"
+      name: "deleteElevatorController",
+      path: "../controllers/elevator/delete/deleteElevatorController"
+    },
+    deleteFloor: {
+      name: "deleteFloorController",
+      path: "../controllers/floor/delete/DeleteFloorController"
     },
   },
 
@@ -215,8 +219,8 @@ export default {
       name: "createRoomService",
       path: "../services/room/create/createRoomService"
     },
-    deleteRoom:{
-      name:"deleteRoomService",
+    deleteRoom: {
+      name: "deleteRoomService",
       path: "../services/room/delete/deleteRoomService"
     },
     createElevator: {
@@ -308,8 +312,12 @@ export default {
       path: "../services/robotType/list/listAllRobotTypeService"
     },
     deleteElevator: {
-        name: "deleteElevatorService",
-        path: "../services/elevator/delete/deleteElevatorService"
-    }
+      name: "deleteElevatorService",
+      path: "../services/elevator/delete/deleteElevatorService"
+    },
+    deleteFloor: {
+      name: "deleteFloorService",
+      path: "../services/floor/delete/DeleteFloorService"
+    },
   },
 };
