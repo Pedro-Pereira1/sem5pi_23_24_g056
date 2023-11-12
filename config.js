@@ -132,6 +132,10 @@ export default {
     listRobotsByDesignation: {
       name: "listRobotsByDesignationController",
       path: "../controllers/robot/list/ListRobotsByDesignationController"
+    },
+    deleteElevator: {
+        name: "deleteElevatorController",
+        path: "../controllers/elevator/delete/deleteElevatorController"
     }
   },
 
@@ -266,6 +270,10 @@ export default {
     listRobotsByDesignation: {
       name: "listRobotsByDesignationService",
       path: "../services/robot/list/ListRobotsByDesignationService"
+    },
+    deleteElevator: {
+        name: "deleteElevatorService",
+        path: "../services/elevator/delete/deleteElevatorService"
     }
   },
 };
