@@ -3,6 +3,7 @@ import { celebrate, Joi } from 'celebrate';
 
 import { Container } from 'typedi';
 import ICreateFloorController from '../../controllers/IControllers/floor/create/ICreateFloorController';
+import IDeleteFloorController from '../../controllers/IControllers/floor/delete/IDeleteFLoorController';
 
 import config from "../../../config";
 import IListAllFloorsController from '../../controllers/IControllers/floor/list/IListAllFloorsController';
@@ -21,6 +22,7 @@ export default (app: Router) => {
     const ctrllistFloorsPassageways = Container.get(config.controllers.listFloorsPassageways.name) as IListFloorsPassagewaysController
     const ctrlEditFloor = Container.get(config.controllers.editFloor.name) as IEditFloorController
     const ctrlLoadFLoorMap = Container.get(config.controllers.loadFloorMap.name) as ILoadFloorMapController
+    const ctrlDelete = Container.get(config.controllers.deleteFloor.name) as IDeleteFloorController
 
     route.get('/listAllFloors/:buildingId',
         (req, res, next) => {
@@ -46,15 +48,15 @@ export default (app: Router) => {
         (req, res, next) => ctrl.createFloor(req, res, next));
 
     route.put('/editFloor',
-		celebrate({
+        celebrate({
             body: Joi.object({
                 floorId: Joi.number().required(),
-                floorNumber:  Joi.number().max(10),
+                floorNumber: Joi.number().max(10),
                 floorDescription: Joi.string().max(255),
             }),
-		}),
-		(req, res, next) => ctrlEditFloor.editFloor(req, res, next)
-	);
+        }),
+        (req, res, next) => ctrlEditFloor.editFloor(req, res, next)
+    );
 
     route.patch('/loadFloorMap', /*
     celebrate({
@@ -63,4 +65,12 @@ export default (app: Router) => {
             //floorMap: Joi.required(),
         })
     }),*/ (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
+
+    route.delete('/deleteFloor/:id',
+        celebrate({
+            body: Joi.object({
+                id: Joi.number().required()
+            })
+        }), (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
+    )
 }
