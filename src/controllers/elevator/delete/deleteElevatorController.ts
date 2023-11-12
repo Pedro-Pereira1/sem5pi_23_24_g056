@@ -22,7 +22,7 @@ export default class DeleteElevatorController implements IDeleteElevatorControll
                 return res.status(400).send(elevatorOrError.errorValue())
             }
 
-            return res.status(201).json("Elevator deleted successfully");
+            return res.status(204).json("Elevator deleted successfully");
 
         }catch (e){
             return next(e);
