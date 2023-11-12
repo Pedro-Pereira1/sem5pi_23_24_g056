@@ -154,7 +154,7 @@ export default class BuildingRepo implements IBuildingRepo {
     }
 
     public async deleteFloor(buildingCode: string, floorId: number): Promise<boolean> {
-        const query = { buildingCode: buildingCode.toString() };
+        const query = { buildingCode: buildingCode };
 
         const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
 
