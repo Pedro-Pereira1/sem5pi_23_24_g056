@@ -13,7 +13,7 @@ export default class DeletePassagewayService implements IDeletePassagewayService
         @Inject(config.repos.floor.name) private floorRepo: IFloorRepo
     ) {}
 
-    public async deleteFloor(id: number): Promise<Result<string>> {
+    public async deletePassageway(id: number): Promise<Result<string>> {
         try {
 
             let floors = await this.floorRepo.findByPassageway(id)

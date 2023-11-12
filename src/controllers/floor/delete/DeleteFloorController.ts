@@ -11,10 +11,9 @@ export default class DeleteFloorController implements IDeleteFloorController {
 
     constructor(
         @Inject(config.services.deleteFloor.name) private deleteFloorService: IDeleteFloorService
-    ) {}
+    ) { }
 
-
-    public async deleteFloor(req: Request, res: Response, next: NextFunction): Promise<Result<string>> {
+    public async deleteFloor(req: Request, res: Response, next: NextFunction) {
         try {
             const id = req.params.id.toString();
 
@@ -28,7 +27,7 @@ export default class DeleteFloorController implements IDeleteFloorController {
 
             return result;
         } catch (error) {
-            return Result.fail<string>('Floor not deleted');
+            res.status(500).send('Internal Server Error');
         }
     }
 }
