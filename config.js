@@ -65,6 +65,10 @@ export default {
       name:"createRoomController",
       path: "../controllers/room/create/createRoomController"
     },
+    deleteRoom:{
+      name:"deleteRoomController",
+      path: "../controllers/room/delete/deleteRoomController"
+    },
     listAllBuildigns: {
       name: "listAllBuildingsController",
       path: "../controllers/building/list/listAllBuildingsController"
@@ -194,6 +198,10 @@ export default {
     createRoom: {
       name: "createRoomService",
       path: "../services/room/create/createRoomService"
+    },
+    deleteRoom:{
+      name:"deleteRoomService",
+      path: "../services/room/delete/deleteRoomService"
     },
     createElevator: {
       name: "createElevatorService",
