@@ -1,4 +1,5 @@
 import { Repo } from "../../../core/infra/Repo";
+import { Result } from "../../../core/logic/Result";
 import { Floor } from "../../../domain/Floor/Floor";
 
 export default interface IFloorRepo extends Repo<Floor> {
@@ -7,4 +8,5 @@ export default interface IFloorRepo extends Repo<Floor> {
     findByElevator(id: number): Promise<Floor[]>
     findByPassageway(passagewayId: number): Promise<Floor[]>
     findByRoom(id: string): Promise<Floor>
+    deleteFloor(id: number): Promise<boolean>
 }
