@@ -93,6 +93,10 @@ export default {
       name: "listPassagewaysBetween2BuildingsController",
       path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
     },
+    listAllRoomsInBuilding: {
+      name: "listAllRoomsInBuildingController",
+      path: "../controllers/room/list/listAllRoomsInBuildingController"
+    },
     editBuilding: {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
@@ -290,6 +294,10 @@ export default {
     listRobotsByDesignation: {
       name: "listRobotsByDesignationService",
       path: "../services/robot/list/ListRobotsByDesignationService"
+    },
+    listAllRoomsInBuilding: {
+      name: "listAllRoomsInBuildingService",
+      path: "../services/room/list/listAllRoomsInBuildingService"
     },
     deleteBuilding: {
       name: "deleteBuildingService",
