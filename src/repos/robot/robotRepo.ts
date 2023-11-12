@@ -5,6 +5,7 @@ import IRobotRepo from "../../services/IRepos/robot/IRobotRepo";
 import IRobotPersistence from "../../dataschema/robot/IRobotPersistence";
 import { RobotMap } from "../../mappers/robot/RobotMap";
 import { AvailableTask } from "../../domain/RobotType/AvailableTask";
+import { Result } from "../../core/logic/Result";
 
 
 @Service()
@@ -124,6 +125,25 @@ export default class RobotRepo implements IRobotRepo {
     }
 
     return result
+  }
+
+  public async deleteRobot(id: string): Promise<Result<String>> {
+    try {
+      const query = { code: id.toString() };
+
+      const robotDocument = await this.robotSchema.findOne(query as FilterQuery<IRobotPersistence & Document>);
+
+      if (robotDocument === null) {
+          return Result.fail<String>("Robot not found");
+      }
+
+      await robotDocument.deleteOne();
+
+      return Result.ok<String>("Robot deleted succesfully");
+
+  } catch (e) {
+      throw e
+  }
   }
 
 }

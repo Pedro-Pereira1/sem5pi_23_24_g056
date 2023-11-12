@@ -6,6 +6,7 @@ import config from "../../../config";
 import ICreateRobotController from '../../controllers/IControllers/robot/create/ICreateRobotController';
 import IListAllRobotsController from '../../controllers/IControllers/robot/list/IListAllRobotsController';
 import IInhibitRobotController from '../../controllers/IControllers/robot/inhibit/IInhibitRobotController';
+import IRobotController from '../../controllers/IControllers/robot/IRobotController';
 
 const route = Router();
 
@@ -15,6 +16,7 @@ export default (app: Router) => {
   const ctrl = Container.get(config.controllers.createRobot.name) as ICreateRobotController;
   const ctrlList = Container.get(config.controllers.listAllRobots.name) as IListAllRobotsController;
   const inhibitRobotController = Container.get(config.controllers.inhibitRobot.name) as IInhibitRobotController
+  const ctrl1 = Container.get(config.controllers.robot.name) as IRobotController;
 
   route.post('/createRobot',
     celebrate({
@@ -38,4 +40,8 @@ export default (app: Router) => {
 
   route.get('/listAll', (req, res, next) => { ctrlList.listAllRobots(req, res, next) });
 
+  route.delete('/deleteRobot/:id', (req, res, next) => {
+    ctrl1.deleteRobot(req, res, next),
+    req.params.id
+  });
 };
