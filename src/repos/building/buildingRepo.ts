@@ -101,8 +101,8 @@ export default class BuildingRepo implements IBuildingRepo {
         }
     }
 
-    public async findByFloor(floorId : number): Promise<Building> {
-        const query = {buildingFloors: floorId};
+    public async findByFloor(floorId: number): Promise<Building> {
+        const query = { buildingFloors: floorId };
         const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
 
         if (buildingDocument != null) {
@@ -152,5 +152,24 @@ export default class BuildingRepo implements IBuildingRepo {
             throw e
         }
     }
+
+    public async deleteFloor(buildingCode: string, floorId: number): Promise<boolean> {
+        const query = { buildingCode: buildingCode.toString() };
+
+        const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
+
+        if (buildingDocument === null) {
+            return false
+        }
+
+        const building = await BuildingMap.toDomain(buildingDocument);
+
+        building.removeFloor(floorId);
+
+        this.save(building);
+
+        return true;
+    }
+
 
 }

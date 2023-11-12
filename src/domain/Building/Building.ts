@@ -67,6 +67,10 @@ export class Building extends AggregateRoot<BuildingProps> {
     this.props.floors.push(floor)
   }
 
+  removeFloor(floorId: number) {
+    this.props.floors = this.props.floors.filter(f => f.id.toValue() !== floorId)
+  }
+
   public static create(buildingProps: BuildingProps, buildingCode: string): Result<Building> {
     const name = buildingProps.buildingName
     const description = buildingProps.buildingDescription

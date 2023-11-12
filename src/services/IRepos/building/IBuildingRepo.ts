@@ -11,4 +11,5 @@ export default interface IBuildingRepo extends Repo<Building> {
     findByFloor(floorId : number): Promise<Building>
     findByFloorId(floorId: number): Promise<Building>
     deleteBuilding(id: String): Promise<Result<String>>
+    deleteFloor(buildingCode: string, floorId: number): Promise<boolean>
 }
