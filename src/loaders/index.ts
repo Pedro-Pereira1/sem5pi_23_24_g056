@@ -404,7 +404,7 @@ export default async ({ expressApp }) => {
       ListPassagewaysBetween2BuildingsController,
       deleteBuildingController,
       robotController,
-      robotTypeController
+      robotTypeController,
       ListPassagewaysBetween2BuildingsController,
       deleteElevatorController
     ],
@@ -441,7 +441,7 @@ export default async ({ expressApp }) => {
       listAllRobotsService,
       inhibitRobotService,
       listPassagewaysBetween2BuildingsService,
-      deleteElevatorService
+      deleteElevatorService,
       listPassagewaysBetween2BuildingsService,
       deleteBuildingService,
       deleteRobotTypeService,
