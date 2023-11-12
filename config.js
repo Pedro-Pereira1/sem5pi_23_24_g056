@@ -327,5 +327,9 @@ export default {
       name: "deleteFloorService",
       path: "../services/floor/delete/DeleteFloorService"
     },
+    deletePassageway: {
+      name: "deletePassagewayService",
+      path: "../services/passageway/delete/deletePassagewayService"
+    },
   },
 };
