@@ -145,6 +145,10 @@ export default {
       name: "robotTypeController",
       path: "../controllers/robotType/robotTypeController"
     },
+    deleteElevator: {
+        name: "deleteElevatorController",
+        path: "../controllers/elevator/delete/deleteElevatorController"
+    },
   },
 
   repos: {
@@ -295,5 +299,9 @@ export default {
       name: "listAllRobotTypeService",
       path: "../services/robotType/list/listAllRobotTypeService"
     },
+    deleteElevator: {
+        name: "deleteElevatorService",
+        path: "../services/elevator/delete/deleteElevatorService"
+    }
   },
 };

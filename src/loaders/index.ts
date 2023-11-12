@@ -176,6 +176,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.robotType.path
   }
 
+  const deleteElevatorController = {
+    name: config.controllers.deleteElevator.name,
+    path: config.controllers.deleteElevator.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -350,12 +355,17 @@ export default async ({ expressApp }) => {
   const deleteRobotTypeService = {
     name: config.services.deleteRobotType.name,
     path: config.services.deleteRobotType.path
-  } 
+  }
 
   const listAllRobotTypeService = {
     name: config.services.listAllRobotType.name,
     path: config.services.listAllRobotType.path
-  } 
+  }
+
+    const deleteElevatorService = {
+        name: config.services.deleteElevator.name,
+        path: config.services.deleteElevator.path
+    }
 
   await dependencyInjectorLoader({
     mongoConnection,
@@ -395,6 +405,8 @@ export default async ({ expressApp }) => {
       deleteBuildingController,
       robotController,
       robotTypeController
+      ListPassagewaysBetween2BuildingsController,
+      deleteElevatorController
     ],
     repos: [
       roleRepo,
@@ -428,6 +440,8 @@ export default async ({ expressApp }) => {
       loadFlorMapService,
       listAllRobotsService,
       inhibitRobotService,
+      listPassagewaysBetween2BuildingsService,
+      deleteElevatorService
       listPassagewaysBetween2BuildingsService,
       deleteBuildingService,
       deleteRobotTypeService,
