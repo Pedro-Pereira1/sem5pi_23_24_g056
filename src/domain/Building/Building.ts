@@ -3,12 +3,9 @@ import { UniqueEntityID } from "../../core/domain/UniqueEntityID";
 import { BuildingDescription } from './BuildingDescription';
 import { BuildingName } from './BuildingName';
 import { Floor } from '../Floor/Floor';
-import { IBuildingDTO } from '../../dto/building/IBuildingDTO';
 import { Result } from '../../core/logic/Result';
 import { BuildingSize } from './BuildingSize';
 import BuildingCode from './BuildingCode';
-import { CONNREFUSED } from 'dns';
-import { ExceptionHandler } from 'winston';
 
 
 interface BuildingProps {
@@ -44,15 +41,15 @@ export class Building extends AggregateRoot<BuildingProps> {
   }
 
   changeName(name: string) {
-    this.props.buildingName = new BuildingName({value: name})
+    this.props.buildingName = new BuildingName({ value: name })
   }
 
   changeDescription(description: string) {
-    this.props.buildingDescription = new BuildingDescription({value: description})
+    this.props.buildingDescription = new BuildingDescription({ value: description })
   }
 
   changeSize(length: number, width: number) {
-    this.props.buildingSize = new BuildingSize({length: length, width: width})
+    this.props.buildingSize = new BuildingSize({ length: length, width: width })
   }
 
   get floorsNumber(): number[] {

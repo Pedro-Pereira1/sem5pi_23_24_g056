@@ -25,25 +25,27 @@ export default class DeleteFloorService implements IDeleteFloorService {
                 return Result.fail<string>('Floor not found');
             }
 
-            const building = await this.buildingRepo.findByFloorId(id);
+            const building = await this.buildingRepo.findByFloor(id);
             if (building === null) {
                 return Result.fail<string>('building not found');
             }
 
+
+            building.removeFloor(id);
+
+            await this.buildingRepo.save(building);
             const deleted = await this.floorRepo.deleteFloor(id);
-            const buildingAfter = await this.buildingRepo.deleteFloor(building.id.toString(), id);
 
             if (deleted === false) {
                 return Result.fail<string>('Floor not deleted');
             }
 
-            if (buildingAfter === false) {
-                throw new Error('Building not updated');
-            }
 
             return Result.ok<string>('Floor deleted');
+
         } catch (error) {
-            return Result.fail<string>('Floor not deleted');
+            console.log(error)
+            return Result.fail<string>('error');
         }
 
 

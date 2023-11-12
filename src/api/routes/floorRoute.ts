@@ -66,11 +66,6 @@ export default (app: Router) => {
         })
     }),*/ (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 
-    route.delete('/deleteFloor/:id',
-        celebrate({
-            body: Joi.object({
-                id: Joi.number().required()
-            })
-        }), (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
+    route.delete('/deleteFloor/:id', (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
     )
 }
