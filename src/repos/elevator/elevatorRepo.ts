@@ -64,4 +64,21 @@ export default class ElevatorRepo implements IElevatorRepo {
         else
             return null;
     }
+
+    public async delete(elevator: Elevator): Promise<Elevator> {
+        const query = { elevatorId: elevator.id.toValue() }
+        const elevatorDocument = await this.elevatorSchema.findOne(query)
+
+        try {
+            if (elevatorDocument === null) {
+                return null
+            } else {
+                await elevatorDocument.deleteOne()
+                return elevator
+            }
+        } catch (err) {
+            throw err
+        }
+    }
+
 }
