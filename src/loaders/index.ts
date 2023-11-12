@@ -186,6 +186,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.deleteElevator.path
   }
 
+  const deleteFloorController = {
+    name: config.controllers.deleteFloor.name,
+    path: config.controllers.deleteFloor.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -260,7 +265,7 @@ export default async ({ expressApp }) => {
     name: config.services.createRoom.name,
     path: config.services.createRoom.path
   }
-  
+
   const deleteRoomService = {
     name: config.services.deleteRoom.name,
     path: config.services.deleteRoom.path
@@ -372,10 +377,15 @@ export default async ({ expressApp }) => {
     path: config.services.listAllRobotType.path
   }
 
-    const deleteElevatorService = {
-        name: config.services.deleteElevator.name,
-        path: config.services.deleteElevator.path
-    }
+  const deleteElevatorService = {
+    name: config.services.deleteElevator.name,
+    path: config.services.deleteElevator.path
+  }
+
+  const deleteFloorService = {
+    name: config.services.deleteFloor.name,
+    path: config.services.deleteFloor.path
+  }
 
   await dependencyInjectorLoader({
     mongoConnection,
@@ -417,7 +427,8 @@ export default async ({ expressApp }) => {
       robotController,
       robotTypeController,
       ListPassagewaysBetween2BuildingsController,
-      deleteElevatorController
+      deleteElevatorController,
+      deleteFloorController,
     ],
     repos: [
       roleRepo,
@@ -458,7 +469,8 @@ export default async ({ expressApp }) => {
       deleteBuildingService,
       deleteRobotTypeService,
       listAllRobotTypeService,
-      deleteRobotService
+      deleteRobotService,
+      deleteFloorService,
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
