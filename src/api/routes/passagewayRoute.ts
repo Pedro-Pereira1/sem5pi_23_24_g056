@@ -7,6 +7,7 @@ import config from "../../../config";
 import ICreatePassagewayController from '../../controllers/IControllers/passageway/create/ICreatePassagewayController';
 import IListPassagewaysBetween2BuildingsController from '../../controllers/IControllers/passageway/list/IListPassagewaysBetween2BuildingsController';
 import IEditPassagewayController from "../../controllers/IControllers/passageway/edit/IEditPassagewayController";
+import IDeletePassagewayController from '../../controllers/IControllers/passageway/delete/IDeletePassagewayController';
 
 const route = Router();
 
@@ -16,6 +17,7 @@ export default (app: Router) => {
     const ctrl = Container.get(config.controllers.createPassageway.name) as ICreatePassagewayController
     const ctrlEdit = Container.get(config.controllers.editPassageway.name) as IEditPassagewayController
     const ctrlList = Container.get(config.controllers.listPassagewaysBetween2Buildings.name) as IListPassagewaysBetween2BuildingsController
+    const ctrlDelete = Container.get(config.controllers.deletePassageway.name) as IDeletePassagewayController
 
     route.post('/createPassageway',
     celebrate({
@@ -43,4 +45,7 @@ export default (app: Router) => {
     (req, res, next) => {ctrlList.listPassagewaysBetween2Buildings(req, res, next);
         req.params.building1Code;
         req.params.building2Code});
+
+
+    route.delete('/deletePassageway/:id', (req, res, next) => { ctrlDelete.deletePassageway(req, res, next); });
 }
