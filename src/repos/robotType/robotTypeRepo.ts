@@ -6,6 +6,7 @@ import { RobotType } from "../../domain/RobotType/RobotType";
 import IRobotTypeRepo from "../../services/IRepos/robotType/IRobotTypeRepo";
 import { RobotTypeMap } from "../../mappers/robotType/RobotTypeMap";
 import { RobotBrand } from "../../domain/RobotType/RobotBrand";
+import { Result } from "../../core/logic/Result";
 
 @Service()
 export default class RobotTypeRepo implements IRobotTypeRepo {
@@ -68,5 +69,35 @@ export default class RobotTypeRepo implements IRobotTypeRepo {
       return null;
   }
 
+  public async deleteRobotType(id: string): Promise<Result<String>> {
+    try {
+      const query = { robotTypeID: id.toString() };
+
+      const robotTypeDocument = await this.robotTypeSchema.findOne(query as FilterQuery<IRobotTypePersistence & Document>);
+
+      if (robotTypeDocument === null) {
+          return Result.fail<String>("RobotType not found");
+      }
+
+      await robotTypeDocument.deleteOne();
+
+      return Result.ok<String>("RobotType deleted succesfully");
+
+  } catch (e) {
+      throw e
+  }
+  }
+
+  public async findAll(): Promise<RobotType[]> {
+    let robotTypes: RobotType[] = []
+
+        const cursor = this.robotTypeSchema.find<RobotType>({});
+
+        for await (let doc of cursor) {
+          robotTypes.push(await RobotTypeMap.toDomain(doc))
+        }
+
+        return robotTypes
+  }
 
 }

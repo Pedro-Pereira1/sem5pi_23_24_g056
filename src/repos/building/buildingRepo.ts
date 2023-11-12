@@ -133,4 +133,24 @@ export default class BuildingRepo implements IBuildingRepo {
         }
     }
 
+
+    public async deleteBuilding(id: String): Promise<Result<String>> {
+        try {
+            const query = { buildingCode: id.toString() };
+
+            const buildingDocument = await this.buildingSchema.findOne(query as FilterQuery<IBuildingPersistence & Document>);
+
+            if (buildingDocument === null) {
+                return Result.fail<String>("Building not found");
+            }
+
+            await buildingDocument.deleteOne();
+
+            return Result.ok<String>("Building deleted succesfully");
+
+        } catch (e) {
+            throw e
+        }
+    }
+
 }

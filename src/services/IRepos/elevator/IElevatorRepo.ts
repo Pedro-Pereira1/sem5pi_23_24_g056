@@ -4,4 +4,5 @@ import { Elevator } from "../../../domain/Elevator/Elevator";
 export default interface IElevatorRepo extends Repo<Elevator> {
     save(elevator: Elevator): Promise<Elevator>
     findById(id: number): Promise<Elevator>
+    delete(elevator: Elevator): Promise<Elevator>
 }

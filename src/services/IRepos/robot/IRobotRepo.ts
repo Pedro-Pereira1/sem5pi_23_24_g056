@@ -1,4 +1,5 @@
 import { Repo } from "../../../core/infra/Repo";
+import { Result } from "../../../core/logic/Result";
 import { Robot } from "../../../domain/Robot/Robot";
 import { AvailableTask } from "../../../domain/RobotType/AvailableTask";
 
@@ -9,4 +10,5 @@ export default interface IRobotRepo extends Repo<Robot> {
     findByNickname(nickname: string): Promise<Robot>
     findByAvailableTask(tasks: AvailableTask[]): Promise<Robot[]>
     findAll(): Promise<Robot[]>
+    deleteRobot(id: string): Promise<Result<String>>
 }
