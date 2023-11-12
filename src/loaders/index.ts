@@ -86,6 +86,11 @@ export default async ({ expressApp }) => {
     path: config.controllers.createRoom.path
   }
 
+  const deleteRoomController = {
+    name: config.controllers.deleteRoom.name,
+    path: config.controllers.deleteRoom.path
+  }
+
   const listAllBuildingsController = {
     name: config.controllers.listAllBuildigns.name,
     path: config.controllers.listAllBuildigns.path
@@ -235,6 +240,11 @@ export default async ({ expressApp }) => {
     name: config.services.createRoom.name,
     path: config.services.createRoom.path
   }
+  
+  const deleteRoomService = {
+    name: config.services.deleteRoom.name,
+    path: config.services.deleteRoom.path
+  }
 
   const listAllBuildingsService = {
     name: config.services.listAllBuildigns.name,
@@ -356,7 +366,8 @@ export default async ({ expressApp }) => {
       loadFlorMapController,
       listAllRobotsController,
       inhibitRobotController,
-      ListPassagewaysBetween2BuildingsController
+      ListPassagewaysBetween2BuildingsController,
+      deleteRoomController
     ],
     repos: [
       roleRepo,
@@ -390,7 +401,8 @@ export default async ({ expressApp }) => {
       loadFlorMapService,
       listAllRobotsService,
       inhibitRobotService,
-      listPassagewaysBetween2BuildingsService
+      listPassagewaysBetween2BuildingsService,
+      deleteRoomService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');

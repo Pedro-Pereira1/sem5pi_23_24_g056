@@ -60,4 +60,11 @@ export default class RoomRepo implements IRoomRepo {
             throw err;
         }
     }
+
+    public async delete(id: string): Promise<boolean> {
+        const query = { roomName: id };
+        const roomRecord = await this.roomSchema.deleteOne(query as FilterQuery<IRoomPersistence & Document>);
+
+        return roomRecord.acknowledged.valueOf()
+    }
 }

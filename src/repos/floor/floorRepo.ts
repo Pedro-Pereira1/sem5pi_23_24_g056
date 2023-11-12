@@ -117,4 +117,15 @@ export default class FloorRepo implements IFloorRepo {
       return [];
     }
   }
+
+  public async findByRoom(id: string): Promise<Floor> {
+    const query = { 'floorMap.rooms': id };
+    const floorRecord = await this.floorSchema.findOne(query as FilterQuery<IFloorPersistence & Document>);
+
+    if (floorRecord != null) {
+      return FloorMaper.toDomain(floorRecord);
+    }
+    else
+      return null;
+  }
 }

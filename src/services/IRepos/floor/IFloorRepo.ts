@@ -6,4 +6,5 @@ export default interface IFloorRepo extends Repo<Floor> {
     findById(id: number): Promise<Floor>
     findByElevator(id: number): Promise<Floor[]>
     findByPassageway(passagewayId: number): Promise<Floor[]>
+    findByRoom(id: string): Promise<Floor>
 }
