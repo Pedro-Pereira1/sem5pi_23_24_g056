@@ -7,6 +7,7 @@ import { Model } from "mongoose";
 import { RoomDescription } from "../../domain/Room/RoomDescription";
 import { RoomCategory } from "../../domain/Room/RoomCategory";
 import { RoomName } from "../../domain/Room/RoomName";
+import IListAllRoomsInBuildingDTO from "../../dto/room/IListAllRoomsInBuildingDTO";
 
 export default class RoomMap extends Mapper<Room> {
 
@@ -16,6 +17,15 @@ export default class RoomMap extends Mapper<Room> {
             roomDescription: room.props.roomDescription.description,
             roomCategory: room.props.roomCategory.category
         } as IRoomDTO
+    }
+
+    public static toDtoList(room: Room, floorNumber: number): IListAllRoomsInBuildingDTO {
+        return {
+            roomName: room.id.toString(),
+            roomDescription: room.props.roomDescription.description,
+            roomCategory: room.props.roomCategory.category,
+            floorNumber: floorNumber
+        } as IListAllRoomsInBuildingDTO
     }
 
     public static toDomain(roomDto: any | Model<IRoomPersistence & Document>): Room {
