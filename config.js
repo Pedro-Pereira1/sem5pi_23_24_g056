@@ -161,6 +161,10 @@ export default {
       name: "deleteFloorController",
       path: "../controllers/floor/delete/DeleteFloorController"
     },
+    deletePassageway: {
+      name: "deletePassagewayController",
+      path: "../controllers/passageway/delete/DeletePassagewayController"
+    },
   },
 
   repos: {
