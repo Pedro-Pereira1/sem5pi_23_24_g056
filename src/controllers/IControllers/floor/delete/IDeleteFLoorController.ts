@@ -1,5 +1,5 @@
-import { Result } from "../../../../core/logic/Result";
+import { NextFunction, Request, Response } from "express";
 
 export default interface IDeleteFloorService {
-    deleteFloor(id: number): Promise<Result<string>>;
+    deleteFloor(req: Request, res: Response, next: NextFunction)
 }
