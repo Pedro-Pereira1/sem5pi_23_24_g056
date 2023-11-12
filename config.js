@@ -132,7 +132,19 @@ export default {
     listRobotsByDesignation: {
       name: "listRobotsByDesignationController",
       path: "../controllers/robot/list/ListRobotsByDesignationController"
-    }
+    },
+    deleteBuilding: {
+      name: "deleteBuildingController",
+      path: "../controllers/building/delete/deleteBuildingController"
+    },
+    robot: {
+      name: "robotController",
+      path: "../controllers/robot/robotController"
+    },
+    robotType: {
+      name: "robotTypeController",
+      path: "../controllers/robotType/robotTypeController"
+    },
   },
 
   repos: {
@@ -266,6 +278,22 @@ export default {
     listRobotsByDesignation: {
       name: "listRobotsByDesignationService",
       path: "../services/robot/list/ListRobotsByDesignationService"
-    }
+    },
+    deleteBuilding: {
+      name: "deleteBuildingService",
+      path: "../services/building/delete/deleteBuildingService"
+    },
+    deleteRobot: {
+      name: "deleteRobotService",
+      path: "../services/robot/delete/deleteRobotService"
+    },
+    deleteRobotType: {
+      name: "deleteRobotTypeService",
+      path: "../services/robotType/delete/deleteRobotTypeService"
+    },
+    listAllRobotType: {
+      name: "listAllRobotTypeService",
+      path: "../services/robotType/list/listAllRobotTypeService"
+    },
   },
 };

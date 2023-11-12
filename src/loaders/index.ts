@@ -161,6 +161,21 @@ export default async ({ expressApp }) => {
     path: config.controllers.inhibitRobot.path
   }
 
+  const deleteBuildingController = {
+    name: config.controllers.deleteBuilding.name,
+    path: config.controllers.deleteBuilding.path
+  }
+
+  const robotController = {
+    name: config.controllers.robot.name,
+    path: config.controllers.robot.path
+  }
+
+  const robotTypeController = {
+    name: config.controllers.robotType.name,
+    path: config.controllers.robotType.path
+  }
+
   const roleRepo = {
     name: config.repos.role.name,
     path: config.repos.role.path
@@ -322,6 +337,26 @@ export default async ({ expressApp }) => {
     path: config.services.listRobotsByDesignation.path
   }
 
+  const deleteBuildingService = {
+    name: config.services.deleteBuilding.name,
+    path: config.services.deleteBuilding.path
+  }
+
+  const deleteRobotService = {
+    name: config.services.deleteRobot.name,
+    path: config.services.deleteRobot.path
+  }
+
+  const deleteRobotTypeService = {
+    name: config.services.deleteRobotType.name,
+    path: config.services.deleteRobotType.path
+  } 
+
+  const listAllRobotTypeService = {
+    name: config.services.listAllRobotType.name,
+    path: config.services.listAllRobotType.path
+  } 
+
   await dependencyInjectorLoader({
     mongoConnection,
     schemas: [
@@ -356,7 +391,10 @@ export default async ({ expressApp }) => {
       loadFlorMapController,
       listAllRobotsController,
       inhibitRobotController,
-      ListPassagewaysBetween2BuildingsController
+      ListPassagewaysBetween2BuildingsController,
+      deleteBuildingController,
+      robotController,
+      robotTypeController
     ],
     repos: [
       roleRepo,
@@ -390,7 +428,11 @@ export default async ({ expressApp }) => {
       loadFlorMapService,
       listAllRobotsService,
       inhibitRobotService,
-      listPassagewaysBetween2BuildingsService
+      listPassagewaysBetween2BuildingsService,
+      deleteBuildingService,
+      deleteRobotTypeService,
+      listAllRobotTypeService,
+      deleteRobotService
     ]
   });
   Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
