@@ -1,14 +1,12 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-
 import { Container } from 'typedi';
 import ICreateBuildingController from '../../controllers/IControllers/building/createBuilding/ICreateBuildingController';
 import IListBuildingsMaxMinFloorsController from '../../controllers/IControllers/building/list/IListBuildingsMaxMinFloorsController';
-
-
 import config from "../../../config";
 import IListAllBuildingsController from '../../controllers/IControllers/building/list/IListAllBUildingsController';
 import IEditBuildingontroller from '../../controllers/IControllers/building/edit/IEditBuildingController';
+import IDeleteBuildingController from '../../controllers/IControllers/building/delete/IdeleteBuildingController';
 
 const route = Router();
 
@@ -19,6 +17,13 @@ export default (app: Router) => {
   const ctrlListAllBuildings = Container.get(config.controllers.listAllBuildigns.name) as IListAllBuildingsController
   const ctrlEditBuilding = Container.get(config.controllers.editBuilding.name) as IEditBuildingontroller
   const ctrl1 = Container.get(config.controllers.listBuildingsMaxMinFloors.name) as IListBuildingsMaxMinFloorsController
+  const ctrlDelete = Container.get(config.controllers.deleteBuilding.name) as IDeleteBuildingController
+
+  route.delete('/deleteBuilding/:id', (req, res, next) => {
+    ctrlDelete.deleteBuilding(req, res, next),
+    req.params.id;
+  });
+
 
   route.post('/createBuilding',
     celebrate({
