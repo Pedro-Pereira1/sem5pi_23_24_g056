@@ -3,16 +3,16 @@
 
 autonumber
 participant Vizualization
-participant MasterDataBuilding
+participant MasterDataLogistics
 
 ?o-> Vizualization : disableRobot
 activate Vizualization
 
-Vizualization -> MasterDataBuilding : disableRobot
-activate MasterDataBuilding
+Vizualization -> MasterDataLogistics : disableRobot
+activate MasterDataLogistics
 
-MasterDataBuilding --> Vizualization
-deactivate MasterDataBuilding
+MasterDataLogistics --> Vizualization
+deactivate MasterDataLogistics
 
 <-- Vizualization
 deactivate Vizualization
