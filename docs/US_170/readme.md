@@ -63,7 +63,7 @@ registered in the system regarless of number of floors, elevators, passageways a
 
 * Logical:
 
-![Logical](./Diagrams/Level3/logicalView.svg)
+![Logical](./Diagrams/Level3/LogicalView.svg)
 
 * Implementation
 
