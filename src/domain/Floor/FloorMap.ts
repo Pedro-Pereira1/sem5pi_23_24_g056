@@ -54,6 +54,18 @@ export class FloorMap extends Entity<FloorMapProps> {
     this.props.elevators.splice(index, 1)
   }
 
+  get passageways(): Passageway[] {
+    return this.props.passageways
+  }
+
+  get elevators(): Elevator[] {
+    return this.props.elevators
+  }
+
+  get rooms(): Room[] {
+    return this.props.rooms
+  }
+
   get passagewaysId(): number[] {
     let ids: number[] = []
     this.props.passageways.forEach(m => {

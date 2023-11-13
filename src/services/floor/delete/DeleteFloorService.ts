@@ -6,14 +6,21 @@ import IFloorRepo from "../../IRepos/floor/IFloorRepo";
 import config from "../../../../config";
 import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
 import { FloorMaper } from "../../../mappers/floor/FloorMaper";
+import IElevatorRepo from "../../IRepos/elevator/IElevatorRepo";
+import IRoomRepo from "../../IRepos/room/IRoomRepo";
+import IPassagewayRepo from "../../IRepos/passageway/IPassagewayRepo";
+import { copyFileSync } from "fs";
 
 @Service()
 export default class DeleteFloorService implements IDeleteFloorService {
 
     constructor(
         @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
-        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
-    ) { }
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo,
+        @Inject(config.repos.elevator.name) private elevatorRepo: IElevatorRepo,
+        @Inject(config.repos.room.name) private roomRepo: IRoomRepo,
+        @Inject(config.repos.passageway.name) private passagewayRepo: IPassagewayRepo
+    ) {}
 
 
     public async deleteFloor(id: number): Promise<Result<string>> {
@@ -30,10 +37,28 @@ export default class DeleteFloorService implements IDeleteFloorService {
                 return Result.fail<string>('building not found');
             }
 
-
             building.removeFloor(id);
 
             await this.buildingRepo.save(building);
+
+            for (const elevator of floor.map.elevators) {
+                this.elevatorRepo.delete(elevator);
+            }
+
+            for (const room of floor.map.rooms) {
+                this.roomRepo.delete(room.id.toString());
+            }
+
+            const floorsWithPassageway = await this.floorRepo.findByPassageway(id);
+
+            for (const passage of floor.map.passageways) {
+                for (const floor of floorsWithPassageway) {
+                    floor.map.removePassageway(passage);
+                    await this.floorRepo.save(floor);
+                }
+                this.passagewayRepo.deletePassageway(passage);
+            }
+
             const deleted = await this.floorRepo.deleteFloor(id);
 
             if (deleted === false) {
