@@ -58,13 +58,17 @@ export default (app: Router) => {
         (req, res, next) => ctrlEditFloor.editFloor(req, res, next)
     );
 
-    route.patch('/loadFloorMap', /*
+    route.patch('/loadFloorMap',
     celebrate({
         body: Joi.object({
-            //floorId: Joi.number().required(),
-            //floorMap: Joi.required(),
+            floorId: Joi.number().required(),
+            buildingCode: Joi.string().alphanum().max(5).required(),
+            map: Joi.required(),
+            passageways: Joi.required(),
+            rooms: Joi.required(),
+            elevators: Joi.required()
         })
-    }),*/ (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
+    }), (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 
     route.delete('/deleteFloor/:id', (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
     )
