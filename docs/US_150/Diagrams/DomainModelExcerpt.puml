@@ -1,4 +1,4 @@
-@startuml domainModelExcerpt
+@startuml DomainModelExcerpt
 'https://plantuml.com/use-case-diagram
 
 rectangle #36827F{
