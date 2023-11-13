@@ -41,24 +41,6 @@ export default class DeleteFloorService implements IDeleteFloorService {
 
             await this.buildingRepo.save(building);
 
-            for (const elevator of floor.map.elevators) {
-                this.elevatorRepo.delete(elevator);
-            }
-
-            for (const room of floor.map.rooms) {
-                this.roomRepo.delete(room.id.toString());
-            }
-
-            const floorsWithPassageway = await this.floorRepo.findByPassageway(id);
-
-            for (const passage of floor.map.passageways) {
-                for (const floor of floorsWithPassageway) {
-                    floor.map.removePassageway(passage);
-                    await this.floorRepo.save(floor);
-                }
-                this.passagewayRepo.deletePassageway(passage);
-            }
-
             const deleted = await this.floorRepo.deleteFloor(id);
 
             if (deleted === false) {
