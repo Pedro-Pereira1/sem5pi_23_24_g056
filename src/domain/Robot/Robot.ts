@@ -36,13 +36,13 @@ export class Robot extends AggregateRoot<RobotProps> {
     this.props.operationStatus = OperationStatus.create({status: false}).getValue()
   }
 
-  public static create(robotDTO: ICreateRobotDTO, robotType: RobotType, code: string): Result<Robot> {
+  public static create(robotDTO: ICreateRobotDTO, robotType: RobotType, code: string, status: boolean): Result<Robot> {
     const nicknameOrError = Nickname.create({ nickname: robotDTO.nickname })
     if (nicknameOrError.isFailure) {
       return Result.fail<Robot>(nicknameOrError.errorValue())
     }
 
-    const operationStatusOrError = OperationStatus.create({status: true})
+    const operationStatusOrError = OperationStatus.create({status: status})
     if (operationStatusOrError.isFailure) {
       return Result.fail<Robot>(operationStatusOrError.errorValue())
     }

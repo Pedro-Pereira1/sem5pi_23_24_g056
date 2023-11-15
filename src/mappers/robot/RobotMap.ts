@@ -31,7 +31,7 @@ export class RobotMap extends Mapper<Robot> {
         const robotTypeRepo: IRobotTypeRepo = Container.get(config.repos.robotType.name)
 
         const type = await robotTypeRepo.findById(robotDTO.type)
-        const RobotOrError = Robot.create(robotDTO, type, robotDTO.code)
+        const RobotOrError = Robot.create(robotDTO, type, robotDTO.code, robotDTO.operationStatus)
 
         return RobotOrError.isSuccess ? RobotOrError.getValue() : null
     }
