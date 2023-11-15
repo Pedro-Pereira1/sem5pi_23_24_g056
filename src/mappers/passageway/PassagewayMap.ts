@@ -5,6 +5,7 @@ import { Passageway } from "../../domain/Passageway/Passageway";
 import { IPassagewayDTO } from "../../dto/passageway/IPassagewayDTO";
 import { NumericDictionary } from "lodash";
 import { IListPassagewaysBetween2BuildingsDTO } from "../../dto/passageway/IListPassagewaysBetween2BuildingsDTO";
+import IEditPassagewayDTO from "../../dto/passageway/IEditPassagewayDTO";
 
 export class PassagewayMap extends Mapper<Passageway> {
 
@@ -20,6 +21,14 @@ export class PassagewayMap extends Mapper<Passageway> {
             floorNumberBuilding1: floorNumberBuilding1,
             floorNumberBuilding2: floorNumberBuilding2
         } as IListPassagewaysBetween2BuildingsDTO
+    }
+
+    public static toDtoListAll(passageway: Passageway, floor1Id: number, floor2Id: number): IEditPassagewayDTO {
+        return {
+            passagewayId: Number(passageway.id.toValue()),
+            floor1Id: floor1Id,
+            floor2Id: floor2Id
+        } as IEditPassagewayDTO
     }
 
     public static toDomain(IPassagewayDTO: any | Model<IPassagewayPersistence & Document>): Passageway {
