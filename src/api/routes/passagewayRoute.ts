@@ -8,6 +8,8 @@ import ICreatePassagewayController from '../../controllers/IControllers/passagew
 import IListPassagewaysBetween2BuildingsController from '../../controllers/IControllers/passageway/list/IListPassagewaysBetween2BuildingsController';
 import IEditPassagewayController from "../../controllers/IControllers/passageway/edit/IEditPassagewayController";
 import IDeletePassagewayController from '../../controllers/IControllers/passageway/delete/IDeletePassagewayController';
+import IListAllPassagewaysController
+    from "../../controllers/IControllers/passageway/list/IListAllPassagewaysController";
 
 const route = Router();
 
@@ -18,6 +20,7 @@ export default (app: Router) => {
     const ctrlEdit = Container.get(config.controllers.editPassageway.name) as IEditPassagewayController
     const ctrlList = Container.get(config.controllers.listPassagewaysBetween2Buildings.name) as IListPassagewaysBetween2BuildingsController
     const ctrlDelete = Container.get(config.controllers.deletePassageway.name) as IDeletePassagewayController
+    const ctrlListAll = Container.get(config.controllers.listAllPassageways.name) as IListAllPassagewaysController
 
     route.post('/createPassageway',
     celebrate({
@@ -48,4 +51,7 @@ export default (app: Router) => {
 
 
     route.delete('/deletePassageway/:id', (req, res, next) => { ctrlDelete.deletePassageway(req, res, next); });
+
+    route.get('/listAll', (req, res, next) => {
+        ctrlListAll.listAllPassageways(req, res, next); });
 }

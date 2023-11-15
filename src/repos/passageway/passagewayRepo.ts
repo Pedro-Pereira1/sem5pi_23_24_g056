@@ -78,4 +78,14 @@ export default class PassagewayRepo implements IPassagewayRepo {
       throw e
     }
   }
+
+  public async findAll(): Promise<Passageway[]> {
+    let passageways: Passageway[] = []
+    const cursor = this.passagewaychema.find<Passageway>({});
+
+    for await (let doc of cursor) {
+      passageways.push(await PassagewayMap.toDomain(doc))
+    }
+    return passageways
+  }
 }

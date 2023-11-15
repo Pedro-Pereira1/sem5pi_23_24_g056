@@ -48,7 +48,7 @@ export default class createRobotService implements ICreateRobotService {
                 return Result.fail<IRobotDTO>("Robot of this type and serial number already exists")
             }
 
-            const robotOrError = Robot.create(robotDTO,typeOrError,robotDTO.code)
+            const robotOrError = Robot.create(robotDTO,typeOrError,robotDTO.code, true)
             if (robotOrError.isFailure) {
                 return Result.fail<IRobotDTO>(robotOrError.errorValue())
             }
