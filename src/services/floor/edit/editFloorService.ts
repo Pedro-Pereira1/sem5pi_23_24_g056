@@ -35,14 +35,16 @@ export default class EditFloorService implements IEditFloorService {
 				return Result.fail<IFloorDTO>('Floor dont exists on system!!');
 			} else {
 
+				if(floorDTO.floorNumber !== undefined && floorDTO.floorNumber !== floor.props.floorNumber.props.number) {
 				
-				const building = await this.buildingRepo.findByFloorId(floorDTO.floorId)
-            	for (let i = 0; i < building.floors.length; i++) {
-					const floor = await this.floorRepo.findById(building.floorsNumber[i])
-                	if (floor.floorNumber.props.number == floorDTO.floorNumber) {
-                    	return Result.fail<IFloorDTO>("Floor number already exists")
-                	}
-           		}
+					const building = await this.buildingRepo.findByFloorId(floorDTO.floorId)
+            		for (let i = 0; i < building.floors.length; i++) {
+						const floor = await this.floorRepo.findById(building.floorsNumber[i])
+                		if (floor.floorNumber.props.number == floorDTO.floorNumber) {
+                	    	return Result.fail<IFloorDTO>("Floor number already exists")
+                		}
+           			}
+				}
 
                 if (floorDTO.floorDescription !== undefined) {
 					const floorDescription = new FloorDescription({ value: floorDTO.floorDescription });
