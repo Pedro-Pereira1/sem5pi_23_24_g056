@@ -5,4 +5,5 @@ export default interface IPassagewayRepo extends Repo<Passageway> {
     save(passageway: Passageway): Promise<Passageway>
     findById(number: number): Promise<Passageway>
     deletePassageway(passageway: Passageway): Promise<boolean>
+    findAll(): Promise<Passageway[]>
 }

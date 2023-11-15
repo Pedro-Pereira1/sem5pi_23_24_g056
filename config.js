@@ -93,6 +93,10 @@ export default {
       name: "listPassagewaysBetween2BuildingsController",
       path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
     },
+    listAllPassageways: {
+        name: "listAllPassagewaysController",
+        path: "../controllers/passageway/list/listAllPassagewaysController"
+    },
     listAllRoomsInBuilding: {
       name: "listAllRoomsInBuildingController",
       path: "../controllers/room/list/listAllRoomsInBuildingController"
@@ -258,6 +262,10 @@ export default {
     listPassagewaysBetween2Buildings: {
       name: "listPassagewaysBetween2BuildingsService",
       path: "../services/passageway/list/listPassagewaysBetween2BuildingsService"
+    },
+    listAllPassageways: {
+        name: "listAllPassagewaysService",
+        path: "../services/passageway/list/listAllPassagewaysService"
     },
     editBuilding: {
       name: "editBuildingService",
