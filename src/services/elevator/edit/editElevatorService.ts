@@ -77,9 +77,9 @@ export default class EditElevatorService implements IEditElevatorService {
 
             if (elevatorDto.floorsIdToRemove !== undefined) {
                 let floors: Floor[] = [];
-                for (var floorId of elevatorDto.floorsIdToRemove) {
-                    const floor = await this.floorRepo.findById(floorId)
-                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
+                for (var floorNumber of elevatorDto.floorsIdToRemove) {
+                    const floor = building.props.floors.find((floorInList) => floorInList.floorNumber.number === floorNumber)
+                    if (floor === undefined) return Result.fail<IElevatorDTO>('Floor does not exist!')
                     floors.push(floor)
                 }
 
@@ -94,10 +94,9 @@ export default class EditElevatorService implements IEditElevatorService {
 
             if (elevatorDto.floorsIdToAdd !== undefined) {
                 let floors: Floor[] = [];
-                for (var floorId of elevatorDto.floorsIdToAdd) {
-                    const floor = await this.floorRepo.findById(floorId)
-                    if (floor === null) return Result.fail<IElevatorDTO>('Floor does not exist!')
-                    if (building.props.floors.find((floorInList) => floorInList.id.toValue() === floor.id.toValue()) === undefined){ return Result.fail<IElevatorDTO>('Floor with id ' + floor.floorId.toValue() + ' does not belong in building ' + building.code.toValue())}
+                for (var floorNumber of elevatorDto.floorsIdToAdd) {
+                    const floor = building.props.floors.find((floorInList) => floorInList.floorNumber.number === floorNumber)
+                    if (floor === undefined) return Result.fail<IElevatorDTO>('Floor number ' + floor.floorNumber.number + ' does not belong exist in building ' + building.code.toValue())
                     floors.push(floor)
                 }
     
