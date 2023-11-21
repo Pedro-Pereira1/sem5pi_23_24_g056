@@ -10,9 +10,6 @@ node Server1{
 }
 
 node Server2{
-  component "<<Planeamento>>" as P {
-  }
-
   component "<<MasterDataLogistic>>" as MDL{
   }
 
@@ -20,9 +17,14 @@ node Server2{
   }
 }
 
+node Server3{
+  component "<<Planeamento>>" as P {
+  }
+}
+
 
 
 Server1 -d- Server2: http/s
-
+Server2 -u- Server3: http/s
 
 @enduml
