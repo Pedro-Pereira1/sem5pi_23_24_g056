@@ -141,6 +141,11 @@ export default async ({expressApp}) => {
         path: config.controllers.listAllRoomsInBuilding.path
     }
 
+    const listAllElevatorsController = {
+        name: config.controllers.listAllElevators.name,
+        path: config.controllers.listAllElevators.path
+    }
+
     const editFloorController = {
         name: config.controllers.editFloor.name,
         path: config.controllers.editFloor.path
@@ -336,6 +341,11 @@ export default async ({expressApp}) => {
         path: config.services.listAllRobots.path
     }
 
+    const listAllElevatorsService = {
+        name: config.services.listAllElevators.name,
+        path: config.services.listAllElevators.path
+    }
+
     const editFloorService = {
         name: config.services.editFloor.name,
         path: config.services.editFloor.path
@@ -460,6 +470,7 @@ export default async ({expressApp}) => {
             listAllPassagewaysController,
             deleteElevatorController,
             listAllRoomsInBuildingController,
+            listAllElevatorsController,
             deleteFloorController,
             deletePassagewayController,
         ],
@@ -505,6 +516,7 @@ export default async ({expressApp}) => {
             listAllRobotTypeService,
             deleteRobotService,
             listAllRoomsInBuildingService,
+            listAllElevatorsService,
             deleteFloorService,
             deletePassagewayService,
         ]
