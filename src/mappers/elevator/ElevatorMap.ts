@@ -10,6 +10,7 @@ import { ElevatorModel } from "../../domain/Elevator/ElevatorModel"
 import { ElevatorSerialNumber } from "../../domain/Elevator/ElevatorSerialNumber"
 import { ElevatorID } from "../../domain/Elevator/ElevatorID"
 import IListElevatorsInBuildingDTO from "../../dto/elevator/IListElevatorsInBuildingDTO"
+import IListAllElevatorsDTO from "../../dto/elevator/IListAllElevatorsDTO";
 
 export default class ElevatorMap extends Mapper<Elevator> {
 
@@ -58,5 +59,13 @@ export default class ElevatorMap extends Mapper<Elevator> {
             elevatorModel: elevator.props.elevatorModel.model,
             elevatorSerialNumber: elevator.props.elevatorSerialNumber.serialNumber
         }
+    }
+
+    public static toDtoListAll(elevator: Elevator, floors: number[], buildingCode: string): IListAllElevatorsDTO {
+        return {
+            elevatorId: Number(elevator.id.toValue()),
+            floorsId: floors,
+            buildingCode: buildingCode
+        } as IListAllElevatorsDTO
     }
 }
