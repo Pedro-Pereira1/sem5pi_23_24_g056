@@ -22,7 +22,6 @@ export default class listAllElevators implements IListAllElevatorsService {
     public async listAllElevators(): Promise<Result<IListAllElevatorsDTO[]>> {
         const elevators = await this.elevatorRepo.findAll()
         const resolve: IListAllElevatorsDTO[] = []
-        const floorsId: number[] = []
 
         if(elevators.length === 0) {
             return Result.fail<IListAllElevatorsDTO[]>("null")
@@ -31,6 +30,7 @@ export default class listAllElevators implements IListAllElevatorsService {
         for(let elevator of elevators){
             const floors = await this.floorRepo.findByElevator(Number(elevator.id.toValue()))
             const building = await this.buildingRepo.findByFloor(Number(floors[0].floorId.toValue()))
+            const floorsId: number[] = []
             for(let floor of floors){
                 floorsId.push(Number(floor.floorId.toValue()))
             }
