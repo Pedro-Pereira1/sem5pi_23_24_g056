@@ -8,6 +8,7 @@ import ICreateElevatorController from '../../controllers/IControllers/elevator/c
 import IEditElevatorController from '../../controllers/IControllers/elevator/edit/IEditElevatorController';
 import IListElevatorsInBuildingController from '../../controllers/IControllers/elevator/list/IListElevatorsInBuildingController';
 import IDeleteElevatorController from "../../controllers/IControllers/elevator/delete/IDeleteElevatorController";
+import IListAllElevatorsController from "../../controllers/IControllers/elevator/list/IListAllElevatorsController";
 
 const route = Router();
 
@@ -18,6 +19,7 @@ export default (app: Router) => {
     const ctrlEdit = Container.get(config.controllers.editElevator.name) as IEditElevatorController
     const ctrlList = Container.get(config.controllers.listElevatorsInBuilding.name) as IListElevatorsInBuildingController
     const ctrlDelete = Container.get(config.controllers.deleteElevator.name) as IDeleteElevatorController
+    const ctrlListAll = Container.get(config.controllers.listAllElevators.name) as IListAllElevatorsController
     
     route.post('/create', 
     celebrate({
@@ -62,4 +64,7 @@ export default (app: Router) => {
         }),
     }),
     (req, res, next) => ctrlDelete.deleteElevator(req, res, next));
+
+    route.get('/listAll', (req, res, next) => {
+        ctrlListAll.listAllElevators(req, res, next); });
 }
