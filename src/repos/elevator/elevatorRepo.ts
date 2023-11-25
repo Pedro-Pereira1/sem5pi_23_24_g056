@@ -5,7 +5,6 @@ import { Document, FilterQuery } from "mongoose";
 import { Model } from "mongoose";
 import ElevatorMap from "../../mappers/elevator/ElevatorMap";
 import IElevatorPersistence from "../../dataschema/elevator/IElevatorPersistence";
-import BuildingCode from "../../domain/Building/BuildingCode";
 
 @Service()
 export default class ElevatorRepo implements IElevatorRepo {
@@ -79,6 +78,16 @@ export default class ElevatorRepo implements IElevatorRepo {
         } catch (err) {
             throw err
         }
+    }
+
+    public async findAll(): Promise<Elevator[]> {
+        let elevators: Elevator[] = []
+        const cursor = this.elevatorSchema.find<Elevator>({});
+
+        for await (let doc of cursor) {
+            elevators.push(await ElevatorMap.toDomain(doc))
+        }
+        return elevators
     }
 
 }
