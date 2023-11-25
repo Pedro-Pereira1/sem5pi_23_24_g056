@@ -101,6 +101,10 @@ export default {
       name: "listAllRoomsInBuildingController",
       path: "../controllers/room/list/listAllRoomsInBuildingController"
     },
+    listAllElevators: {
+        name: "listAllElevatorsController",
+        path: "../controllers/elevator/list/listAllElevatorsController"
+    },
     editBuilding: {
       name: "editBuildingController",
       path: "../controllers/building/edit/EditBuildingController"
@@ -314,6 +318,10 @@ export default {
     listAllRoomsInBuilding: {
       name: "listAllRoomsInBuildingService",
       path: "../services/room/list/listAllRoomsInBuildingService"
+    },
+    listAllElevators: {
+        name: "listAllElevatorsService",
+        path: "../services/elevator/list/listAllElevatorsService"
     },
     deleteBuilding: {
       name: "deleteBuildingService",
