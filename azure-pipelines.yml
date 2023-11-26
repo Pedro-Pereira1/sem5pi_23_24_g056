@@ -2,6 +2,13 @@
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(3ddc68fb-d44a-4c6f-b5b4-8921943eb753)'
+    appType: 'webAppLinux'
+    WebAppName: 'Sem5pi'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(1)(c1a47393-272e-4c9f-b8ce-d19eb3dc2e69)'
     appType: 'webAppLinux'
     WebAppName: 'sem5pig56'
