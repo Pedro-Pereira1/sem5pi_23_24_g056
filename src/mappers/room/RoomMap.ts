@@ -19,12 +19,12 @@ export default class RoomMap extends Mapper<Room> {
         } as IRoomDTO
     }
 
-    public static toDtoList(room: Room, floorNumber: number): IListAllRoomsInBuildingDTO {
+    public static toDtoList(room: Room, floorId: number): IListAllRoomsInBuildingDTO {
         return {
             roomName: room.id.toString(),
             roomDescription: room.props.roomDescription.description,
             roomCategory: room.props.roomCategory.category,
-            floorNumber: floorNumber
+            floorId: floorId
         } as IListAllRoomsInBuildingDTO
     }
 

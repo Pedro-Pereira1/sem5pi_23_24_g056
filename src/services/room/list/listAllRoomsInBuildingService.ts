@@ -22,7 +22,7 @@ export default class ListAllRoomsService implements IListAllRoomsService {
             let roomsList: IListAllRoomsInBuildingDTO[] = []
             for (var floor of building.floors) {
                 for (var anRoom of floor.props.floormap.props.rooms){
-                    const roomrDto = RoomMap.toDtoList(anRoom, floor.props.floorNumber.number)
+                    const roomrDto = RoomMap.toDtoList(anRoom, Number(floor.floorId.toValue()))
                     roomsList.push(roomrDto)
                 }
             }
