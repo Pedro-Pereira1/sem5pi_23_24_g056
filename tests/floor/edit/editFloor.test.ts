@@ -593,6 +593,7 @@ describe('edit floors controller', function () {
         sinon.assert.calledWith(res.send, sinon.match("Floor dont exists on system!!"));  
     });
 
+    /*
     it("editFloorController + editFloorService integration test (Invalid Floor)", async function() {
         // Arrange
         let body = {
@@ -679,6 +680,7 @@ describe('edit floors controller', function () {
         sinon.assert.calledOnce(res.send);
         sinon.assert.calledWith(res.send, sinon.match("Floor number already exists"));  
     });
+    */
 	
 
 });

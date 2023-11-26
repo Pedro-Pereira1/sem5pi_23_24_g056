@@ -83,7 +83,7 @@ describe("Create robot", function () {
 
 
         // Act
-        const result = Robot.create(robotDTO, robotType, robotDTO.code);
+        const result = Robot.create(robotDTO, robotType, robotDTO.code, true);
 
         // Assert
         assert.ok(result.isSuccess);
@@ -116,7 +116,7 @@ describe("Create robot", function () {
 
 
         // Act
-        const result = Robot.create(robotDTO, robotType, robotDTO.code);
+        const result = Robot.create(robotDTO, robotType, robotDTO.code, true);
 
         // Assert
         assert.ok(result.isFailure);
@@ -142,7 +142,7 @@ describe("Create robot", function () {
 
 
        // Act
-       const result = Robot.create(robotDTO, robotType, robotDTO.code);
+       const result = Robot.create(robotDTO, robotType, robotDTO.code, true);
 
        // Assert
        assert.ok(result.isFailure);
@@ -168,7 +168,7 @@ describe("Create robot", function () {
 
 
     // Act
-    const result = Robot.create(robotDTO, robotType, robotDTO.code);
+    const result = Robot.create(robotDTO, robotType, robotDTO.code, true);
 
     // Assert
     assert.ok(result.isFailure);

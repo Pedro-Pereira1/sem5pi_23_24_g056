@@ -29,7 +29,7 @@ describe('List all robots test', function () {
         "description": "Joi.string().max(250)"
     };
 
-    const robot = Robot.create(robotDTO, robotType, robotDTO.code);
+    const robot = Robot.create(robotDTO, robotType, robotDTO.code, true);
 
     const robot2DTO: ICreateRobotDTO = {
         "code":"code2",
@@ -39,7 +39,7 @@ describe('List all robots test', function () {
         "description": "Joi.string().max(250)"
     };
 
-    const robot2 = Robot.create(robot2DTO, robotType, robotDTO.code);
+    const robot2 = Robot.create(robot2DTO, robotType, robotDTO.code, true);
 
     beforeEach(function () {
         Container.reset()

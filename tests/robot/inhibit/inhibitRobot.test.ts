@@ -47,7 +47,7 @@ describe('Inhibit robot test', function () {
             "description": "fast"
         }
 
-        const robot = Robot.create(robotDTO, robotType, robotDTO.code).getValue()
+        const robot = Robot.create(robotDTO, robotType, robotDTO.code, true).getValue()
 
         robot.inhibit()
 
@@ -148,7 +148,7 @@ describe('Inhibit robot test', function () {
             "description": "fast"
         }
 
-        const robot = Robot.create(robotDTO, robotType, robotDTO.code).getValue()
+        const robot = Robot.create(robotDTO, robotType, robotDTO.code, true).getValue()
 
         const toTest = {
             id: "code1"
@@ -204,7 +204,7 @@ describe('Inhibit robot test', function () {
             "serialNumber": "maxC",
             "description": "fast"
         }
-        const robot = Robot.create(robotDTO, robotType, robotDTO.code).getValue()
+        const robot = Robot.create(robotDTO, robotType, robotDTO.code, true).getValue()
 
         const robotJson = {
             id: "code1"
