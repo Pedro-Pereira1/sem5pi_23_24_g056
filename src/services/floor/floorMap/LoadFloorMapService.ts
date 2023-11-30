@@ -111,7 +111,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const r of roomsCoords) {
-            if (map[r.x][r.y] !== 7 || map[r.x1][r.y1] !== 4 ) {
+            if (map[r.y][r.x] != 7 || map[r.y1][r.x1] != 4 ) {
                 return Result.fail<IFloorDTO>('There is no room in the coords: X1:' + r.x + ' Y1:' + r.y + ' X2:' + r.x1 + ' Y2: ' + r.y1)
             }
         }
@@ -130,12 +130,13 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        const roomsIds = floorOrError.map.elevatorsId
-        for (const r of roomsCoords) {
-            if (!roomsIds.includes(Number(r.id))) {
-                return Result.fail<IFloorDTO>('There is no room with id ' + r.id + ' in this floor')
-            }
-        }
+        //const roomsIds = floorOrError.map.elevatorsId
+        //for (const r of roomsCoords) {
+        //    if (!roomsIds.includes(Number(r.id))) {
+        //        console.log(roomsIds)
+        //        return Result.fail<IFloorDTO>('There is no room with id ' + r.id + ' in this floor')
+        //    }
+        //}
 
         floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
 
