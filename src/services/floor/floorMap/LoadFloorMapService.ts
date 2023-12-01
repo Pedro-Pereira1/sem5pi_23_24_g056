@@ -99,13 +99,13 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const p of passagewaysCoords) {
-            if (map[p.x][p.y] !== 12 || map[p.x][p.y] !== 13 || map[p.x1][p.y1] !== 12 || map[p.x1][p.y1] !== 13) {
+            if (map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13 || map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13) {
                 return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
             }
         }
 
         for (const e of elevatorsCoords) {
-            if (map[e.x][e.y] !== 14) {
+            if (map[e.y][e.x] !== 14) {
                 return Result.fail<IFloorDTO>('There is no elevator in the coords: X1:' + e.x + ' Y1:' + e.y)
             }
         }
