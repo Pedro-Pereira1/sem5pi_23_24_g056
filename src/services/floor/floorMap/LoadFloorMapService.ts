@@ -10,6 +10,7 @@ import BuildingCode from "../../../domain/Building/BuildingCode";
 import ILoadFloorMapDTO from "../../../dto/floor/ILoadFloorMapDTO";
 import DoubleCoords from "../../../domain/Floor/DoubleCoords";
 import SingleCoords from "../../../domain/Floor/SingleCoords";
+import RoomCoords from "../../../domain/Floor/RoomCoords";
 
 @Service()
 export default class LoadFloorMapService implements ILoadFloorMapService {
@@ -60,15 +61,15 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        for(const r of floorLayout.rooms) {
-            if (r.length !== 5) {
+        for(const r of floorLayout.roomsCoords) {
+            if (r.length !== 4) {
                 return Result.fail<IFloorDTO>('There is a problem with the coordinates of the room with id ' + r[0])
             }
         }
 
         let passagewaysCoords: DoubleCoords[] = []
         let elevatorsCoords: SingleCoords[] = []
-        let roomsCoords: DoubleCoords[] = []
+        let roomsCoords: RoomCoords[] = []
 
         for (let i = 0; i < floorLayout.passageways.length; i++) {
             passagewaysCoords[i] = DoubleCoords.create({
@@ -89,12 +90,12 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (let i = 0; i < floorLayout.rooms.length; i++) {
-            roomsCoords[i] = DoubleCoords.create({
+            roomsCoords[i] = RoomCoords.create({
                 id: floorLayout.rooms[i][0],
-                x: floorLayout.rooms[i][1],
-                y: floorLayout.rooms[i][2],
-                x1: floorLayout.rooms[i][3],
-                y1: floorLayout.rooms[i][4]
+                x: floorLayout.roomsCoords[i][0],
+                y: floorLayout.roomsCoords[i][1],
+                x1: floorLayout.roomsCoords[i][2],
+                y1: floorLayout.roomsCoords[i][3]
             })
         }
 
@@ -130,16 +131,16 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        //const roomsIds = floorOrError.map.elevatorsId
-        //for (const r of roomsCoords) {
-        //    if (!roomsIds.includes(Number(r.id))) {
-        //        console.log(roomsIds)
-        //        return Result.fail<IFloorDTO>('There is no room with id ' + r.id + ' in this floor')
-        //    }
-        //}
+        const roomsIds = floorOrError.map.roomsId
+        for (const r of floorLayout.rooms) {
+            if (!roomsIds.includes(r)) {
+                return Result.fail<IFloorDTO>('There is no room with id ' + r + ' in this floor')
+            }
+        }
 
         floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
 
+        console.log(floorOrError.map.roomsCoords)
         await this.floorRepo.save(floorOrError)
 
         return Result.ok<IFloorDTO>(FloorMaper.toDto(floorOrError))
