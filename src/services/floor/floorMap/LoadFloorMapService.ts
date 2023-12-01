@@ -140,7 +140,6 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
 
         floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
 
-        console.log(floorOrError.map.roomsCoords)
         await this.floorRepo.save(floorOrError)
 
         return Result.ok<IFloorDTO>(FloorMaper.toDto(floorOrError))
