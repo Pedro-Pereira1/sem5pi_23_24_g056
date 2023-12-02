@@ -11,7 +11,15 @@
 
 ## 3. Analysis
 
+**Analyzing this User Story we understand that:**
+* We need to install rsyslog.
+* Edit rsyslog file to redirect logs to a specified directory.
+* Create/edit a script to alert the admin to alert the administrator when accessing the console if a serious failure occurs in this process
+
 ## 4. Implementation
+
+**The implementation of this user story will be done in the specific ASIST document**
+
 
 ## 5. Observations
 
