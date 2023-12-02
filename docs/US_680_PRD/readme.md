@@ -20,7 +20,8 @@
 
 ## 4. Implementation
 
+**The implementation of this user story will be done in the specific ASIST document**
+
 
 ## 5. Observations
 
-git commit -m "SC-2 <message>"
