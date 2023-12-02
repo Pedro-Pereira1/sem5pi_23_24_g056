@@ -4,6 +4,7 @@ import { Elevator } from '../Elevator/Elevator';
 import DoubleCoords from './DoubleCoords';
 import { Entity } from '../../core/domain/Entity';
 import SingleCoords from './SingleCoords';
+import RoomCoords from './RoomCoords';
 
 interface FloorMapProps {
   map: number[][]
@@ -12,7 +13,7 @@ interface FloorMapProps {
   elevators: Elevator[]
   passagewaysCoords: DoubleCoords[]
   elevatorsCoords: SingleCoords[]
-  roomsCoords: DoubleCoords[]
+  roomsCoords: RoomCoords[]
 }
 
 export class FloorMap extends Entity<FloorMapProps> {
@@ -43,7 +44,7 @@ export class FloorMap extends Entity<FloorMapProps> {
     this.props.map = layout
   }
 
-  updateFloorObjectsCoordinates(passageways: DoubleCoords[], elevators: SingleCoords[], rooms: DoubleCoords[]) {
+  updateFloorObjectsCoordinates(passageways: DoubleCoords[], elevators: SingleCoords[], rooms: RoomCoords[]) {
     this.props.passagewaysCoords = passageways
     this.props.elevatorsCoords = elevators
     this.props.roomsCoords = rooms
@@ -123,11 +124,10 @@ export class FloorMap extends Entity<FloorMapProps> {
 
     for (let i = 0; i < this.props.roomsCoords.length; i++) {
       coords[i] = []
-      coords[i][0] = Number(this.props.roomsCoords[i].id)
-      coords[i][1] = this.props.roomsCoords[i].x
-      coords[i][2] = this.props.roomsCoords[i].y
-      coords[i][3] = this.props.roomsCoords[i].x1
-      coords[i][4] = this.props.roomsCoords[i].y1
+      coords[i][0] = this.props.roomsCoords[i].x
+      coords[i][1] = this.props.roomsCoords[i].y
+      coords[i][2] = this.props.roomsCoords[i].x1
+      coords[i][3] = this.props.roomsCoords[i].y1
     }
 
     return coords

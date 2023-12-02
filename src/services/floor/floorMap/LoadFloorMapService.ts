@@ -10,6 +10,7 @@ import BuildingCode from "../../../domain/Building/BuildingCode";
 import ILoadFloorMapDTO from "../../../dto/floor/ILoadFloorMapDTO";
 import DoubleCoords from "../../../domain/Floor/DoubleCoords";
 import SingleCoords from "../../../domain/Floor/SingleCoords";
+import RoomCoords from "../../../domain/Floor/RoomCoords";
 
 @Service()
 export default class LoadFloorMapService implements ILoadFloorMapService {
@@ -60,15 +61,15 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        for(const r of floorLayout.rooms) {
-            if (r.length !== 5) {
+        for(const r of floorLayout.roomsCoords) {
+            if (r.length !== 4) {
                 return Result.fail<IFloorDTO>('There is a problem with the coordinates of the room with id ' + r[0])
             }
         }
 
         let passagewaysCoords: DoubleCoords[] = []
         let elevatorsCoords: SingleCoords[] = []
-        let roomsCoords: DoubleCoords[] = []
+        let roomsCoords: RoomCoords[] = []
 
         for (let i = 0; i < floorLayout.passageways.length; i++) {
             passagewaysCoords[i] = DoubleCoords.create({
@@ -89,29 +90,29 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (let i = 0; i < floorLayout.rooms.length; i++) {
-            roomsCoords[i] = DoubleCoords.create({
+            roomsCoords[i] = RoomCoords.create({
                 id: floorLayout.rooms[i][0],
-                x: floorLayout.rooms[i][1],
-                y: floorLayout.rooms[i][2],
-                x1: floorLayout.rooms[i][3],
-                y1: floorLayout.rooms[i][4]
+                x: floorLayout.roomsCoords[i][0],
+                y: floorLayout.roomsCoords[i][1],
+                x1: floorLayout.roomsCoords[i][2],
+                y1: floorLayout.roomsCoords[i][3]
             })
         }
 
         for (const p of passagewaysCoords) {
-            if (map[p.x][p.y] !== 12 || map[p.x][p.y] !== 13 || map[p.x1][p.y1] !== 12 || map[p.x1][p.y1] !== 13) {
+            if (map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13 || map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13) {
                 return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
             }
         }
 
         for (const e of elevatorsCoords) {
-            if (map[e.x][e.y] !== 14) {
+            if (map[e.y][e.x] !== 14) {
                 return Result.fail<IFloorDTO>('There is no elevator in the coords: X1:' + e.x + ' Y1:' + e.y)
             }
         }
 
         for (const r of roomsCoords) {
-            if (map[r.x][r.y] !== 7 || map[r.x1][r.y1] !== 4 ) {
+            if (map[r.y][r.x] != 7 || map[r.y1][r.x1] != 4 ) {
                 return Result.fail<IFloorDTO>('There is no room in the coords: X1:' + r.x + ' Y1:' + r.y + ' X2:' + r.x1 + ' Y2: ' + r.y1)
             }
         }
@@ -130,10 +131,10 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        const roomsIds = floorOrError.map.elevatorsId
-        for (const r of roomsCoords) {
-            if (!roomsIds.includes(Number(r.id))) {
-                return Result.fail<IFloorDTO>('There is no room with id ' + r.id + ' in this floor')
+        const roomsIds = floorOrError.map.roomsId
+        for (const r of floorLayout.rooms) {
+            if (!roomsIds.includes(r)) {
+                return Result.fail<IFloorDTO>('There is no room with id ' + r + ' in this floor')
             }
         }
 

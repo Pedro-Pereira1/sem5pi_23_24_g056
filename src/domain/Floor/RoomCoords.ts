@@ -1,20 +1,20 @@
 import { ValueObject } from "../../core/domain/ValueObject"
 
-interface IDoubleCoordsProps {
-    id: number
+interface IRoomCoordsProps {
+    id: string
     x: number
     y: number
     x1: number
     y1: number
 }
 
-export default class DoubleCoords extends ValueObject<IDoubleCoordsProps> {
+export default class DoubleCoords extends ValueObject<IRoomCoordsProps> {
 
-    private constructor(props: IDoubleCoordsProps) {
+    private constructor(props: IRoomCoordsProps) {
         super(props)
     }
 
-    public static create(props: IDoubleCoordsProps): DoubleCoords {
+    public static create(props: IRoomCoordsProps): DoubleCoords {
         return new DoubleCoords({
             id: props.id,
             x: props.x,
@@ -24,7 +24,7 @@ export default class DoubleCoords extends ValueObject<IDoubleCoordsProps> {
         })
     }
 
-    get id(): (number | string) {
+    get id(): string {
         return this.props.id
     }
 
