@@ -32,6 +32,8 @@ The task aims to establish the necessary configuration to allow the administrato
 
 ## 4. Implementation
 
+**The implementation of this user story will be done in the specific ASIST document**
+
 
 ## 5. Observations
 
