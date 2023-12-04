@@ -33,7 +33,8 @@ export class FloorMaper extends Mapper<Floor> {
                 elevators: floor.map.elevatorsId,
                 passagewaysCoords: floor.map.passagewaysCoords,
                 elevatorsCoords: floor.map.elevatorsCoords,
-                roomCoords:floor.map.roomsCoords
+                roomCoords:floor.map.roomsCoords,
+                doorsCoords: floor.map.doorsCoords
             }
         } as IFloorDTO
     }
@@ -65,6 +66,7 @@ export class FloorMaper extends Mapper<Floor> {
         let passagewaysCoords: DoubleCoords[] = []
         let elevatorsCoords: SingleCoords[] = []
         let roomCoords: RoomCoords[] = []
+        let doorsCoords: number[][] = []
 
 
         for (const f of floorDTO.floorMap.passageways) {
@@ -107,6 +109,12 @@ export class FloorMaper extends Mapper<Floor> {
             }))
         }
 
+        for (let i = 0; i < floorDTO.floorMap.doorsCoords.length; i++) {
+            doorsCoords[i] = []
+            doorsCoords[i][0] = floorDTO.floorMap.doorsCoords[i][0]
+            doorsCoords[i][1] = floorDTO.floorMap.doorsCoords[i][1]
+        }
+
         const FloorOrError = Floor.create(
             {
                 floorNumber: new FloorNumber({ number: floorNumber }),
@@ -118,7 +126,8 @@ export class FloorMaper extends Mapper<Floor> {
                     rooms: rooms,
                     passagewaysCoords: passagewaysCoords,
                     elevatorsCoords: elevatorsCoords,
-                    roomsCoords: roomCoords
+                    roomsCoords: roomCoords,
+                    doorsCoords: doorsCoords
                 })
             }, floorDTO.floorId)
 
@@ -137,7 +146,8 @@ export class FloorMaper extends Mapper<Floor> {
                 elevators: floor.map.elevatorsId,
                 passagewaysCoords: floor.map.passagewaysCoords,
                 elevatorsCoords: floor.map.elevatorsCoords,
-                roomCoords:floor.map.roomsCoords
+                roomCoords:floor.map.roomsCoords,
+                doorsCoords: floor.map.doorsCoords
             }
         }
     }

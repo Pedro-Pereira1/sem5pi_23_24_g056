@@ -16,7 +16,8 @@ const FloorSchema = new mongoose.Schema(
             elevators: [Number],
             passagewaysCoords: [[Number]],
             elevatorsCoords: [[Number]] ,
-            roomCoords: [[Number]]
+            roomCoords: [[Number]],
+            doorsCoords: [[Number]]
         }
     },
     {

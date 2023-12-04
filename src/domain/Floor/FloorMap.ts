@@ -14,6 +14,7 @@ interface FloorMapProps {
   passagewaysCoords: DoubleCoords[]
   elevatorsCoords: SingleCoords[]
   roomsCoords: RoomCoords[]
+  doorsCoords: number[][]
 }
 
 export class FloorMap extends Entity<FloorMapProps> {
@@ -44,10 +45,11 @@ export class FloorMap extends Entity<FloorMapProps> {
     this.props.map = layout
   }
 
-  updateFloorObjectsCoordinates(passageways: DoubleCoords[], elevators: SingleCoords[], rooms: RoomCoords[]) {
+  updateFloorObjectsCoordinates(passageways: DoubleCoords[], elevators: SingleCoords[], rooms: RoomCoords[], doors: number[][]) {
     this.props.passagewaysCoords = passageways
     this.props.elevatorsCoords = elevators
     this.props.roomsCoords = rooms
+    this.props.doorsCoords = doors
   }
 
   removeElevator(theElevator: Elevator) {
@@ -131,6 +133,10 @@ export class FloorMap extends Entity<FloorMapProps> {
     }
 
     return coords
+  }
+
+  get doorsCoords(): number[][] {
+    return this.props.doorsCoords
   }
 
   get map(): number[][] {

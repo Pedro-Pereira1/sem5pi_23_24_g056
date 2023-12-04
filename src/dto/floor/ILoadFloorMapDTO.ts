@@ -6,4 +6,5 @@ export default interface ILoadFloorMapDTO {
     elevators: number[][]
     rooms: string[]
     roomsCoords: number[][]
+    doors: number[][]
 }

@@ -70,6 +70,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         let passagewaysCoords: DoubleCoords[] = []
         let elevatorsCoords: SingleCoords[] = []
         let roomsCoords: RoomCoords[] = []
+        let doorsCoords: [][] = []
 
         for (let i = 0; i < floorLayout.passageways.length; i++) {
             passagewaysCoords[i] = DoubleCoords.create({
@@ -138,7 +139,13 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
             }
         }
 
-        floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords)
+        for (const d in floorLayout.doors) {
+            if (floorLayout.doors[d].length !== 2) {
+                return Result.fail<IFloorDTO>('There is a problem with the coordinates of the door in index ' + d)
+            }
+        }
+
+        floorOrError.loadFloorMapAndUpdate(map, passagewaysCoords, elevatorsCoords, roomsCoords, floorLayout.doors)
 
         await this.floorRepo.save(floorOrError)
 
