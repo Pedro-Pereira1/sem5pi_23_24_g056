@@ -9,6 +9,7 @@ export default interface IFloorPersistence {
         elevators: number[],
         passagewaysCoords: number[][],
         elevatorsCoords: number[][],
-        roomCoords: number[][]
+        roomCoords: number[][],
+        doorsCoords: number[][]
     }
 }

@@ -39,9 +39,9 @@ export class Floor extends AggregateRoot<FloorProps> {
     return this.props.floormap
   }
 
-  loadFloorMapAndUpdate(layout: number[][], passageways: DoubleCoords[], elevators: SingleCoords[], rooms: RoomCoords[]) {
+  loadFloorMapAndUpdate(layout: number[][], passageways: DoubleCoords[], elevators: SingleCoords[], rooms: RoomCoords[], doors: number[][]) {
     this.map.loadFloorMap(layout)
-    this.map.updateFloorObjectsCoordinates(passageways, elevators, rooms)
+    this.map.updateFloorObjectsCoordinates(passageways, elevators, rooms, doors)
   }
 
   public static create(floorProp: FloorProps, floorId: number): Result<Floor> {
@@ -60,7 +60,8 @@ export class Floor extends AggregateRoot<FloorProps> {
         elevators: floorProp.floormap.props.elevators,
         passagewaysCoords: floorProp.floormap.props.passagewaysCoords,
         elevatorsCoords: floorProp.floormap.props.elevatorsCoords,
-        roomsCoords: floorProp.floormap.props.roomsCoords
+        roomsCoords: floorProp.floormap.props.roomsCoords,
+        doorsCoords: floorProp.floormap.props.doorsCoords
       })
     }, new FloorId(floorId))
 

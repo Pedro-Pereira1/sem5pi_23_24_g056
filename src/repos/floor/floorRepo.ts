@@ -73,6 +73,10 @@ export default class FloorRepo implements IFloorRepo {
           floorDocument.floorMap.roomCoords = floor.map.roomsCoords
         }
 
+        if (floor.map.doorsCoords !== undefined) {
+          floorDocument.floorMap.doorsCoords = floor.map.doorsCoords
+        }
+
         await floorDocument.save();
         return floor;
       }

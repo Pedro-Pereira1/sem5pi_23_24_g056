@@ -67,7 +67,8 @@ export default (app: Router) => {
             passageways: Joi.required(),
             rooms: Joi.required(),
             roomsCoords: Joi.required(),
-            elevators: Joi.required()
+            elevators: Joi.required(),
+            doors: Joi.required()
         })
     }), (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 

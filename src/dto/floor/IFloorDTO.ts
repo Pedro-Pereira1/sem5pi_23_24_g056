@@ -9,6 +9,7 @@ export interface IFloorDTO {
         elevators: number[],
         passagewaysCoords: number[][], // passagewaysCoords[i][0] = x passagewaysCoords[i][1] = y
         elevatorsCoords: number[][],
-        roomCoords: number[][]
+        roomCoords: number[][],
+        doorsCoords: number[][]
     }
 }
