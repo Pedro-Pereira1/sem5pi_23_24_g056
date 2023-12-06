@@ -101,7 +101,9 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const p of passagewaysCoords) {
-            if (map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13 || map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13) {
+            console.log(map[p.y][p.x])
+            console.log(map[p.y1][p.x1])
+            if (!(map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13) && !(map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13)) {
                 return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
             }
         }
@@ -113,7 +115,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const r of roomsCoords) {
-            if (map[r.y][r.x] != 7 || map[r.y1][r.x1] != 4 ) {
+            if (map[r.y][r.x] != 7 && (map[r.y1][r.x1] != 4 || map[r.y1][r.x] != 6)) {
                 return Result.fail<IFloorDTO>('There is no room in the coords: X1:' + r.x + ' Y1:' + r.y + ' X2:' + r.x1 + ' Y2: ' + r.y1)
             }
         }
