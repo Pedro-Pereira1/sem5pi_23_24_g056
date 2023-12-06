@@ -86,8 +86,8 @@ export class FloorMaper extends Mapper<Floor> {
                 id: Number(floorDTO.floorMap.passagewaysCoords[i][0]),
                 x:  floorDTO.floorMap.passagewaysCoords[i][1],
                 y:  floorDTO.floorMap.passagewaysCoords[i][2],
-                x1: floorDTO.floorMap.roomCoords[i][3],
-                y1: floorDTO.floorMap.roomCoords[i][4]
+                x1: floorDTO.floorMap.passagewaysCoords[i][3],
+                y1: floorDTO.floorMap.passagewaysCoords[i][4]
             }))
         }
 
