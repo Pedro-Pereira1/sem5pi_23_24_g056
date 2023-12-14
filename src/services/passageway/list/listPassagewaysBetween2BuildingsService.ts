@@ -13,6 +13,8 @@ import BuildingCode from "../../../domain/Building/BuildingCode";
 import IListPassagewaysBetween2BuildingsService from "../../IServices/passageway/list/IListPassagewaysBetween2BuildingsService";
 import { IListPassagewaysBetween2BuildingsDTO } from "../../../dto/passageway/IListPassagewaysBetween2BuildingsDTO";
 import { Floor } from "../../../domain/Floor/Floor";
+import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
+import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 
 @Service()
 export default class ListPassagewaysBetween2BuildingsService implements IListPassagewaysBetween2BuildingsService {
@@ -51,13 +53,19 @@ export default class ListPassagewaysBetween2BuildingsService implements IListPas
         }
     }
 
-    public async findFloorsByPassageway(passagewayId: number): Promise<Result<Floor[]>> {
+    public async findFloorsByPassageway(passagewayId: number): Promise<Result<IFloorDTO[]>> {
         try{
             
             let floors: Floor[] = []
             floors = await this.floorRepo.findByPassageway(passagewayId)
 
-            return Result.ok<Floor[]>(floors)      
+            let resolve: IFloorDTO[] = []
+
+            floors.forEach(b => {
+            resolve.push(FloorMaper.toDto(b))
+        })
+
+            return Result.ok<IFloorDTO[]>(resolve)      
         } catch(e) {
             throw e
         }
