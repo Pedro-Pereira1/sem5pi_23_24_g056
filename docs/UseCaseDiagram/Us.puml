@@ -7,6 +7,8 @@ actor "UI Campus Manager" as CM
 actor "UI Fleet Manager" as FM
 actor "UI System Manager" as SM
 actor "UI User" as U
+actor "UI Task Manager" as TM
+actor "UI Admin" as ADM
 
 package  RobDroneGo  {
   usecase "Create Building" as UC1
@@ -50,6 +52,28 @@ package  RobDroneGo  {
   usecase "Have SSH access to the virtual machine, only through a certificate, without using a password" as UC37
   usecase "A public file share to be created between the various teams, in SMB/CIFS or NFS format" as UC38
   usecase "Must ensure that, if necessary, backups were carried out correctly. To do this, we must automate its replacement, ultimately validating the functioning of the system (Ex. Database - execute a successful SQL query after replacement)" as UC39
+
+  usecase "Request Task" as UC40
+
+  usecase "Approve or Deny Request" as UC42
+  usecase "Consult Unapproved Requests" as UC43
+  usecase "Search Requests" as UC44
+  usecase "Get Execution Sequence" as UC45
+
+  usecase "Create User" as UC46
+
+  usecase "Register User" as UC47
+  usecase "Consent to Data Collection and Processing" as UC48
+  usecase "Inform Data Purpose" as UC49
+  usecase "Meet the Person Responsible for Treatment" as UC50
+  usecase "Know Data Retention Period" as UC51
+  usecase "Knowing Rights as a Data Subject" as UC52
+  usecase "Approve or Refuse Registration" as UC53
+  usecase "Rectify/Change Data" as UC54
+  usecase "Get Copy of Data" as UC55
+  usecase "Cancel Account and Delete Data" as UC56
+
+
 }
 CM --> UC1
 CM --> UC2
@@ -92,4 +116,24 @@ SM --> UC36
 SM --> UC37
 SM --> UC38
 SM --> UC39
+
+U --> UC40
+U --> UC47
+U --> UC48
+U --> UC49
+U --> UC50
+U --> UC51
+U --> UC52
+U --> UC53
+U --> UC54
+U --> UC55
+U --> UC56
+
+TM --> UC42
+TM --> UC43
+TM --> UC44
+TM --> UC45
+
+ADM --> UC46
+
 @enduml
