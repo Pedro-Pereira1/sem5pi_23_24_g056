@@ -7,7 +7,7 @@
 ![ImplementationView](Diagrams/ImplementationView.svg)
 
 ## Physical View
-![PhysicalView](Diagrams/PhysicalView.svg)
+![PhysicalView](Diagrams/PhysicalView.png)
 
 ## Logical and Implementation View
 ![LogicalAndImplementation](Diagrams/LogicalAndImplementation.svg)
