@@ -108,6 +108,7 @@ export class FloorMap extends Entity<FloorMapProps> {
       coords[i][0] = Number(this.props.elevatorsCoords[i].id)
       coords[i][1] = this.props.elevatorsCoords[i].x
       coords[i][2] = this.props.elevatorsCoords[i].y
+      coords[i][3] = this.props.elevatorsCoords[i].orientation
     }
 
     return coords

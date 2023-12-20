@@ -95,7 +95,8 @@ export class FloorMaper extends Mapper<Floor> {
             elevatorsCoords.push(SingleCoords.create({
                 id: Number(floorDTO.floorMap.elevatorsCoords[i][0]),
                 x: floorDTO.floorMap.elevatorsCoords[i][1],
-                y: floorDTO.floorMap.elevatorsCoords[i][2]
+                y: floorDTO.floorMap.elevatorsCoords[i][2],
+                orientation: floorDTO.floorMap.elevatorsCoords[i][3]
             }))
         }
 

@@ -56,7 +56,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for(const e of floorLayout.elevators) {
-            if (e.length !== 3) {
+            if (e.length !== 4) {
                 return Result.fail<IFloorDTO>('There is a problem with the coordinates of the elevator with id ' + e[0])
             }
         }
@@ -83,10 +83,14 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (let i = 0; i < floorLayout.elevators.length; i++) {
+            if (floorLayout.elevators[i][3] < 1 || floorLayout.elevators[i][3] > 4) {
+                return Result.fail<IFloorDTO>('There is a problem with the orientation of the elevator with id ' + floorLayout.elevators[i][0])
+            }
             elevatorsCoords[i] = SingleCoords.create({
                 id: floorLayout.elevators[i][0],
                 x: floorLayout.elevators[i][1],
-                y: floorLayout.elevators[i][2]
+                y: floorLayout.elevators[i][2],
+                orientation: floorLayout.elevators[i][3]
             })
         }
 
@@ -101,8 +105,6 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const p of passagewaysCoords) {
-            console.log(map[p.y][p.x])
-            console.log(map[p.y1][p.x1])
             if (!(map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13) && !(map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13)) {
                 return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
             }
