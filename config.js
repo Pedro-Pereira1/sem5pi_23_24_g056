@@ -175,6 +175,10 @@ export default {
       name: "deletePassagewayController",
       path: "../controllers/passageway/delete/DeletePassagewayController"
     },
+    auth: {
+      name: "authController",
+      path: "../controllers/auth/AuthController"
+    }
   },
 
   repos: {
