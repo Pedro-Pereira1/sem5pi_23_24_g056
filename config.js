@@ -353,5 +353,9 @@ export default {
       name: "deletePassagewayService",
       path: "../services/passageway/delete/deletePassagewayService"
     },
-  },
-};
+    authService: {
+      name: "authService",
+      path: "../services/auth/AuthService"
+    },
+  }
+}
