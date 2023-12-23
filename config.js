@@ -40,6 +40,8 @@ export default {
     prefix: '/api',
   },
 
+  tokenKey: "u2mUMiNxgfIbfXIOhOFskAI8o6doVRCH",
+
   controllers: {
     role: {
       name: "RoleController",
