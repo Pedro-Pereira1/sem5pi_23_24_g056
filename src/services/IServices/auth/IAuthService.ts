@@ -1,3 +1,3 @@
 export interface IAuthService {
-    validateToken(token: string): Promise<boolean>
+    validateToken(token: string): boolean
 }

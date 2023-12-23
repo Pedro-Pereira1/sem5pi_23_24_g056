@@ -10,7 +10,7 @@ export class AuthController implements IAuthController {
         @Inject(config.services.auth.name) private authService: IAuthService
     ) {}
 
-    public validateToken(token: string): Promise<boolean> {
+    public validateToken(token: string): boolean {
         return this.authService.validateToken(token);       
     }
     

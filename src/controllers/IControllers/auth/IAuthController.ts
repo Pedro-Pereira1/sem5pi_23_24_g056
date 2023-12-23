@@ -1,3 +1,3 @@
 export interface IAuthController {
-    validateToken(token: string): Promise<boolean>
+    validateToken(token: string): boolean
 }

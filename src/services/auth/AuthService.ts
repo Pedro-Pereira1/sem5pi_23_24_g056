@@ -8,7 +8,7 @@ export class AuthService implements IAuthService {
 
     constructor() {}
 
-    public async validateToken(token: string): Promise<boolean> {
+    public validateToken(token: string): boolean {
         if (token) {
             jwt.verify(token, config.tokenKey, (err, decoded) => {
                 if (err) {
