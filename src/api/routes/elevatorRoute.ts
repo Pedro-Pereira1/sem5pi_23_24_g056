@@ -67,4 +67,11 @@ export default (app: Router) => {
 
     route.get('/listAll', (req, res, next) => {
         ctrlListAll.listAllElevators(req, res, next); });
+
+
+        route.get('/listFloorsByElevatorId/:elevatorIdentificationNumber', 
+        (req, res, next) => {ctrlListAll.listFloorsByElevatorId(req, res, next);
+            req.params.elevatorIdentificationNumber;
+        }
+    );
 }
