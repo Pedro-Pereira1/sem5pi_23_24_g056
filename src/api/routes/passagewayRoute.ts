@@ -10,6 +10,7 @@ import IEditPassagewayController from "../../controllers/IControllers/passageway
 import IDeletePassagewayController from '../../controllers/IControllers/passageway/delete/IDeletePassagewayController';
 import IListAllPassagewaysController
     from "../../controllers/IControllers/passageway/list/IListAllPassagewaysController";
+var validateToken = require('../middlewares/validateToken');
 
 const route = Router();
 
@@ -22,7 +23,7 @@ export default (app: Router) => {
     const ctrlDelete = Container.get(config.controllers.deletePassageway.name) as IDeletePassagewayController
     const ctrlListAll = Container.get(config.controllers.listAllPassageways.name) as IListAllPassagewaysController
 
-    route.post('/createPassageway',
+    route.post('/createPassageway', validateToken,
     celebrate({
         body: Joi.object({
             passagewayId: Joi.number().required(),
@@ -34,7 +35,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createPassageway(req, res, next));
 
-    route.put('/editPassageway',
+    route.put('/editPassageway', validateToken,
         celebrate({
             body: Joi.object({
                 passagewayId: Joi.number().required().min(1),
@@ -44,17 +45,17 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrlEdit.editPassageway(req, res, next));
 
-    route.get('/list/building1/:building1Code/building2/:building2Code', 
+    route.get('/list/building1/:building1Code/building2/:building2Code', validateToken,
     (req, res, next) => {ctrlList.listPassagewaysBetween2Buildings(req, res, next);
         req.params.building1Code;
         req.params.building2Code});
 
 
-    route.delete('/deletePassageway/:id', (req, res, next) => { ctrlDelete.deletePassageway(req, res, next); });
+    route.delete('/deletePassageway/:id', validateToken, (req, res, next) => { ctrlDelete.deletePassageway(req, res, next); });
 
-    route.get('/listAll', (req, res, next) => {
+    route.get('/listAll', validateToken, (req, res, next) => {
         ctrlListAll.listAllPassageways(req, res, next); });
 
-    route.get('/findFloorsByPassageway/:passagewayId', (req, res, next) => {
+    route.get('/findFloorsByPassageway/:passagewayId', validateToken, (req, res, next) => {
         ctrlList.findFloorsByPassageway(req, res, next); });
 }

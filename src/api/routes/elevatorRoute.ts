@@ -9,6 +9,7 @@ import IEditElevatorController from '../../controllers/IControllers/elevator/edi
 import IListElevatorsInBuildingController from '../../controllers/IControllers/elevator/list/IListElevatorsInBuildingController';
 import IDeleteElevatorController from "../../controllers/IControllers/elevator/delete/IDeleteElevatorController";
 import IListAllElevatorsController from "../../controllers/IControllers/elevator/list/IListAllElevatorsController";
+var validateToken = require('../middlewares/validateToken');
 
 const route = Router();
 
@@ -21,7 +22,7 @@ export default (app: Router) => {
     const ctrlDelete = Container.get(config.controllers.deleteElevator.name) as IDeleteElevatorController
     const ctrlListAll = Container.get(config.controllers.listAllElevators.name) as IListAllElevatorsController
     
-    route.post('/create', 
+    route.post('/create', validateToken,
     celebrate({
         body: Joi.object({
             elevatorId: Joi.number().required().min(1),
@@ -35,7 +36,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createElevator(req, res, next));
 
-    route.put('/edit', 
+    route.put('/edit', validateToken,
     celebrate({
         body: Joi.object({
             elevatorIdentificationNumber: Joi.number().required().min(1),
@@ -50,13 +51,13 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrlEdit.editElevator(req, res, next));
 
-    route.get('/listInBuilding/:buildingCode', 
+    route.get('/listInBuilding/:buildingCode', validateToken,
         (req, res, next) => {ctrlList.listElevatorsInBuilding(req, res, next);
             req.params.buildingCode;
         }
     );
 
-    route.delete('/delete',
+    route.delete('/delete', validateToken,
     celebrate({
         body: Joi.object({
             elevatorIdentificationNumber: Joi.number().required().min(1),
@@ -65,6 +66,6 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrlDelete.deleteElevator(req, res, next));
 
-    route.get('/listAll', (req, res, next) => {
+    route.get('/listAll', validateToken, (req, res, next) => {
         ctrlListAll.listAllElevators(req, res, next); });
 }

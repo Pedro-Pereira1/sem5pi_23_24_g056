@@ -8,6 +8,7 @@ import config from "../../../config";
 import ICreateRoomController from '../../controllers/IControllers/room/create/ICreateRoomController';
 import IDeleteRoomController from '../../controllers/IControllers/room/delete/IDeleteRoomController';
 import IListAllRoomsInBuildingController from '../../controllers/IControllers/room/list/IListAllRoomsInBuildingController';
+var validateToken = require('../middlewares/validateToken');
 
 
 const route = Router();
@@ -19,7 +20,7 @@ export default (app: Router) => {
     const ctrlDelete = Container.get(config.controllers.deleteRoom.name) as IDeleteRoomController
     const ctrlList = Container.get(config.controllers.listAllRoomsInBuilding.name) as IListAllRoomsInBuildingController
 
-    route.post('/createRoom',
+    route.post('/createRoom', validateToken,
         celebrate({
             body: Joi.object({
                 roomName: Joi.string().required().max(50),
@@ -30,10 +31,10 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrlCreate.createRoom(req, res, next));
 
-    route.delete('/delete/:roomName', (req, res, next) => {ctrlDelete.deleteRoom(req, res, next);
+    route.delete('/delete/:roomName', validateToken, (req, res, next) => {ctrlDelete.deleteRoom(req, res, next);
         req.params.roomName;})
 
-    route.get('/listAllInBuilding/:buildingCode', (req, res, next) => {ctrlList.listAllRoomsInBuilding(req, res, next);
+    route.get('/listAllInBuilding/:buildingCode', validateToken, (req, res, next) => {ctrlList.listAllRoomsInBuilding(req, res, next);
         req.params.buildingCode;})
 
 }

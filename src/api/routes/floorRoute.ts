@@ -11,6 +11,7 @@ import IEditFloorController from '../../controllers/IControllers/floor/edit/IEdi
 import ILoadFloorMapController from '../../controllers/IControllers/floor/floorMap/ILoadFloorMapController';
 import IListFloorsPassagewaysController
     from "../../controllers/IControllers/floor/list/IListFloorsPassagewaysController";
+var validateToken = require('../middlewares/validateToken');
 
 const route = Router();
 
@@ -24,19 +25,19 @@ export default (app: Router) => {
     const ctrlLoadFLoorMap = Container.get(config.controllers.loadFloorMap.name) as ILoadFloorMapController
     const ctrlDelete = Container.get(config.controllers.deleteFloor.name) as IDeleteFloorController
 
-    route.get('/listAllFloors/:buildingId',
+    route.get('/listAllFloors/:buildingId', validateToken,
         (req, res, next) => {
             ctrllistAllFloors.listAllFloors(req, res, next);
             req.params.buildingId
         });
 
-    route.get('/listFloorsPassageways/:buildingCode',
+    route.get('/listFloorsPassageways/:buildingCode', validateToken,
         (req, res, next) => {
             ctrllistFloorsPassageways.listFloorsPassageways(req, res, next);
             req.params.buildingCode
         });
 
-    route.post('/createFloor',
+    route.post('/createFloor', validateToken,
         celebrate({
             body: Joi.object({
                 floorId: Joi.number().required(),
@@ -47,7 +48,7 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.createFloor(req, res, next));
 
-    route.put('/editFloor',
+    route.put('/editFloor', validateToken,  
         celebrate({
             body: Joi.object({
                 floorId: Joi.number().required(),
@@ -58,7 +59,7 @@ export default (app: Router) => {
         (req, res, next) => ctrlEditFloor.editFloor(req, res, next)
     );
 
-    route.patch('/loadFloorMap',
+    route.patch('/loadFloorMap', validateToken,
     celebrate({
         body: Joi.object({
             floorId: Joi.number().required(),
@@ -72,6 +73,6 @@ export default (app: Router) => {
         })
     }), (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 
-    route.delete('/deleteFloor/:id', (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
+    route.delete('/deleteFloor/:id', validateToken, (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
     )
 }
