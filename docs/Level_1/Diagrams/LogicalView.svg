@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="169px" preserveAspectRatio="none" style="width:568px;height:169px;background:#FFFFFF;" version="1.1" viewBox="0 0 568 169" width="568px" zoomAndPan="magnify"><defs/><g><!--entity CM--><g id="elem_CM"><ellipse cx="70" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="6" y="43.6738">UI Campus Manager</text></g><!--entity FM--><g id="elem_FM"><ellipse cx="239" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="185" y="43.6738">UI Fleet Manager</text></g><!--entity SM--><g id="elem_SM"><ellipse cx="405" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122" x="344" y="43.6738">UI System Manager</text></g><!--entity U--><g id="elem_U"><ellipse cx="539" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="516.5" y="43.6738">UI User</text></g><!--entity RDG--><g id="elem_RDG"><rect fill="#F1F1F1" height="61.2813" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="131" x="256.5" y="102"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="367.5" y="107"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="365.5" y="109"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="365.5" y="113"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="271.5" y="134.6738">&#171;component&#187;</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="271.5" y="150.3145">RobDroneGo</text></g><!--link CM to RDG--><g id="link_CM_RDG"><path codeLine="12" d="M79.27,19.28 C107.82,32.48 196.22,73.35 258.05,101.94 " fill="none" id="CM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--link FM to RDG--><g id="link_FM_RDG"><path codeLine="13" d="M244.7,23.01 C256.1,39 282.17,75.59 300.88,101.86 " fill="none" id="FM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--link SM to RDG--><g id="link_SM_RDG"><path codeLine="14" d="M399.3,23.01 C387.9,39 361.83,75.59 343.12,101.86 " fill="none" id="SM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--link U to RDG--><g id="link_U_RDG"><path codeLine="15" d="M529.69,20.48 C520.25,26.01 505.19,34.74 492,42 C454.74,62.5 412.43,84.78 379.34,101.98 " fill="none" id="U-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--SRC=[qz1KK0hrL71Ep2qeBLRmJSnBJ4yjKb98B5PmzkNIW4YwvQIcbg38kS7bWYkBIr9pKII3uPAXnL2XK2wkvFpSWloyrBmIXI0NTuLeBWK56nkuc9qTaA-b5PIVv584573FrzBYYkNYSlPLq4tH1MdWSaCmWn7CK0Ku4m00]--></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="175px" preserveAspectRatio="none" style="width:500px;height:175px;background:#FFFFFF;" version="1.1" viewBox="0 0 500 175" width="500px" zoomAndPan="magnify"><defs/><g><!--MD5=[99f3cfe8ce18ee9cb444babb539f6fb5]
+entity CM--><g id="elem_CM"><ellipse cx="70" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="6" y="45.5332">UI Campus Manager</text></g><!--MD5=[a89ee74bb4979dbed373b93afc1c36e4]
+entity FM--><g id="elem_FM"><ellipse cx="239" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108" x="185" y="45.5332">UI Fleet Manager</text></g><!--MD5=[8b2ff9d1f7829004ecac6fa4ee22dbd9]
+entity SM--><g id="elem_SM"><ellipse cx="371" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="343.5" y="45.5332">UI Admin</text></g><!--MD5=[ee0fec323975fbe97ba28321ad4c4bf3]
+entity U--><g id="elem_U"><ellipse cx="471" cy="14" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="448.5" y="45.5332">UI User</text></g><!--MD5=[bd94d8033ef57c996e8cf8dfa9e4cc9b]
+entity RDG--><g id="elem_RDG"><rect fill="#F1F1F1" height="65.2188" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="131" x="239.5" y="104"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="350.5" y="109"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="348.5" y="111"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="348.5" y="115"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="254.5" y="138.5332">«component»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="254.5" y="156.1426">RobDroneGo</text></g><!--MD5=[e9be45bdd99de83afd7d89fc42a70082]
+link CM to RDG--><g id="link_CM_RDG"><path codeLine="12" d="M79.21,19.72 C106.11,33.52 186.26,74.61 243.4,103.91 " fill="none" id="CM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[408ee7d5a418b630390e354fa1b241a1]
+link FM to RDG--><g id="link_FM_RDG"><path codeLine="13" d="M243.54,23.28 C252.48,39.61 272.79,76.7 287.63,103.79 " fill="none" id="FM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ca54e398c45e9d170a4189f4a22daa6a]
+link SM to RDG--><g id="link_SM_RDG"><path codeLine="14" d="M366.46,23.28 C357.52,39.61 337.21,76.7 322.37,103.79 " fill="none" id="SM-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d66b8c865fe817c65cf8bba5b67caf4a]
+link U to RDG--><g id="link_U_RDG"><path codeLine="15" d="M461.6,21.82 C440.27,37.31 387.07,75.92 348.59,103.86 " fill="none" id="U-RDG" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6d236310136634d72f9dd20ab8a16b10]
+@startuml
+
+() "UI Campus Manager" as CM
+() "UI Fleet Manager" as FM
+() "UI Admin" as SM
+() "UI User" as U
+
+component RDG [
+  <<component>>
+  **RobDroneGo**
+]
+
+CM -d- RDG
+FM -d- RDG
+SM -d- RDG
+U  -d- RDG
+
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 18:01:30 WEST 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>
