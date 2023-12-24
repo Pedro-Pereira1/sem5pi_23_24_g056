@@ -56,7 +56,7 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for(const e of floorLayout.elevators) {
-            if (e.length !== 3) {
+            if (e.length !== 4) {
                 return Result.fail<IFloorDTO>('There is a problem with the coordinates of the elevator with id ' + e[0])
             }
         }
@@ -83,10 +83,14 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (let i = 0; i < floorLayout.elevators.length; i++) {
+            if (floorLayout.elevators[i][3] < 1 || floorLayout.elevators[i][3] > 4) {
+                return Result.fail<IFloorDTO>('There is a problem with the orientation of the elevator with id ' + floorLayout.elevators[i][0])
+            }
             elevatorsCoords[i] = SingleCoords.create({
                 id: floorLayout.elevators[i][0],
                 x: floorLayout.elevators[i][1],
-                y: floorLayout.elevators[i][2]
+                y: floorLayout.elevators[i][2],
+                orientation: floorLayout.elevators[i][3]
             })
         }
 

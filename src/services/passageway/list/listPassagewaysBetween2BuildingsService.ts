@@ -12,14 +12,19 @@ import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
 import BuildingCode from "../../../domain/Building/BuildingCode";
 import IListPassagewaysBetween2BuildingsService from "../../IServices/passageway/list/IListPassagewaysBetween2BuildingsService";
 import { IListPassagewaysBetween2BuildingsDTO } from "../../../dto/passageway/IListPassagewaysBetween2BuildingsDTO";
+import { Floor } from "../../../domain/Floor/Floor";
+import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
+import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 
 @Service()
 export default class ListPassagewaysBetween2BuildingsService implements IListPassagewaysBetween2BuildingsService {
 
     constructor(
         @Inject(config.repos.passageway.name) private passagewayRepo: IPassagewayRepo,
-        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo
+        @Inject(config.repos.building.name) private buildingRepo: IBuildingRepo,
+        @Inject(config.repos.floor.name) private floorRepo: IFloorRepo,
     ) { }
+    
 
     public async listPassagewaysBetween2Buildings(building1Code: string, building2Code: string): Promise<Result<IListPassagewaysBetween2BuildingsDTO[]>> {
         try{
@@ -43,6 +48,24 @@ export default class ListPassagewaysBetween2BuildingsService implements IListPas
             if (passagewaysList.length === 0) return Result.fail<IListPassagewaysBetween2BuildingsDTO[]>('No passageways found!')
             
             return Result.ok<IListPassagewaysBetween2BuildingsDTO[]>(passagewaysList)
+        } catch(e) {
+            throw e
+        }
+    }
+
+    public async findFloorsByPassageway(passagewayId: number): Promise<Result<IFloorDTO[]>> {
+        try{
+            
+            let floors: Floor[] = []
+            floors = await this.floorRepo.findByPassageway(passagewayId)
+
+            let resolve: IFloorDTO[] = []
+
+            floors.forEach(b => {
+            resolve.push(FloorMaper.toDto(b))
+        })
+
+            return Result.ok<IFloorDTO[]>(resolve)      
         } catch(e) {
             throw e
         }

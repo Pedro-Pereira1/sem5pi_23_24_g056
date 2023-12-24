@@ -54,4 +54,7 @@ export default (app: Router) => {
 
     route.get('/listAll', (req, res, next) => {
         ctrlListAll.listAllPassageways(req, res, next); });
+
+    route.get('/findFloorsByPassageway/:passagewayId', (req, res, next) => {
+        ctrlList.findFloorsByPassageway(req, res, next); });
 }

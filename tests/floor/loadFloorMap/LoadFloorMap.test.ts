@@ -39,10 +39,12 @@ describe('upload floor map test', function () {
             [2, 2, 2, 2, 2, 2, 0, 0, 0]
         ],
         "elevators": [
-            [5, 2, 2]
+            [5, 1, 2, 1]
         ],
         "passageways": [],
-        "rooms": []
+        "rooms": [],
+        "roomsCoords": [],
+        "doors": []
     }
 
     const validMapDtoExpected = {
@@ -67,14 +69,15 @@ describe('upload floor map test', function () {
             ],
             passagewaysCoords: [],
             elevatorsCoords: [
-                [5, 2, 2]
+                [5, 2, 2, 1]
             ],
-            roomCoords: []
+            roomCoords: [],
+            doorsCoords: []
         }
     } as IFloorDTO
 
     const invalidMapWrognFormatCoords = {
-        "floorId": 1,
+        "floorId": 2,
         "buildingCode": "A",
         "map": [
             [3, 2, 2, 2, 2, 3, 2, 2, 1],
@@ -87,10 +90,12 @@ describe('upload floor map test', function () {
             [2, 2, 2, 2, 2, 2, 0, 0, 0]
         ],
         "elevators": [
-            [5, 2, 2, 5]
+            [5, 2, 2, 5, 6]
         ],
         "passageways": [],
-        "rooms": []
+        "rooms": [],
+        "roomsCoords": [],
+        "doors": []
     }
 
     const invalidMapDtoWrongFormatCoordsExpected = {
@@ -115,30 +120,33 @@ describe('upload floor map test', function () {
             ],
             passagewaysCoords: [],
             elevatorsCoords: [
-                [5, 2, 2, 5]
+                [5, 2, 2, 1]
             ],
-            roomCoords: []
+            roomCoords: [],
+            doorsCoords: []
         }
     } as IFloorDTO
 
     const invalidMapObjectisNotOnSpecifiedCoords = {
-        "floorId": 1,
+        "floorId": 2,
         "buildingCode": "A",
         "map": [
             [3, 2, 2, 2, 2, 3, 2, 2, 1],
             [1, 0, 0, 0, 0, 1, 0, 0, 1],
             [2, 2, 0, 0, 2, 2, 0, 2, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [3, 2, 2, 2, 14, 2, 0, 0, 1],
+            [3, 2, 2, 2, 2, 2, 0, 0, 1],
             [1, 0, 0, 0, 0, 0, 1, 0, 0],
             [1, 0, 0, 0, 0, 0, 1, 0, 0],
             [2, 2, 2, 2, 2, 2, 0, 0, 0]
         ],
         "elevators": [
-            [5, 2, 2]
+            [5, 1, 2, 1]
         ],
         "passageways": [],
-        "rooms": []
+        "rooms": [],
+        "roomsCoords": [],
+        "doors": []
     }
 
     const elevatorDto = {
@@ -168,7 +176,8 @@ describe('upload floor map test', function () {
             elevators: [],
             passagewaysCoords: [],
             elevatorsCoords: [],
-            roomCoords: []
+            roomCoords: [],
+            doorsCoords: []
         }
     } as IFloorDTO
 
@@ -184,6 +193,7 @@ describe('upload floor map test', function () {
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+                doorsCoords: []
             })
         }, createFloorDTO.floorId)
 
@@ -199,6 +209,7 @@ describe('upload floor map test', function () {
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+                doorsCoords: []
             })
         }, createFloorDTO.floorId)
 

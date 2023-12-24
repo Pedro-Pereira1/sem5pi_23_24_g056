@@ -4,6 +4,7 @@ interface ISingleCoordsProps {
     id: number
     x: number
     y: number
+    orientation: number
 }
 
 export default class DoubleCoords extends ValueObject<ISingleCoordsProps> {
@@ -17,6 +18,7 @@ export default class DoubleCoords extends ValueObject<ISingleCoordsProps> {
             id: props.id,
             x: props.x,
             y: props.y,
+            orientation: props.orientation
         })
     }
 
@@ -30,6 +32,10 @@ export default class DoubleCoords extends ValueObject<ISingleCoordsProps> {
 
     get y(): number {
         return this.props.y
+    }
+
+    get orientation(): number {
+        return this.props.orientation
     }
 
 }
