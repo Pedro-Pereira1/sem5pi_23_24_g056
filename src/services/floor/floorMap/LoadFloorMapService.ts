@@ -101,8 +101,6 @@ export default class LoadFloorMapService implements ILoadFloorMapService {
         }
 
         for (const p of passagewaysCoords) {
-            console.log(map[p.y][p.x])
-            console.log(map[p.y1][p.x1])
             if (!(map[p.y][p.x] !== 12 || map[p.y][p.x] !== 13) && !(map[p.y1][p.x1] !== 12 || map[p.y1][p.x1] !== 13)) {
                 return Result.fail<IFloorDTO>('There is no passageway in the coords: X1:' + p.x + ' Y1:' + p.y + ' X2:' + p.x1 + ' Y2: ' + p.y1)
             }
