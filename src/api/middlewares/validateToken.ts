@@ -11,6 +11,8 @@ function validateToken(req, res, next) {
         if (err) {
             return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
         }
+        req.userId = decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']
+        req.userRole = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
         next();
     })
 }

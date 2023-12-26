@@ -12,7 +12,7 @@ var validateToken = require('../middlewares/validateToken');
 const route = Router();
 
 export default (app: Router) => {
-  app.use('/buildings', validateToken, route)
+  app.use('/buildings', route)
 
   const ctrlCreate = Container.get(config.controllers.createbuilding.name) as ICreateBuildingController
   const ctrlListAllBuildings = Container.get(config.controllers.listAllBuildigns.name) as IListAllBuildingsController
@@ -20,7 +20,7 @@ export default (app: Router) => {
   const ctrl1 = Container.get(config.controllers.listBuildingsMaxMinFloors.name) as IListBuildingsMaxMinFloorsController
   const ctrlDelete = Container.get(config.controllers.deleteBuilding.name) as IDeleteBuildingController
 
-  route.delete('/deleteBuilding/:id', (req, res, next) => {
+  route.delete('/deleteBuilding/:id', validateToken, (req, res, next) => {
     ctrlDelete.deleteBuilding(req, res, next),
     req.params.id;
   });
