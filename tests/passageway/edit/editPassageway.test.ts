@@ -190,6 +190,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 1;
@@ -206,6 +207,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor2Id = 2;
@@ -222,6 +224,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor3Id = 3;
@@ -334,6 +337,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 1;
@@ -350,6 +354,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor2Id = 2;
@@ -366,6 +371,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor3Id = 3;
@@ -478,6 +484,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 1;
@@ -494,6 +501,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor2Id = 2;
@@ -510,6 +518,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor3Id = 3;
@@ -589,6 +598,7 @@ describe('edit Passageways', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 1;

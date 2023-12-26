@@ -184,6 +184,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+			doorsCoords: [],
             }),
         };
         const floor1Id = 1;
@@ -200,6 +201,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+			doorsCoords: [],
             }),
         };
         const floor2Id = 2;
@@ -420,6 +422,8 @@ describe('Passageway tests', function () {
                 elevators: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+			doorsCoords: [],
+
                 passagewaysCoords: [],
             }),
         };
@@ -504,6 +508,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 1;
@@ -519,6 +524,7 @@ describe('Passageway tests', function () {
                 elevators: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+                doorsCoords: [],
                 passagewaysCoords: [],
             }),
         };
@@ -609,6 +615,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor1Id = 5;
@@ -625,6 +632,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor2Id = 6;
@@ -713,6 +721,7 @@ describe('Passageway tests', function () {
                 map: [[]],
                 passageways: [],
                 rooms: [],
+                doorsCoords: [],
                 elevators: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
@@ -733,6 +742,7 @@ describe('Passageway tests', function () {
                 elevatorsCoords: [],
                 roomsCoords: [],
                 passagewaysCoords: [],
+                doorsCoords: [],
             }),
         };
         const floor2Id = 6;

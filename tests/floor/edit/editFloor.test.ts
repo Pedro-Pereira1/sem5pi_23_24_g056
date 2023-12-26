@@ -146,7 +146,8 @@ describe('edit floors controller', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
-                roomCoords: []
+                roomCoords: [],
+			doorsCoords: [],
             }     
         } as IFloorDTO
         
@@ -163,6 +164,7 @@ describe('edit floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+			doorsCoords: [],
 				}
 			  )
 		}, FloorDTO.floorId).getValue()
@@ -244,6 +246,7 @@ describe('edit floors controller', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }     
         } as IFloorDTO
@@ -260,6 +263,7 @@ describe('edit floors controller', function () {
 				  elevators: [],
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
+			doorsCoords: [],
 				  roomsCoords: [],
 				}
 			  )
@@ -341,6 +345,7 @@ describe('edit floors controller', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }     
         } as IFloorDTO
@@ -356,6 +361,7 @@ describe('edit floors controller', function () {
 				  rooms: [],
 				  elevators: [],
 				  passagewaysCoords: [],
+			doorsCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
 				}
@@ -435,6 +441,7 @@ describe('edit floors controller', function () {
                 passageways: [],
                 rooms: [],
                 elevators: [],
+			doorsCoords: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomCoords: []
@@ -452,6 +459,7 @@ describe('edit floors controller', function () {
 				  rooms: [],
 				  elevators: [],
 				  passagewaysCoords: [],
+			doorsCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
 				}
@@ -530,6 +538,7 @@ describe('edit floors controller', function () {
             floorDescription: "Joi.string().max(255)",
             floorMap: {
                 map: [],
+			doorsCoords: [],
                 passageways: [],
                 rooms: [],
                 elevators: [],
@@ -552,6 +561,7 @@ describe('edit floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+			doorsCoords: [],
 				}
 			  )
 		}, FloorDTO.floorId).getValue()

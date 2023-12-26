@@ -86,6 +86,7 @@ describe('List elevators in building test', function () {
             passagewaysCoords: [],
             elevatorsCoords: [],
             roomsCoords: [],
+			doorsCoords: []
         })
     }, floorDto.floorId)
 
@@ -107,6 +108,7 @@ describe('List elevators in building test', function () {
             passagewaysCoords: [],
             elevatorsCoords: [],
             roomsCoords: [],
+			doorsCoords: []
         })
     }, floorDto.floorId)
 

@@ -217,6 +217,7 @@ describe("Create elevator", function () {
                   passagewaysCoords: [],
                   elevatorsCoords: [],
                   roomsCoords: [],
+			doorsCoords: []
                 }
               )
           }, 1 ).getValue();
@@ -310,6 +311,7 @@ describe("Create elevator", function () {
                   passagewaysCoords: [],
                   elevatorsCoords: [],
                   roomsCoords: [],
+			doorsCoords: []
                 }
               )
           }, 1 ).getValue();
@@ -405,6 +407,7 @@ describe("Create elevator", function () {
                   passagewaysCoords: [],
                   elevatorsCoords: [],
                   roomsCoords: [],
+			doorsCoords: []
                 }
               )
           }, 1 ).getValue();
@@ -494,6 +497,7 @@ describe("Create elevator", function () {
                   passagewaysCoords: [],
                   elevatorsCoords: [],
                   roomsCoords: [],
+			doorsCoords: []
                 }
               )
           }, 1 ).getValue();
@@ -582,6 +586,7 @@ describe("Create elevator", function () {
                   passagewaysCoords: [],
                   elevatorsCoords: [],
                   roomsCoords: [],
+			doorsCoords: []
                 }
               )
           }, 1 ).getValue();
