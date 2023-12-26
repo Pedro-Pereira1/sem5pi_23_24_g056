@@ -7,6 +7,8 @@ import IListAllElevatorsDTO from "../../../dto/elevator/IListAllElevatorsDTO";
 import IElevatorRepo from "../../IRepos/elevator/IElevatorRepo";
 import ElevatorMap from "../../../mappers/elevator/ElevatorMap";
 import IBuildingRepo from "../../IRepos/building/IBuildingRepo";
+import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
+import { FloorMaper } from "../../../mappers/floor/FloorMaper";
 
 
 @Service()
@@ -38,6 +40,21 @@ export default class listAllElevators implements IListAllElevatorsService {
         }
 
         return Result.ok<IListAllElevatorsDTO[]>(resolve)
+    }
+
+    public async listFloorsByElevatorId(elevatorId: string): Promise<Result<IFloorDTO[]>> {
+        const floors = await this.floorRepo.findByElevator(Number(elevatorId))
+        const resolve: IFloorDTO[] = []
+
+        if(floors.length === 0) {
+            return Result.fail<IFloorDTO[]>("null")
+        }
+
+        for(let floor of floors){
+            resolve.push(FloorMaper.toDto(floor))
+        }
+
+        return Result.ok<IFloorDTO[]>(resolve)
     }
 
 }

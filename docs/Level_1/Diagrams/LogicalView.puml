@@ -2,7 +2,7 @@
 
 () "UI Campus Manager" as CM
 () "UI Fleet Manager" as FM
-() "UI System Manager" as SM
+() "UI Admin" as SM
 () "UI User" as U
 
 component RDG [

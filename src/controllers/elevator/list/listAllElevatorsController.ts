@@ -26,5 +26,23 @@ export default class ListAllElevatorsController implements IListAllElevatorsCont
         }
     }
 
+    public async listFloorsByElevatorId(req: Request, res: Response, next: NextFunction) {
+        try {
+            const elevatorId = String(req.params.elevatorIdentificationNumber);
+
+            const floorIds = await this.listAllElevatorsService.listFloorsByElevatorId(elevatorId)
+
+            if(floorIds.isFailure) {
+                return res.status(400).send(floorIds.errorValue())
+            }
+
+            return res.status(200).json(floorIds.getValue())
+        } catch(err) {
+            throw err
+        }
+    }
+
+
+
 
 }
