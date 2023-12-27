@@ -3,15 +3,22 @@ import IDeletePassagewayController from "../../IControllers/passageway/delete/ID
 import { Inject, Service } from "typedi";
 import config from "../../../../config";
 import IDeletePassagewayService from "../../../services/IServices/passageway/delete/IDeletePassagewayService";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class DeletePassagewayController implements IDeletePassagewayController {
 
     constructor(
-        @Inject(config.services.deletePassageway.name) private deletePassagewayService: IDeletePassagewayService
+        @Inject(config.services.deletePassageway.name) private deletePassagewayService: IDeletePassagewayService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     ) { }
 
     public async deletePassageway(req: Request, res: Response, next: NextFunction) {
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const id = req.params.id
 
