@@ -96,16 +96,16 @@ export default {
       path: "../controllers/passageway/list/listPassagewaysBetween2BuildingsController"
     },
     listAllPassageways: {
-        name: "listAllPassagewaysController",
-        path: "../controllers/passageway/list/listAllPassagewaysController"
+      name: "listAllPassagewaysController",
+      path: "../controllers/passageway/list/listAllPassagewaysController"
     },
     listAllRoomsInBuilding: {
       name: "listAllRoomsInBuildingController",
       path: "../controllers/room/list/listAllRoomsInBuildingController"
     },
     listAllElevators: {
-        name: "listAllElevatorsController",
-        path: "../controllers/elevator/list/listAllElevatorsController"
+      name: "listAllElevatorsController",
+      path: "../controllers/elevator/list/listAllElevatorsController"
     },
     editBuilding: {
       name: "editBuildingController",
@@ -178,7 +178,7 @@ export default {
     auth: {
       name: "authController",
       path: "../controllers/auth/AuthController"
-    }
+    },
   },
 
   repos: {
@@ -274,8 +274,8 @@ export default {
       path: "../services/passageway/list/listPassagewaysBetween2BuildingsService"
     },
     listAllPassageways: {
-        name: "listAllPassagewaysService",
-        path: "../services/passageway/list/listAllPassagewaysService"
+      name: "listAllPassagewaysService",
+      path: "../services/passageway/list/listAllPassagewaysService"
     },
     editBuilding: {
       name: "editBuildingService",
@@ -326,8 +326,8 @@ export default {
       path: "../services/room/list/listAllRoomsInBuildingService"
     },
     listAllElevators: {
-        name: "listAllElevatorsService",
-        path: "../services/elevator/list/listAllElevatorsService"
+      name: "listAllElevatorsService",
+      path: "../services/elevator/list/listAllElevatorsService"
     },
     deleteBuilding: {
       name: "deleteBuildingService",
@@ -357,9 +357,9 @@ export default {
       name: "deletePassagewayService",
       path: "../services/passageway/delete/deletePassagewayService"
     },
-    authService: {
+    auth: {
       name: "authService",
       path: "../services/auth/AuthService"
     },
-  }
-}
+  },
+};
