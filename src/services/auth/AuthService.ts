@@ -21,8 +21,8 @@ export default class AuthService implements IAuthService {
     }
 
 
-    public validatePermission(userRole: string, permission: string): boolean {
-        if (userRole === permission) {
+    public validatePermission(userRole: string, permission: string[]): boolean {
+        if (permission.includes(userRole)) {
             return true
         }
         return false
