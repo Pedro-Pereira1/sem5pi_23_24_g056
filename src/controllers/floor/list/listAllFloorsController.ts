@@ -19,7 +19,7 @@ export default class ListAllFloorsController implements IListAllFloorsController
     public async listAllFloors(req: Request, res: Response, next: NextFunction) {
         //@ts-ignore
         let userRole = req.userRole;
-        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+        if(!this.authService.validatePermission(userRole, ["CampusManager","FleetManager","TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
         try {

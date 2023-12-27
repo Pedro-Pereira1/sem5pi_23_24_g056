@@ -18,7 +18,7 @@ export default class ListAllBuildingsController implements IListAllBuildingsCont
     public async listAllBuildings(req: Request, res: Response, next: NextFunction) {
         //@ts-ignore
         let userRole = req.userRole;
-        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+        if(!this.authService.validatePermission(userRole, ["CampusManager","FleetManager","TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
         try {

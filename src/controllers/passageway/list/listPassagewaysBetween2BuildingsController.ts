@@ -41,7 +41,7 @@ export default class ListPassagewaysBetween2BuildingsController implements IList
     public async findFloorsByPassageway(req: Request, res: Response, next: NextFunction) {
         //@ts-ignore
         let userRole = req.userRole;
-        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+        if(!this.authService.validatePermission(userRole, ["CampusManager","FleetManager","TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
         try {
