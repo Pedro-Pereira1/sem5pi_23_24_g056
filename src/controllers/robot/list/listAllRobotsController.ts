@@ -3,16 +3,23 @@ import { Request, Response, NextFunction } from "express";
 import config from "../../../../config";
 import IListAllRobotsService from "../../../services/IServices/robot/list/IListAllRobotsService";
 import IListAllRobotsController from "../../IControllers/robot/list/IListAllRobotsController";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class ListAllRobotsController implements IListAllRobotsController {
 
     constructor(
-        @Inject(config.services.listAllRobots.name) private listAllRobotsService: IListAllRobotsService
+        @Inject(config.services.listAllRobots.name) private listAllRobotsService: IListAllRobotsService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async listAllRobots(req: Request, res: Response, next: NextFunction) {
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["FleetManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const robots = await this.listAllRobotsService.listAllRobots()
 
