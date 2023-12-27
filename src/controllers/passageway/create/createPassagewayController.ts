@@ -7,16 +7,23 @@ import { PassagewayMap } from "../../../mappers/passageway/PassagewayMap";
 import { IPassagewayDTO } from "../../../dto/passageway/IPassagewayDTO";
 import { Result } from "../../../core/logic/Result";
 import { ICreatePassagewayDTO } from "../../../dto/passageway/ICreatePassagewayDTO";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class CreatePassagewayController implements ICreatePassagewayController {
 
     constructor(
-        @Inject(config.services.createPassageway.name) private service: ICreatePassagewayService
+        @Inject(config.services.createPassageway.name) private service: ICreatePassagewayService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async createPassageway(req: Request, res: Response, next: NextFunction) {
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const PassagewayOrError = await this.service.createPassageway(req.body as ICreatePassagewayDTO) as Result<IPassagewayDTO>
 
