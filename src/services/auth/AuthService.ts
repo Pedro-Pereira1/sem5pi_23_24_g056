@@ -4,7 +4,7 @@ import config from "../../../config"
 import jwt from 'jsonwebtoken'
 
 @Service()
-export class AuthService implements IAuthService {
+export default class AuthService implements IAuthService {
 
     constructor() {}
 
@@ -16,6 +16,14 @@ export class AuthService implements IAuthService {
                 }
                 return true
             })
+        }
+        return false
+    }
+
+
+    public validatePermission(userRole: string, permission: string): boolean {
+        if (userRole === permission) {
+            return true
         }
         return false
     }

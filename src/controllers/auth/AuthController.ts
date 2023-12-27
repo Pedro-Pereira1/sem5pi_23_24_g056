@@ -4,10 +4,10 @@ import config from "../../../config";
 import { IAuthService } from "../../services/IServices/auth/IAuthService";
 
 @Service()
-export class AuthController implements IAuthController {
+export default class AuthController implements IAuthController {
 
     constructor(
-        @Inject(config.services.authService.name) private authService: IAuthService
+        @Inject(config.services.auth.name) private authService: IAuthService
     ) {}
 
     public validateToken(token: string): boolean {
