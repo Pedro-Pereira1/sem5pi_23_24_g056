@@ -37,4 +37,7 @@ export default (app: Router) => {
     route.get('/listAllInBuilding/:buildingCode', validateToken, (req, res, next) => {ctrlList.listAllRoomsInBuilding(req, res, next);
         req.params.buildingCode;})
 
+    route.get('/listAllRooms', validateToken, (req, res, next) => {
+        ctrlList.listAllRooms(req, res, next)
+    });
 }
