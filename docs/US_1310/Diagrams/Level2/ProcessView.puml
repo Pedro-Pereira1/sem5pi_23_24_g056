@@ -1,0 +1,21 @@
+@startuml ProcessView
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant Vizualization
+participant BackendComponent
+
+?o-> Vizualization: HTTP method
+activate Vizualization
+
+Vizualization -> BackendComponent: HTTP method
+activate BackendComponent
+
+BackendComponent --> Vizualization
+deactivate BackendComponent
+
+<-- Vizualization
+
+deactivate Vizualization
+
+@enduml
