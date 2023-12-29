@@ -7,16 +7,21 @@ import IDeleteRobotTypeService from "../../services/IServices/robotType/delete/I
 import IListAllRobotTypeService from "../../services/IServices/robotType/list/IListAllRobotTypeService";
 import IRobotController from "../IControllers/robot/IRobotController";
 import IDeleteRobotService from "../../services/IServices/robot/delete/IDeleteRobotService";
+import { IAuthService } from "../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class robotController implements IRobotController {
     
     constructor(
         @Inject(config.services.deleteRobot.name) private deleteRobotService: IDeleteRobotService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     ) 
     {}
 
     public async deleteRobot(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
         try{
             const id = req.params.id.toString();
 

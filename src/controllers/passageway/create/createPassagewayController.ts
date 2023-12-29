@@ -19,6 +19,9 @@ export default class CreatePassagewayController implements ICreatePassagewayCont
     {}
 
     public async createPassageway(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
         //@ts-ignore
         let userRole = req.userRole;
         if(!this.authService.validatePermission(userRole, ["CampusManager"])){

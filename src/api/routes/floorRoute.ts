@@ -9,9 +9,7 @@ import config from "../../../config";
 import IListAllFloorsController from '../../controllers/IControllers/floor/list/IListAllFloorsController';
 import IEditFloorController from '../../controllers/IControllers/floor/edit/IEditFloorController';
 import ILoadFloorMapController from '../../controllers/IControllers/floor/floorMap/ILoadFloorMapController';
-import IListFloorsPassagewaysController
-    from "../../controllers/IControllers/floor/list/IListFloorsPassagewaysController";
-var validateToken = require('../middlewares/validateToken');
+import IListFloorsPassagewaysController from "../../controllers/IControllers/floor/list/IListFloorsPassagewaysController";
 
 const route = Router();
 
@@ -25,19 +23,19 @@ export default (app: Router) => {
     const ctrlLoadFLoorMap = Container.get(config.controllers.loadFloorMap.name) as ILoadFloorMapController
     const ctrlDelete = Container.get(config.controllers.deleteFloor.name) as IDeleteFloorController
 
-    route.get('/listAllFloors/:buildingId', validateToken,
+    route.get('/listAllFloors/:buildingId',
         (req, res, next) => {
             ctrllistAllFloors.listAllFloors(req, res, next);
             req.params.buildingId
         });
 
-    route.get('/listFloorsPassageways/:buildingCode', validateToken,
+    route.get('/listFloorsPassageways/:buildingCode',
         (req, res, next) => {
             ctrllistFloorsPassageways.listFloorsPassageways(req, res, next);
             req.params.buildingCode
         });
 
-    route.post('/createFloor', validateToken,
+    route.post('/createFloor',
         celebrate({
             body: Joi.object({
                 floorId: Joi.number().required(),
@@ -48,7 +46,7 @@ export default (app: Router) => {
         }),
         (req, res, next) => ctrl.createFloor(req, res, next));
 
-    route.put('/editFloor', validateToken,  
+    route.put('/editFloor',
         celebrate({
             body: Joi.object({
                 floorId: Joi.number().required(),
@@ -59,7 +57,7 @@ export default (app: Router) => {
         (req, res, next) => ctrlEditFloor.editFloor(req, res, next)
     );
 
-    route.patch('/loadFloorMap', validateToken,
+    route.patch('/loadFloorMap',
     celebrate({
         body: Joi.object({
             floorId: Joi.number().required(),
@@ -73,6 +71,6 @@ export default (app: Router) => {
         })
     }), (req, res, next) => ctrlLoadFLoorMap.loadFloorMap(req, res, next))
 
-    route.delete('/deleteFloor/:id', validateToken, (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
+    route.delete('/deleteFloor/:id', (req, res, next) => ctrlDelete.deleteFloor(req, res, next)
     )
 }

@@ -5,7 +5,7 @@ import { Container } from 'typedi';
 import config from "../../../config";
 import ICreateRobotTypeController from '../../controllers/IControllers/robotType/create/ICreateRobotTypeController';
 import IRobotTypeController from '../../controllers/IControllers/robotType/IRobotTypeController';
-var validateToken = require('../middlewares/validateToken');
+
 
 const route = Router();
 
@@ -15,7 +15,7 @@ export default (app: Router) => {
   const ctrl = Container.get(config.controllers.createRobotType.name) as ICreateRobotTypeController;
   const ctrl1 = Container.get(config.controllers.robotType.name) as IRobotTypeController;
 
-  route.post('/createRobotType', validateToken,
+  route.post('/createRobotType',
     celebrate({
       body: Joi.object({
         robotTypeID: Joi.string().alphanum().max(25).required(),
@@ -26,11 +26,11 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createRobotType(req, res, next) );
 
-    route.get('/listAllRobotTypes', validateToken, (req, res, next) => {
+    route.get('/listAllRobotTypes', (req, res, next) => {
       ctrl1.listAllRobotTypes(req, res, next)
     });
 
-    route.delete('/deleteRobotType/:id', validateToken, (req, res, next) => {
+    route.delete('/deleteRobotType/:id', (req, res, next) => {
       ctrl1.deleteRobotType(req, res, next),
       req.params.id
     });

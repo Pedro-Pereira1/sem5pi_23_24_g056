@@ -7,7 +7,6 @@ import config from "../../../config";
 import IListAllBuildingsController from '../../controllers/IControllers/building/list/IListAllBUildingsController';
 import IEditBuildingontroller from '../../controllers/IControllers/building/edit/IEditBuildingController';
 import IDeleteBuildingController from '../../controllers/IControllers/building/delete/IdeleteBuildingController';
-var validateToken = require('../middlewares/validateToken');
 
 const route = Router();
 
@@ -20,13 +19,13 @@ export default (app: Router) => {
   const ctrl1 = Container.get(config.controllers.listBuildingsMaxMinFloors.name) as IListBuildingsMaxMinFloorsController
   const ctrlDelete = Container.get(config.controllers.deleteBuilding.name) as IDeleteBuildingController
 
-  route.delete('/deleteBuilding/:id', validateToken, (req, res, next) => {
+  route.delete('/deleteBuilding/:id', (req, res, next) => {
     ctrlDelete.deleteBuilding(req, res, next),
     req.params.id;
   });
 
 
-  route.post('/createBuilding', validateToken,
+  route.post('/createBuilding',
     celebrate({
       body: Joi.object({
         buildingName: Joi.string().alphanum().max(50),
@@ -39,18 +38,18 @@ export default (app: Router) => {
     (req, res, next) => ctrlCreate.createBuilding(req, res, next));
 
 
-  route.get('/listAllBuildings', validateToken, (req, res, next) => {
+  route.get('/listAllBuildings', (req, res, next) => {
     ctrlListAllBuildings.listAllBuildings(req, res, next)
   });
 
-  route.get('/listBuildingsMaxMinFloors/:max/:min', validateToken,
+  route.get('/listBuildingsMaxMinFloors/:max/:min',
     (req, res, next) =>  { ctrl1.listBuildingsMaxMinFloors(req, res, next);
       req.params.max;
       req.params.min;
     }
   );
 
-  route.put('/editBuilding', validateToken,
+  route.put('/editBuilding', 
     celebrate(
       {
         body: Joi.object({

@@ -7,7 +7,6 @@ import ICreateRobotController from '../../controllers/IControllers/robot/create/
 import IListAllRobotsController from '../../controllers/IControllers/robot/list/IListAllRobotsController';
 import IInhibitRobotController from '../../controllers/IControllers/robot/inhibit/IInhibitRobotController';
 import IRobotController from '../../controllers/IControllers/robot/IRobotController';
-var validateToken = require('../middlewares/validateToken');
 
 const route = Router();
 
@@ -19,7 +18,7 @@ export default (app: Router) => {
   const inhibitRobotController = Container.get(config.controllers.inhibitRobot.name) as IInhibitRobotController
   const ctrl1 = Container.get(config.controllers.robot.name) as IRobotController;
 
-  route.post('/createRobot', validateToken,
+  route.post('/createRobot',
     celebrate({
       body: Joi.object({
         code: Joi.string().alphanum().max(30).required(),
@@ -31,7 +30,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createRobot(req, res, next) );
 
-  route.patch('/inhibitRobot', validateToken,
+  route.patch('/inhibitRobot',
     celebrate({
       body: Joi.object({
         id: Joi.string().required()
@@ -39,9 +38,9 @@ export default (app: Router) => {
     }),
     (req, res, next) => inhibitRobotController.inhibitRobot(req, res, next))
 
-  route.get('/listAll', validateToken, (req, res, next) => { ctrlList.listAllRobots(req, res, next) });
+  route.get('/listAll', (req, res, next) => { ctrlList.listAllRobots(req, res, next) });
 
-  route.delete('/deleteRobot/:id', validateToken, (req, res, next) => {
+  route.delete('/deleteRobot/:id', (req, res, next) => {
     ctrl1.deleteRobot(req, res, next),
     req.params.id
   });

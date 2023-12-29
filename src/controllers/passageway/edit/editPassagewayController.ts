@@ -18,6 +18,9 @@ export default class EditPassagewayController implements IEditPassagewayControll
     {}
 
     public async editPassageway(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
         //@ts-ignore
         let userRole = req.userRole;
         if(!this.authService.validatePermission(userRole, ["CampusManager"])){
