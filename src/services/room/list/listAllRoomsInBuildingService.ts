@@ -35,4 +35,28 @@ export default class ListAllRoomsService implements IListAllRoomsService {
             throw e
         }
     }
+
+    public async listAllRooms(): Promise<Result<IListAllRoomsInBuildingDTO[]>> {
+        try{
+            const buildings = await this.buildingRepo.findAll()
+            if (buildings === null) return Result.fail<IListAllRoomsInBuildingDTO[]>('No buildings found!')
+
+            let roomsList: IListAllRoomsInBuildingDTO[] = []
+            for (var building of buildings) {
+                for (var floor of building.floors) {
+                    for (var anRoom of floor.props.floormap.props.rooms){
+                        const roomrDto = RoomMap.toDtoList(anRoom, Number(floor.floorId.toValue()))
+                        roomsList.push(roomrDto)
+                    }
+                }
+            }
+
+            if (roomsList.length === 0) return Result.fail<IListAllRoomsInBuildingDTO[]>('No rooms found!')
+
+            return Result.ok<IListAllRoomsInBuildingDTO[]>(roomsList)
+
+        } catch(e) {
+            throw e
+        }
+    }
 }

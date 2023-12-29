@@ -37,4 +37,20 @@ export default class ListAllRoomsInBuildingController implements IListAllRoomsIn
             return next(e);
         }
     }
+
+    public async listAllRooms(req: Request, res: Response, next: NextFunction) {
+
+        try {
+            const rooms = await this.service.listAllRooms()
+
+            if (rooms.isFailure) {
+                return res.status(400).send(rooms.errorValue())
+            }
+
+            return res.status(200).json(rooms.getValue());
+
+        }catch (e){
+            return next(e);
+        }
+    }
 }
