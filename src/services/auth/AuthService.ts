@@ -20,7 +20,6 @@ export default class AuthService implements IAuthService {
         if (token) {
             jwt.verify(token, "u2mUMiNxgfIbfXIOhOFskAI8o6doVRCH", (err, decoded) => {
                 if (err) {
-                    console.log("error")
                     //return res.status(500)
                     return false
                 }
