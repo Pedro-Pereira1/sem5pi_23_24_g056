@@ -10,11 +10,11 @@ import cors from 'cors';
 
 async function startServer() {
   const app = express();
-
+  
+  app.use(cors());
   await require('./loaders').default({ expressApp: app });
 
   app.listen(config.port, () => {
-    app.use(cors());
 
     console.log("Server listening on port: " + config.port);
 
