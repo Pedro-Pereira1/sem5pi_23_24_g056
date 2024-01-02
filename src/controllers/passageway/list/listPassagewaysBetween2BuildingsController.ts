@@ -42,11 +42,17 @@ export default class ListPassagewaysBetween2BuildingsController implements IList
     }
 
     public async findFloorsByPassageway(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        
         //@ts-ignore
         let userRole = req.userRole;
+        console.log(userRole);
         if(!this.authService.validatePermission(userRole, ["CampusManager","FleetManager","TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
+
         try {
             const passagewayId = Number(req.params.passagewayId);
             const passageways = await this.listPassagewaysBetween2BuildingsService.findFloorsByPassageway(passagewayId)
