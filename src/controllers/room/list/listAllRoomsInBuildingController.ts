@@ -20,7 +20,7 @@ export default class ListAllRoomsInBuildingController implements IListAllRoomsIn
         }
         //@ts-ignore
         let userRole = req.userRole;
-        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+        if(!this.authService.validatePermission(userRole, ["CampusManager", "TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
         try {
