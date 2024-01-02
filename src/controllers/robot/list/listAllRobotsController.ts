@@ -20,7 +20,7 @@ export default class ListAllRobotsController implements IListAllRobotsController
         }
         //@ts-ignore
         let userRole = req.userRole;
-        if(!this.authService.validatePermission(userRole, ["FleetManager"])){
+        if(!this.authService.validatePermission(userRole, ["FleetManager", "TaskManager"])){
             return res.status(401).send("Unauthorized");
         }
         try {
