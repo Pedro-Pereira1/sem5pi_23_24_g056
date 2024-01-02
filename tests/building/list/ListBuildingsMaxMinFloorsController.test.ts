@@ -118,6 +118,7 @@ describe('list buildings max min floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+				  doorsCoords: []
 				}
 			  )
 		  }, 1 ).getValue()
@@ -186,6 +187,7 @@ describe('list buildings max min floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+				  doorsCoords: []
 				}
 			  )
 		  	}, 1 ).getValue()
@@ -259,6 +261,7 @@ describe('list buildings max min floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+				  doorsCoords: []
 				}
 			  )
 		  }, 1 ).getValue()

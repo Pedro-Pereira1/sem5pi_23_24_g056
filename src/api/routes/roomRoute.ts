@@ -10,6 +10,7 @@ import IDeleteRoomController from '../../controllers/IControllers/room/delete/ID
 import IListAllRoomsInBuildingController from '../../controllers/IControllers/room/list/IListAllRoomsInBuildingController';
 
 
+
 const route = Router();
 
 export default (app: Router) => {
@@ -19,7 +20,7 @@ export default (app: Router) => {
     const ctrlDelete = Container.get(config.controllers.deleteRoom.name) as IDeleteRoomController
     const ctrlList = Container.get(config.controllers.listAllRoomsInBuilding.name) as IListAllRoomsInBuildingController
 
-    route.post('/createRoom',
+    route.post('/createRoom', 
         celebrate({
             body: Joi.object({
                 roomName: Joi.string().required().max(50),
@@ -36,4 +37,7 @@ export default (app: Router) => {
     route.get('/listAllInBuilding/:buildingCode', (req, res, next) => {ctrlList.listAllRoomsInBuilding(req, res, next);
         req.params.buildingCode;})
 
+    route.get('/listAllRooms', (req, res, next) => {
+        ctrlList.listAllRooms(req, res, next)
+    });
 }

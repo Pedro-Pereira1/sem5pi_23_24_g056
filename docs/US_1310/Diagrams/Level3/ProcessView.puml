@@ -1,0 +1,32 @@
+@startuml ProcessView
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant Router
+participant Controller
+participant AuthService
+
+?o-> Router: HTTP method
+activate Router
+
+Router-> Controller: Call controller
+activate Controller
+
+Controller -> AuthService: validateToken
+activate AuthService
+
+
+AuthService --> Controller: 
+deactivate AuthService
+
+Controller --> 
+
+Controller --> Router
+deactivate Controller
+
+<-- Router
+
+deactivate Router
+
+
+@enduml

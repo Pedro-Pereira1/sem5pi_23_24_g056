@@ -1,0 +1,16 @@
+@startuml ProcessView
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor "System User" as CM
+participant RobDroneGo
+
+CM -> RobDroneGo : Authenticate all services
+activate RobDroneGo
+
+
+RobDroneGo --> CM
+deactivate RobDroneGo
+
+
+@enduml

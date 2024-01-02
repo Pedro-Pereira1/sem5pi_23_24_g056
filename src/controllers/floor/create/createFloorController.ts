@@ -8,16 +8,26 @@ import { IFloorDTO } from "../../../dto/floor/IFloorDTO";
 import { Result } from "../../../core/logic/Result";
 import { IBuildingDTO } from "../../../dto/building/IBuildingDTO";
 import { ICreateFloorDTO } from "../../../dto/floor/ICreateFloorDTO";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class CreateFloorController implements ICreateFloorController {
 
     constructor(
-        @Inject(config.services.createFloor.name) private service: ICreateFloorService
+        @Inject(config.services.createFloor.name) private service: ICreateFloorService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async createFloor(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const FloorOrError = await this.service.createFloor(req.body as ICreateFloorDTO) as Result<IFloorDTO>
 

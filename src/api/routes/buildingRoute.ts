@@ -49,7 +49,7 @@ export default (app: Router) => {
     }
   );
 
-  route.put('/editBuilding',
+  route.put('/editBuilding', 
     celebrate(
       {
         body: Joi.object({

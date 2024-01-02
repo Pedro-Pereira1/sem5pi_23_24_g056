@@ -58,6 +58,7 @@ describe('List passageways between 2 buildings test', function () {
             passagewaysCoords: [],
             elevatorsCoords: [],
             roomsCoords: [],
+                doorsCoords: [],
         })
     }, floorDto.floorId)
 
@@ -79,6 +80,8 @@ describe('List passageways between 2 buildings test', function () {
             passagewaysCoords: [],
             elevatorsCoords: [],
             roomsCoords: [],
+                doorsCoords: [],
+
         })
     }, floorDto.floorId)
 

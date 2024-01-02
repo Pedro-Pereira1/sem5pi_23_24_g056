@@ -6,6 +6,7 @@ import config from "../../../config";
 import ICreateRobotTypeController from '../../controllers/IControllers/robotType/create/ICreateRobotTypeController';
 import IRobotTypeController from '../../controllers/IControllers/robotType/IRobotTypeController';
 
+
 const route = Router();
 
 export default (app: Router) => {

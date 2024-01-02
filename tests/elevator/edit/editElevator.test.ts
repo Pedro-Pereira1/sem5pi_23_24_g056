@@ -64,6 +64,7 @@ describe('Edit elevator test', function () {
             passagewaysCoords: [],
             elevatorsCoords: [],
             roomsCoords: [],
+			doorsCoords: []
         })
     }, floorDto.floorId)
 

@@ -53,6 +53,7 @@ export default class CreateFloorService implements ICreateFloorService {
                         passagewaysCoords: [],
                         elevatorsCoords: [],
                         roomsCoords: [],
+                        doorsCoords: [],
                     })
                 }, createFloorDTO.floorId)
 

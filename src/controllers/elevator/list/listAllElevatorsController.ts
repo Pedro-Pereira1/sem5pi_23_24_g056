@@ -3,16 +3,26 @@ import config from "../../../../config";
 import {NextFunction, Request, Response} from "express";
 import IListAllElevatorsController from "../../IControllers/elevator/list/IListAllElevatorsController";
 import IListAllElevatorsService from "../../../services/IServices/elevator/list/IListAllElevatorsService";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class ListAllElevatorsController implements IListAllElevatorsController{
 
     constructor(
-        @Inject(config.services.listAllElevators.name) private listAllElevatorsService: IListAllElevatorsService
+        @Inject(config.services.listAllElevators.name) private listAllElevatorsService: IListAllElevatorsService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async listAllElevators(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const passageways = await this.listAllElevatorsService.listAllElevators()
 
@@ -27,6 +37,11 @@ export default class ListAllElevatorsController implements IListAllElevatorsCont
     }
 
     public async listFloorsByElevatorId(req: Request, res: Response, next: NextFunction) {
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
             const elevatorId = String(req.params.elevatorIdentificationNumber);
 

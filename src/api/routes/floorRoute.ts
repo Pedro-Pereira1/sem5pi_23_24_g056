@@ -9,8 +9,7 @@ import config from "../../../config";
 import IListAllFloorsController from '../../controllers/IControllers/floor/list/IListAllFloorsController';
 import IEditFloorController from '../../controllers/IControllers/floor/edit/IEditFloorController';
 import ILoadFloorMapController from '../../controllers/IControllers/floor/floorMap/ILoadFloorMapController';
-import IListFloorsPassagewaysController
-    from "../../controllers/IControllers/floor/list/IListFloorsPassagewaysController";
+import IListFloorsPassagewaysController from "../../controllers/IControllers/floor/list/IListFloorsPassagewaysController";
 
 const route = Router();
 

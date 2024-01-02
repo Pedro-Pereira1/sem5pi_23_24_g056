@@ -8,8 +8,8 @@ import ICreatePassagewayController from '../../controllers/IControllers/passagew
 import IListPassagewaysBetween2BuildingsController from '../../controllers/IControllers/passageway/list/IListPassagewaysBetween2BuildingsController';
 import IEditPassagewayController from "../../controllers/IControllers/passageway/edit/IEditPassagewayController";
 import IDeletePassagewayController from '../../controllers/IControllers/passageway/delete/IDeletePassagewayController';
-import IListAllPassagewaysController
-    from "../../controllers/IControllers/passageway/list/IListAllPassagewaysController";
+import IListAllPassagewaysController from "../../controllers/IControllers/passageway/list/IListAllPassagewaysController";
+
 
 const route = Router();
 
@@ -22,7 +22,7 @@ export default (app: Router) => {
     const ctrlDelete = Container.get(config.controllers.deletePassageway.name) as IDeletePassagewayController
     const ctrlListAll = Container.get(config.controllers.listAllPassageways.name) as IListAllPassagewaysController
 
-    route.post('/createPassageway',
+    route.post('/createPassageway', 
     celebrate({
         body: Joi.object({
             passagewayId: Joi.number().required(),
@@ -34,7 +34,7 @@ export default (app: Router) => {
     }),
     (req, res, next) => ctrl.createPassageway(req, res, next));
 
-    route.put('/editPassageway',
+    route.put('/editPassageway', 
         celebrate({
             body: Joi.object({
                 passagewayId: Joi.number().required().min(1),

@@ -6,16 +6,28 @@ import ICreateRobotTypeController from "../../IControllers/robotType/create/ICre
 import ICreateRobotTypeService from "../../../services/IServices/robotType/create/ICreateRobotTypeService";
 import { ICreateRobotTypeDTO } from "../../../dto/robotType/ICreateRobotTypeDTO";
 import { IRobotTypeDTO } from "../../../dto/robotType/IRobotTypeDTO";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class createRobotTypeController implements ICreateRobotTypeController {
     
     constructor(
-        @Inject(config.services.createRobotType.name) private service: ICreateRobotTypeService
+        @Inject(config.services.createRobotType.name) private service: ICreateRobotTypeService,
+        @Inject(config.services.auth.name) private authService: IAuthService
+
     ) 
     {}
 
     public async createRobotType(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["FleetManager"])){
+            return res.status(401).send("Unauthorized");
+        }
+
         try {
             const robotOrError = await this.service.createRobotType(req.body as ICreateRobotTypeDTO) as Result<IRobotTypeDTO>
         

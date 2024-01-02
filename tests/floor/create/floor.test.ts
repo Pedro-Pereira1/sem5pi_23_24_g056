@@ -84,6 +84,7 @@ describe("Create floor", function () {
             elevatorsCoords: [],
             roomsCoords: [],
             passagewaysCoords: [],
+			doorsCoords: []
           }),
         };
         const floorId = 5;
@@ -111,6 +112,7 @@ describe("Create floor", function () {
             elevatorsCoords: [],
             roomsCoords: [],
             passagewaysCoords: [],
+			doorsCoords: []
           }),
         };
         const floorId = -1;
@@ -132,6 +134,7 @@ describe("Create floor", function () {
             elevatorsCoords: [],
             roomsCoords: [],
             passagewaysCoords: [],
+			doorsCoords: []
           }),
         };
         const floorId = 5;
@@ -188,7 +191,8 @@ describe("Create floor", function () {
                 "elevators": [],
                 "passagewaysCoords": [],
                 "elevatorsCoords": [],
-                "roomCoords": []
+                "roomCoords": [],
+			"doorsCoords": []
             }
         } ));
 
@@ -265,6 +269,7 @@ describe("Create floor", function () {
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+			doorsCoords: []
               }
             )
         }, 1 ).getValue());
@@ -332,6 +337,7 @@ describe("Create floor", function () {
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+			doorsCoords: []
               }
             )
         }, 1 ).getValue());
@@ -404,6 +410,7 @@ describe("Create floor", function () {
                 passagewaysCoords: [],
                 elevatorsCoords: [],
                 roomsCoords: [],
+			doorsCoords: []
               }
             )
         }, 1 ).getValue())

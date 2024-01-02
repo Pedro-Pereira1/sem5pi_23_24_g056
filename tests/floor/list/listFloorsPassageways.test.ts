@@ -139,6 +139,7 @@ describe('list floors with passageways to other buildings', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }
         } as IFloorDTO
@@ -155,6 +156,7 @@ describe('list floors with passageways to other buildings', function () {
                         elevators: [],
                         passagewaysCoords: [],
                         elevatorsCoords: [],
+			doorsCoords: [],
                         roomsCoords: [],
                     }
                 )
@@ -171,6 +173,7 @@ describe('list floors with passageways to other buildings', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }
         } as IFloorDTO
@@ -187,6 +190,7 @@ describe('list floors with passageways to other buildings', function () {
                         elevators: [],
                         passagewaysCoords: [],
                         elevatorsCoords: [],
+			doorsCoords: [],
                         roomsCoords: [],
                     }
                 )
@@ -288,6 +292,7 @@ describe('list floors with passageways to other buildings', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }
         } as IFloorDTO
@@ -304,6 +309,7 @@ describe('list floors with passageways to other buildings', function () {
                         elevators: [],
                         passagewaysCoords: [],
                         elevatorsCoords: [],
+			doorsCoords: [],
                         roomsCoords: [],
                     }
                 )
@@ -320,6 +326,7 @@ describe('list floors with passageways to other buildings', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }
         } as IFloorDTO
@@ -336,6 +343,7 @@ describe('list floors with passageways to other buildings', function () {
                         elevators: [],
                         passagewaysCoords: [],
                         elevatorsCoords: [],
+			doorsCoords: [],
                         roomsCoords: [],
                     }
                 )
@@ -436,6 +444,7 @@ describe('list floors with passageways to other buildings', function () {
                 elevators: [],
                 passagewaysCoords: [],
                 elevatorsCoords: [],
+			doorsCoords: [],
                 roomCoords: []
             }
         } as IFloorDTO
@@ -453,6 +462,7 @@ describe('list floors with passageways to other buildings', function () {
                         passagewaysCoords: [],
                         elevatorsCoords: [],
                         roomsCoords: [],
+			doorsCoords: [],
                     }
                 )
             }, FloorDTO.floorId).getValue()

@@ -121,6 +121,7 @@ describe('list buildings max min floors controller', function () {
               elevators: [],
               passagewaysCoords: [],
               elevatorsCoords: [],
+			doorsCoords: [],
               roomCoords: []
           }     
           } as IFloorDTO
@@ -137,6 +138,7 @@ describe('list buildings max min floors controller', function () {
 				  elevators: [],
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
+			doorsCoords: [],
 				  roomsCoords: [],
 				}
 			  )
@@ -205,6 +207,7 @@ describe('list buildings max min floors controller', function () {
               elevators: [],
               passagewaysCoords: [],
               elevatorsCoords: [],
+			doorsCoords: [],
               roomCoords: []
           }     
           } as IFloorDTO
@@ -222,6 +225,7 @@ describe('list buildings max min floors controller', function () {
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
 				  roomsCoords: [],
+			doorsCoords: [],
 				}
 			  )
 		}, FloorDTO.floorId).getValue()
@@ -300,6 +304,7 @@ describe('list buildings max min floors controller', function () {
               rooms: [],
               elevators: [],
               passagewaysCoords: [],
+			doorsCoords: [],
               elevatorsCoords: [],
               roomCoords: []
           }     
@@ -317,6 +322,7 @@ describe('list buildings max min floors controller', function () {
 				  elevators: [],
 				  passagewaysCoords: [],
 				  elevatorsCoords: [],
+			doorsCoords: [],
 				  roomsCoords: [],
 				}
 			  )
@@ -386,6 +392,7 @@ describe('list buildings max min floors controller', function () {
               rooms: [],
               elevators: [],
               passagewaysCoords: [],
+			doorsCoords: [],
               elevatorsCoords: [],
               roomCoords: []
           }     

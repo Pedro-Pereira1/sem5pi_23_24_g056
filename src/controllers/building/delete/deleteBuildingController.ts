@@ -9,16 +9,26 @@ import { Result } from "../../../core/logic/Result";
 import { IBuildingDTO } from "../../../dto/building/IBuildingDTO";
 import IDeleteBuildingController from "../../IControllers/building/delete/IdeleteBuildingController";
 import IDeleteBuildingService from "../../../services/IServices/building/IDeleteBuildingService";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class deleteBuildingController implements IDeleteBuildingController {
 
     constructor(
-        @Inject(config.services.deleteBuilding.name) private deleteBuildingService: IDeleteBuildingService
+        @Inject(config.services.deleteBuilding.name) private deleteBuildingService: IDeleteBuildingService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async deleteBuilding(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try{
             const id = req.params.id.toString();
 

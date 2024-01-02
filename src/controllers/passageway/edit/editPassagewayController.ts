@@ -6,16 +6,26 @@ import {Result} from "../../../core/logic/Result";
 import IEditPassagewayService from "../../../services/IServices/passageway/edit/IEditPassagewayService";
 import IEditPassagewayDTO from "../../../dto/passageway/IEditPassagewayDTO";
 import {IPassagewayDTO} from "../../../dto/passageway/IPassagewayDTO";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class EditPassagewayController implements IEditPassagewayController {
 
     constructor(
-        @Inject(config.services.editPassageway.name) private service: IEditPassagewayService
+        @Inject(config.services.editPassageway.name) private service: IEditPassagewayService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async editPassageway(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
         try {
 
             const passagewayOrError = await this.service.editPassageway(req.body as IEditPassagewayDTO) as Result<IPassagewayDTO>

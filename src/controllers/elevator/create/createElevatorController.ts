@@ -6,16 +6,27 @@ import IElevatorDTO from "../../../dto/elevator/IElevatorDTO";
 import { Result } from "../../../core/logic/Result";
 import ICreateElevatorService from "../../../services/IServices/elevator/ICreateElevatorService";
 import ICreateElevatorDTO from "../../../dto/elevator/ICreateElevatorDTO";
+import { IAuthService } from "../../../services/IServices/auth/IAuthService";
 
 @Service()
 export default class CreateElevatorController implements ICreateElevatorController {
 
     constructor(
-        @Inject(config.services.createElevator.name) private service: ICreateElevatorService
+        @Inject(config.services.createElevator.name) private service: ICreateElevatorService,
+        @Inject(config.services.auth.name) private authService: IAuthService
     )
     {}
 
     public async createElevator(req: Request, res: Response, next: NextFunction) {
+        if(!this.authService.validateToken(req)){
+            return res.status(401).send("Unauthorized");
+        }
+        //@ts-ignore
+        let userRole = req.userRole;
+        if(!this.authService.validatePermission(userRole, ["CampusManager"])){
+            return res.status(401).send("Unauthorized");
+        }
+        
         try {
             const elevatorOrError = await this.service.createElevator(req.body as ICreateElevatorDTO) as Result<IElevatorDTO>
 

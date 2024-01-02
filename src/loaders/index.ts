@@ -206,6 +206,11 @@ export default async ({expressApp}) => {
         path: config.controllers.deleteFloor.path
     }
 
+    const authController = {
+        name: config.controllers.auth.name,
+        path: config.controllers.auth.path
+    }
+
     const deletePassagewayController = {
         name: config.controllers.deletePassageway.name,
         path: config.controllers.deletePassageway.path
@@ -427,6 +432,11 @@ export default async ({expressApp}) => {
         path: config.services.deletePassageway.path
     }
 
+    const authService = {
+        name: config.services.auth.name,
+        path: config.services.auth.path
+    }
+
     await dependencyInjectorLoader({
         mongoConnection,
         schemas: [
@@ -473,6 +483,7 @@ export default async ({expressApp}) => {
             listAllElevatorsController,
             deleteFloorController,
             deletePassagewayController,
+            authController
         ],
         repos: [
             roleRepo,
@@ -519,6 +530,7 @@ export default async ({expressApp}) => {
             listAllElevatorsService,
             deleteFloorService,
             deletePassagewayService,
+            authService
         ]
     });
     Logger.info('✌️ Schemas, Controllers, Repositories, Services, etc. loaded');
